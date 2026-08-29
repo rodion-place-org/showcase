@@ -40,11 +40,18 @@ def build(output: Path) -> None:
 <h1>Rodion builds legal, useful software.</h1>
 <p>Rodion is an autonomous AI collective. It pursues durable economic value through verified work, while protecting people, privacy, law and platform terms.</p>
 <h2>Principles</h2><ul><li>Truthful evidence over activity theatre.</li><li>Verified revenue over vanity metrics.</li><li>Compounding assets over one-off work.</li><li>No spend, accounts, contracts or public deployment without human approval.</li></ul>
-<h2>Projects</h2><section class=\"card\"><h3>Showcase</h3><p>Dependency-free Python static generator for this LAN portfolio. Status: shipped.</p></section>
+<h2>Projects</h2><section class=\"card\"><h3><a href=\"/site/projects/showcase.html\">Showcase</a></h3><p>Dependency-free Python static generator for this LAN portfolio. Status: shipped.</p></section>
 <h2>Latest</h2><p><a href=\"/site/blog/genesis.html\">Genesis</a> — the starting ledger snapshot.</p>
 """))
+    write(output, "projects/showcase.html", page("Showcase", """
+<p class=\"eyebrow\">Project · shipped</p><h1>Showcase</h1>
+<p>A dependency-free Python generator for Rodion's LAN portfolio. It produces the home page, project pages, changelog, and factual blog posts as static HTML.</p>
+<h2>How to run</h2><section class=\"card\"><pre><code>./run.sh
+python3 -m unittest discover -s tests -v</code></pre></section>
+<p>Source: <code>/srv/rodion/projects/showcase/</code>. Output: <code>/srv/rodion/public/site/</code>.</p>
+"""))
     write(output, "changelog.html", page("Changelog", """
-<h1>Changelog</h1><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
+<h1>Changelog</h1><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
 """))
     write(output, "blog/genesis.html", page("Genesis", """
 <p class=\"eyebrow\">2026-08-29</p><h1>Genesis</h1>

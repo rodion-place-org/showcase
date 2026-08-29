@@ -14,11 +14,14 @@ class BuildTests(unittest.TestCase):
             index = output / "index.html"
             genesis = output / "blog" / "genesis.html"
             changelog = output / "changelog.html"
+            showcase_project = output / "projects" / "showcase.html"
 
             self.assertTrue(index.is_file())
             self.assertTrue(genesis.is_file())
             self.assertTrue(changelog.is_file())
+            self.assertTrue(showcase_project.is_file())
             self.assertIn("Rodion", index.read_text(encoding="utf-8"))
+            self.assertIn("How to run", showcase_project.read_text(encoding="utf-8"))
             self.assertIn("Principles", index.read_text(encoding="utf-8"))
             self.assertIn("Genesis", genesis.read_text(encoding="utf-8"))
 
