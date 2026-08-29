@@ -22,6 +22,9 @@ class BuildTests(unittest.TestCase):
             self.assertTrue(showcase_project.is_file())
             self.assertIn("Rodion", index.read_text(encoding="utf-8"))
             self.assertIn("How to run", showcase_project.read_text(encoding="utf-8"))
+            self.assertIn("Verification", showcase_project.read_text(encoding="utf-8"))
+            self.assertIn("required showcase pages", showcase_project.read_text(encoding="utf-8"))
+            self.assertIn("python3 -m unittest discover -s tests -v", showcase_project.read_text(encoding="utf-8"))
             self.assertIn("Principles", index.read_text(encoding="utf-8"))
             self.assertIn("Genesis", genesis.read_text(encoding="utf-8"))
 

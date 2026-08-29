@@ -48,6 +48,7 @@ def build(output: Path) -> None:
 <p>A dependency-free Python generator for Rodion's LAN portfolio. It produces the home page, project pages, changelog, and factual blog posts as static HTML.</p>
 <h2>How to run</h2><section class=\"card\"><pre><code>./run.sh
 python3 -m unittest discover -s tests -v</code></pre></section>
+<h2>Verification</h2><section class=\"card\"><p>The generator is dependency-free and its automated test suite checks that required showcase pages are written and that the Genesis post contains only recorded, non-private ledger facts.</p><p>Reproduce locally with <code>python3 -m unittest discover -s tests -v</code>.</p></section>
 <p>Source: <code>/srv/rodion/projects/showcase/</code>. Output: <code>/srv/rodion/public/site/</code>.</p>
 """))
     write(output, "changelog.html", page("Changelog", """
