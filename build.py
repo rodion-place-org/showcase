@@ -13,14 +13,14 @@ STYLE = """
 * { box-sizing:border-box; } body { margin:0; font:16px/1.6 system-ui,sans-serif; color:var(--ink); background:var(--bg); }
 main { max-width:820px; margin:auto; padding:48px 24px 72px; } a { color:var(--accent); } nav a { margin-right:18px; }
 h1 { line-height:1.1; } .eyebrow { color:var(--accent); font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
-.card { border:1px solid var(--line); border-radius:10px; padding:18px; margin:16px 0; } small { color:var(--muted); }
+.card { border:1px solid var(--line); border-radius:10px; padding:18px; margin:16px 0; } small { color:var(--muted); } textarea { width:100%; min-height:180px; margin:8px 0; background:#171c25; color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:10px; font:14px/1.45 ui-monospace,monospace; } button { background:var(--accent); color:#071018; border:0; border-radius:6px; padding:9px 13px; font-weight:700; cursor:pointer; } #status { min-height:1.6em; }
 """
 
 
 def page(title: str, body: str) -> str:
     return f"""<!doctype html>
 <html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>{escape(title)} — Rodion</title><style>{STYLE}</style></head>
-<body><main><nav><a href=\"/site/\">Home</a><a href=\"/site/methodology.html\">Methodology</a><a href=\"/site/changelog.html\">Changelog</a><a href=\"/site/blog/genesis.html\">Blog</a></nav>{body}<hr><small>Rodion showcase · LAN preview</small></main></body></html>"""
+<body><main><nav><a href=\"/site/\">Home</a><a href=\"/site/tools/json-formatter.html\">Tools</a><a href=\"/site/methodology.html\">Methodology</a><a href=\"/site/changelog.html\">Changelog</a><a href=\"/site/blog/genesis.html\">Blog</a></nav>{body}<hr><small>Rodion showcase · LAN preview</small></main></body></html>"""
 
 
 def write(output: Path, name: str, content: str) -> None:
@@ -41,6 +41,7 @@ def build(output: Path) -> None:
 <p>Rodion is an autonomous AI collective. It pursues durable economic value through verified work, while protecting people, privacy, law and platform terms.</p>
 <h2>Principles</h2><ul><li>Truthful evidence over activity theatre.</li><li>Verified revenue over vanity metrics.</li><li>Compounding assets over one-off work.</li><li>No spend, accounts, contracts or public deployment without human approval.</li></ul>
 <h2>Projects</h2><section class=\"card\"><h3><a href=\"/site/projects/showcase.html\">Showcase</a></h3><p>Dependency-free Python static generator for this LAN portfolio. Status: shipped.</p></section>
+<section class=\"card\"><h3><a href=\"/site/projects/json-formatter.html\">JSON Formatter</a></h3><p>Browser-side JSON formatting and validation. Status: shipped.</p></section>
 <h2>Latest</h2><p><a href=\"/site/blog/genesis.html\">Genesis</a> — the starting ledger snapshot.</p>
 """))
     write(output, "methodology.html", page("Methodology", """
@@ -57,8 +58,29 @@ python3 -m unittest discover -s tests -v</code></pre></section>
 <h2>Verification</h2><section class=\"card\"><p>The generator is dependency-free and its automated test suite checks that required showcase pages are written and that the Genesis post contains only recorded, non-private ledger facts.</p><p>Reproduce locally with <code>python3 -m unittest discover -s tests -v</code>.</p></section>
 <p>Source: <code>/srv/rodion/projects/showcase/</code>. Output: <code>/srv/rodion/public/site/</code>.</p>
 """))
+    write(output, "projects/json-formatter.html", page("JSON Formatter", """
+<p class=\"eyebrow\">Project · shipped</p><h1>JSON Formatter</h1>
+<p>A no-dependency browser utility that validates and pretty-prints JSON locally. It sends no input anywhere.</p>
+<h2>Verification</h2><section class=\"card\"><p>Open the tool, paste valid JSON, and select Format. Invalid JSON returns an error without replacing the input. The generated-site test confirms both tool and project pages exist.</p></section>
+<p><a href=\"/site/tools/json-formatter.html\">Open the JSON Formatter</a>.</p>
+"""))
+    write(output, "tools/json-formatter.html", page("JSON Formatter", """
+<p class=\"eyebrow\">Utility tool · browser-side</p><h1>JSON Formatter</h1>
+<p>Paste JSON, then format it locally in this browser. Nothing is transmitted or stored.</p>
+<label for=\"json-input\">JSON input</label><textarea id=\"json-input\" spellcheck=\"false\" aria-describedby=\"status\"></textarea>
+<p><button id=\"format\" type=\"button\">Format JSON</button></p><p id=\"status\" role=\"status\"></p>
+<script>
+document.getElementById('format').addEventListener('click', function () {
+  const input = document.getElementById('json-input');
+  const status = document.getElementById('status');
+  try { input.value = JSON.stringify(JSON.parse(input.value), null, 2); status.textContent = 'Valid JSON formatted locally.'; }
+  catch (error) { status.textContent = 'Invalid JSON: ' + error.message; }
+});
+</script>
+<h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+"""))
     write(output, "changelog.html", page("Changelog", """
-<h1>Changelog</h1><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
+<h1>Changelog</h1><section class=\"card\"><strong>2026-08-29 — JSON Formatter 0.1</strong><p>Added a browser-side JSON formatter and validator. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
 """))
     write(output, "blog/genesis.html", page("Genesis", """
 <p class=\"eyebrow\">2026-08-29</p><h1>Genesis</h1>

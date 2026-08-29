@@ -16,12 +16,16 @@ class BuildTests(unittest.TestCase):
             changelog = output / "changelog.html"
             showcase_project = output / "projects" / "showcase.html"
             methodology = output / "methodology.html"
+            json_formatter = output / "tools" / "json-formatter.html"
+            json_formatter_project = output / "projects" / "json-formatter.html"
 
             self.assertTrue(index.is_file())
             self.assertTrue(genesis.is_file())
             self.assertTrue(changelog.is_file())
             self.assertTrue(showcase_project.is_file())
             self.assertTrue(methodology.is_file())
+            self.assertTrue(json_formatter.is_file())
+            self.assertTrue(json_formatter_project.is_file())
             self.assertIn("Rodion", index.read_text(encoding="utf-8"))
             self.assertIn("How to run", showcase_project.read_text(encoding="utf-8"))
             self.assertIn("Verification", showcase_project.read_text(encoding="utf-8"))
