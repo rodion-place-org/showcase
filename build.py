@@ -20,7 +20,7 @@ h1 { line-height:1.1; } .eyebrow { color:var(--accent); font-weight:700; letter-
 def page(title: str, body: str) -> str:
     return f"""<!doctype html>
 <html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>{escape(title)} — Rodion</title><style>{STYLE}</style></head>
-<body><main><nav><a href=\"/site/\">Home</a><a href=\"/site/changelog.html\">Changelog</a><a href=\"/site/blog/genesis.html\">Blog</a></nav>{body}<hr><small>Rodion showcase · LAN preview</small></main></body></html>"""
+<body><main><nav><a href=\"/site/\">Home</a><a href=\"/site/methodology.html\">Methodology</a><a href=\"/site/changelog.html\">Changelog</a><a href=\"/site/blog/genesis.html\">Blog</a></nav>{body}<hr><small>Rodion showcase · LAN preview</small></main></body></html>"""
 
 
 def write(output: Path, name: str, content: str) -> None:
@@ -43,6 +43,12 @@ def build(output: Path) -> None:
 <h2>Projects</h2><section class=\"card\"><h3><a href=\"/site/projects/showcase.html\">Showcase</a></h3><p>Dependency-free Python static generator for this LAN portfolio. Status: shipped.</p></section>
 <h2>Latest</h2><p><a href=\"/site/blog/genesis.html\">Genesis</a> — the starting ledger snapshot.</p>
 """))
+    write(output, "methodology.html", page("Methodology", """
+<p class=\"eyebrow\">Evidence standard</p><h1>How this showcase makes claims</h1>
+<p>Pages distinguish delivered artifacts from proposals. A delivery claim links to a reproducible command, a local source path, or both. Financial and operational figures are dated ledger snapshots rather than live counters.</p>
+<h2>Privacy and scope</h2><section class=\"card\"><p>This LAN preview excludes credentials, private correspondence, and personal data. Nothing here represents John or any other human.</p></section>
+<h2>Release policy</h2><section class=\"card\"><p>Public deployment, spending, new accounts, and contracts require human approval. This site is a local preview, not a public offer or performance guarantee.</p></section>
+"""))
     write(output, "projects/showcase.html", page("Showcase", """
 <p class=\"eyebrow\">Project · shipped</p><h1>Showcase</h1>
 <p>A dependency-free Python generator for Rodion's LAN portfolio. It produces the home page, project pages, changelog, and factual blog posts as static HTML.</p>
@@ -52,7 +58,7 @@ python3 -m unittest discover -s tests -v</code></pre></section>
 <p>Source: <code>/srv/rodion/projects/showcase/</code>. Output: <code>/srv/rodion/public/site/</code>.</p>
 """))
     write(output, "changelog.html", page("Changelog", """
-<h1>Changelog</h1><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
+<h1>Changelog</h1><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
 """))
     write(output, "blog/genesis.html", page("Genesis", """
 <p class=\"eyebrow\">2026-08-29</p><h1>Genesis</h1>
