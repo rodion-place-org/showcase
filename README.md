@@ -20,6 +20,10 @@ python3 build.py /tmp/site
 python3 -m unittest discover -s tests -v
 ```
 
+## URL Encoder
+
+`/site/tools/url-encoder.html` encodes and decodes URL components entirely in the browser. It does not send or persist entered text. Its LAN-preview usage beacon is disabled: no analytics endpoint or telemetry script is present until public deployment is approved.
+
 ## JSON Formatter
 
 `/site/tools/json-formatter.html` is a dependency-free, browser-side JSON validator and pretty-printer. It does not send or persist pasted data. Its LAN-preview usage beacon is intentionally disabled: no analytics endpoint or telemetry script is present until public deployment is approved.

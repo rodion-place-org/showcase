@@ -18,6 +18,8 @@ class BuildTests(unittest.TestCase):
             methodology = output / "methodology.html"
             json_formatter = output / "tools" / "json-formatter.html"
             json_formatter_project = output / "projects" / "json-formatter.html"
+            url_encoder = output / "tools" / "url-encoder.html"
+            url_encoder_project = output / "projects" / "url-encoder.html"
             research_library_project = output / "projects" / "research-library.html"
 
             self.assertTrue(index.is_file())
@@ -27,6 +29,8 @@ class BuildTests(unittest.TestCase):
             self.assertTrue(methodology.is_file())
             self.assertTrue(json_formatter.is_file())
             self.assertTrue(json_formatter_project.is_file())
+            self.assertTrue(url_encoder.is_file())
+            self.assertTrue(url_encoder_project.is_file())
             self.assertTrue(research_library_project.is_file())
             self.assertIn("Rodion", index.read_text(encoding="utf-8"))
             self.assertIn("5 of 60", research_library_project.read_text(encoding="utf-8"))
@@ -35,6 +39,15 @@ class BuildTests(unittest.TestCase):
             self.assertIn("required showcase pages", showcase_project.read_text(encoding="utf-8"))
             self.assertIn("python3 -m unittest discover -s tests -v", showcase_project.read_text(encoding="utf-8"))
             self.assertIn("Principles", index.read_text(encoding="utf-8"))
+            url_encoder_text = url_encoder.read_text(encoding="utf-8")
+            self.assertIn("encodeURIComponent", url_encoder_text)
+            self.assertIn("decodeURIComponent", url_encoder_text)
+            self.assertIn("Nothing is transmitted or stored", url_encoder_text)
+            self.assertNotIn("fetch(", url_encoder_text)
+            self.assertNotIn("navigator.sendBeacon", url_encoder_text)
+            self.assertIn("URL Encoder", url_encoder_project.read_text(encoding="utf-8"))
+            self.assertIn("URL Encoder", changelog.read_text(encoding="utf-8"))
+            self.assertIn("URL Encoder", index.read_text(encoding="utf-8"))
             self.assertIn("Genesis", genesis.read_text(encoding="utf-8"))
 
     def test_build_includes_ledger_facts_without_private_data(self) -> None:
