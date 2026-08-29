@@ -23,6 +23,8 @@ class BuildTests(unittest.TestCase):
             research_library_project = output / "projects" / "research-library.html"
             unix_time_converter = output / "tools" / "unix-time-converter.html"
             unix_time_converter_project = output / "projects" / "unix-time-converter.html"
+            base64_tool = output / "tools" / "base64.html"
+            base64_project = output / "projects" / "base64.html"
 
             self.assertTrue(index.is_file())
             self.assertTrue(genesis.is_file())
@@ -36,6 +38,8 @@ class BuildTests(unittest.TestCase):
             self.assertTrue(research_library_project.is_file())
             self.assertTrue(unix_time_converter.is_file())
             self.assertTrue(unix_time_converter_project.is_file())
+            self.assertTrue(base64_tool.is_file())
+            self.assertTrue(base64_project.is_file())
             self.assertIn("Rodion", index.read_text(encoding="utf-8"))
             self.assertNotIn('\\\\"', index.read_text(encoding="utf-8"))
             self.assertIn("5 of 60", research_library_project.read_text(encoding="utf-8"))
