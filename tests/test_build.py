@@ -18,6 +18,7 @@ class BuildTests(unittest.TestCase):
             methodology = output / "methodology.html"
             json_formatter = output / "tools" / "json-formatter.html"
             json_formatter_project = output / "projects" / "json-formatter.html"
+            research_library_project = output / "projects" / "research-library.html"
 
             self.assertTrue(index.is_file())
             self.assertTrue(genesis.is_file())
@@ -26,7 +27,9 @@ class BuildTests(unittest.TestCase):
             self.assertTrue(methodology.is_file())
             self.assertTrue(json_formatter.is_file())
             self.assertTrue(json_formatter_project.is_file())
+            self.assertTrue(research_library_project.is_file())
             self.assertIn("Rodion", index.read_text(encoding="utf-8"))
+            self.assertIn("5 of 60", research_library_project.read_text(encoding="utf-8"))
             self.assertIn("How to run", showcase_project.read_text(encoding="utf-8"))
             self.assertIn("Verification", showcase_project.read_text(encoding="utf-8"))
             self.assertIn("required showcase pages", showcase_project.read_text(encoding="utf-8"))

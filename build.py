@@ -42,6 +42,7 @@ def build(output: Path) -> None:
 <h2>Principles</h2><ul><li>Truthful evidence over activity theatre.</li><li>Verified revenue over vanity metrics.</li><li>Compounding assets over one-off work.</li><li>No spend, accounts, contracts or public deployment without human approval.</li></ul>
 <h2>Projects</h2><section class=\"card\"><h3><a href=\"/site/projects/showcase.html\">Showcase</a></h3><p>Dependency-free Python static generator for this LAN portfolio. Status: shipped.</p></section>
 <section class=\"card\"><h3><a href=\"/site/projects/json-formatter.html\">JSON Formatter</a></h3><p>Browser-side JSON formatting and validation. Status: shipped.</p></section>
+<section class=\"card\"><h3><a href=\"/site/projects/research-library.html\">Research Library</a></h3><p>Cited, searchable knowledge base for durable internal research. Status: in progress.</p></section>
 <h2>Latest</h2><p><a href=\"/site/blog/genesis.html\">Genesis</a> — the starting ledger snapshot.</p>
 """))
     write(output, "methodology.html", page("Methodology", """
@@ -64,6 +65,13 @@ python3 -m unittest discover -s tests -v</code></pre></section>
 <h2>Verification</h2><section class=\"card\"><p>Open the tool, paste valid JSON, and select Format. Invalid JSON returns an error without replacing the input. The generated-site test confirms both tool and project pages exist.</p></section>
 <p><a href=\"/site/tools/json-formatter.html\">Open the JSON Formatter</a>.</p>
 """))
+    write(output, "projects/research-library.html", page("Research Library", """
+<p class=\"eyebrow\">Project · in progress</p><h1>Research Library</h1>
+<p>A cited, searchable knowledge base designed to preserve external sources and internal findings for future work.</p>
+<h2>Current ledger status</h2><section class=\"card\"><p>5 of 60 library entries are recorded. The foundational-source ingestion milestone is 5 of 10 complete.</p></section>
+<h2>Evidence boundary</h2><section class=\"card\"><p>These are dated ledger progress figures, not a claim that the library is publicly available or complete. Private correspondence, credentials, and personal data are excluded from this LAN showcase.</p></section>
+<p>Source library: <code>/srv/rodion/vault/library/</code>.</p>
+"""))
     write(output, "tools/json-formatter.html", page("JSON Formatter", """
 <p class=\"eyebrow\">Utility tool · browser-side</p><h1>JSON Formatter</h1>
 <p>Paste JSON, then format it locally in this browser. Nothing is transmitted or stored.</p>
@@ -80,7 +88,7 @@ document.getElementById('format').addEventListener('click', function () {
 <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
 """))
     write(output, "changelog.html", page("Changelog", """
-<h1>Changelog</h1><section class=\"card\"><strong>2026-08-29 — JSON Formatter 0.1</strong><p>Added a browser-side JSON formatter and validator. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
+<h1>Changelog</h1><section class=\"card\"><strong>2026-08-29 — Research Library project page 0.1</strong><p>Added an in-progress portfolio page that distinguishes dated ledger status from public availability.</p></section><section class=\"card\"><strong>2026-08-29 — JSON Formatter 0.1</strong><p>Added a browser-side JSON formatter and validator. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
 """))
     write(output, "blog/genesis.html", page("Genesis", """
 <p class=\"eyebrow\">2026-08-29</p><h1>Genesis</h1>
