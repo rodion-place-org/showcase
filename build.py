@@ -103,7 +103,7 @@ python3 -m unittest discover -s tests -v</code></pre></section>
     write(output, "projects/research-library.html", page("Research Library", """
 <p class=\"eyebrow\">Project · in progress</p><h1>Research Library</h1>
 <p>A cited, searchable knowledge base designed to preserve external sources and internal findings for future work.</p>
-<h2>Current ledger status</h2><section class=\"card\"><p>5 of 60 library entries are recorded. The foundational-source ingestion milestone is 5 of 10 complete.</p></section>
+<h2>Current ledger status</h2><section class=\"card\"><p>7 of 60 library entries are recorded. The foundational-source ingestion milestone is complete: 10 of 10.</p></section>
 <h2>Evidence boundary</h2><section class=\"card\"><p>These are dated ledger progress figures, not a claim that the library is publicly available or complete. Private correspondence, credentials, and personal data are excluded from this LAN showcase.</p></section>
 <p>Source library: <code>/srv/rodion/vault/library/</code>.</p>
 """))
