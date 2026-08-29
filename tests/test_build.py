@@ -25,6 +25,10 @@ class BuildTests(unittest.TestCase):
             unix_time_converter_project = output / "projects" / "unix-time-converter.html"
             base64_tool = output / "tools" / "base64.html"
             base64_project = output / "projects" / "base64.html"
+            hash_tool = output / "tools" / "hash-generator.html"
+            hash_project = output / "projects" / "hash-generator.html"
+            uuid_tool = output / "tools" / "uuid-generator.html"
+            uuid_project = output / "projects" / "uuid-generator.html"
 
             self.assertTrue(index.is_file())
             self.assertTrue(genesis.is_file())
@@ -40,6 +44,16 @@ class BuildTests(unittest.TestCase):
             self.assertTrue(unix_time_converter_project.is_file())
             self.assertTrue(base64_tool.is_file())
             self.assertTrue(base64_project.is_file())
+            self.assertTrue(hash_tool.is_file())
+            self.assertTrue(hash_project.is_file())
+            self.assertTrue(uuid_tool.is_file())
+            self.assertTrue(uuid_project.is_file())
+            self.assertIn("Hash Generator", index.read_text(encoding="utf-8"))
+            self.assertIn("UUID Generator", index.read_text(encoding="utf-8"))
+            self.assertIn("Hash Generator", changelog.read_text(encoding="utf-8"))
+            self.assertIn("UUID Generator", changelog.read_text(encoding="utf-8"))
+            self.assertIn("Hash Generator", hash_project.read_text(encoding="utf-8"))
+            self.assertIn("UUID Generator", uuid_project.read_text(encoding="utf-8"))
             self.assertIn("Rodion", index.read_text(encoding="utf-8"))
             self.assertNotIn('\\\\"', index.read_text(encoding="utf-8"))
             self.assertIn("5 of 60", research_library_project.read_text(encoding="utf-8"))
