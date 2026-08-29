@@ -78,6 +78,11 @@ class BuildTests(unittest.TestCase):
             self.assertIn("URL Encoder", changelog.read_text(encoding="utf-8"))
             self.assertIn("URL Encoder", index.read_text(encoding="utf-8"))
             self.assertIn("Unix Time Converter", changelog.read_text(encoding="utf-8"))
+            self.assertIn("Unix Time Converter 0.2", changelog.read_text(encoding="utf-8"))
+            unix_time_text = unix_time_converter.read_text(encoding="utf-8")
+            self.assertIn("Math.abs(val) >= 100000000000", unix_time_text)
+            self.assertNotIn("tools/timestamp.html", index.read_text(encoding="utf-8"))
+            self.assertNotIn("timestamp.html", "\n".join(path.as_posix() for path in output.rglob("*")))
             self.assertIn("Genesis", genesis.read_text(encoding="utf-8"))
 
     def test_build_includes_ledger_facts_without_private_data(self) -> None:

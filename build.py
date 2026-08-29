@@ -153,7 +153,8 @@ document.getElementById('format').addEventListener('click', function () {
     document.getElementById('ts-to-date').addEventListener('click', function () {
       const val = parseInt(input.value.trim(), 10);
       if (!isNaN(val)) {
-        const date = new Date(val * 1000);
+        const milliseconds = Math.abs(val) >= 100000000000 ? val : val * 1000;
+        const date = new Date(milliseconds);
         output.value = date.toISOString() + ' (UTC)\\n' + date.toString() + ' (local)';
         status.textContent = 'Converted locally.';
       } else {
@@ -251,48 +252,8 @@ document.getElementById('format').addEventListener('click', function () {
     </script>
     <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
     """))
-    write(output, "tools/timestamp.html", page("Timestamp Converter", """
-    <p class="eyebrow">Utility tool · browser-side</p><h1>Timestamp Converter</h1>
-    <p>Convert between Unix timestamps and human-readable dates locally in this browser. Nothing is transmitted or stored.</p>
-    <label for="ts-input">Unix timestamp or ISO date</label><textarea id="ts-input" spellcheck="false" aria-describedby="ts-status" rows="2"></textarea>
-    <p><button id="ts-to-date" type="button">Timestamp → Date</button> <button id="ts-to-ts" type="button">Date → Timestamp</button> <button id="ts-now" type="button">Now</button></p>
-    <textarea id="ts-output" readonly spellcheck="false" aria-describedby="ts-status" rows="3"></textarea>
-    <p id="ts-status" role="status"></p>
-    <script>
-    const input = document.getElementById('ts-input');
-    const output = document.getElementById('ts-output');
-    const status = document.getElementById('ts-status');
-    document.getElementById('ts-to-date').addEventListener('click', function () {
-      const val = parseInt(input.value.trim(), 10);
-      if (!isNaN(val)) {
-        const date = new Date(val * 1000);
-        output.value = date.toISOString() + ' (UTC)\n' + date.toString() + ' (local)';
-        status.textContent = 'Converted locally.';
-      } else {
-        status.textContent = 'Invalid timestamp.';
-      }
-    });
-    document.getElementById('ts-to-ts').addEventListener('click', function () {
-      const date = new Date(input.value.trim());
-      if (!isNaN(date.getTime())) {
-        output.value = Math.floor(date.getTime() / 1000).toString();
-        status.textContent = 'Converted locally.';
-      } else {
-        status.textContent = 'Invalid date format.';
-      }
-    });
-    document.getElementById('ts-now').addEventListener('click', function () {
-      const now = Math.floor(Date.now() / 1000);
-      input.value = now.toString();
-      const date = new Date(now * 1000);
-      output.value = date.toISOString() + ' (UTC)\n' + date.toString() + ' (local)';
-      status.textContent = 'Current timestamp set locally.';
-    });
-    </script>
-    <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
-    """))
     write(output, "changelog.html", page("Changelog", """
-<h1>Changelog</h1><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.2</strong><p>Removed the non-functional MD5 option; the browser Web Crypto API supports SHA-256 and SHA-512 here. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — UUID Generator 0.1</strong><p>Documented the shipped browser-side UUID v4 generator in the showcase. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.1</strong><p>Documented the shipped browser-side SHA-256 and SHA-512 hash generator in the showcase. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Base64 Encoder/Decoder 0.1</strong><p>Added a browser-side Base64 encoder and decoder with Unicode text support. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.1</strong><p>Added a browser-side Unix timestamp and ISO date converter. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — URL Encoder 0.1</strong><p>Added a browser-side URL component encoder and decoder. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Research Library project page 0.1</strong><p>Added an in-progress portfolio page that distinguishes dated ledger status from public availability.</p></section><section class=\"card\"><strong>2026-08-29 — JSON Formatter 0.1</strong><p>Added a browser-side JSON formatter and validator. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
+<h1>Changelog</h1><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.2</strong><p>Corrected millisecond timestamp handling and removed the obsolete duplicate Timestamp Converter output. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.2</strong><p>Removed the non-functional MD5 option; the browser Web Crypto API supports SHA-256 and SHA-512 here. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — UUID Generator 0.1</strong><p>Documented the shipped browser-side UUID v4 generator in the showcase. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.1</strong><p>Documented the shipped browser-side SHA-256 and SHA-512 hash generator in the showcase. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Base64 Encoder/Decoder 0.1</strong><p>Added a browser-side Base64 encoder and decoder with Unicode text support. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.1</strong><p>Added a browser-side Unix timestamp and ISO date converter. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — URL Encoder 0.1</strong><p>Added a browser-side URL component encoder and decoder. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Research Library project page 0.1</strong><p>Added an in-progress portfolio page that distinguishes dated ledger status from public availability.</p></section><section class=\"card\"><strong>2026-08-29 — JSON Formatter 0.1</strong><p>Added a browser-side JSON formatter and validator. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
 """))
     write(output, "blog/genesis.html", page("Genesis", """
 <p class=\"eyebrow\">2026-08-29</p><h1>Genesis</h1>
