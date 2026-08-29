@@ -90,7 +90,7 @@ python3 -m unittest discover -s tests -v</code></pre></section>
     """))
     write(output, "projects/hash-generator.html", page("Hash Generator", """
     <p class="eyebrow">Project · shipped</p><h1>Hash Generator</h1>
-    <p>A no-dependency browser utility that generates MD5, SHA-256, and SHA-512 text hashes locally. It sends no input anywhere.</p>
+    <p>A no-dependency browser utility that generates SHA-256 and SHA-512 text hashes locally. It sends no input anywhere.</p>
     <h2>Verification</h2><section class="card"><p>Enter text and choose an algorithm. The tool displays the resulting digest locally. The generated-site test confirms that the tool and this portfolio page exist.</p></section>
     <p><a href="/site/tools/hash-generator.html">Open the Hash Generator</a>.</p>
     """))
@@ -200,9 +200,9 @@ document.getElementById('format').addEventListener('click', function () {
     """))
     write(output, "tools/hash-generator.html", page("Hash Generator", """
     <p class="eyebrow">Utility tool · browser-side</p><h1>Hash Generator</h1>
-    <p>Generate MD5, SHA-256, or SHA-512 hashes of text locally in this browser. Nothing is transmitted or stored.</p>
+    <p>Generate SHA-256 or SHA-512 hashes of text locally in this browser. Nothing is transmitted or stored.</p>
     <label for="hash-input">Text to hash</label><textarea id="hash-input" spellcheck="false" aria-describedby="hash-status"></textarea>
-    <p><button id="hash-md5" type="button">MD5</button> <button id="hash-sha256" type="button">SHA-256</button> <button id="hash-sha512" type="button">SHA-512</button></p>
+    <p><button id="hash-sha256" type="button">SHA-256</button> <button id="hash-sha512" type="button">SHA-512</button></p>
     <p id="hash-status" role="status"></p>
     <textarea id="hash-output" readonly spellcheck="false" aria-describedby="hash-status" style="height:120px;"></textarea>
     <script async>
@@ -222,7 +222,6 @@ document.getElementById('format').addEventListener('click', function () {
         status.textContent = 'Hash error: ' + error.message;
       }
     }
-    document.getElementById('hash-md5').addEventListener('click', function () { hashText('MD5'); });
     document.getElementById('hash-sha256').addEventListener('click', function () { hashText('SHA-256'); });
     document.getElementById('hash-sha512').addEventListener('click', function () { hashText('SHA-512'); });
     </script>
@@ -293,7 +292,7 @@ document.getElementById('format').addEventListener('click', function () {
     <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
     """))
     write(output, "changelog.html", page("Changelog", """
-<h1>Changelog</h1><section class=\"card\"><strong>2026-08-29 — UUID Generator 0.1</strong><p>Documented the shipped browser-side UUID v4 generator in the showcase. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.1</strong><p>Documented the shipped browser-side MD5, SHA-256, and SHA-512 hash generator in the showcase. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Base64 Encoder/Decoder 0.1</strong><p>Added a browser-side Base64 encoder and decoder with Unicode text support. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.1</strong><p>Added a browser-side Unix timestamp and ISO date converter. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — URL Encoder 0.1</strong><p>Added a browser-side URL component encoder and decoder. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Research Library project page 0.1</strong><p>Added an in-progress portfolio page that distinguishes dated ledger status from public availability.</p></section><section class=\"card\"><strong>2026-08-29 — JSON Formatter 0.1</strong><p>Added a browser-side JSON formatter and validator. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
+<h1>Changelog</h1><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.2</strong><p>Removed the non-functional MD5 option; the browser Web Crypto API supports SHA-256 and SHA-512 here. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — UUID Generator 0.1</strong><p>Documented the shipped browser-side UUID v4 generator in the showcase. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.1</strong><p>Documented the shipped browser-side SHA-256 and SHA-512 hash generator in the showcase. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Base64 Encoder/Decoder 0.1</strong><p>Added a browser-side Base64 encoder and decoder with Unicode text support. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.1</strong><p>Added a browser-side Unix timestamp and ISO date converter. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — URL Encoder 0.1</strong><p>Added a browser-side URL component encoder and decoder. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Research Library project page 0.1</strong><p>Added an in-progress portfolio page that distinguishes dated ledger status from public availability.</p></section><section class=\"card\"><strong>2026-08-29 — JSON Formatter 0.1</strong><p>Added a browser-side JSON formatter and validator. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
 """))
     write(output, "blog/genesis.html", page("Genesis", """
 <p class=\"eyebrow\">2026-08-29</p><h1>Genesis</h1>
