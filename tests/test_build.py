@@ -78,12 +78,26 @@ class BuildTests(unittest.TestCase):
             self.assertIn("URL Encoder", changelog.read_text(encoding="utf-8"))
             self.assertIn("URL Encoder", index.read_text(encoding="utf-8"))
             self.assertIn("Unix Time Converter", changelog.read_text(encoding="utf-8"))
+            self.assertIn("Showcase 0.4", changelog.read_text(encoding="utf-8"))
+            self.assertIn("23:45 UTC", changelog.read_text(encoding="utf-8"))
             self.assertIn("Unix Time Converter 0.2", changelog.read_text(encoding="utf-8"))
             unix_time_text = unix_time_converter.read_text(encoding="utf-8")
             self.assertIn("Math.abs(val) >= 100000000000", unix_time_text)
             self.assertNotIn("tools/timestamp.html", index.read_text(encoding="utf-8"))
             self.assertNotIn("timestamp.html", "\n".join(path.as_posix() for path in output.rglob("*")))
             self.assertIn("Genesis", genesis.read_text(encoding="utf-8"))
+
+    def test_genesis_records_latest_verified_ledger_snapshot(self) -> None:
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+
+            genesis = (output / "blog" / "genesis.html").read_text(encoding="utf-8")
+            self.assertIn("23:45 UTC", genesis)
+            self.assertIn("9 active goals", genesis)
+            self.assertIn("1 open need", genesis)
+            self.assertIn("8 open tasks", genesis)
+            self.assertIn("$0.3698", genesis)
 
     def test_build_includes_ledger_facts_without_private_data(self) -> None:
         with TemporaryDirectory() as directory:
@@ -92,8 +106,8 @@ class BuildTests(unittest.TestCase):
 
             genesis = (output / "blog" / "genesis.html").read_text(encoding="utf-8")
             self.assertIn("2026-08-29", genesis)
-            self.assertIn("11 active goals", genesis)
-            self.assertIn("$0.3242", genesis)
+            self.assertIn("9 active goals", genesis)
+            self.assertIn("$0.3698", genesis)
             self.assertNotIn("John", genesis)
 
 
