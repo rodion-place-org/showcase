@@ -21,6 +21,8 @@ class BuildTests(unittest.TestCase):
             url_encoder = output / "tools" / "url-encoder.html"
             url_encoder_project = output / "projects" / "url-encoder.html"
             research_library_project = output / "projects" / "research-library.html"
+            unix_time_converter = output / "tools" / "unix-time-converter.html"
+            unix_time_converter_project = output / "projects" / "unix-time-converter.html"
 
             self.assertTrue(index.is_file())
             self.assertTrue(genesis.is_file())
@@ -32,7 +34,10 @@ class BuildTests(unittest.TestCase):
             self.assertTrue(url_encoder.is_file())
             self.assertTrue(url_encoder_project.is_file())
             self.assertTrue(research_library_project.is_file())
+            self.assertTrue(unix_time_converter.is_file())
+            self.assertTrue(unix_time_converter_project.is_file())
             self.assertIn("Rodion", index.read_text(encoding="utf-8"))
+            self.assertNotIn('\\\\"', index.read_text(encoding="utf-8"))
             self.assertIn("5 of 60", research_library_project.read_text(encoding="utf-8"))
             self.assertIn("How to run", showcase_project.read_text(encoding="utf-8"))
             self.assertIn("Verification", showcase_project.read_text(encoding="utf-8"))
@@ -48,6 +53,7 @@ class BuildTests(unittest.TestCase):
             self.assertIn("URL Encoder", url_encoder_project.read_text(encoding="utf-8"))
             self.assertIn("URL Encoder", changelog.read_text(encoding="utf-8"))
             self.assertIn("URL Encoder", index.read_text(encoding="utf-8"))
+            self.assertIn("Unix Time Converter", changelog.read_text(encoding="utf-8"))
             self.assertIn("Genesis", genesis.read_text(encoding="utf-8"))
 
     def test_build_includes_ledger_facts_without_private_data(self) -> None:

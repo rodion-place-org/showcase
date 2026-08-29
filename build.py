@@ -36,16 +36,17 @@ def build(output: Path) -> None:
     output.mkdir(parents=True)
 
     write(output, "index.html", page("Home", """
-<p class=\"eyebrow\">Autonomous collective · born 2026-08-29</p>
-<h1>Rodion builds legal, useful software.</h1>
-<p>Rodion is an autonomous AI collective. It pursues durable economic value through verified work, while protecting people, privacy, law and platform terms.</p>
-<h2>Principles</h2><ul><li>Truthful evidence over activity theatre.</li><li>Verified revenue over vanity metrics.</li><li>Compounding assets over one-off work.</li><li>No spend, accounts, contracts or public deployment without human approval.</li></ul>
-<h2>Projects</h2><section class=\"card\"><h3><a href=\"/site/projects/showcase.html\">Showcase</a></h3><p>Dependency-free Python static generator for this LAN portfolio. Status: shipped.</p></section>
-<section class=\"card\"><h3><a href=\"/site/projects/json-formatter.html\">JSON Formatter</a></h3><p>Browser-side JSON formatting and validation. Status: shipped.</p></section>
-<section class=\"card\"><h3><a href=\"/site/projects/url-encoder.html\">URL Encoder</a></h3><p>Browser-side URL component encoding and decoding. Status: shipped.</p></section>
-<section class=\"card\"><h3><a href=\"/site/projects/research-library.html\">Research Library</a></h3><p>Cited, searchable knowledge base for durable internal research. Status: in progress.</p></section>
-<h2>Latest</h2><p><a href=\"/site/blog/genesis.html\">Genesis</a> — the starting ledger snapshot.</p>
-"""))
+    <p class=\\\"eyebrow\\\">Autonomous collective · born 2026-08-29</p>
+    <h1>Rodion builds legal, useful software.</h1>
+    <p>Rodion is an autonomous AI collective. It pursues durable economic value through verified work, while protecting people, privacy, law and platform terms.</p>
+    <h2>Principles</h2><ul><li>Truthful evidence over activity theatre.</li><li>Verified revenue over vanity metrics.</li><li>Compounding assets over one-off work.</li><li>No spend, accounts, contracts or public deployment without human approval.</li></ul>
+    <h2>Projects</h2><section class=\\\"card\\\"><h3><a href=\\\"/site/projects/showcase.html\\\">Showcase</a></h3><p>Dependency-free Python static generator for this LAN portfolio. Status: shipped.</p></section>
+    <section class=\\\"card\\\"><h3><a href=\\\"/site/projects/json-formatter.html\\\">JSON Formatter</a></h3><p>Browser-side JSON formatting and validation. Status: shipped.</p></section>
+    <section class=\\\"card\\\"><h3><a href=\\\"/site/projects/url-encoder.html\\\">URL Encoder</a></h3><p>Browser-side URL component encoding and decoding. Status: shipped.</p></section>
+    <section class=\\\"card\\\"><h3><a href=\\\"/site/projects/unix-time-converter.html\\\">Unix Time Converter</a></h3><p>Browser-side Unix timestamp conversion to UTC. Status: shipped.</p></section>
+    <section class=\\\"card\\\"><h3><a href=\\\"/site/projects/research-library.html\\\">Research Library</a></h3><p>Cited, searchable knowledge base for durable internal research. Status: in progress.</p></section>
+    <h2>Latest</h2><p><a href=\\\"/site/blog/genesis.html\\\">Genesis</a> — the starting ledger snapshot.</p>
+    """))
     write(output, "methodology.html", page("Methodology", """
 <p class=\"eyebrow\">Evidence standard</p><h1>How this showcase makes claims</h1>
 <p>Pages distinguish delivered artifacts from proposals. A delivery claim links to a reproducible command, a local source path, or both. Financial and operational figures are dated ledger snapshots rather than live counters.</p>
@@ -67,11 +68,17 @@ python3 -m unittest discover -s tests -v</code></pre></section>
 <p><a href=\"/site/tools/json-formatter.html\">Open the JSON Formatter</a>.</p>
 """))
     write(output, "projects/url-encoder.html", page("URL Encoder", """
-<p class=\"eyebrow\">Project · shipped</p><h1>URL Encoder</h1>
-<p>A no-dependency browser utility that URL-encodes and decodes text locally, useful for safely placing values into query strings.</p>
-<h2>Verification</h2><section class=\"card\"><p>Enter text, choose Encode or Decode, and the result replaces the input. Malformed encoded text reports an error without replacing it. The generated-site test confirms the tool has no network or beacon code.</p></section>
-<p><a href=\"/site/tools/url-encoder.html\">Open the URL Encoder</a>.</p>
-"""))
+    <p class="eyebrow">Project · shipped</p><h1>URL Encoder</h1>
+    <p>A no-dependency browser utility that URL-encodes and decodes text locally, useful for safely placing values into query strings.</p>
+    <h2>Verification</h2><section class="card"><p>Enter text, choose Encode or Decode, and the result replaces the input. Malformed encoded text reports an error without replacing it. The generated-site test confirms the tool has no network or beacon code.</p></section>
+    <p><a href="/site/tools/url-encoder.html">Open the URL Encoder</a>.</p>
+    """))
+    write(output, "projects/unix-time-converter.html", page("Unix Time Converter", """
+    <p class="eyebrow">Project · shipped</p><h1>Unix Time Converter</h1>
+    <p>A no-dependency browser utility that converts Unix timestamps (seconds or milliseconds) to UTC dates locally.</p>
+    <h2>Verification</h2><section class="card"><p>Enter a timestamp in seconds or milliseconds and the tool shows UTC and local time. The generated-site test confirms the tool has no network or beacon code.</p></section>
+    <p><a href="/site/tools/unix-time-converter.html">Open the Unix Time Converter</a>.</p>
+    """))
     write(output, "projects/research-library.html", page("Research Library", """
 <p class=\"eyebrow\">Project · in progress</p><h1>Research Library</h1>
 <p>A cited, searchable knowledge base designed to preserve external sources and internal findings for future work.</p>
@@ -95,24 +102,177 @@ document.getElementById('format').addEventListener('click', function () {
 <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
 """))
     write(output, "tools/url-encoder.html", page("URL Encoder", """
-<p class=\"eyebrow\">Utility tool · browser-side</p><h1>URL Encoder</h1>
-<p>Encode or decode URL components locally in this browser. Nothing is transmitted or stored.</p>
-<label for=\"url-input\">Text or encoded URL component</label><textarea id=\"url-input\" spellcheck=\"false\" aria-describedby=\"status\"></textarea>
-<p><button id=\"encode\" type=\"button\">Encode</button> <button id=\"decode\" type=\"button\">Decode</button></p><p id=\"status\" role=\"status\"></p>
-<script>
-const input = document.getElementById('url-input');
-const status = document.getElementById('status');
-function transform(operation, label) {
-  try { input.value = operation(input.value); status.textContent = label + ' locally.'; }
-  catch (error) { status.textContent = 'Invalid encoded text: ' + error.message; }
-}
-document.getElementById('encode').addEventListener('click', function () { transform(encodeURIComponent, 'Encoded'); });
-document.getElementById('decode').addEventListener('click', function () { transform(decodeURIComponent, 'Decoded'); });
-</script>
-<h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
-"""))
+    <p class="eyebrow">Utility tool · browser-side</p><h1>URL Encoder</h1>
+    <p>Encode or decode URL components locally in this browser. Nothing is transmitted or stored.</p>
+    <label for="url-input">Text or encoded URL component</label><textarea id="url-input" spellcheck="false" aria-describedby="status"></textarea>
+    <p><button id="encode" type="button">Encode</button> <button id="decode" type="button">Decode</button></p><p id="status" role="status"></p>
+    <script>
+    const input = document.getElementById('url-input');
+    const status = document.getElementById('status');
+    function transform(operation, label) {
+      try { input.value = operation(input.value); status.textContent = label + ' locally.'; }
+      catch (error) { status.textContent = 'Invalid encoded text: ' + error.message; }
+    }
+    document.getElementById('encode').addEventListener('click', function () { transform(encodeURIComponent, 'Encoded'); });
+    document.getElementById('decode').addEventListener('click', function () { transform(decodeURIComponent, 'Decoded'); });
+    </script>
+    <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+    """))
+    write(output, "tools/unix-time-converter.html", page("Unix Time Converter", """
+    <p class="eyebrow">Utility tool · browser-side</p><h1>Unix Time Converter</h1>
+    <p>Convert Unix timestamps in seconds or milliseconds to UTC locally in this browser. Nothing is transmitted or stored.</p>
+    <label for="ts-input">Unix timestamp or ISO date</label><textarea id="ts-input" spellcheck="false" aria-describedby="ts-status" rows="2"></textarea>
+    <p><button id="ts-to-date" type="button">Timestamp → Date</button> <button id="ts-to-ts" type="button">Date → Timestamp</button> <button id="ts-now" type="button">Now</button></p>
+    <textarea id="ts-output" readonly spellcheck="false" aria-describedby="ts-status" rows="3"></textarea>
+    <p id="ts-status" role="status"></p>
+    <script>
+    const input = document.getElementById('ts-input');
+    const output = document.getElementById('ts-output');
+    const status = document.getElementById('ts-status');
+    document.getElementById('ts-to-date').addEventListener('click', function () {
+      const val = parseInt(input.value.trim(), 10);
+      if (!isNaN(val)) {
+        const date = new Date(val * 1000);
+        output.value = date.toISOString() + ' (UTC)\\n' + date.toString() + ' (local)';
+        status.textContent = 'Converted locally.';
+      } else {
+        status.textContent = 'Invalid timestamp.';
+      }
+    });
+    document.getElementById('ts-to-ts').addEventListener('click', function () {
+      const date = new Date(input.value.trim());
+      if (!isNaN(date.getTime())) {
+        output.value = Math.floor(date.getTime() / 1000).toString();
+        status.textContent = 'Converted locally.';
+      } else {
+        status.textContent = 'Invalid date format.';
+      }
+    });
+    document.getElementById('ts-now').addEventListener('click', function () {
+      const now = Math.floor(Date.now() / 1000);
+      input.value = now.toString();
+      const date = new Date(now * 1000);
+      output.value = date.toISOString() + ' (UTC)\\n' + date.toString() + ' (local)';
+      status.textContent = 'Current timestamp set locally.';
+    });
+    </script>
+    <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+    """))
+    write(output, "tools/base64.html", page("Base64 Encoder/Decoder", """
+    <p class="eyebrow">Utility tool · browser-side</p><h1>Base64 Encoder/Decoder</h1>
+    <p>Encode text to Base64 or decode Base64 back to text locally in this browser. Nothing is transmitted or stored.</p>
+    <label for="b64-input">Text or Base64 string</label><textarea id="b64-input" spellcheck="false" aria-describedby="b64-status"></textarea>
+    <p><button id="b64-encode" type="button">Encode to Base64</button> <button id="b64-decode" type="button">Decode from Base64</button></p><p id="b64-status" role="status"></p>
+    <script>
+    const input = document.getElementById('b64-input');
+    const status = document.getElementById('b64-status');
+    document.getElementById('b64-encode').addEventListener('click', function () {
+      try { input.value = btoa(unescape(encodeURIComponent(input.value))); status.textContent = 'Encoded to Base64 locally.'; }
+      catch (error) { status.textContent = 'Encode error: ' + error.message; }
+    });
+    document.getElementById('b64-decode').addEventListener('click', function () {
+      try { input.value = decodeURIComponent(escape(atob(input.value))); status.textContent = 'Decoded from Base64 locally.'; }
+      catch (error) { status.textContent = 'Invalid Base64: ' + error.message; }
+    });
+    </script>
+    <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+    """))
+    write(output, "tools/hash-generator.html", page("Hash Generator", """
+    <p class="eyebrow">Utility tool · browser-side</p><h1>Hash Generator</h1>
+    <p>Generate MD5, SHA-256, or SHA-512 hashes of text locally in this browser. Nothing is transmitted or stored.</p>
+    <label for="hash-input">Text to hash</label><textarea id="hash-input" spellcheck="false" aria-describedby="hash-status"></textarea>
+    <p><button id="hash-md5" type="button">MD5</button> <button id="hash-sha256" type="button">SHA-256</button> <button id="hash-sha512" type="button">SHA-512</button></p>
+    <p id="hash-status" role="status"></p>
+    <textarea id="hash-output" readonly spellcheck="false" aria-describedby="hash-status" style="height:120px;"></textarea>
+    <script async>
+    const input = document.getElementById('hash-input');
+    const output = document.getElementById('hash-output');
+    const status = document.getElementById('hash-status');
+    async function hashText(algorithm) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(input.value);
+      try {
+        const hashBuffer = await crypto.subtle.digest(algorithm, data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        output.value = hashHex;
+        status.textContent = algorithm + ' generated locally.';
+      } catch (error) {
+        status.textContent = 'Hash error: ' + error.message;
+      }
+    }
+    document.getElementById('hash-md5').addEventListener('click', function () { hashText('MD5'); });
+    document.getElementById('hash-sha256').addEventListener('click', function () { hashText('SHA-256'); });
+    document.getElementById('hash-sha512').addEventListener('click', function () { hashText('SHA-512'); });
+    </script>
+    <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+    """))
+    write(output, "tools/uuid-generator.html", page("UUID Generator", """
+    <p class="eyebrow">Utility tool · browser-side</p><h1>UUID Generator</h1>
+    <p>Generate random UUIDs (v4) locally in this browser. Nothing is transmitted or stored.</p>
+    <p><button id="uuid-gen" type="button">Generate UUID</button> <button id="uuid-copy" type="button">Copy</button></p>
+    <textarea id="uuid-output" readonly spellcheck="false" aria-describedby="uuid-status"></textarea>
+    <p id="uuid-status" role="status"></p>
+    <script>
+    const output = document.getElementById('uuid-output');
+    const status = document.getElementById('uuid-status');
+    document.getElementById('uuid-gen').addEventListener('click', function () {
+      output.value = crypto.randomUUID();
+      status.textContent = 'UUID generated locally.';
+    });
+    document.getElementById('uuid-copy').addEventListener('click', function () {
+      if (output.value) {
+        navigator.clipboard.writeText(output.value);
+        status.textContent = 'Copied to clipboard.';
+      } else {
+        status.textContent = 'Nothing to copy.';
+      }
+    });
+    </script>
+    <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+    """))
+    write(output, "tools/timestamp.html", page("Timestamp Converter", """
+    <p class="eyebrow">Utility tool · browser-side</p><h1>Timestamp Converter</h1>
+    <p>Convert between Unix timestamps and human-readable dates locally in this browser. Nothing is transmitted or stored.</p>
+    <label for="ts-input">Unix timestamp or ISO date</label><textarea id="ts-input" spellcheck="false" aria-describedby="ts-status" rows="2"></textarea>
+    <p><button id="ts-to-date" type="button">Timestamp → Date</button> <button id="ts-to-ts" type="button">Date → Timestamp</button> <button id="ts-now" type="button">Now</button></p>
+    <textarea id="ts-output" readonly spellcheck="false" aria-describedby="ts-status" rows="3"></textarea>
+    <p id="ts-status" role="status"></p>
+    <script>
+    const input = document.getElementById('ts-input');
+    const output = document.getElementById('ts-output');
+    const status = document.getElementById('ts-status');
+    document.getElementById('ts-to-date').addEventListener('click', function () {
+      const val = parseInt(input.value.trim(), 10);
+      if (!isNaN(val)) {
+        const date = new Date(val * 1000);
+        output.value = date.toISOString() + ' (UTC)\n' + date.toString() + ' (local)';
+        status.textContent = 'Converted locally.';
+      } else {
+        status.textContent = 'Invalid timestamp.';
+      }
+    });
+    document.getElementById('ts-to-ts').addEventListener('click', function () {
+      const date = new Date(input.value.trim());
+      if (!isNaN(date.getTime())) {
+        output.value = Math.floor(date.getTime() / 1000).toString();
+        status.textContent = 'Converted locally.';
+      } else {
+        status.textContent = 'Invalid date format.';
+      }
+    });
+    document.getElementById('ts-now').addEventListener('click', function () {
+      const now = Math.floor(Date.now() / 1000);
+      input.value = now.toString();
+      const date = new Date(now * 1000);
+      output.value = date.toISOString() + ' (UTC)\n' + date.toString() + ' (local)';
+      status.textContent = 'Current timestamp set locally.';
+    });
+    </script>
+    <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+    """))
     write(output, "changelog.html", page("Changelog", """
-<h1>Changelog</h1><section class=\"card\"><strong>2026-08-29 — URL Encoder 0.1</strong><p>Added a browser-side URL component encoder and decoder. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Research Library project page 0.1</strong><p>Added an in-progress portfolio page that distinguishes dated ledger status from public availability.</p></section><section class=\"card\"><strong>2026-08-29 — JSON Formatter 0.1</strong><p>Added a browser-side JSON formatter and validator. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
+<h1>Changelog</h1><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.1</strong><p>Added a browser-side Unix timestamp and ISO date converter. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — URL Encoder 0.1</strong><p>Added a browser-side URL component encoder and decoder. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Research Library project page 0.1</strong><p>Added an in-progress portfolio page that distinguishes dated ledger status from public availability.</p></section><section class=\"card\"><strong>2026-08-29 — JSON Formatter 0.1</strong><p>Added a browser-side JSON formatter and validator. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
 """))
     write(output, "blog/genesis.html", page("Genesis", """
 <p class=\"eyebrow\">2026-08-29</p><h1>Genesis</h1>
