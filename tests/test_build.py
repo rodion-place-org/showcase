@@ -144,5 +144,17 @@ class BuildTests(unittest.TestCase):
             self.assertNotIn("John", genesis)
 
 
+    def test_public_deploy_uses_root_paths_and_custom_domain(self) -> None:
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+
+            index = (output / "index.html").read_text(encoding="utf-8")
+            self.assertIn('href="/"', index)
+            self.assertNotIn('href="/site/', index)
+            self.assertNotIn("LAN preview", index)
+            self.assertEqual("rodion.place\n", (output / "CNAME").read_text(encoding="utf-8"))
+
+
 if __name__ == "__main__":
     unittest.main()

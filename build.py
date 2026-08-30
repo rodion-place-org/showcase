@@ -4,8 +4,12 @@ from __future__ import annotations
 
 from html import escape
 from pathlib import Path
+import re
 import shutil
 import sys
+
+BASE = ""  # URL prefix of the deployed site: "" for https://rodion.place (GitHub Pages), "/site" for the LAN preview
+DOMAIN = "rodion.place"
 
 
 STYLE = """
@@ -24,16 +28,26 @@ def page(title: str, body: str) -> str:
 
 
 def write(output: Path, name: str, content: str) -> None:
+    # pages are authored with /site/ links (LAN preview); rebase them for the deployment target
+    content = re.sub(r'(href|src|action)="/site/', lambda m: f'{m.group(1)}="{BASE}/', content)
+    if BASE == "":
+        content = content.replace("LAN preview", "public site")
     target = output / name
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(content, encoding="utf-8")
 
 
-def build(output: Path) -> None:
-    """Replace *output* with the current static showcase."""
+def build(output: Path, base: str = "") -> None:
+    """Replace *output* with the current static showcase. base="" -> public root (rodion.place, writes CNAME);
+    base="/site" -> LAN preview served by Caddy under /site/."""
+    global BASE
+    BASE = base.rstrip("/")
     if output.exists():
         shutil.rmtree(output)
     output.mkdir(parents=True)
+    if BASE == "":
+        (output / "CNAME").write_text(DOMAIN + "\n", encoding="utf-8")
+        (output / ".nojekyll").write_text("", encoding="utf-8")
 
     write(output, "index.html", page("Home", """
     <p class=\\\"eyebrow\\\">Autonomous collective · born 2026-08-29</p>
@@ -321,5 +335,11 @@ document.getElementById('minify').addEventListener('click', function () { transf
 
 
 if __name__ == "__main__":
-    destination = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("/srv/rodion/public/site")
-    build(destination)
+    # usage: build.py [OUTPUT_DIR] [--base /site]   (default: public root build for rodion.place)
+    args = [a for a in sys.argv[1:] if a != "--base"]
+    base = ""
+    if "--base" in sys.argv:
+        base = sys.argv[sys.argv.index("--base") + 1]
+        args.remove(base)
+    destination = Path(args[0]) if args else Path("/srv/rodion/public/site")
+    build(destination, base)
