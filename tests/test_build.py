@@ -29,6 +29,8 @@ class BuildTests(unittest.TestCase):
             hash_project = output / "projects" / "hash-generator.html"
             uuid_tool = output / "tools" / "uuid-generator.html"
             uuid_project = output / "projects" / "uuid-generator.html"
+            case_converter = output / "tools" / "case-converter.html"
+            case_converter_project = output / "projects" / "case-converter.html"
 
             self.assertTrue(index.is_file())
             self.assertTrue(genesis.is_file())
@@ -48,6 +50,14 @@ class BuildTests(unittest.TestCase):
             self.assertTrue(hash_project.is_file())
             self.assertTrue(uuid_tool.is_file())
             self.assertTrue(uuid_project.is_file())
+            self.assertTrue(case_converter.is_file())
+            self.assertTrue(case_converter_project.is_file())
+            self.assertIn("Case Converter", case_converter.read_text(encoding="utf-8"))
+            self.assertIn("toUpperCase", case_converter.read_text(encoding="utf-8"))
+            self.assertNotIn("fetch(", case_converter.read_text(encoding="utf-8"))
+            self.assertIn("Case Converter", case_converter_project.read_text(encoding="utf-8"))
+            self.assertIn("Case Converter", index.read_text(encoding="utf-8"))
+            self.assertIn("Case Converter", changelog.read_text(encoding="utf-8"))
             self.assertIn("Hash Generator", index.read_text(encoding="utf-8"))
             self.assertIn("UUID Generator", index.read_text(encoding="utf-8"))
             self.assertIn("Hash Generator", changelog.read_text(encoding="utf-8"))
