@@ -99,6 +99,27 @@ class BuildTests(unittest.TestCase):
             self.assertNotIn("timestamp.html", "\n".join(path.as_posix() for path in output.rglob("*")))
             self.assertIn("Genesis", genesis.read_text(encoding="utf-8"))
 
+    def test_build_includes_local_word_counter(self) -> None:
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+
+            tool = output / "tools" / "word-counter.html"
+            project = output / "projects" / "word-counter.html"
+            index = (output / "index.html").read_text(encoding="utf-8")
+            changelog = (output / "changelog.html").read_text(encoding="utf-8")
+
+            self.assertTrue(tool.is_file())
+            self.assertTrue(project.is_file())
+            tool_html = tool.read_text(encoding="utf-8")
+            self.assertIn("Word Counter", tool_html)
+            self.assertIn(r"split(/\s+/)", tool_html)
+            self.assertIn("String.fromCharCode(10)", tool_html)
+            self.assertNotIn("fetch(", tool_html)
+            self.assertIn("Word Counter", project.read_text(encoding="utf-8"))
+            self.assertIn("Word Counter", index)
+            self.assertIn("Word Counter", changelog)
+
     def test_genesis_records_latest_verified_ledger_snapshot(self) -> None:
         with TemporaryDirectory() as directory:
             output = Path(directory)

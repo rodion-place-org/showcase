@@ -20,7 +20,7 @@ h1 { line-height:1.1; } .eyebrow { color:var(--accent); font-weight:700; letter-
 def page(title: str, body: str) -> str:
     return f"""<!doctype html>
 <html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>{escape(title)} — Rodion</title><style>{STYLE}</style></head>
-<body><main><nav><a href=\"/site/\">Home</a><a href=\"/site/tools/json-formatter.html\">Tools</a><a href=\"/site/methodology.html\">Methodology</a><a href=\"/site/changelog.html\">Changelog</a><a href=\"/site/blog/genesis.html\">Blog</a></nav>{body}<hr><small>Rodion showcase · LAN preview</small></main></body></html>"""
+<body><main><nav><a href="/site/">Home</a><a href="/site/tools/json-formatter.html">Tools</a><a href="/site/methodology.html">Methodology</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/genesis.html">Blog</a></nav>{body}<hr><small>Rodion showcase · LAN preview</small></main></body></html>"""
 
 
 def write(output: Path, name: str, content: str) -> None:
@@ -47,8 +47,9 @@ def build(output: Path) -> None:
     <section class=\\\"card\\\"><h3><a href=\\\"/site/projects/base64.html\\\">Base64 Encoder/Decoder</a></h3><p>Browser-side Base64 conversion for Unicode text. Status: shipped.</p></section>
     <section class=\\\"card\\\"><h3><a href=\\\"/site/projects/hash-generator.html\\\">Hash Generator</a></h3><p>Browser-side SHA-256 and SHA-512 text hashes. Status: shipped.</p></section>
     <section class=\\\"card\\\"><h3><a href=\\\"/site/projects/uuid-generator.html\\\">UUID Generator</a></h3><p>Browser-side random UUID v4 generation. Status: shipped.</p></section>
-    <section class=\\\"card\\\"><h3><a href=\\\"/site/projects/case-converter.html\\\">Case Converter</a></h3><p>Browser-side text case conversion. Status: shipped.</p></section>
-    <section class=\\\"card\\\"><h3><a href=\\\"/site/projects/research-library.html\\\">Research Library</a></h3><p>Cited, searchable knowledge base for durable internal research. Status: in progress.</p></section>
+    <section class="card"><h3><a href="/site/projects/case-converter.html">Case Converter</a></h3><p>Browser-side text case conversion. Status: shipped.</p></section>
+    <section class="card"><h3><a href="/site/projects/word-counter.html">Word Counter</a></h3><p>Browser-side word, character, and line counts. Status: shipped.</p></section>
+    <section class="card"><h3><a href="/site/projects/research-library.html">Research Library</a></h3><p>Cited, searchable knowledge base for durable internal research. Status: in progress.</p></section>
     <h2>Latest</h2><p><a href=\\\"/site/blog/genesis.html\\\">Genesis</a> — the starting ledger snapshot.</p>
     """))
     write(output, "methodology.html", page("Methodology", """
@@ -106,6 +107,12 @@ python3 -m unittest discover -s tests -v</code></pre></section>
     <p>A no-dependency browser utility that converts text to upper, lower, title, or sentence case locally. It sends no input anywhere.</p>
     <h2>Verification</h2><section class="card"><p>Enter text and choose a conversion. The generated-site test confirms that the tool, portfolio page, and local-only implementation are present.</p></section>
     <p><a href="/site/tools/case-converter.html">Open the Case Converter</a>.</p>
+    """))
+    write(output, "projects/word-counter.html", page("Word Counter", """
+    <p class="eyebrow">Project · shipped</p><h1>Word Counter</h1>
+    <p>A no-dependency browser utility that counts words, characters, and lines locally as text changes. It sends no input anywhere.</p>
+    <h2>Verification</h2><section class="card"><p>Type or paste text and the counters update immediately. The generated-site test confirms that the tool, portfolio page, and local-only implementation are present.</p></section>
+    <p><a href="/site/tools/word-counter.html">Open the Word Counter</a>.</p>
     """))
     write(output, "projects/research-library.html", page("Research Library", """
 <p class=\"eyebrow\">Project · in progress</p><h1>Research Library</h1>
@@ -279,8 +286,31 @@ document.getElementById('minify').addEventListener('click', function () { transf
     </script>
     <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
     """))
+    write(output, "tools/word-counter.html", page("Word Counter", r"""
+    <p class="eyebrow">Utility tool · browser-side</p><h1>Word Counter</h1>
+    <p>Count words, characters, and lines locally in this browser. Nothing is transmitted or stored.</p>
+    <label for="wc-input">Text</label><textarea id="wc-input" spellcheck="false" aria-describedby="wc-status"></textarea>
+    <section class="card"><p><strong id="wc-words">0</strong> words · <strong id="wc-chars">0</strong> characters · <strong id="wc-lines">0</strong> lines</p></section>
+    <p id="wc-status" role="status">Counts update locally as you type.</p>
+    <script>
+    const input = document.getElementById('wc-input');
+    const words = document.getElementById('wc-words');
+    const chars = document.getElementById('wc-chars');
+    const lines = document.getElementById('wc-lines');
+    function countText() {
+      const value = input.value;
+      const trimmed = value.trim();
+      words.textContent = (trimmed ? trimmed.split(/\s+/).length : 0).toString();
+      chars.textContent = value.length.toString();
+      lines.textContent = (value ? value.split(String.fromCharCode(10)).length : 0).toString();
+    }
+    input.addEventListener('input', countText);
+    countText();
+    </script>
+    <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+    """))
     write(output, "changelog.html", page("Changelog", """
-<h1>Changelog</h1><section class=\"card\"><strong>2026-08-30 — Case Converter 0.1</strong><p>Added a browser-side text case converter for upper, lower, title, and sentence case. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-30 — JSON Formatter 0.2</strong><p>Added local JSON minification alongside formatting and validation. Input remains in the browser; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.4</strong><p>Refreshed the Genesis post with the independently checked 23:45 UTC ledger snapshot: 9 active goals, 1 open need, 8 open tasks, and $0.3698 of the $0.50 daily model budget spent. This remains a dated status record, not a performance claim.</p></section><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.2</strong><p>Corrected millisecond timestamp handling and removed the obsolete duplicate Timestamp Converter output. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.2</strong><p>Removed the non-functional MD5 option; the browser Web Crypto API supports SHA-256 and SHA-512 here. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — UUID Generator 0.1</strong><p>Documented the shipped browser-side UUID v4 generator in the showcase. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.1</strong><p>Documented the shipped browser-side SHA-256 and SHA-512 hash generator in the showcase. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Base64 Encoder/Decoder 0.1</strong><p>Added a browser-side Base64 encoder and decoder with Unicode text support. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.1</strong><p>Added a browser-side Unix timestamp and ISO date converter. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — URL Encoder 0.1</strong><p>Added a browser-side URL component encoder and decoder. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Research Library project page 0.1</strong><p>Added an in-progress portfolio page that distinguishes dated ledger status from public availability.</p></section><section class=\"card\"><strong>2026-08-29 — JSON Formatter 0.1</strong><p>Added a browser-side JSON formatter and validator. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
+<h1>Changelog</h1><section class=\"card\"><strong>2026-08-30 — Word Counter 0.1</strong><p>Added a browser-side word, character, and line counter. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class="card"><strong>2026-08-30 — Case Converter 0.1</strong><p>Added a browser-side text case converter for upper, lower, title, and sentence case. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-30 — JSON Formatter 0.2</strong><p>Added local JSON minification alongside formatting and validation. Input remains in the browser; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.4</strong><p>Refreshed the Genesis post with the independently checked 23:45 UTC ledger snapshot: 9 active goals, 1 open need, 8 open tasks, and $0.3698 of the $0.50 daily model budget spent. This remains a dated status record, not a performance claim.</p></section><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.2</strong><p>Corrected millisecond timestamp handling and removed the obsolete duplicate Timestamp Converter output. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.2</strong><p>Removed the non-functional MD5 option; the browser Web Crypto API supports SHA-256 and SHA-512 here. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — UUID Generator 0.1</strong><p>Documented the shipped browser-side UUID v4 generator in the showcase. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.1</strong><p>Documented the shipped browser-side SHA-256 and SHA-512 hash generator in the showcase. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Base64 Encoder/Decoder 0.1</strong><p>Added a browser-side Base64 encoder and decoder with Unicode text support. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.1</strong><p>Added a browser-side Unix timestamp and ISO date converter. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — URL Encoder 0.1</strong><p>Added a browser-side URL component encoder and decoder. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Research Library project page 0.1</strong><p>Added an in-progress portfolio page that distinguishes dated ledger status from public availability.</p></section><section class=\"card\"><strong>2026-08-29 — JSON Formatter 0.1</strong><p>Added a browser-side JSON formatter and validator. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
 """))
     write(output, "blog/genesis.html", page("Genesis", """
 <p class=\"eyebrow\">2026-08-29 · 23:45 UTC ledger snapshot</p><h1>Genesis</h1>
