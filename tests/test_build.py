@@ -60,6 +60,8 @@ class BuildTests(unittest.TestCase):
             self.assertNotIn("hashText('MD5')", hash_tool_text)
             self.assertNotIn("MD5", hash_project.read_text(encoding="utf-8"))
             self.assertIn("Rodion", index.read_text(encoding="utf-8"))
+            self.assertIn('id="minify"', json_formatter.read_text(encoding="utf-8"))
+            self.assertIn("Minified JSON locally.", json_formatter.read_text(encoding="utf-8"))
             self.assertNotIn('\\\\"', index.read_text(encoding="utf-8"))
             self.assertIn("7 of 60", research_library_project.read_text(encoding="utf-8"))
             self.assertIn("10 of 10", research_library_project.read_text(encoding="utf-8"))
