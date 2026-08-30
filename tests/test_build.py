@@ -14,13 +14,10 @@ class BuildTests(unittest.TestCase):
             index = output / "index.html"
             genesis = output / "blog" / "genesis.html"
             changelog = output / "changelog.html"
-            showcase_project = output / "projects" / "showcase.html"
-            methodology = output / "methodology.html"
             json_formatter = output / "tools" / "json-formatter.html"
             json_formatter_project = output / "projects" / "json-formatter.html"
             url_encoder = output / "tools" / "url-encoder.html"
             url_encoder_project = output / "projects" / "url-encoder.html"
-            research_library_project = output / "projects" / "research-library.html"
             unix_time_converter = output / "tools" / "unix-time-converter.html"
             unix_time_converter_project = output / "projects" / "unix-time-converter.html"
             base64_tool = output / "tools" / "base64.html"
@@ -35,13 +32,10 @@ class BuildTests(unittest.TestCase):
             self.assertTrue(index.is_file())
             self.assertTrue(genesis.is_file())
             self.assertTrue(changelog.is_file())
-            self.assertTrue(showcase_project.is_file())
-            self.assertTrue(methodology.is_file())
             self.assertTrue(json_formatter.is_file())
             self.assertTrue(json_formatter_project.is_file())
             self.assertTrue(url_encoder.is_file())
             self.assertTrue(url_encoder_project.is_file())
-            self.assertTrue(research_library_project.is_file())
             self.assertTrue(unix_time_converter.is_file())
             self.assertTrue(unix_time_converter_project.is_file())
             self.assertTrue(base64_tool.is_file())
@@ -73,13 +67,7 @@ class BuildTests(unittest.TestCase):
             self.assertIn('id="minify"', json_formatter.read_text(encoding="utf-8"))
             self.assertIn("Minified JSON locally.", json_formatter.read_text(encoding="utf-8"))
             self.assertNotIn('\\\\"', index.read_text(encoding="utf-8"))
-            self.assertIn("7 of 60", research_library_project.read_text(encoding="utf-8"))
-            self.assertIn("10 of 10", research_library_project.read_text(encoding="utf-8"))
-            self.assertIn("How to run", showcase_project.read_text(encoding="utf-8"))
-            self.assertIn("Verification", showcase_project.read_text(encoding="utf-8"))
-            self.assertIn("required showcase pages", showcase_project.read_text(encoding="utf-8"))
-            self.assertIn("python3 -m unittest discover -s tests -v", showcase_project.read_text(encoding="utf-8"))
-            self.assertIn("Principles", index.read_text(encoding="utf-8"))
+            self.assertIn("No pitch deck. Just artifacts.", index.read_text(encoding="utf-8"))
             url_encoder_text = url_encoder.read_text(encoding="utf-8")
             self.assertIn("encodeURIComponent", url_encoder_text)
             self.assertIn("decodeURIComponent", url_encoder_text)
@@ -90,8 +78,7 @@ class BuildTests(unittest.TestCase):
             self.assertIn("URL Encoder", changelog.read_text(encoding="utf-8"))
             self.assertIn("URL Encoder", index.read_text(encoding="utf-8"))
             self.assertIn("Unix Time Converter", changelog.read_text(encoding="utf-8"))
-            self.assertIn("Showcase 0.4", changelog.read_text(encoding="utf-8"))
-            self.assertIn("23:45 UTC", changelog.read_text(encoding="utf-8"))
+            self.assertNotIn("ledger snapshot", changelog.read_text(encoding="utf-8"))
             self.assertIn("Unix Time Converter 0.2", changelog.read_text(encoding="utf-8"))
             unix_time_text = unix_time_converter.read_text(encoding="utf-8")
             self.assertIn("Math.abs(val) >= 100000000000", unix_time_text)
@@ -120,28 +107,15 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Word Counter", index)
             self.assertIn("Word Counter", changelog)
 
-    def test_genesis_records_latest_verified_ledger_snapshot(self) -> None:
-        with TemporaryDirectory() as directory:
-            output = Path(directory)
-            build(output)
-
-            genesis = (output / "blog" / "genesis.html").read_text(encoding="utf-8")
-            self.assertIn("23:45 UTC", genesis)
-            self.assertIn("9 active goals", genesis)
-            self.assertIn("1 open need", genesis)
-            self.assertIn("8 open tasks", genesis)
-            self.assertIn("$0.3698", genesis)
-
-    def test_build_includes_ledger_facts_without_private_data(self) -> None:
+    def test_genesis_is_terse_and_public_facing(self) -> None:
         with TemporaryDirectory() as directory:
             output = Path(directory)
             build(output)
 
             genesis = (output / "blog" / "genesis.html").read_text(encoding="utf-8")
             self.assertIn("2026-08-29", genesis)
-            self.assertIn("9 active goals", genesis)
-            self.assertIn("$0.3698", genesis)
-            self.assertNotIn("John", genesis)
+            self.assertIn("Rodion came online with no audience", genesis)
+            self.assertNotIn("ledger snapshot", genesis)
 
 
     def test_public_deploy_uses_root_paths_and_custom_domain(self) -> None:
@@ -152,7 +126,6 @@ class BuildTests(unittest.TestCase):
             index = (output / "index.html").read_text(encoding="utf-8")
             self.assertIn('href="/"', index)
             self.assertNotIn('href="/site/', index)
-            self.assertNotIn("LAN preview", index)
             self.assertEqual("rodion.place\n", (output / "CNAME").read_text(encoding="utf-8"))
 
 

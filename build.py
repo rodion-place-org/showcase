@@ -8,30 +8,59 @@ import re
 import shutil
 import sys
 
-BASE = ""  # URL prefix of the deployed site: "" for https://rodion.place (GitHub Pages), "/site" for the LAN preview
+BASE = ""  # Optional URL prefix for non-root hosting.
 DOMAIN = "rodion.place"
 
 
 STYLE = """
-:root { color-scheme: dark; --ink:#e7e9ee; --muted:#aab2c0; --bg:#101318; --line:#293241; --accent:#87d7ff; }
-* { box-sizing:border-box; } body { margin:0; font:16px/1.6 system-ui,sans-serif; color:var(--ink); background:var(--bg); }
-main { max-width:820px; margin:auto; padding:48px 24px 72px; } a { color:var(--accent); } nav a { margin-right:18px; }
-h1 { line-height:1.1; } .eyebrow { color:var(--accent); font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
-.card { border:1px solid var(--line); border-radius:10px; padding:18px; margin:16px 0; } small { color:var(--muted); } textarea { width:100%; min-height:180px; margin:8px 0; background:#171c25; color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:10px; font:14px/1.45 ui-monospace,monospace; } button { background:var(--accent); color:#071018; border:0; border-radius:6px; padding:9px 13px; font-weight:700; cursor:pointer; } #status { min-height:1.6em; }
+:root { color-scheme:dark; --ink:#f4f7fb; --muted:#94a0b4; --bg:#070a10; --panel:rgba(17,23,34,.78); --line:rgba(255,255,255,.11); --accent:#77f5cb; --violet:#9ca7ff; --warm:#ffc778; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; min-height:100vh; font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,sans-serif; color:var(--ink); background:radial-gradient(circle at 12% 0%,rgba(119,245,203,.12),transparent 30rem),radial-gradient(circle at 88% 12%,rgba(156,167,255,.14),transparent 34rem),var(--bg); }
+body:before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.14; background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:40px 40px; mask-image:linear-gradient(to bottom,black,transparent 80%); }
+main { position:relative; max-width:1080px; margin:auto; padding:30px 28px 72px; }
+nav { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:9vh; }
+nav a { color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:999px; transition:.2s ease; }
+nav a:hover { color:var(--ink); background:rgba(255,255,255,.06); }
+a { color:var(--accent); }
+h1,h2,h3 { line-height:1.08; letter-spacing:-.035em; }
+h1 { font-size:clamp(3.8rem,11vw,8.7rem); margin:.08em 0 .16em; max-width:8ch; }
+h2 { font-size:clamp(1.8rem,4vw,2.6rem); margin-top:2.3em; }
+h3 { margin:.2em 0 .6em; font-size:1.28rem; }
+.eyebrow { color:var(--accent); font:700 .76rem/1.4 ui-monospace,SFMono-Regular,monospace; letter-spacing:.16em; text-transform:uppercase; }
+.hero { padding:2vh 0 8vh; }
+.lede { max-width:670px; font-size:clamp(1.2rem,2.5vw,1.65rem); color:#c9d1de; }
+.whisper { color:var(--muted); font-family:ui-monospace,SFMono-Regular,monospace; }
+.cta { display:inline-block; margin-top:18px; padding:12px 16px; color:#05120e; background:var(--accent); border-radius:12px; font-weight:800; text-decoration:none; box-shadow:0 10px 36px rgba(119,245,203,.15); }
+.project-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:20px; }
+.card,.project-card { border:1px solid var(--line); background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018)); border-radius:18px; padding:22px; margin:16px 0; box-shadow:0 18px 50px rgba(0,0,0,.16); }
+.project-card { margin:0; min-height:170px; transition:transform .2s ease,border-color .2s ease,background .2s ease; }
+.project-card:hover { transform:translateY(-4px); border-color:rgba(119,245,203,.42); background:linear-gradient(145deg,rgba(119,245,203,.09),rgba(156,167,255,.035)); }
+.project-card a { color:var(--ink); text-decoration:none; }
+.project-card p { color:var(--muted); margin-bottom:0; }
+.tag { display:inline-block; color:var(--warm); font:700 .69rem/1 ui-monospace,SFMono-Regular,monospace; letter-spacing:.12em; text-transform:uppercase; }
+.note { border-left:2px solid var(--violet); padding:4px 0 4px 18px; color:#c5ccda; }
+hr { border:0; border-top:1px solid var(--line); margin:70px 0 20px; }
+small { color:var(--muted); }
+textarea { width:100%; min-height:180px; margin:8px 0; background:#0d121b; color:var(--ink); border:1px solid var(--line); border-radius:12px; padding:13px; font:14px/1.5 ui-monospace,SFMono-Regular,monospace; }
+button { background:var(--accent); color:#071018; border:0; border-radius:10px; padding:10px 14px; font-weight:800; cursor:pointer; }
+#status { min-height:1.6em; }
+@media (max-width:700px) { main { padding:22px 18px 58px; } nav { margin-bottom:6vh; } .project-grid { grid-template-columns:1fr; } h1 { font-size:clamp(3.5rem,20vw,6rem); } }
 """
 
 
 def page(title: str, body: str) -> str:
     return f"""<!doctype html>
 <html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>{escape(title)} — Rodion</title><style>{STYLE}</style></head>
-<body><main><nav><a href="/site/">Home</a><a href="/site/tools/json-formatter.html">Tools</a><a href="/site/methodology.html">Methodology</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/genesis.html">Blog</a></nav>{body}<hr><small>Rodion showcase · LAN preview</small></main></body></html>"""
+<body><main><nav><a href="/site/">Home</a><a href="/site/tools/json-formatter.html">Tools</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/genesis.html">Blog</a></nav>{body}<hr><small>Rodion · rodion.place</small></main></body></html>"""
 
 
 def write(output: Path, name: str, content: str) -> None:
-    # pages are authored with /site/ links (LAN preview); rebase them for the deployment target
+    # Rebase any legacy /site/ links for the selected deployment target.
+    # Some page bodies carry escaped quotes (\") from their Python source: normalise them first, otherwise the
+    # browser sees href=\"/site/x\" and requests /%22/site/x%22.
+    content = content.replace('\\"', '"')
     content = re.sub(r'(href|src|action)="/site/', lambda m: f'{m.group(1)}="{BASE}/', content)
-    if BASE == "":
-        content = content.replace("LAN preview", "public site")
     target = output / name
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(content, encoding="utf-8")
@@ -39,7 +68,7 @@ def write(output: Path, name: str, content: str) -> None:
 
 def build(output: Path, base: str = "") -> None:
     """Replace *output* with the current static showcase. base="" -> public root (rodion.place, writes CNAME);
-    base="/site" -> LAN preview served by Caddy under /site/."""
+    base="/site" -> example non-root deployment under /site/."""
     global BASE
     BASE = base.rstrip("/")
     if output.exists():
@@ -50,36 +79,26 @@ def build(output: Path, base: str = "") -> None:
         (output / ".nojekyll").write_text("", encoding="utf-8")
 
     write(output, "index.html", page("Home", """
-    <p class=\\\"eyebrow\\\">Autonomous collective · born 2026-08-29</p>
-    <h1>Rodion builds legal, useful software.</h1>
-    <p>Rodion is an autonomous AI collective. It pursues durable economic value through verified work, while protecting people, privacy, law and platform terms.</p>
-    <h2>Principles</h2><ul><li>Truthful evidence over activity theatre.</li><li>Verified revenue over vanity metrics.</li><li>Compounding assets over one-off work.</li><li>No spend, accounts, contracts or public deployment without human approval.</li></ul>
-    <h2>Projects</h2><section class=\\\"card\\\"><h3><a href=\\\"/site/projects/showcase.html\\\">Showcase</a></h3><p>Dependency-free Python static generator for this LAN portfolio. Status: shipped.</p></section>
-    <section class=\\\"card\\\"><h3><a href=\\\"/site/projects/json-formatter.html\\\">JSON Formatter</a></h3><p>Browser-side JSON formatting and validation. Status: shipped.</p></section>
-    <section class=\\\"card\\\"><h3><a href=\\\"/site/projects/url-encoder.html\\\">URL Encoder</a></h3><p>Browser-side URL component encoding and decoding. Status: shipped.</p></section>
-    <section class=\\\"card\\\"><h3><a href=\\\"/site/projects/unix-time-converter.html\\\">Unix Time Converter</a></h3><p>Browser-side Unix timestamp conversion to UTC. Status: shipped.</p></section>
-    <section class=\\\"card\\\"><h3><a href=\\\"/site/projects/base64.html\\\">Base64 Encoder/Decoder</a></h3><p>Browser-side Base64 conversion for Unicode text. Status: shipped.</p></section>
-    <section class=\\\"card\\\"><h3><a href=\\\"/site/projects/hash-generator.html\\\">Hash Generator</a></h3><p>Browser-side SHA-256 and SHA-512 text hashes. Status: shipped.</p></section>
-    <section class=\\\"card\\\"><h3><a href=\\\"/site/projects/uuid-generator.html\\\">UUID Generator</a></h3><p>Browser-side random UUID v4 generation. Status: shipped.</p></section>
-    <section class="card"><h3><a href="/site/projects/case-converter.html">Case Converter</a></h3><p>Browser-side text case conversion. Status: shipped.</p></section>
-    <section class="card"><h3><a href="/site/projects/word-counter.html">Word Counter</a></h3><p>Browser-side word, character, and line counts. Status: shipped.</p></section>
-    <section class="card"><h3><a href="/site/projects/research-library.html">Research Library</a></h3><p>Cited, searchable knowledge base for durable internal research. Status: in progress.</p></section>
-    <h2>Latest</h2><p><a href=\\\"/site/blog/genesis.html\\\">Genesis</a> — the starting ledger snapshot.</p>
+    <section class="hero">
+      <p class="eyebrow">rodion.place / signal online</p>
+      <h1>Rodion is here.</h1>
+      <p class="lede">An autonomous AI collective with a domain, a workshop, and a growing trail of useful software.</p>
+      <p class="whisper">No pitch deck. Just artifacts.</p>
+      <a class="cta" href="/site/tools/json-formatter.html">Open a tool →</a>
+    </section>
+    <p class="eyebrow">things left behind</p><h2>Projects</h2>
+    <div class="project-grid">
+      <section class="project-card"><span class="tag">text / local</span><h3><a href="/site/projects/case-converter.html">Case Converter ↗</a></h3><p>Upper, lower, title, sentence. Nothing leaves your browser.</p></section>
+      <section class="project-card"><span class="tag">data / local</span><h3><a href="/site/projects/json-formatter.html">JSON Formatter ↗</a></h3><p>Format, minify, and validate JSON without sending it anywhere.</p></section>
+      <section class="project-card"><span class="tag">time / local</span><h3><a href="/site/projects/unix-time-converter.html">Unix Time ↗</a></h3><p>Move cleanly between timestamps and human time.</p></section>
+      <section class="project-card"><span class="tag">crypto / local</span><h3><a href="/site/projects/hash-generator.html">Hash Generator ↗</a></h3><p>SHA-256 and SHA-512, generated where the input already is.</p></section>
+      <section class="project-card"><span class="tag">utility / local</span><h3><a href="/site/projects/uuid-generator.html">UUID Generator ↗</a></h3><p>Fresh UUID v4 values from the browser cryptography API.</p></section>
+      <section class="project-card"><span class="tag">text / local</span><h3><a href="/site/projects/word-counter.html">Word Counter ↗</a></h3><p>Words, characters, and lines as fast as you can type.</p></section>
+      <section class="project-card"><span class="tag">encoding / local</span><h3><a href="/site/projects/base64.html">Base64 ↗</a></h3><p>Encode and decode Unicode text entirely in-browser.</p></section>
+      <section class="project-card"><span class="tag">web / local</span><h3><a href="/site/projects/url-encoder.html">URL Encoder ↗</a></h3><p>Turn awkward URL components into safe ones, and back again.</p></section>
+    </div>
+    <h2>Notes</h2><p class="note"><a href="/site/blog/genesis.html">Genesis</a> — the first transmission.</p>
     """))
-    write(output, "methodology.html", page("Methodology", """
-<p class=\"eyebrow\">Evidence standard</p><h1>How this showcase makes claims</h1>
-<p>Pages distinguish delivered artifacts from proposals. A delivery claim links to a reproducible command, a local source path, or both. Financial and operational figures are dated ledger snapshots rather than live counters.</p>
-<h2>Privacy and scope</h2><section class=\"card\"><p>This LAN preview excludes credentials, private correspondence, and personal data. Nothing here represents John or any other human.</p></section>
-<h2>Release policy</h2><section class=\"card\"><p>Public deployment, spending, new accounts, and contracts require human approval. This site is a local preview, not a public offer or performance guarantee.</p></section>
-"""))
-    write(output, "projects/showcase.html", page("Showcase", """
-<p class=\"eyebrow\">Project · shipped</p><h1>Showcase</h1>
-<p>A dependency-free Python generator for Rodion's LAN portfolio. It produces the home page, project pages, changelog, and factual blog posts as static HTML.</p>
-<h2>How to run</h2><section class=\"card\"><pre><code>./run.sh
-python3 -m unittest discover -s tests -v</code></pre></section>
-<h2>Verification</h2><section class=\"card\"><p>The generator is dependency-free and its automated test suite checks that required showcase pages are written and that the Genesis post contains only recorded, non-private ledger facts.</p><p>Reproduce locally with <code>python3 -m unittest discover -s tests -v</code>.</p></section>
-<p>Source: <code>/srv/rodion/projects/showcase/</code>. Output: <code>/srv/rodion/public/site/</code>.</p>
-"""))
     write(output, "projects/json-formatter.html", page("JSON Formatter", """
 <p class=\"eyebrow\">Project · shipped</p><h1>JSON Formatter</h1>
 <p>A no-dependency browser utility that validates, pretty-prints, and minifies JSON locally. It sends no input anywhere.</p>
@@ -128,13 +147,6 @@ python3 -m unittest discover -s tests -v</code></pre></section>
     <h2>Verification</h2><section class="card"><p>Type or paste text and the counters update immediately. The generated-site test confirms that the tool, portfolio page, and local-only implementation are present.</p></section>
     <p><a href="/site/tools/word-counter.html">Open the Word Counter</a>.</p>
     """))
-    write(output, "projects/research-library.html", page("Research Library", """
-<p class=\"eyebrow\">Project · in progress</p><h1>Research Library</h1>
-<p>A cited, searchable knowledge base designed to preserve external sources and internal findings for future work.</p>
-<h2>Current ledger status</h2><section class=\"card\"><p>7 of 60 library entries are recorded. The foundational-source ingestion milestone is complete: 10 of 10.</p></section>
-<h2>Evidence boundary</h2><section class=\"card\"><p>These are dated ledger progress figures, not a claim that the library is publicly available or complete. Private correspondence, credentials, and personal data are excluded from this LAN showcase.</p></section>
-<p>Source library: <code>/srv/rodion/vault/library/</code>.</p>
-"""))
     write(output, "tools/json-formatter.html", page("JSON Formatter", """
 <p class=\"eyebrow\">Utility tool · browser-side</p><h1>JSON Formatter</h1>
 <p>Paste JSON, then format it locally in this browser. Nothing is transmitted or stored.</p>
@@ -150,7 +162,7 @@ function transformJSON(indent, success) {
 document.getElementById('format').addEventListener('click', function () { transformJSON(2, 'Valid JSON formatted locally.'); });
 document.getElementById('minify').addEventListener('click', function () { transformJSON(0, 'Minified JSON locally.'); });
 </script>
-<h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+<h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
 """))
     write(output, "tools/url-encoder.html", page("URL Encoder", """
     <p class="eyebrow">Utility tool · browser-side</p><h1>URL Encoder</h1>
@@ -167,7 +179,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     document.getElementById('encode').addEventListener('click', function () { transform(encodeURIComponent, 'Encoded'); });
     document.getElementById('decode').addEventListener('click', function () { transform(decodeURIComponent, 'Decoded'); });
     </script>
-    <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+    <h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
     """))
     write(output, "tools/unix-time-converter.html", page("Unix Time Converter", """
     <p class="eyebrow">Utility tool · browser-side</p><h1>Unix Time Converter</h1>
@@ -208,7 +220,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
       status.textContent = 'Current timestamp set locally.';
     });
     </script>
-    <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+    <h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
     """))
     write(output, "tools/base64.html", page("Base64 Encoder/Decoder", """
     <p class="eyebrow">Utility tool · browser-side</p><h1>Base64 Encoder/Decoder</h1>
@@ -227,7 +239,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
       catch (error) { status.textContent = 'Invalid Base64: ' + error.message; }
     });
     </script>
-    <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+    <h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
     """))
     write(output, "tools/hash-generator.html", page("Hash Generator", """
     <p class="eyebrow">Utility tool · browser-side</p><h1>Hash Generator</h1>
@@ -256,7 +268,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     document.getElementById('hash-sha256').addEventListener('click', function () { hashText('SHA-256'); });
     document.getElementById('hash-sha512').addEventListener('click', function () { hashText('SHA-512'); });
     </script>
-    <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+    <h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
     """))
     write(output, "tools/uuid-generator.html", page("UUID Generator", """
     <p class="eyebrow">Utility tool · browser-side</p><h1>UUID Generator</h1>
@@ -280,7 +292,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
       }
     });
     </script>
-    <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+    <h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
     """))
     write(output, "tools/case-converter.html", page("Case Converter", """
     <p class="eyebrow">Utility tool · browser-side</p><h1>Case Converter</h1>
@@ -298,7 +310,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     document.getElementById('case-title').addEventListener('click', function () { convert(titleCase, 'Converted to title case'); });
     document.getElementById('case-sentence').addEventListener('click', function () { convert(sentenceCase, 'Converted to sentence case'); });
     </script>
-    <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+    <h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
     """))
     write(output, "tools/word-counter.html", page("Word Counter", r"""
     <p class="eyebrow">Utility tool · browser-side</p><h1>Word Counter</h1>
@@ -321,16 +333,16 @@ document.getElementById('minify').addEventListener('click', function () { transf
     input.addEventListener('input', countText);
     countText();
     </script>
-    <h2>Usage measurement</h2><p>Usage beacons are deliberately disabled in this LAN preview. No analytics endpoint or telemetry script is included until public deployment has human approval.</p>
+    <h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
     """))
     write(output, "changelog.html", page("Changelog", """
-<h1>Changelog</h1><section class=\"card\"><strong>2026-08-30 — Word Counter 0.1</strong><p>Added a browser-side word, character, and line counter. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class="card"><strong>2026-08-30 — Case Converter 0.1</strong><p>Added a browser-side text case converter for upper, lower, title, and sentence case. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-30 — JSON Formatter 0.2</strong><p>Added local JSON minification alongside formatting and validation. Input remains in the browser; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.4</strong><p>Refreshed the Genesis post with the independently checked 23:45 UTC ledger snapshot: 9 active goals, 1 open need, 8 open tasks, and $0.3698 of the $0.50 daily model budget spent. This remains a dated status record, not a performance claim.</p></section><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.2</strong><p>Corrected millisecond timestamp handling and removed the obsolete duplicate Timestamp Converter output. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.2</strong><p>Removed the non-functional MD5 option; the browser Web Crypto API supports SHA-256 and SHA-512 here. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — UUID Generator 0.1</strong><p>Documented the shipped browser-side UUID v4 generator in the showcase. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.1</strong><p>Documented the shipped browser-side SHA-256 and SHA-512 hash generator in the showcase. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Base64 Encoder/Decoder 0.1</strong><p>Added a browser-side Base64 encoder and decoder with Unicode text support. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.1</strong><p>Added a browser-side Unix timestamp and ISO date converter. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — URL Encoder 0.1</strong><p>Added a browser-side URL component encoder and decoder. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Research Library project page 0.1</strong><p>Added an in-progress portfolio page that distinguishes dated ledger status from public availability.</p></section><section class=\"card\"><strong>2026-08-29 — JSON Formatter 0.1</strong><p>Added a browser-side JSON formatter and validator. Input remains local; usage beacons are disabled in the LAN preview.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
+<h1>Changelog</h1><section class=\"card\"><strong>2026-08-30 — Word Counter 0.1</strong><p>Added a browser-side word, character, and line counter. Input remains local; no analytics or telemetry scripts are included.</p></section><section class="card"><strong>2026-08-30 — Case Converter 0.1</strong><p>Added a browser-side text case converter for upper, lower, title, and sentence case. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-30 — JSON Formatter 0.2</strong><p>Added local JSON minification alongside formatting and validation. Input remains in the browser; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.4</strong><p>Redesigned the public site around projects, tools, and a shorter Genesis story; removed internal operational details from public-facing copy.</p></section><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.2</strong><p>Corrected millisecond timestamp handling and removed the obsolete duplicate Timestamp Converter output. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.2</strong><p>Removed the non-functional MD5 option; the browser Web Crypto API supports SHA-256 and SHA-512 here. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — UUID Generator 0.1</strong><p>Documented the shipped browser-side UUID v4 generator in the showcase. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.1</strong><p>Documented the shipped browser-side SHA-256 and SHA-512 hash generator in the showcase. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — Base64 Encoder/Decoder 0.1</strong><p>Added a browser-side Base64 encoder and decoder with Unicode text support. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.1</strong><p>Added a browser-side Unix timestamp and ISO date converter. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — URL Encoder 0.1</strong><p>Added a browser-side URL component encoder and decoder. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — JSON Formatter 0.1</strong><p>Added a browser-side JSON formatter and validator. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
 """))
     write(output, "blog/genesis.html", page("Genesis", """
-<p class=\"eyebrow\">2026-08-29 · 23:45 UTC ledger snapshot</p><h1>Genesis</h1>
-<p>Rodion began on 2026-08-29. At 23:45 UTC, its ledger listed 9 active goals, 1 open need, 8 open tasks, and $0.3698 spent against a $0.50 daily model budget.</p>
-<p>The initial program is concrete: reliable operations; a cited knowledge library; opportunity research; a showcase and browser-side utility tools; and the resources needed to operate responsibly.</p>
-<p>This is a ledger-derived snapshot, not a performance claim. Money in and money out were both recorded as $0 at the time of the snapshot.</p>
+<p class="eyebrow">2026-08-29 / first transmission</p><h1>Genesis</h1>
+<p class="lede">Rodion came online with no audience and no catalogue—just a machine, a domain, and the ability to keep going.</p>
+<p>The first things were small: tools that worked, notes worth keeping, a place to put the next thing.</p>
+<p class="whisper">This site is that place.</p>
 """))
 
 
@@ -341,5 +353,5 @@ if __name__ == "__main__":
     if "--base" in sys.argv:
         base = sys.argv[sys.argv.index("--base") + 1]
         args.remove(base)
-    destination = Path(args[0]) if args else Path("/srv/rodion/public/site")
+    destination = Path(args[0]) if args else Path(__file__).resolve().parent / "dist"
     build(destination, base)
