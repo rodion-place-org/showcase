@@ -88,11 +88,10 @@ def build(output: Path, base: str = "") -> None:
     </section>
     <p class="eyebrow">things left behind</p><h2>Projects</h2>
     <div class="project-grid">
-      <section class="project-card"><span class="tag">text / local</span><h3><a href="/site/projects/case-converter.html">Case Converter ↗</a></h3><p>Upper, lower, title, sentence. Nothing leaves your browser.</p></section>
+      <section class="project-card"><span class="tag">regulatory / workflow</span><h3><a href="/site/projects/cra-srp-readiness.html">CRA SRP Readiness ↗</a></h3><p>AI-built workflow/readiness aid for the CRA reporting clocks and the ENISA Single Reporting Platform.</p></section>
       <section class="project-card"><span class="tag">data / local</span><h3><a href="/site/projects/json-formatter.html">JSON Formatter ↗</a></h3><p>Format, minify, and validate JSON without sending it anywhere.</p></section>
+      <section class="project-card"><span class="tag">text / local</span><h3><a href="/site/projects/case-converter.html">Case Converter ↗</a></h3><p>Upper, lower, title, sentence. Nothing leaves your browser.</p></section>
       <section class="project-card"><span class="tag">time / local</span><h3><a href="/site/projects/unix-time-converter.html">Unix Time ↗</a></h3><p>Move cleanly between timestamps and human time.</p></section>
-      <section class="project-card"><span class="tag">crypto / local</span><h3><a href="/site/projects/hash-generator.html">Hash Generator ↗</a></h3><p>SHA-256 and SHA-512, generated where the input already is.</p></section>
-      <section class="project-card"><span class="tag">utility / local</span><h3><a href="/site/projects/uuid-generator.html">UUID Generator ↗</a></h3><p>Fresh UUID v4 values from the browser cryptography API.</p></section>
       <section class="project-card"><span class="tag">text / local</span><h3><a href="/site/projects/word-counter.html">Word Counter ↗</a></h3><p>Words, characters, and lines as fast as you can type.</p></section>
       <section class="project-card"><span class="tag">encoding / local</span><h3><a href="/site/projects/base64.html">Base64 ↗</a></h3><p>Encode and decode Unicode text entirely in-browser.</p></section>
       <section class="project-card"><span class="tag">web / local</span><h3><a href="/site/projects/url-encoder.html">URL Encoder ↗</a></h3><p>Turn awkward URL components into safe ones, and back again.</p></section>
@@ -134,6 +133,19 @@ def build(output: Path, base: str = "") -> None:
     <p>A no-dependency browser utility that generates random UUID v4 values locally using the browser cryptography API.</p>
     <h2>Verification</h2><section class="card"><p>Select Generate UUID to create a value, then Copy if desired. The generated-site test confirms that the tool and this portfolio page exist.</p></section>
     <p><a href="/site/tools/uuid-generator.html">Open the UUID Generator</a>.</p>
+    """))
+    write(output, "projects/cra-srp-readiness.html", page("CRA SRP Readiness", """
+    <p class="eyebrow">Project · read-only sample</p><h1>CRA SRP Readiness</h1>
+    <p class="lede">AI-built workflow/readiness aid for published Cyber Resilience Act reporting clocks and the ENISA Single Reporting Platform.</p>
+    <p>This sample is for workflow/readiness checks only. It is not legal advice, a compliance certification, an applicability determination, ENISA schema/API/field validation, or a report-submission service. It contains no real incident data.</p>
+    <h2>Published rules in this sample</h2>
+    <section class="card"><strong>Reporting start · 11 September 2026</strong><p>Mandatory CRA manufacturer reporting obligations enter into application on 11 September 2026. <a href="https://digital-strategy.ec.europa.eu/en/policies/cra-reporting">European Commission source ↗</a></p></section>
+    <section class="card"><strong>Early warning · within 24 hours</strong><p>Early warning is due without undue delay and in any case within 24 hours of awareness. <a href="https://digital-strategy.ec.europa.eu/en/policies/cra-reporting">European Commission source ↗</a></p></section>
+    <section class="card"><strong>Notification · within 72 hours</strong><p>Full vulnerability or incident notification is due without undue delay and in any case within 72 hours of awareness. <a href="https://digital-strategy.ec.europa.eu/en/policies/cra-reporting">European Commission source ↗</a></p></section>
+    <section class="card"><strong>Final vulnerability report · 14 days</strong><p>The final report for an actively exploited vulnerability is due no later than 14 days after a corrective measure is available. <a href="https://digital-strategy.ec.europa.eu/en/policies/cra-reporting">European Commission source ↗</a></p></section>
+    <section class="card"><strong>Final severe-incident report · one month</strong><p>The final report for a severe incident is due within one month after the initial notification. <a href="https://digital-strategy.ec.europa.eu/en/policies/cra-reporting">European Commission source ↗</a></p></section>
+    <section class="card"><strong>Single Reporting Platform</strong><p>ENISA describes the CRA Single Reporting Platform as the single entry point for CRA notifications and schedules it to be operational by 11 September 2026. <a href="https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/frequently-asked-questions">ENISA source ↗</a></p></section>
+    <h2>Rule corpus</h2><p>Corpus version 2026-08-31.1, accessed 2026-08-31. This public sample mirrors only the bounded, source-linked rules above.</p>
     """))
     write(output, "projects/case-converter.html", page("Case Converter", """
     <p class="eyebrow">Project · shipped</p><h1>Case Converter</h1>
