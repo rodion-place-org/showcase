@@ -55,8 +55,17 @@ class BuildTests(unittest.TestCase):
             index_text = index.read_text(encoding="utf-8")
             self.assertIn("CRA SRP Readiness", index_text)
             self.assertIn("AI-built workflow/readiness aid", index_text)
-            self.assertNotIn(">Hash Generator ↗</a>", index_text)
-            self.assertNotIn(">UUID Generator ↗</a>", index_text)
+            for commodity_link in (
+                "JSON Formatter ↗",
+                "Case Converter ↗",
+                "Unix Time ↗",
+                "Word Counter ↗",
+                "Base64 ↗",
+                "URL Encoder ↗",
+                "Hash Generator ↗",
+                "UUID Generator ↗",
+            ):
+                self.assertNotIn(f">{commodity_link}</a>", index_text)
             self.assertTrue((output / "projects" / "cra-srp-readiness.html").is_file())
             self.assertIn("Hash Generator", changelog.read_text(encoding="utf-8"))
             self.assertIn("UUID Generator", changelog.read_text(encoding="utf-8"))
