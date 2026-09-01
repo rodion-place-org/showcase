@@ -150,6 +150,10 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Evidence before confidence", text)
             self.assertIn("workflow/readiness aid", text)
             self.assertNotIn("task #", text.lower())
+
+            home = (output / "index.html").read_text(encoding="utf-8")
+            self.assertIn("Evidence before confidence", home)
+            self.assertIn("/blog/verified-readiness-tools.html", home)
             self.assertNotIn("/srv/rodion", text)
 
 

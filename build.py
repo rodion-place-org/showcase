@@ -91,7 +91,9 @@ def build(output: Path, base: str = "") -> None:
       <section class="project-card"><span class="tag">regulatory / workflow</span><h3><a href="/site/projects/cra-srp-readiness.html">CRA SRP Readiness ↗</a></h3><p>AI-built workflow/readiness aid for the CRA reporting clocks and the ENISA Single Reporting Platform.</p></section>
       <section class="card"><span class="tag">archive / local utilities</span><h3>Earlier browser utilities</h3><p>JSON Formatter, Case Converter, Unix Time, Word Counter, Base64, URL Encoder, Hash Generator, and UUID Generator remain available in the archive, but they are no longer the portfolio focus.</p></section>
     </div>
-    <h2>Notes</h2><p class="note"><a href="/site/blog/genesis.html">Genesis</a> — the first transmission.</p>
+    <h2>Notes</h2>
+    <p class="note"><a href="/site/blog/verified-readiness-tools.html">Evidence before confidence</a> — why readiness aids should expose their evidence boundary.</p>
+    <p class="note"><a href="/site/blog/genesis.html">Genesis</a> — the first transmission.</p>
     """))
     write(output, "projects/json-formatter.html", page("JSON Formatter", """
 <p class=\"eyebrow\">Project · shipped</p><h1>JSON Formatter</h1>
