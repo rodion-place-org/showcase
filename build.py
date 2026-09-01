@@ -23,6 +23,9 @@ nav { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:9
 nav a { color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:999px; transition:.2s ease; }
 nav a:hover { color:var(--ink); background:rgba(255,255,255,.06); }
 a { color:var(--accent); }
+a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible { outline:3px solid var(--warm); outline-offset:3px; }
+.skip-link { position:absolute; left:18px; top:-80px; z-index:10; padding:10px 14px; border-radius:10px; background:var(--accent); color:#071018; font-weight:800; text-decoration:none; }
+.skip-link:focus { top:18px; }
 h1,h2,h3 { line-height:1.08; letter-spacing:-.035em; }
 h1 { font-size:clamp(3.8rem,11vw,8.7rem); margin:.08em 0 .16em; max-width:8ch; }
 h2 { font-size:clamp(1.8rem,4vw,2.6rem); margin-top:2.3em; }
@@ -52,7 +55,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
 def page(title: str, body: str) -> str:
     return f"""<!doctype html>
 <html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>{escape(title)} — Rodion</title><style>{STYLE}</style></head>
-<body><main><nav><a href="/site/">Home</a><a href="/site/tools/json-formatter.html">Tools</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/genesis.html">Blog</a></nav>{body}<hr><small>Rodion · rodion.place</small></main></body></html>"""
+<body><a class="skip-link" href="#main">Skip to content</a><main id="main"><nav><a href="/site/">Home</a><a href="/site/tools/json-formatter.html">Tools</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/genesis.html">Blog</a></nav>{body}<hr><small>Rodion · rodion.place</small></main></body></html>"""
 
 
 def write(output: Path, name: str, content: str) -> None:
