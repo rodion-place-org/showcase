@@ -130,17 +130,79 @@ def build(output: Path, base: str = "") -> None:
     <p><a href="/site/tools/uuid-generator.html">Open the UUID Generator</a>.</p>
     """))
     write(output, "projects/cra-srp-readiness.html", page("CRA SRP Readiness", """
-    <p class="eyebrow">Project · read-only sample</p><h1>CRA SRP Readiness</h1>
-    <p class="lede">AI-built workflow/readiness aid for published Cyber Resilience Act reporting clocks and the ENISA Single Reporting Platform.</p>
-    <p>This sample is for workflow/readiness checks only. It is not legal advice, a compliance certification, an applicability determination, ENISA schema/API/field validation, or a report-submission service. It contains no real incident data.</p>
+    <p class="eyebrow">Project · read-only readiness aid</p><h1>CRA SRP Readiness</h1>
+    <p class="lede">Source-linked preparation aids for published Cyber Resilience Act reporting clocks and the ENISA Single Reporting Platform.</p>
+    <p>This sample is non-authoritative. It is not legal advice, a compliance certification, an applicability determination, official ENISA schema/API/field validation, or a report-submission service. It contains no real incident data.</p>
+    <section class="card"><strong>Guidance as of 31 August 2026 · corpus 2026-08-31.2</strong><p>ENISA guidance is still changing ahead of the 11 September launch. Re-check the linked primary guidance before filing. <a href="/site/projects/cra-srp-guidance-changelog.html">View the guidance changelog →</a></p></section>
     <h2>Published rules in this sample</h2>
     <section class="card"><strong>Reporting start · 11 September 2026</strong><p>Mandatory CRA manufacturer reporting obligations enter into application on 11 September 2026. <a href="https://digital-strategy.ec.europa.eu/en/policies/cra-reporting">European Commission source ↗</a></p></section>
     <section class="card"><strong>Early warning · within 24 hours</strong><p>Early warning is due without undue delay and in any case within 24 hours of awareness. <a href="https://digital-strategy.ec.europa.eu/en/policies/cra-reporting">European Commission source ↗</a></p></section>
     <section class="card"><strong>Notification · within 72 hours</strong><p>Full vulnerability or incident notification is due without undue delay and in any case within 72 hours of awareness. <a href="https://digital-strategy.ec.europa.eu/en/policies/cra-reporting">European Commission source ↗</a></p></section>
     <section class="card"><strong>Final vulnerability report · 14 days</strong><p>The final report for an actively exploited vulnerability is due no later than 14 days after a corrective measure is available. <a href="https://digital-strategy.ec.europa.eu/en/policies/cra-reporting">European Commission source ↗</a></p></section>
     <section class="card"><strong>Final severe-incident report · one month</strong><p>The final report for a severe incident is due within one month after the initial notification. <a href="https://digital-strategy.ec.europa.eu/en/policies/cra-reporting">European Commission source ↗</a></p></section>
-    <section class="card"><strong>Single Reporting Platform</strong><p>ENISA describes the CRA Single Reporting Platform as the single entry point for CRA notifications and schedules it to be operational by 11 September 2026. <a href="https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/frequently-asked-questions">ENISA source ↗</a></p></section>
-    <h2>Rule corpus</h2><p>Corpus version 2026-08-31.1, accessed 2026-08-31. This public sample mirrors only the bounded, source-linked rules above.</p>
+    <section class="card"><strong>Single Reporting Platform</strong><p>ENISA describes the CRA Single Reporting Platform as the single entry point for CRA notifications and schedules it to be operational by 11 September 2026. <a href="https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/frequently-asked-questions">ENISA FAQ ↗</a></p></section>
+
+    <h2>Deadline clock aid</h2>
+    <section class="card">
+      <p>These clocks use elapsed time; weekends do not pause them. The awareness timestamp drives the 24h and 72h aids. The corrective-measure timestamp drives the 14-day vulnerability-final aid.</p>
+      <label for="cra-awareness">Awareness timestamp (your browser timezone)</label><br>
+      <input id="cra-awareness" type="datetime-local">
+      <p><label for="cra-corrective">Corrective measure available (your browser timezone)</label><br>
+      <input id="cra-corrective" type="datetime-local"></p>
+      <p><button id="cra-deadline-calc" type="button">Calculate clocks</button></p>
+      <p id="cra-zone" class="whisper"></p>
+      <textarea id="cra-deadlines" readonly rows="6" aria-label="Calculated CRA deadlines"></textarea>
+      <p class="whisper">Operational aid only: the legal trigger and facts must still be verified against current guidance.</p>
+    </section>
+    <script>
+    (function () {
+      const awareness = document.getElementById('cra-awareness');
+      const corrective = document.getElementById('cra-corrective');
+      const out = document.getElementById('cra-deadlines');
+      const zone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'local browser timezone';
+      document.getElementById('cra-zone').textContent = 'Browser timezone: ' + zone + '. Results also show UTC.';
+      function line(label, date) {
+        return label + ': ' + date.toLocaleString() + ' [' + zone + '] / ' + date.toISOString() + ' [UTC]';
+      }
+      document.getElementById('cra-deadline-calc').addEventListener('click', function () {
+        const lines = [];
+        if (awareness.value) {
+          const a = new Date(awareness.value);
+          lines.push(line('24h early-warning outer limit', new Date(a.getTime() + 24 * 60 * 60 * 1000)));
+          lines.push(line('72h notification outer limit', new Date(a.getTime() + 72 * 60 * 60 * 1000)));
+        } else {
+          lines.push('Add an awareness timestamp for the 24h and 72h aids.');
+        }
+        if (corrective.value) {
+          const c = new Date(corrective.value);
+          lines.push(line('14d vulnerability-final outer limit', new Date(c.getTime() + 14 * 24 * 60 * 60 * 1000)));
+        } else {
+          lines.push('Add the corrective-measure availability timestamp for the 14d aid.');
+        }
+        out.value = lines.join('\n');
+      });
+    }());
+    </script>
+
+    <h2>Stage-field preparation checklist</h2>
+    <p>This is a non-exhaustive preparation checklist, not a mirror of official fields. Confirm every item against the current ENISA interface guide/FAQ at filing time.</p>
+    <section class="card"><strong>Early warning · prepare before the 24h window</strong><ul><li>Awareness timestamp and internal owner recorded.</li><li>Manufacturer/contact and product/version identifiers ready.</li><li>Concise vulnerability or incident summary and known exploitation/severity facts ready.</li><li>Source evidence and hand-off notes stored outside the SRP draft.</li></ul></section>
+    <section class="card"><strong>72h notification · enrich the prepared payload</strong><ul><li>Affected products/versions and available technical assessment reviewed.</li><li>Impact, exploitation/incident scope, mitigations and corrective-action status updated.</li><li>Representative access and submission responsibility confirmed.</li></ul></section>
+    <section class="card"><strong>Final vulnerability report · prepare from corrective-measure availability</strong><ul><li>Corrective-measure availability timestamp recorded.</li><li>Remediation, disclosure and closure facts reconciled with prior stages.</li><li>Current ENISA guidance re-checked before submission.</li></ul></section>
+
+    <h2>Known platform readiness traps</h2>
+    <section class="card"><strong>Assigned Representative limit conflict</strong><p>The 14 August interface-guide reporting says an unverified Assigned Representative can represent up to <strong>10</strong> manufacturers, while the ENISA FAQ has stated <strong>20</strong>. Treat this as unresolved guidance, not a rule to automate. <a href="https://www.cyberresilienceact.eu/news/enisa-srp-ar-interface-functions-14-august-2026.html">14 Aug interface-guide summary ↗</a> · <a href="https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/frequently-asked-questions">ENISA FAQ ↗</a></p></section>
+    <section class="card"><strong>Draft visibility warning</strong><p>ENISA guidance says drafts are private to their author; a backup representative cannot rely on seeing another user's draft during a 24-hour window. Keep a controlled shared preparation copy outside SRP and define the hand-off owner before an incident. <a href="https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/frequently-asked-questions">ENISA FAQ ↗</a></p></section>
+    """))
+    write(output, "projects/cra-srp-guidance-changelog.html", page("CRA SRP Guidance Changelog", """
+    <p class="eyebrow">CRA SRP · versioned source mirror</p><h1>Guidance changelog</h1>
+    <p class="lede">What this readiness sample is pinned to, and what must be re-checked at launch.</p>
+    <section class="card"><strong>Guidance as of 31 August 2026 · corpus 2026-08-31.2</strong><p>FAQ source checked through its 31 August update. The sample remains non-authoritative and intentionally exposes unresolved guidance conflicts instead of guessing.</p></section>
+    <h2>Tracked changes</h2>
+    <section class="card"><strong>31 August 2026</strong><p>ENISA FAQ re-dated/updated. Current source: <a href="https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/frequently-asked-questions">ENISA FAQ ↗</a>.</p></section>
+    <section class="card"><strong>14 August 2026</strong><p>Assigned Representative interface-guide material reported a 10-manufacturer cap for an unverified representative; FAQ material states 20. The readiness sample flags the discrepancy rather than choosing one. <a href="https://www.cyberresilienceact.eu/news/enisa-srp-ar-interface-functions-14-august-2026.html">interface-guide summary ↗</a>.</p></section>
+    <section class="card"><strong>11–12 September 2026 · scheduled re-check</strong><p>After the SRP launch, re-check the live platform and ENISA guidance, diff against this dated corpus, and update the sample before treating it as current.</p></section>
+    <p><a href="/site/projects/cra-srp-readiness.html">← Back to CRA SRP Readiness</a></p>
     """))
     write(output, "projects/case-converter.html", page("Case Converter", """
     <p class="eyebrow">Project · shipped</p><h1>Case Converter</h1>
