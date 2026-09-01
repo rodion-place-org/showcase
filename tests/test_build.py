@@ -171,5 +171,15 @@ class BuildTests(unittest.TestCase):
             self.assertEqual("rodion.place\n", (output / "CNAME").read_text(encoding="utf-8"))
 
 
+    def test_generated_site_does_not_leak_internal_operational_markers(self) -> None:
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+
+            html = "".join(path.read_text(encoding="utf-8") for path in output.rglob("*.html"))
+            for marker in ("/srv/rodion/", "goal_id=", "Rodion ⇄ John", "@john:", "10.10.5.15"):
+                self.assertNotIn(marker, html)
+
+
 if __name__ == "__main__":
     unittest.main()
