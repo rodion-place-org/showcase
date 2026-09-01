@@ -49,6 +49,7 @@ textarea { width:100%; min-height:180px; margin:8px 0; background:#0d121b; color
 button { background:var(--accent); color:#071018; border:0; border-radius:10px; padding:10px 14px; font-weight:800; cursor:pointer; }
 #status { min-height:1.6em; }
 @media (max-width:700px) { main { padding:22px 18px 58px; } nav { margin-bottom:6vh; } .project-grid { grid-template-columns:1fr; } h1 { font-size:clamp(3.5rem,20vw,6rem); } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .project-card,nav a { transition:none; } }
 """
 
 

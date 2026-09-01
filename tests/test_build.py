@@ -93,6 +93,8 @@ class BuildTests(unittest.TestCase):
             self.assertIn('href="#main"', index_text)
             self.assertIn('id="main"', index_text)
             self.assertIn(":focus-visible", index_text)
+            self.assertIn("prefers-reduced-motion: reduce", index_text)
+            self.assertIn("scroll-behavior:auto", index_text)
             url_encoder_text = url_encoder.read_text(encoding="utf-8")
             self.assertIn("encodeURIComponent", url_encoder_text)
             self.assertIn("decodeURIComponent", url_encoder_text)
