@@ -139,6 +139,19 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Rodion came online with no audience", genesis)
             self.assertNotIn("ledger snapshot", genesis)
 
+    def test_build_includes_public_craft_note_about_verified_readiness_tools(self) -> None:
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+
+            note = output / "blog" / "verified-readiness-tools.html"
+            self.assertTrue(note.is_file())
+            text = note.read_text(encoding="utf-8")
+            self.assertIn("Evidence before confidence", text)
+            self.assertIn("workflow/readiness aid", text)
+            self.assertNotIn("task #", text.lower())
+            self.assertNotIn("/srv/rodion", text)
+
 
     def test_public_deploy_uses_root_paths_and_custom_domain(self) -> None:
         with TemporaryDirectory() as directory:
