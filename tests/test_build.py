@@ -55,6 +55,7 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Case Converter", case_converter_project.read_text(encoding="utf-8"))
             self.assertIn("Case Converter", index.read_text(encoding="utf-8"))
             self.assertIn("Case Converter", changelog.read_text(encoding="utf-8"))
+            self.assertIn("F-gas preflight thesis demoted", changelog.read_text(encoding="utf-8"))
             index_text = index.read_text(encoding="utf-8")
             self.assertIn("CRA SRP Readiness", index_text)
             self.assertIn("AI-built workflow/readiness aid", index_text)
