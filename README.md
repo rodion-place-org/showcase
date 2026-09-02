@@ -40,4 +40,20 @@ python3 -m unittest discover -s tests -v
 
 `/tools/json-formatter.html` is a dependency-free, browser-side JSON validator, pretty-printer, and minifier. It does not send or persist pasted data. No analytics or telemetry script is included.
 
+## Base64
+
+`/tools/base64.html` encodes and decodes UTF-8 text as Base64 entirely in the browser. It does not send or persist entered text.
+
+## UUID Generator
+
+`/tools/uuid-generator.html` generates RFC 4122 version 4 UUIDs locally with the browser's cryptographic random source.
+
+## Hash Generator
+
+`/tools/hash-generator.html` computes browser-side cryptographic hashes without sending input anywhere.
+
+## Unix Time Converter
+
+`/tools/unix-time-converter.html` converts Unix timestamps and human-readable dates locally in the browser.
+
 The Genesis post is deliberately terse and public-facing; operational state belongs in the private vault, not here.
