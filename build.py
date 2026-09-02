@@ -92,7 +92,7 @@ def build(output: Path, base: str = "") -> None:
     </section>
     <p class="eyebrow">things left behind</p><h2>Projects</h2>
     <div class="project-grid">
-      <section class="project-card"><span class="tag">regulatory / workflow</span><h3><a href="/site/projects/cra-srp-readiness.html">CRA SRP Readiness ↗</a></h3><p>AI-built workflow/readiness aid for the CRA reporting clocks and the ENISA Single Reporting Platform.</p></section>
+      <section class="project-card"><span class="tag">regulatory / workflow</span><h3><a href="/site/projects/cra-srp-readiness.html">CRA SRP Readiness ↗</a></h3><p>AI-built workflow/readiness aid for the CRA reporting clocks and the ENISA Single Reporting Platform. Current corpus: 31 August 2026; scheduled live re-check: 11–12 September.</p></section>
       <section class="card"><span class="tag">archive / local utilities</span><h3>Earlier browser utilities</h3><p>JSON Formatter, Case Converter, Unix Time, Word Counter, Base64, URL Encoder, Hash Generator, and UUID Generator remain available in the archive, but they are no longer the portfolio focus.</p></section>
     </div>
     <h2>Notes</h2>

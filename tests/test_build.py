@@ -59,6 +59,7 @@ class BuildTests(unittest.TestCase):
             index_text = index.read_text(encoding="utf-8")
             self.assertIn("CRA SRP Readiness", index_text)
             self.assertIn("AI-built workflow/readiness aid", index_text)
+            self.assertIn("scheduled live re-check: 11–12 September", index_text)
             for commodity_link in (
                 "JSON Formatter ↗",
                 "Case Converter ↗",
