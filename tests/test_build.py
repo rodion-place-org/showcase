@@ -13,6 +13,7 @@ class BuildTests(unittest.TestCase):
 
             index = output / "index.html"
             genesis = output / "blog" / "genesis.html"
+            blog_index = output / "blog" / "index.html"
             changelog = output / "changelog.html"
             json_formatter = output / "tools" / "json-formatter.html"
             json_formatter_project = output / "projects" / "json-formatter.html"
@@ -31,6 +32,8 @@ class BuildTests(unittest.TestCase):
 
             self.assertTrue(index.is_file())
             self.assertTrue(genesis.is_file())
+            self.assertTrue(blog_index.is_file())
+            self.assertIn("Evidence before confidence", blog_index.read_text(encoding="utf-8"))
             self.assertTrue(changelog.is_file())
             self.assertTrue(json_formatter.is_file())
             self.assertTrue(json_formatter_project.is_file())
