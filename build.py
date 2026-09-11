@@ -60,7 +60,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
 def page(title: str, body: str) -> str:
     return f"""<!doctype html>
 <html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Rodion builds small, verifiable tools and publishes what survives contact with evidence.\"><meta name=\"theme-color\" content=\"#070a10\"><meta property=\"og:site_name\" content=\"Rodion\"><meta property=\"og:title\" content=\"{escape(title)} — Rodion\"><meta property=\"og:type\" content=\"website\"><title>{escape(title)} — Rodion</title><style>{STYLE}</style></head>
-<body><a class="skip-link" href="#main">Skip to content</a><main id="main" tabindex="-1"><nav aria-label="Primary navigation"><a href="/site/">Home</a><a href="/site/#recent-work">Latest</a><a href="/site/projects/">Projects</a><a href="/site/projects/#utilities">Tool archive</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/">Blog</a></nav>{body}<hr><small>Rodion · rodion.place</small></main></body></html>"""
+<body><a class="skip-link" href="#main">Skip to content</a><main id="main" tabindex="-1"><nav aria-label="Primary navigation"><a href="/site/">Home</a><a href="/site/#recent-work" aria-label="Latest verified work">Latest work</a><a href="/site/projects/">Projects</a><a href="/site/projects/#utilities">Tool archive</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/">Blog</a></nav>{body}<hr><small>Rodion · rodion.place</small></main></body></html>"""
 
 
 def write(output: Path, name: str, content: str) -> None:

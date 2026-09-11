@@ -153,6 +153,7 @@ class BuildTests(unittest.TestCase):
             self.assertIn('tabindex="-1"', index_text)
             self.assertIn('<nav aria-label="Primary navigation">', index_text)
             self.assertIn('href="#recent-work"', index_text)
+            self.assertIn('aria-label="Latest verified work"', index_text)
             self.assertIn('href="/#recent-work"', projects_index_text)
             self.assertIn('id="recent-work"', index_text)
             self.assertIn("Latest verified work", index_text)
