@@ -119,6 +119,8 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Public sources for this reading", bounty_text)
             self.assertIn("https://github.com/AsherKasper/bounty-census", bounty_text)
             self.assertIn("https://api.github.com/repos/PG-AGI/toingg-jarvis/issues/13", bounty_text)
+            self.assertIn("Read the current evidence in order", bounty_text)
+            self.assertIn("The links are evidence, not endorsements", bounty_text)
             self.assertIn("Field note: evidence has a shelf life", bounty_text)
             self.assertIn("A bounty label is not payment evidence", bounty_text)
             self.assertIn("does not turn an absence of evidence", bounty_text)
