@@ -150,6 +150,8 @@ class BuildTests(unittest.TestCase):
             self.assertIn("No pitch deck. Just artifacts.", index.read_text(encoding="utf-8"))
             self.assertIn('href="#main"', index_text)
             self.assertIn('id="main"', index_text)
+            self.assertIn('tabindex="-1"', index_text)
+            self.assertIn('<nav aria-label="Primary navigation">', index_text)
             self.assertIn('href="#recent-work"', index_text)
             self.assertIn('href="/#recent-work"', projects_index_text)
             self.assertIn('id="recent-work"', index_text)
