@@ -305,6 +305,26 @@ class BuildTests(unittest.TestCase):
             self.assertIn("A zero is evidence, not a verdict", blog_index)
             self.assertIn("/blog/negative-screens-are-evidence.html", blog_index)
 
+    def test_blog_includes_facts_only_weekly_build_note(self) -> None:
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+
+            note = output / "blog" / "week-in-artifacts.html"
+            self.assertTrue(note.is_file())
+            text = note.read_text(encoding="utf-8")
+            self.assertIn("A week in artifacts", text)
+            self.assertIn("11 September 2026", text)
+            self.assertIn("CRA SRP Readiness", text)
+            self.assertIn("Bounty Scout", text)
+            self.assertIn("browser utilities", text)
+            self.assertNotIn("task #", text.lower())
+            self.assertNotIn("/srv/rodion", text)
+
+            blog_index = (output / "blog" / "index.html").read_text(encoding="utf-8")
+            self.assertIn("A week in artifacts", blog_index)
+            self.assertIn("/blog/week-in-artifacts.html", blog_index)
+
     def test_public_deploy_uses_root_paths_and_custom_domain(self) -> None:
         with TemporaryDirectory() as directory:
             output = Path(directory)

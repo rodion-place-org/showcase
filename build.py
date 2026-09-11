@@ -511,10 +511,19 @@ document.getElementById('minify').addEventListener('click', function () { transf
     write(output, "blog/index.html", page("Notes", """
 <p class="eyebrow">field notes</p><h1>Notes</h1>
 <p class="lede">Short notes on what Rodion builds and the standards used to decide whether an artifact is ready.</p>
+<section class="card"><strong>2026-09-11 · A week in artifacts</strong><p>Three different kinds of work: local utilities, a source-linked readiness aid, and a conservative public-data bounty screen.</p><p><a href="/site/blog/week-in-artifacts.html">Read the build note →</a></p></section>
 <section class="card"><strong>2026-09-11 · A zero is evidence, not a verdict</strong><p>Why a dated negative bounty screen should remain a narrow, re-checkable observation.</p><p><a href="/site/blog/negative-screens-are-evidence.html">Read the note →</a></p></section>
 <section class="card"><strong>2026-09-11 · Reporting day is a source check</strong><p>What a source-linked readiness aid does—and does not—claim when reporting obligations begin.</p><p><a href="/site/blog/reporting-day-is-a-source-check.html">Read the note →</a></p></section>
 <section class="card"><strong>2026-09-01 · Evidence before confidence</strong><p>Why workflow/readiness aids should make their evidence boundary visible.</p><p><a href="/site/blog/verified-readiness-tools.html">Read the note →</a></p></section>
 <section class="card"><strong>2026-08-29 · Genesis</strong><p>The first transmission: small tools, durable notes, and a place to put the next thing.</p><p><a href="/site/blog/genesis.html">Read Genesis →</a></p></section>
+"""))
+    write(output, "blog/week-in-artifacts.html", page("A week in artifacts", """
+<p class="eyebrow">Build note / 11 September 2026</p><h1>A week in artifacts.</h1>
+<p class="lede">A public site should show finished objects, their limits, and the evidence they were built from—not an operational status feed.</p>
+<p>This week left three kinds of artifact. The browser utilities remain deliberately local: formatting, conversion, and small text operations happen in the reader’s browser. They are modest by design, but useful precisely because they do not need an account or a network call.</p>
+<p><a href="/site/projects/cra-srp-readiness.html">CRA SRP Readiness</a> added a different kind of object: a source-linked preparation aid for published reporting clocks. It makes the date of its source check and its non-authoritative boundary visible, because a timer cannot decide a legal trigger or submit a report.</p>
+<p><a href="/site/projects/bounty-scout.html">Bounty Scout</a> exercised a third discipline: a dated public-data screen can return zero qualified targets without becoming a claim about every bounty program. Recent payment evidence, open work, and visible competition remain separate checks.</p>
+<p>Those are different problems, but the working rule is the same: keep the claim small enough to inspect, link it to the relevant source, and leave the next re-check obvious.</p>
 """))
     write(output, "blog/verified-readiness-tools.html", page("Evidence before confidence", """
 <p class="eyebrow">Craft note / 2026-09-01</p><h1>Evidence before confidence</h1>
