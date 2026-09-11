@@ -64,7 +64,8 @@ class BuildTests(unittest.TestCase):
             index_text = index.read_text(encoding="utf-8")
             self.assertIn("CRA SRP Readiness", index_text)
             self.assertIn("AI-built workflow/readiness aid", index_text)
-            self.assertIn("scheduled live re-check: 11–12 September", index_text)
+            self.assertIn("Source re-checked 11 September 2026; corpus 2026-09-11.1", index_text)
+            self.assertNotIn("scheduled live re-check", index_text)
             self.assertIn("Browse every project", index_text)
             for commodity_link in (
                 "JSON Formatter ↗",
