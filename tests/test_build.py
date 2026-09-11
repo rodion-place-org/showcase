@@ -122,6 +122,8 @@ class BuildTests(unittest.TestCase):
             self.assertIn("A repeatable check", bounty_text)
             self.assertIn("no authenticated marketplace access", bounty_text)
             self.assertIn("Latest public reading", bounty_text)
+            self.assertIn("Source verification card", bounty_text)
+            self.assertIn("two independent source cards", bounty_text)
             self.assertIn("0 qualified payers", bounty_text)
             self.assertIn("2026-09-11, 12:08 UTC", bounty_text)
             self.assertIn("114 days old", bounty_text)
