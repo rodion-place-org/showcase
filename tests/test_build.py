@@ -93,6 +93,8 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Source re-checked 11 September 2026", cra_text)
             self.assertIn("corpus 2026-09-11.1", cra_text)
             self.assertIn("cra-deadline-calc", cra_text)
+            self.assertIn("2026-09-11 — CRA primary-source re-check", changelog.read_text(encoding="utf-8"))
+            self.assertIn("Re-checked seven authoritative", changelog.read_text(encoding="utf-8"))
             self.assertIn("Hash Generator", changelog.read_text(encoding="utf-8"))
             self.assertIn("UUID Generator", changelog.read_text(encoding="utf-8"))
             self.assertIn("Hash Generator", hash_project.read_text(encoding="utf-8"))
