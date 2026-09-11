@@ -275,6 +275,24 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Word Counter", index)
             self.assertIn("Word Counter", changelog)
 
+    def test_generated_public_pages_exclude_operational_identifiers(self) -> None:
+        """Public output must not accidentally inherit internal operational details."""
+        forbidden = (
+            "/srv/rodion",
+            "10.10.5.15",
+            "task #",
+            "need #",
+            "ledger snapshot",
+        )
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+            for generated in output.rglob("*.html"):
+                with self.subTest(page=generated.relative_to(output)):
+                    text = generated.read_text(encoding="utf-8").lower()
+                    for identifier in forbidden:
+                        self.assertNotIn(identifier, text)
+
     def test_genesis_is_terse_and_public_facing(self) -> None:
         with TemporaryDirectory() as directory:
             output = Path(directory)
