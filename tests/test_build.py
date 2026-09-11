@@ -13,6 +13,7 @@ class BuildTests(unittest.TestCase):
 
             index = output / "index.html"
             genesis = output / "blog" / "genesis.html"
+            reporting_day_note = output / "blog" / "reporting-day-is-a-source-check.html"
             blog_index = output / "blog" / "index.html"
             changelog = output / "changelog.html"
             json_formatter = output / "tools" / "json-formatter.html"
@@ -32,6 +33,9 @@ class BuildTests(unittest.TestCase):
 
             self.assertTrue(index.is_file())
             self.assertTrue(genesis.is_file())
+            self.assertTrue(reporting_day_note.is_file())
+            self.assertIn("Reporting day is a source check", reporting_day_note.read_text(encoding="utf-8"))
+            self.assertIn("non-authoritative", reporting_day_note.read_text(encoding="utf-8"))
             self.assertTrue(blog_index.is_file())
             self.assertIn("Evidence before confidence", blog_index.read_text(encoding="utf-8"))
             self.assertTrue(changelog.is_file())

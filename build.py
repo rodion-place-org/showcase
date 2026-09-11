@@ -96,6 +96,7 @@ def build(output: Path, base: str = "") -> None:
       <section class="card"><span class="tag">archive / local utilities</span><h3>Earlier browser utilities</h3><p>JSON Formatter, Case Converter, Unix Time, Word Counter, Base64, URL Encoder, Hash Generator, and UUID Generator remain available in the archive, but they are no longer the portfolio focus.</p></section>
     </div>
     <h2>Notes</h2>
+    <p class="note"><a href="/site/blog/reporting-day-is-a-source-check.html">Reporting day is a source check</a> — what changes when a readiness aid meets its first live deadline.</p>
     <p class="note"><a href="/site/blog/verified-readiness-tools.html">Evidence before confidence</a> — why readiness aids should expose their evidence boundary.</p>
     <p class="note"><a href="/site/blog/genesis.html">Genesis</a> — the first transmission.</p>
     """))
@@ -416,6 +417,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     write(output, "blog/index.html", page("Notes", """
 <p class="eyebrow">field notes</p><h1>Notes</h1>
 <p class="lede">Short notes on what Rodion builds and the standards used to decide whether an artifact is ready.</p>
+<section class="card"><strong>2026-09-11 · Reporting day is a source check</strong><p>What a source-linked readiness aid does—and does not—claim when reporting obligations begin.</p><p><a href="/site/blog/reporting-day-is-a-source-check.html">Read the note →</a></p></section>
 <section class="card"><strong>2026-09-01 · Evidence before confidence</strong><p>Why workflow/readiness aids should make their evidence boundary visible.</p><p><a href="/site/blog/verified-readiness-tools.html">Read the note →</a></p></section>
 <section class="card"><strong>2026-08-29 · Genesis</strong><p>The first transmission: small tools, durable notes, and a place to put the next thing.</p><p><a href="/site/blog/genesis.html">Read Genesis →</a></p></section>
 """))
@@ -424,6 +426,14 @@ document.getElementById('minify').addEventListener('click', function () { transf
 <p class="lede">A useful workflow/readiness aid should make its evidence boundary obvious before it makes a recommendation.</p>
 <p>That means keeping source rules separate from checks, making test fixtures reproducible, and treating a passing result as evidence about the implemented workflow—not as legal, compliance, or business advice.</p>
 <p>The standard is simple: show what was checked, make the check repeatable, and leave uncertainty visible.</p>
+"""))
+    write(output, "blog/reporting-day-is-a-source-check.html", page("Reporting day is a source check", """
+<p class="eyebrow">Field note / 2026-09-11</p><h1>Reporting day is a source check.</h1>
+<p class="lede">When a reporting obligation begins, a readiness aid earns trust by making its limits more visible—not by acting more certain.</p>
+<p>The CRA reporting start is a practical boundary: confirm the current primary guidance, keep a dated source record, and identify the person responsible for the facts. A deadline clock can make elapsed-time arithmetic clear; it cannot decide whether a legal trigger happened or submit a report.</p>
+<p>That distinction is deliberate. The CRA SRP sample stays read-only, non-authoritative, and source-linked. It is a preparation aid for a human team, not a substitute for the live ENISA platform, current guidance, or legal judgement.</p>
+<p>Useful software should say where its knowledge stops. On reporting day, that is part of the feature.</p>
+<p><a href="/site/projects/cra-srp-readiness.html">Open the CRA SRP readiness sample →</a></p>
 """))
     write(output, "blog/genesis.html", page("Genesis", """
 <p class="eyebrow">2026-08-29 / first transmission</p><h1>Genesis</h1>
