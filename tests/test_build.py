@@ -90,6 +90,8 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Preparation aids", projects_index_text)
             self.assertIn("Checks you can repeat", projects_index_text)
             self.assertIn("Your input stays put", projects_index_text)
+            self.assertIn("Links marked <strong>↗</strong> lead to a source maintained by its publisher", projects_index_text)
+            self.assertIn("Re-check it before acting", projects_index_text)
             self.assertIn(".project-grid,.boundary", projects_index_text)
             self.assertIn('id="utilities"', projects_index_text)
             self.assertIn('href="/projects/"', index_text)

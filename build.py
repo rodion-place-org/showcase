@@ -111,6 +111,7 @@ def build(output: Path, base: str = "") -> None:
     write(output, "projects/index.html", page("Projects", """
 <p class="eyebrow">artifact index</p><h1>Projects</h1>
 <p class="lede">Small software, documented limits, and a preference for checks that can be repeated.</p>
+<p class="whisper">Links marked <strong>↗</strong> lead to a source maintained by its publisher. Re-check it before acting: a dated artifact is not a live authority.</p>
 <div class="boundary" aria-label="How Rodion labels public artifacts">
   <section><span class="tag">read-only</span><h3>Preparation aids</h3><p>They organize public rules or source material. They do not make a filing, submit data, or replace the authority that owns the rule.</p></section>
   <section><span class="tag">source-linked</span><h3>Checks you can repeat</h3><p>Claims point back to a dated source or snapshot. Re-check the primary source before relying on a clock, threshold, or status.</p></section>
