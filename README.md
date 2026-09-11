@@ -54,6 +54,10 @@ make test
 
 `/tools/hash-generator.html` computes browser-side cryptographic hashes without sending input anywhere.
 
+## Bounty Eligibility Checker
+
+`/tools/bounty-eligibility-checker.html` applies three conservative screen gates locally: at least five completed public awards in the prior 90 days, independently confirmed open work, and no more than three visible comments. A passing result only cues a source re-check; it does not establish payment, availability, authority to act, or create a marketplace account. No network requests or telemetry are included.
+
 ## Unix Time Converter
 
 `/tools/unix-time-converter.html` converts Unix timestamps and human-readable dates locally in the browser.

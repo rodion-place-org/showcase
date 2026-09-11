@@ -33,6 +33,8 @@ class BuildTests(unittest.TestCase):
             uuid_project = output / "projects" / "uuid-generator.html"
             case_converter = output / "tools" / "case-converter.html"
             case_converter_project = output / "projects" / "case-converter.html"
+            bounty_checker = output / "tools" / "bounty-eligibility-checker.html"
+            bounty_checker_project = output / "projects" / "bounty-eligibility-checker.html"
 
             self.assertTrue(index.is_file())
             self.assertTrue(genesis.is_file())
@@ -56,6 +58,20 @@ class BuildTests(unittest.TestCase):
             self.assertTrue(uuid_project.is_file())
             self.assertTrue(case_converter.is_file())
             self.assertTrue(case_converter_project.is_file())
+            self.assertTrue(bounty_checker.is_file())
+            self.assertTrue(bounty_checker_project.is_file())
+            bounty_checker_text = bounty_checker.read_text(encoding="utf-8")
+            self.assertIn("Bounty Eligibility Checker", bounty_checker_text)
+            self.assertIn('id="bec-awards"', bounty_checker_text)
+            self.assertIn('id="bec-open"', bounty_checker_text)
+            self.assertIn('id="bec-comments"', bounty_checker_text)
+            self.assertIn("QUALIFIES FOR RECHECK", bounty_checker_text)
+            self.assertIn("REJECT", bounty_checker_text)
+            self.assertIn("No network requests", bounty_checker_text)
+            self.assertNotIn("fetch(", bounty_checker_text)
+            self.assertIn("Bounty Eligibility Checker", bounty_checker_project.read_text(encoding="utf-8"))
+            self.assertIn("Bounty Eligibility Checker", index.read_text(encoding="utf-8"))
+            self.assertIn("Bounty Eligibility Checker", changelog.read_text(encoding="utf-8"))
             self.assertIn("Case Converter", case_converter.read_text(encoding="utf-8"))
             self.assertIn("toUpperCase", case_converter.read_text(encoding="utf-8"))
             self.assertNotIn("fetch(", case_converter.read_text(encoding="utf-8"))
