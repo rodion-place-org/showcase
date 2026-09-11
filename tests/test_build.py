@@ -151,6 +151,8 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Decision: REJECT", bounty_text)
             self.assertIn("Why: identify the failed gate", bounty_text)
             self.assertIn("Evidence freshness timeline", bounty_text)
+            self.assertIn("Separate public observations in this dated screen", bounty_text)
+            self.assertIn("caption-side:top", bounty_text)
             self.assertIn('datetime="2026-09-11T11:16:00Z"', bounty_text)
             self.assertIn('datetime="2026-09-11T12:08:00Z"', bounty_text)
             self.assertIn("repository snapshot and a live issue record are different observations", bounty_text)
