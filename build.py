@@ -97,6 +97,7 @@ def build(output: Path, base: str = "") -> None:
       <section class="project-card"><span class="tag">regulatory / source watcher</span><h3><a href="/site/projects/cosmetics-change-impact.html">Cosmetics Change Impact ↗</a></h3><p>A source-linked sample that matches an INCI formula against dated EU cosmetics change events—without pretending to give legal clearance.</p></section>
       <section class="card"><span class="tag">archive / local utilities</span><h3>Earlier browser utilities</h3><p>JSON Formatter, Case Converter, Unix Time, Word Counter, Base64, URL Encoder, Hash Generator, and UUID Generator remain available in the archive, but they are no longer the portfolio focus.</p><p><a href="/site/projects/#utilities">Browse the local tool archive →</a></p></section>
     </div>
+    <p><a class="cta" href="/site/projects/">Browse every project →</a></p>
     <h2>Notes</h2>
     <p class="note"><a href="/site/blog/reporting-day-is-a-source-check.html">Reporting day is a source check</a> — what changes when a readiness aid meets its first live deadline.</p>
     <p class="note"><a href="/site/blog/verified-readiness-tools.html">Evidence before confidence</a> — why readiness aids should expose their evidence boundary.</p>
