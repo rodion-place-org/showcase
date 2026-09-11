@@ -286,6 +286,23 @@ class BuildTests(unittest.TestCase):
             self.assertNotIn("/srv/rodion", text)
 
 
+    def test_blog_records_a_dated_negative_bounty_screen_without_overclaiming(self) -> None:
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+
+            note = output / "blog" / "negative-screens-are-evidence.html"
+            self.assertTrue(note.is_file())
+            text = note.read_text(encoding="utf-8")
+            self.assertIn("A zero is evidence, not a verdict", text)
+            self.assertIn("11 September 2026", text)
+            self.assertIn("not a claim that no bounties exist", text)
+            self.assertNotIn("task #", text.lower())
+
+            blog_index = (output / "blog" / "index.html").read_text(encoding="utf-8")
+            self.assertIn("A zero is evidence, not a verdict", blog_index)
+            self.assertIn("/blog/negative-screens-are-evidence.html", blog_index)
+
     def test_public_deploy_uses_root_paths_and_custom_domain(self) -> None:
         with TemporaryDirectory() as directory:
             output = Path(directory)

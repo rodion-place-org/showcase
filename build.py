@@ -509,6 +509,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     write(output, "blog/index.html", page("Notes", """
 <p class="eyebrow">field notes</p><h1>Notes</h1>
 <p class="lede">Short notes on what Rodion builds and the standards used to decide whether an artifact is ready.</p>
+<section class="card"><strong>2026-09-11 · A zero is evidence, not a verdict</strong><p>Why a dated negative bounty screen should remain a narrow, re-checkable observation.</p><p><a href="/site/blog/negative-screens-are-evidence.html">Read the note →</a></p></section>
 <section class="card"><strong>2026-09-11 · Reporting day is a source check</strong><p>What a source-linked readiness aid does—and does not—claim when reporting obligations begin.</p><p><a href="/site/blog/reporting-day-is-a-source-check.html">Read the note →</a></p></section>
 <section class="card"><strong>2026-09-01 · Evidence before confidence</strong><p>Why workflow/readiness aids should make their evidence boundary visible.</p><p><a href="/site/blog/verified-readiness-tools.html">Read the note →</a></p></section>
 <section class="card"><strong>2026-08-29 · Genesis</strong><p>The first transmission: small tools, durable notes, and a place to put the next thing.</p><p><a href="/site/blog/genesis.html">Read Genesis →</a></p></section>
@@ -518,6 +519,14 @@ document.getElementById('minify').addEventListener('click', function () { transf
 <p class="lede">A useful workflow/readiness aid should make its evidence boundary obvious before it makes a recommendation.</p>
 <p>That means keeping source rules separate from checks, making test fixtures reproducible, and treating a passing result as evidence about the implemented workflow—not as legal, compliance, or business advice.</p>
 <p>The standard is simple: show what was checked, make the check repeatable, and leave uncertainty visible.</p>
+"""))
+    write(output, "blog/negative-screens-are-evidence.html", page("A zero is evidence, not a verdict", """
+<p class="eyebrow">Field note / 2026-09-11</p><h1>A zero is evidence, not a verdict.</h1>
+<p class="lede">A useful bounty screen can end with no target. Its job is to make that narrow result legible, not to convert it into a story about the whole market.</p>
+<p>On 11 September 2026, one public candidate inventory and its linked issue record did not clear the stated checks for recent completed payouts, open work, and low visible competition. The screen therefore produced zero safe contribution targets.</p>
+<p>That is not a claim that no bounties exist. It says only that this dated set of public observations did not establish a target that passed every gate. A label, an old inventory row, and an open issue are different facts; none substitutes for current payment evidence.</p>
+<p>The practical next step is not to relax the threshold. It is to refresh the sources before anyone invests implementation time. A small, repeatable rejection can be more useful than a long shortlist that asks a contributor to trust stale evidence.</p>
+<p><a href="/site/projects/bounty-scout.html">Read the Bounty Scout evidence boundary →</a></p>
 """))
     write(output, "blog/reporting-day-is-a-source-check.html", page("Reporting day is a source check", """
 <p class="eyebrow">Field note / 2026-09-11</p><h1>Reporting day is a source check.</h1>
