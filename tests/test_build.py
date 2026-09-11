@@ -95,6 +95,8 @@ class BuildTests(unittest.TestCase):
             self.assertIn(".project-grid,.boundary", projects_index_text)
             self.assertIn('id="utilities"', projects_index_text)
             self.assertIn('href="/projects/"', index_text)
+            self.assertIn('href="/projects/evidence-boundary.html"', index_text)
+            self.assertIn('>Evidence guide</a>', index_text)
             self.assertIn('href="/projects/#utilities"', index_text)
             self.assertIn('href="/projects/#utilities"', projects_index_text)
             self.assertTrue((output / "projects" / "cra-srp-readiness.html").is_file())
