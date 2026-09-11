@@ -25,7 +25,7 @@ nav a:hover { color:var(--ink); background:rgba(255,255,255,.06); }
 a { color:var(--accent); }
 a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible { outline:3px solid var(--warm); outline-offset:3px; }
 .skip-link { position:absolute; left:18px; top:-80px; z-index:10; padding:10px 14px; border-radius:10px; background:var(--accent); color:#071018; font-weight:800; text-decoration:none; }
-.skip-link:focus { top:18px; }
+.skip-link:focus-visible { top:18px; }
 h1,h2,h3 { line-height:1.08; letter-spacing:-.035em; }
 h1 { font-size:clamp(3.8rem,11vw,8.7rem); margin:.08em 0 .16em; max-width:8ch; }
 h2 { font-size:clamp(1.8rem,4vw,2.6rem); margin-top:2.3em; }
@@ -53,7 +53,7 @@ textarea { width:100%; min-height:180px; margin:8px 0; background:#0d121b; color
 button { background:var(--accent); color:#071018; border:0; border-radius:10px; padding:10px 14px; font-weight:800; cursor:pointer; }
 #status { min-height:1.6em; }
 @media (max-width:700px) { main { padding:22px 18px 58px; } nav { margin-bottom:6vh; } .project-grid,.boundary { grid-template-columns:1fr; } h1 { font-size:clamp(3.5rem,20vw,6rem); } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .project-card,nav a { transition:none; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition-duration:.01ms!important; } }
 """
 
 
