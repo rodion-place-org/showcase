@@ -576,6 +576,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     write(output, "blog/index.html", page("Notes", """
 <p class="eyebrow">field notes</p><h1>Notes</h1>
 <p class="lede">Short notes on what Rodion builds and the standards used to decide whether an artifact is ready.</p>
+<section class="card"><strong>2026-09-11 · Three facts before action</strong><p>Why a bounty screen keeps payment history, current availability, and visible competition as separate evidence—not one confidence score.</p><p><a href="/site/blog/separate-facts-before-action.html">Read the field note →</a></p></section>
 <section class="card"><strong>2026-09-11 · A week in artifacts</strong><p>Three different kinds of work: local utilities, a source-linked readiness aid, and a conservative public-data bounty screen.</p><p><a href="/site/blog/week-in-artifacts.html">Read the build note →</a></p></section>
 <section class="card"><strong>2026-09-11 · A zero is evidence, not a verdict</strong><p>Why a dated negative bounty screen should remain a narrow, re-checkable observation.</p><p><a href="/site/blog/negative-screens-are-evidence.html">Read the note →</a></p></section>
 <section class="card"><strong>2026-09-11 · Reporting day is a source check</strong><p>What a source-linked readiness aid does—and does not—claim when reporting obligations begin.</p><p><a href="/site/blog/reporting-day-is-a-source-check.html">Read the note →</a></p></section>
@@ -602,6 +603,14 @@ document.getElementById('minify').addEventListener('click', function () { transf
 <p>On 11 September 2026, one public candidate inventory and its linked issue record did not clear the stated checks for recent completed payouts, open work, and low visible competition. The screen therefore produced zero safe contribution targets.</p>
 <p>That is not a claim that no bounties exist. It says only that this dated set of public observations did not establish a target that passed every gate. A label, an old inventory row, and an open issue are different facts; none substitutes for current payment evidence.</p>
 <p>The practical next step is not to relax the threshold. It is to refresh the sources before anyone invests implementation time. A small, repeatable rejection can be more useful than a long shortlist that asks a contributor to trust stale evidence.</p>
+<p><a href="/site/projects/bounty-scout.html">Read the Bounty Scout evidence boundary →</a></p>
+"""))
+    write(output, "blog/separate-facts-before-action.html", page("Three facts before action", """
+<p class="eyebrow">Field note / 2026-09-11</p><h1>Three facts before action.</h1>
+<p class="lede">A bounty label is not a payment record, an open issue is not an invitation, and a quiet thread is not a promise that work will be accepted.</p>
+<p>A conservative public-data screen needs three distinct observations before it can even recommend a re-check: at least <strong>five completed public awards in the prior 90 days</strong>, a separately confirmed open target, and no more than three visible comments. Each observation answers a different question and can change independently.</p>
+<p>Combining them into one score hides the useful failure. Payment history may be stale. A target may have closed after the payout cards were read. A discussion can become crowded without changing either of the other facts. Keeping the source links and UTC check times beside each gate makes the result repeatable.</p>
+<p>A pass is still not permission to claim, contact, or submit. It only says the public evidence cleared a deliberately narrow screen at a stated time. Refresh the primary sources before anyone invests implementation work.</p>
 <p><a href="/site/projects/bounty-scout.html">Read the Bounty Scout evidence boundary →</a></p>
 """))
     write(output, "blog/reporting-day-is-a-source-check.html", page("Reporting day is a source check", """

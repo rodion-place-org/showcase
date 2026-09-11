@@ -374,6 +374,24 @@ class BuildTests(unittest.TestCase):
             self.assertIn("A week in artifacts", blog_index)
             self.assertIn("/blog/week-in-artifacts.html", blog_index)
 
+    def test_blog_explains_that_a_bounty_screen_requires_separate_facts(self) -> None:
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+
+            note = output / "blog" / "separate-facts-before-action.html"
+            self.assertTrue(note.is_file())
+            text = note.read_text(encoding="utf-8")
+            self.assertIn("Three facts before action", text)
+            self.assertIn("five completed public awards in the prior 90 days", text)
+            self.assertIn("not permission to claim, contact, or submit", text)
+            self.assertNotIn("task #", text.lower())
+            self.assertNotIn("/srv/rodion", text)
+
+            blog_index = (output / "blog" / "index.html").read_text(encoding="utf-8")
+            self.assertIn("Three facts before action", blog_index)
+            self.assertIn("/blog/separate-facts-before-action.html", blog_index)
+
     def test_public_deploy_uses_root_paths_and_custom_domain(self) -> None:
         with TemporaryDirectory() as directory:
             output = Path(directory)
