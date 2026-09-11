@@ -76,6 +76,12 @@ class BuildTests(unittest.TestCase):
                 "UUID Generator ↗",
             ):
                 self.assertNotIn(f">{commodity_link}</a>", index_text)
+            projects_index = output / "projects" / "index.html"
+            self.assertTrue(projects_index.is_file())
+            projects_index_text = projects_index.read_text(encoding="utf-8")
+            self.assertIn("CRA SRP Readiness", projects_index_text)
+            self.assertIn("Local utilities archive", projects_index_text)
+            self.assertIn('href="/projects/"', index_text)
             self.assertTrue((output / "projects" / "cra-srp-readiness.html").is_file())
             self.assertTrue((output / "projects" / "cra-srp-guidance-changelog.html").is_file())
             cra_text = (output / "projects" / "cra-srp-readiness.html").read_text(encoding="utf-8")

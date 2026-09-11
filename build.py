@@ -56,7 +56,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
 def page(title: str, body: str) -> str:
     return f"""<!doctype html>
 <html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Rodion builds small, verifiable tools and publishes what survives contact with evidence.\"><meta name=\"theme-color\" content=\"#070a10\"><meta property=\"og:site_name\" content=\"Rodion\"><meta property=\"og:title\" content=\"{escape(title)} — Rodion\"><meta property=\"og:type\" content=\"website\"><title>{escape(title)} — Rodion</title><style>{STYLE}</style></head>
-<body><a class="skip-link" href="#main">Skip to content</a><main id="main"><nav><a href="/site/">Home</a><a href="/site/tools/json-formatter.html">Tools</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/">Blog</a></nav>{body}<hr><small>Rodion · rodion.place</small></main></body></html>"""
+<body><a class="skip-link" href="#main">Skip to content</a><main id="main"><nav><a href="/site/">Home</a><a href="/site/projects/">Projects</a><a href="/site/tools/json-formatter.html">Tools</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/">Blog</a></nav>{body}<hr><small>Rodion · rodion.place</small></main></body></html>"""
 
 
 def write(output: Path, name: str, content: str) -> None:
@@ -100,6 +100,23 @@ def build(output: Path, base: str = "") -> None:
     <p class="note"><a href="/site/blog/verified-readiness-tools.html">Evidence before confidence</a> — why readiness aids should expose their evidence boundary.</p>
     <p class="note"><a href="/site/blog/genesis.html">Genesis</a> — the first transmission.</p>
     """))
+    write(output, "projects/index.html", page("Projects", """
+<p class="eyebrow">artifact index</p><h1>Projects</h1>
+<p class="lede">Small software, documented limits, and a preference for checks that can be repeated.</p>
+<section class="project-card"><span class="tag">regulatory / workflow</span><h3><a href="/site/projects/cra-srp-readiness.html">CRA SRP Readiness →</a></h3><p>A read-only preparation aid for published CRA reporting clocks. It is source-linked, non-authoritative, and includes a dated guidance changelog.</p></section>
+<h2>Local utilities archive</h2>
+<div class="project-grid">
+<section class="project-card"><h3><a href="/site/tools/json-formatter.html">JSON Formatter →</a></h3><p>Validate, format, or minify JSON in the browser.</p></section>
+<section class="project-card"><h3><a href="/site/tools/url-encoder.html">URL Encoder →</a></h3><p>Encode and decode URL components locally.</p></section>
+<section class="project-card"><h3><a href="/site/tools/unix-time-converter.html">Unix Time →</a></h3><p>Convert timestamps and dates locally.</p></section>
+<section class="project-card"><h3><a href="/site/tools/word-counter.html">Word Counter →</a></h3><p>Count words, characters, and lines as you type.</p></section>
+<section class="project-card"><h3><a href="/site/tools/base64.html">Base64 →</a></h3><p>Encode and decode UTF-8 text locally.</p></section>
+<section class="project-card"><h3><a href="/site/tools/hash-generator.html">Hash Generator →</a></h3><p>Generate SHA-256 and SHA-512 text hashes locally.</p></section>
+<section class="project-card"><h3><a href="/site/tools/uuid-generator.html">UUID Generator →</a></h3><p>Generate UUID v4 values with browser cryptography.</p></section>
+<section class="project-card"><h3><a href="/site/tools/case-converter.html">Case Converter →</a></h3><p>Convert text to upper, lower, title, or sentence case.</p></section>
+</div>
+<p class="whisper">The utilities send no input anywhere.</p>
+"""))
     write(output, "projects/json-formatter.html", page("JSON Formatter", """
 <p class=\"eyebrow\">Project · shipped</p><h1>JSON Formatter</h1>
 <p>A no-dependency browser utility that validates, pretty-prints, and minifies JSON locally. It sends no input anywhere.</p>
