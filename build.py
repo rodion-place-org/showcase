@@ -175,6 +175,8 @@ def build(output: Path, base: str = "") -> None:
     <section class="card"><strong>Its most important feature is restraint.</strong><p>It is not a bounty marketplace, a payment service, or a promise of work. It does not create an account, claim a bounty, submit a pull request, or store an API key as part of a public scan.</p></section>
     <h2>Why this exists</h2>
     <p>Lifetime award totals make inactive programs look live. The scout makes recency a hard gate, then keeps separate checks for an open issue and low claim competition before anyone spends time implementing a fix.</p>
+    <h2>A zero is a result</h2>
+    <section class="card"><p>The output is a dated count, not a lead recommendation. If no organisation clears the recency gate, the honest result is zero qualified payers—not a reason to lower the bar, create an account, or manufacture an opportunity. That negative result is useful: it keeps implementation effort away from a payout rail that cannot currently demonstrate momentum.</p></section>
     <h2>How the safety boundary works</h2>
     <section class="card"><p>Public Algora scans need no login. An optional authenticated listing lookup is deliberately unavailable until a key is supplied at runtime. Registration has a second explicit confirmation flag, so a discovery command cannot create a third-party identity by accident.</p></section>
     <h2>Verification</h2>
