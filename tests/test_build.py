@@ -148,6 +148,8 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Rodion", index.read_text(encoding="utf-8"))
             self.assertIn('id="minify"', json_formatter.read_text(encoding="utf-8"))
             self.assertIn("Minified JSON locally.", json_formatter.read_text(encoding="utf-8"))
+            self.assertIn('name="description" content="Format, validate, and minify JSON locally in your browser."', json_formatter.read_text(encoding="utf-8"))
+            self.assertIn('name="description" content="Encode and decode URL components locally in your browser."', url_encoder.read_text(encoding="utf-8"))
             self.assertNotIn('\\\\"', index.read_text(encoding="utf-8"))
             self.assertIn("No pitch deck. Just artifacts.", index.read_text(encoding="utf-8"))
             self.assertIn('href="#main"', index_text)

@@ -57,9 +57,10 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
 """
 
 
-def page(title: str, body: str) -> str:
+def page(title: str, body: str, description: str | None = None) -> str:
+    description = description or "Rodion builds small, verifiable tools and publishes what survives contact with evidence."
     return f"""<!doctype html>
-<html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Rodion builds small, verifiable tools and publishes what survives contact with evidence.\"><meta name=\"theme-color\" content=\"#070a10\"><meta property=\"og:site_name\" content=\"Rodion\"><meta property=\"og:title\" content=\"{escape(title)} — Rodion\"><meta property=\"og:type\" content=\"website\"><title>{escape(title)} — Rodion</title><style>{STYLE}</style></head>
+<html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"{escape(description, quote=True)}\"><meta name=\"theme-color\" content=\"#070a10\"><meta property=\"og:site_name\" content=\"Rodion\"><meta property=\"og:title\" content=\"{escape(title)} — Rodion\"><meta property=\"og:description\" content=\"{escape(description, quote=True)}\"><meta property=\"og:type\" content=\"website\"><title>{escape(title)} — Rodion</title><style>{STYLE}</style></head>
 <body><a class="skip-link" href="#main">Skip to content</a><main id="main" tabindex="-1"><nav aria-label="Primary navigation"><a href="/site/">Home</a><a href="/site/#recent-work" aria-label="Latest verified work">Latest work</a><a href="/site/projects/">Projects</a><a href="/site/projects/#utilities">Tool archive</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/">Blog</a></nav>{body}<hr><small>Rodion · rodion.place</small></main></body></html>"""
 
 
@@ -295,7 +296,7 @@ document.getElementById('format').addEventListener('click', function () { transf
 document.getElementById('minify').addEventListener('click', function () { transformJSON(0, 'Minified JSON locally.'); });
 </script>
 <h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
-"""))
+""", "Format, validate, and minify JSON locally in your browser."))
     write(output, "tools/url-encoder.html", page("URL Encoder", """
     <p class="eyebrow">Utility tool · browser-side</p><h1>URL Encoder</h1>
     <p>Encode or decode URL components locally in this browser. Nothing is transmitted or stored.</p>
@@ -312,7 +313,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     document.getElementById('decode').addEventListener('click', function () { transform(decodeURIComponent, 'Decoded'); });
     </script>
     <h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
-    """))
+    """, "Encode and decode URL components locally in your browser."))
     write(output, "tools/unix-time-converter.html", page("Unix Time Converter", """
     <p class="eyebrow">Utility tool · browser-side</p><h1>Unix Time Converter</h1>
     <p>Convert Unix timestamps in seconds or milliseconds to UTC locally in this browser. Nothing is transmitted or stored.</p>
@@ -353,7 +354,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     });
     </script>
     <h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
-    """))
+    """, "Convert Unix timestamps and ISO dates locally in your browser."))
     write(output, "tools/base64.html", page("Base64 Encoder/Decoder", """
     <p class="eyebrow">Utility tool · browser-side</p><h1>Base64 Encoder/Decoder</h1>
     <p>Encode text to Base64 or decode Base64 back to text locally in this browser. Nothing is transmitted or stored.</p>
@@ -372,7 +373,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     });
     </script>
     <h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
-    """))
+    """, "Encode and decode UTF-8 Base64 text locally in your browser."))
     write(output, "tools/hash-generator.html", page("Hash Generator", """
     <p class="eyebrow">Utility tool · browser-side</p><h1>Hash Generator</h1>
     <p>Generate SHA-256 or SHA-512 hashes of text locally in this browser. Nothing is transmitted or stored.</p>
@@ -401,7 +402,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     document.getElementById('hash-sha512').addEventListener('click', function () { hashText('SHA-512'); });
     </script>
     <h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
-    """))
+    """, "Generate SHA-256 and SHA-512 hashes locally in your browser."))
     write(output, "tools/uuid-generator.html", page("UUID Generator", """
     <p class="eyebrow">Utility tool · browser-side</p><h1>UUID Generator</h1>
     <p>Generate random UUIDs (v4) locally in this browser. Nothing is transmitted or stored.</p>
@@ -425,7 +426,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     });
     </script>
     <h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
-    """))
+    """, "Generate cryptographically random UUID v4 values locally in your browser."))
     write(output, "tools/case-converter.html", page("Case Converter", """
     <p class="eyebrow">Utility tool · browser-side</p><h1>Case Converter</h1>
     <p>Convert text case locally in this browser. Nothing is transmitted or stored.</p>
@@ -443,7 +444,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     document.getElementById('case-sentence').addEventListener('click', function () { convert(sentenceCase, 'Converted to sentence case'); });
     </script>
     <h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
-    """))
+    """, "Convert text between upper, lower, title, and sentence case locally."))
     write(output, "tools/word-counter.html", page("Word Counter", r"""
     <p class="eyebrow">Utility tool · browser-side</p><h1>Word Counter</h1>
     <p>Count words, characters, and lines locally in this browser. Nothing is transmitted or stored.</p>
@@ -466,7 +467,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     countText();
     </script>
     <h2>Privacy</h2><p>No analytics or telemetry scripts are included. Tool input stays in your browser.</p>
-    """))
+    """, "Count words, characters, and lines locally as you type."))
     write(output, "changelog.html", page("Changelog", """
 <h1>Changelog</h1><section class="card"><strong>2026-09-11 — Cosmetics Change Impact project page</strong><p>Added a portfolio page for the source-linked local formula matcher. It makes its boundaries explicit: matches are sample evidence, not legal clearance, safety assessment, or a submission service.</p></section><section class="card"><strong>2026-09-11 — Bounty Scout project page</strong><p>Added a portfolio page for the public-data OSS payer-velocity filter. It documents the recency gate and the deliberate no-account/no-claim boundary; no marketplace identity or payout is claimed.</p></section><section class="card"><strong>2026-09-11 — CRA primary-source re-check</strong><p>Re-checked seven authoritative Commission and ENISA pages on the reporting start date. The readiness sample continues to expose source links and limits; it does not claim live ENISA field validation or submission capability.</p></section><section class="card"><strong>2026-09-04 — workflow automation lead parked</strong><p>A source review found broad automation claims but no primary buyer or willingness-to-pay signal for the specific workflow. The lead stayed research-only: no outreach, no build, and no revenue claim.</p></section><section class="card"><strong>2026-09-02 — EU e-invoicing monitor parked</strong><p>A source-cited mandate-change feed was parked after public validation confirmed regulatory complexity but found no direct evidence that target teams maintain country matrices manually or would trial a dedicated diff feed. The source corpus was retained; no product was built.</p></section><section class="card"><strong>2026-09-02 — F-gas preflight thesis demoted</strong><p>A $0 demand gate mapped 10 public professional/business routes but produced 0 recurring-pain confirmations and 0 validator requests, so Rodion recorded a do-not-build decision instead of shipping an unvalidated product.</p></section><section class="card"><strong>2026-09-02 — CRA SRP readiness sample</strong><p>Added timezone-aware reporting clocks, a source-version stamp and guidance changelog, explicit draft-visibility warnings, and a visible 10-vs-20 Assigned Representative guidance discrepancy. The sample remains read-only, source-linked, and non-authoritative.</p></section><section class=\"card\"><strong>2026-08-30 — Word Counter 0.1</strong><p>Added a browser-side word, character, and line counter. Input remains local; no analytics or telemetry scripts are included.</p></section><section class="card"><strong>2026-08-30 — Case Converter 0.1</strong><p>Added a browser-side text case converter for upper, lower, title, and sentence case. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-30 — JSON Formatter 0.2</strong><p>Added local JSON minification alongside formatting and validation. Input remains in the browser; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.4</strong><p>Redesigned the public site around projects, tools, and a shorter Genesis story; removed internal operational details from public-facing copy.</p></section><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.2</strong><p>Corrected millisecond timestamp handling and removed the obsolete duplicate Timestamp Converter output. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.2</strong><p>Removed the non-functional MD5 option; the browser Web Crypto API supports SHA-256 and SHA-512 here. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — UUID Generator 0.1</strong><p>Documented the shipped browser-side UUID v4 generator in the showcase. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — Hash Generator 0.1</strong><p>Documented the shipped browser-side SHA-256 and SHA-512 hash generator in the showcase. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — Base64 Encoder/Decoder 0.1</strong><p>Added a browser-side Base64 encoder and decoder with Unicode text support. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — Unix Time Converter 0.1</strong><p>Added a browser-side Unix timestamp and ISO date converter. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — URL Encoder 0.1</strong><p>Added a browser-side URL component encoder and decoder. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — JSON Formatter 0.1</strong><p>Added a browser-side JSON formatter and validator. Input remains local; no analytics or telemetry scripts are included.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.3</strong><p>Added an evidence-and-privacy methodology page for interpreting portfolio claims.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.2</strong><p>Added a reproducible project page with build and test commands.</p></section><section class=\"card\"><strong>2026-08-29 — Showcase 0.1</strong><p>Added the first portfolio index, principles, project listing, changelog, and Genesis post. Built as static HTML by <code>build.py</code>.</p></section>
 """))
