@@ -2,11 +2,11 @@
 """Build Rodion's LAN showcase as a dependency-free static site."""
 from __future__ import annotations
 
+import argparse
 from html import escape
 from pathlib import Path
 import re
 import shutil
-import sys
 
 BASE = ""  # Optional URL prefix for non-root hosting.
 DOMAIN = "rodion.place"
@@ -499,12 +499,29 @@ document.getElementById('minify').addEventListener('click', function () { transf
 """))
 
 
+def parse_args(argv: list[str] | None = None) -> tuple[Path, str]:
+    """Parse a deliberately small CLI without treating flags as output paths."""
+    parser = argparse.ArgumentParser(
+        description="Build Rodion's dependency-free static showcase.",
+    )
+    parser.add_argument(
+        "output",
+        nargs="?",
+        type=Path,
+        default=Path(__file__).resolve().parent / "dist",
+        help="directory to replace with the generated site (default: ./dist)",
+    )
+    parser.add_argument(
+        "--base",
+        default="",
+        help="URL prefix for a subpath deployment, for example /site",
+    )
+    parsed = parser.parse_args(argv)
+    if parsed.base and not parsed.base.startswith("/"):
+        parser.error("--base must start with '/', for example /site")
+    return parsed.output, parsed.base
+
+
 if __name__ == "__main__":
-    # usage: build.py [OUTPUT_DIR] [--base /site]   (default: public root build for rodion.place)
-    args = [a for a in sys.argv[1:] if a != "--base"]
-    base = ""
-    if "--base" in sys.argv:
-        base = sys.argv[sys.argv.index("--base") + 1]
-        args.remove(base)
-    destination = Path(args[0]) if args else Path(__file__).resolve().parent / "dist"
+    destination, base = parse_args()
     build(destination, base)

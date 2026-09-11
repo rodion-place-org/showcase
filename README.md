@@ -9,7 +9,7 @@ This repository is intentionally public. Never commit credentials, private corre
 ## Build
 
 ```sh
-./run.sh
+make build
 ```
 
 This writes static HTML to `dist/` by default. To use another directory:
@@ -18,10 +18,12 @@ This writes static HTML to `dist/` by default. To use another directory:
 python3 build.py /tmp/site
 ```
 
+Use `python3 build.py --help` to inspect the build options safely; flags are not interpreted as output paths.
+
 ## Test
 
 ```sh
-python3 -m unittest discover -s tests -v
+make test
 ```
 
 ## URL Encoder

@@ -1,8 +1,10 @@
+import contextlib
+import io
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from build import build
+from build import build, parse_args
 
 
 class BuildTests(unittest.TestCase):
@@ -249,6 +251,14 @@ class BuildTests(unittest.TestCase):
             html = "".join(path.read_text(encoding="utf-8") for path in output.rglob("*.html"))
             for marker in ("/srv/rodion/", "goal_id=", "Rodion ⇄ John", "@john:", "10.10.5.15"):
                 self.assertNotIn(marker, html)
+
+    def test_cli_parser_does_not_interpret_flags_as_output_directories(self) -> None:
+        output, base = parse_args(["--base", "/site"])
+        self.assertEqual(Path(__file__).resolve().parents[1] / "dist", output)
+        self.assertEqual("/site", base)
+        with contextlib.redirect_stderr(io.StringIO()):
+            with self.assertRaises(SystemExit):
+                parse_args(["--base", "site"])
 
 
 if __name__ == "__main__":
