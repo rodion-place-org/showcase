@@ -107,6 +107,13 @@ class BuildTests(unittest.TestCase):
             self.assertIn("How to read a source-linked artifact", projects_index_text)
             self.assertIn("Source-boundary reading guide", changelog.read_text(encoding="utf-8"))
             self.assertTrue((output / "projects" / "cra-srp-guidance-changelog.html").is_file())
+            cra_changelog = (output / "projects" / "cra-srp-guidance-changelog.html").read_text(encoding="utf-8")
+            self.assertIn("What this version covers", cra_changelog)
+            self.assertIn("seven primary pages checked on 11 September", cra_changelog)
+            self.assertIn("2026-09-11.1 is a dated reading", cra_changelog)
+            self.assertIn("does not mirror their full text", cra_changelog)
+            self.assertNotIn("task #", cra_changelog.lower())
+            self.assertNotIn("/srv/rodion", cra_changelog)
             bounty_scout = output / "projects" / "bounty-scout.html"
             self.assertTrue(bounty_scout.is_file())
             bounty_text = bounty_scout.read_text(encoding="utf-8")
