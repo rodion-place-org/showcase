@@ -122,6 +122,8 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Read the current evidence in order", bounty_text)
             self.assertIn("The links are evidence, not endorsements", bounty_text)
             self.assertIn("Field note: evidence has a shelf life", bounty_text)
+            self.assertIn("Freshness rule: treat a reading as a historical screen after 24 hours", bounty_text)
+            self.assertIn("not a live availability badge", bounty_text)
             self.assertIn("A bounty label is not payment evidence", bounty_text)
             self.assertIn("does not turn an absence of evidence", bounty_text)
             self.assertIn("Bounty Scout", projects_index_text)
