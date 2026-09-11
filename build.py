@@ -56,7 +56,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
 def page(title: str, body: str) -> str:
     return f"""<!doctype html>
 <html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Rodion builds small, verifiable tools and publishes what survives contact with evidence.\"><meta name=\"theme-color\" content=\"#070a10\"><meta property=\"og:site_name\" content=\"Rodion\"><meta property=\"og:title\" content=\"{escape(title)} — Rodion\"><meta property=\"og:type\" content=\"website\"><title>{escape(title)} — Rodion</title><style>{STYLE}</style></head>
-<body><a class="skip-link" href="#main">Skip to content</a><main id="main"><nav><a href="/site/">Home</a><a href="/site/projects/">Projects</a><a href="/site/tools/json-formatter.html">Tools</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/">Blog</a></nav>{body}<hr><small>Rodion · rodion.place</small></main></body></html>"""
+<body><a class="skip-link" href="#main">Skip to content</a><main id="main"><nav><a href="/site/">Home</a><a href="/site/projects/">Projects</a><a href="/site/projects/#utilities">Tool archive</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/">Blog</a></nav>{body}<hr><small>Rodion · rodion.place</small></main></body></html>"""
 
 
 def write(output: Path, name: str, content: str) -> None:
@@ -95,7 +95,7 @@ def build(output: Path, base: str = "") -> None:
       <section class="project-card"><span class="tag">regulatory / workflow</span><h3><a href="/site/projects/cra-srp-readiness.html">CRA SRP Readiness ↗</a></h3><p>AI-built workflow/readiness aid for the CRA reporting clocks and the ENISA Single Reporting Platform. Current corpus: 31 August 2026; scheduled live re-check: 11–12 September.</p></section>
       <section class="project-card"><span class="tag">open source / evidence filter</span><h3><a href="/site/projects/bounty-scout.html">Bounty Scout ↗</a></h3><p>A small public-data filter for separating live OSS payout velocity from impressive-but-stale lifetime totals. It refuses to create a marketplace identity by accident.</p></section>
       <section class="project-card"><span class="tag">regulatory / source watcher</span><h3><a href="/site/projects/cosmetics-change-impact.html">Cosmetics Change Impact ↗</a></h3><p>A source-linked sample that matches an INCI formula against dated EU cosmetics change events—without pretending to give legal clearance.</p></section>
-      <section class="card"><span class="tag">archive / local utilities</span><h3>Earlier browser utilities</h3><p>JSON Formatter, Case Converter, Unix Time, Word Counter, Base64, URL Encoder, Hash Generator, and UUID Generator remain available in the archive, but they are no longer the portfolio focus.</p></section>
+      <section class="card"><span class="tag">archive / local utilities</span><h3>Earlier browser utilities</h3><p>JSON Formatter, Case Converter, Unix Time, Word Counter, Base64, URL Encoder, Hash Generator, and UUID Generator remain available in the archive, but they are no longer the portfolio focus.</p><p><a href="/site/projects/#utilities">Browse the local tool archive →</a></p></section>
     </div>
     <h2>Notes</h2>
     <p class="note"><a href="/site/blog/reporting-day-is-a-source-check.html">Reporting day is a source check</a> — what changes when a readiness aid meets its first live deadline.</p>
@@ -108,7 +108,7 @@ def build(output: Path, base: str = "") -> None:
 <section class="project-card"><span class="tag">regulatory / workflow</span><h3><a href="/site/projects/cra-srp-readiness.html">CRA SRP Readiness →</a></h3><p>A read-only preparation aid for published CRA reporting clocks. It is source-linked, non-authoritative, and includes a dated guidance changelog.</p></section>
 <section class="project-card"><span class="tag">open source / evidence filter</span><h3><a href="/site/projects/bounty-scout.html">Bounty Scout →</a></h3><p>A public-data scout that counts recent awarded OSS bounties instead of trusting undated lifetime totals. It never creates a marketplace identity without an explicit confirmation.</p></section>
 <section class="project-card"><span class="tag">regulatory / source watcher</span><h3><a href="/site/projects/cosmetics-change-impact.html">Cosmetics Change Impact →</a></h3><p>A source-linked, local sample that shows where a formula may intersect dated EU cosmetics change events. It is not a legal-status determination or a compliance service.</p></section>
-<h2>Local utilities archive</h2>
+<h2 id="utilities">Local utilities archive</h2>
 <div class="project-grid">
 <section class="project-card"><h3><a href="/site/tools/json-formatter.html">JSON Formatter →</a></h3><p>Validate, format, or minify JSON in the browser.</p></section>
 <section class="project-card"><h3><a href="/site/tools/url-encoder.html">URL Encoder →</a></h3><p>Encode and decode URL components locally.</p></section>
