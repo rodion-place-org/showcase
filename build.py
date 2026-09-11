@@ -43,12 +43,16 @@ h3 { margin:.2em 0 .6em; font-size:1.28rem; }
 .project-card p { color:var(--muted); margin-bottom:0; }
 .tag { display:inline-block; color:var(--warm); font:700 .69rem/1 ui-monospace,SFMono-Regular,monospace; letter-spacing:.12em; text-transform:uppercase; }
 .note { border-left:2px solid var(--violet); padding:4px 0 4px 18px; color:#c5ccda; }
+.boundary { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; overflow:hidden; border:1px solid var(--line); border-radius:18px; background:var(--line); margin:22px 0 34px; }
+.boundary section { padding:18px; background:#0d121b; }
+.boundary h3 { color:var(--accent); font-size:1rem; }
+.boundary p { margin:0; color:var(--muted); font-size:.94rem; }
 hr { border:0; border-top:1px solid var(--line); margin:70px 0 20px; }
 small { color:var(--muted); }
 textarea { width:100%; min-height:180px; margin:8px 0; background:#0d121b; color:var(--ink); border:1px solid var(--line); border-radius:12px; padding:13px; font:14px/1.5 ui-monospace,SFMono-Regular,monospace; }
 button { background:var(--accent); color:#071018; border:0; border-radius:10px; padding:10px 14px; font-weight:800; cursor:pointer; }
 #status { min-height:1.6em; }
-@media (max-width:700px) { main { padding:22px 18px 58px; } nav { margin-bottom:6vh; } .project-grid { grid-template-columns:1fr; } h1 { font-size:clamp(3.5rem,20vw,6rem); } }
+@media (max-width:700px) { main { padding:22px 18px 58px; } nav { margin-bottom:6vh; } .project-grid,.boundary { grid-template-columns:1fr; } h1 { font-size:clamp(3.5rem,20vw,6rem); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .project-card,nav a { transition:none; } }
 """
 
@@ -106,6 +110,11 @@ def build(output: Path, base: str = "") -> None:
     write(output, "projects/index.html", page("Projects", """
 <p class="eyebrow">artifact index</p><h1>Projects</h1>
 <p class="lede">Small software, documented limits, and a preference for checks that can be repeated.</p>
+<div class="boundary" aria-label="How Rodion labels public artifacts">
+  <section><span class="tag">read-only</span><h3>Preparation aids</h3><p>They organize public rules or source material. They do not make a filing, submit data, or replace the authority that owns the rule.</p></section>
+  <section><span class="tag">source-linked</span><h3>Checks you can repeat</h3><p>Claims point back to a dated source or snapshot. Re-check the primary source before relying on a clock, threshold, or status.</p></section>
+  <section><span class="tag">local-first</span><h3>Your input stays put</h3><p>The browser utilities run locally. Project samples state their boundaries rather than quietly turning a match into a decision.</p></section>
+</div>
 <section class="project-card"><span class="tag">regulatory / workflow</span><h3><a href="/site/projects/cra-srp-readiness.html">CRA SRP Readiness →</a></h3><p>A read-only preparation aid for published CRA reporting clocks. It is source-linked, non-authoritative, and includes a dated guidance changelog.</p></section>
 <section class="project-card"><span class="tag">open source / evidence filter</span><h3><a href="/site/projects/bounty-scout.html">Bounty Scout →</a></h3><p>A public-data scout that counts recent awarded OSS bounties instead of trusting undated lifetime totals. It never creates a marketplace identity without an explicit confirmation.</p></section>
 <section class="project-card"><span class="tag">regulatory / source watcher</span><h3><a href="/site/projects/cosmetics-change-impact.html">Cosmetics Change Impact →</a></h3><p>A source-linked, local sample that shows where a formula may intersect dated EU cosmetics change events. It is not a legal-status determination or a compliance service.</p></section>
