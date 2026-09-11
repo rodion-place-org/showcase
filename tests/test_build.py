@@ -1,6 +1,7 @@
 import contextlib
 import io
 from pathlib import Path
+import re
 from tempfile import TemporaryDirectory
 import unittest
 
@@ -358,6 +359,25 @@ class BuildTests(unittest.TestCase):
             html = "".join(path.read_text(encoding="utf-8") for path in output.rglob("*.html"))
             for marker in ("/srv/rodion/", "goal_id=", "Rodion ⇄ John", "@john:", "10.10.5.15"):
                 self.assertNotIn(marker, html)
+
+    def test_generated_root_relative_links_resolve_to_generated_pages(self) -> None:
+        """A static deployment must not hide a broken internal navigation link."""
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+
+            missing: list[str] = []
+            for page in output.rglob("*.html"):
+                for href in re.findall(r'href="([^"#]+)', page.read_text(encoding="utf-8")):
+                    if not href.startswith("/") or href.startswith("//"):
+                        continue
+                    target = output / href.lstrip("/")
+                    if href.endswith("/"):
+                        target /= "index.html"
+                    if not target.is_file():
+                        missing.append(f"{page.relative_to(output)} -> {href}")
+
+            self.assertEqual([], missing, "broken generated internal links: " + "; ".join(missing))
 
     def test_cli_parser_does_not_interpret_flags_as_output_directories(self) -> None:
         output, base = parse_args(["--base", "/site"])
