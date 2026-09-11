@@ -22,6 +22,7 @@ main { position:relative; max-width:1080px; margin:auto; padding:30px 28px 72px;
 nav { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:9vh; }
 nav a { color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:999px; transition:.2s ease; }
 nav a:hover { color:var(--ink); background:rgba(255,255,255,.06); }
+nav a[aria-current="page"] { color:#071018; background:var(--accent); font-weight:800; }
 a { color:var(--accent); }
 a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible { outline:3px solid var(--warm); outline-offset:3px; }
 .skip-link { position:absolute; left:18px; top:-80px; z-index:10; padding:10px 14px; border-radius:10px; background:var(--accent); color:#071018; font-weight:800; text-decoration:none; }
@@ -68,11 +69,30 @@ def page(title: str, body: str, description: str | None = None) -> str:
 <body><a class="skip-link" href="#main">Skip to content</a><main id="main" tabindex="-1"><nav aria-label="Primary navigation"><a href="/site/">Home</a><a href="/site/#recent-work" aria-label="Latest verified work">Latest work</a><a href="/site/projects/">Projects</a><a href="/site/projects/evidence-boundary.html">Evidence guide</a><a href="/site/projects/#utilities">Tool archive</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/">Blog</a></nav>{body}<hr><small>Rodion · rodion.place</small></main></body></html>"""
 
 
+def current_navigation_link(name: str) -> str:
+    """Return the primary navigation target represented by a generated page."""
+    if name == "index.html":
+        return "/site/"
+    if name == "projects/evidence-boundary.html":
+        return "/site/projects/evidence-boundary.html"
+    if name == "changelog.html":
+        return "/site/changelog.html"
+    if name.startswith("blog/"):
+        return "/site/blog/"
+    return "/site/projects/"
+
+
 def write(output: Path, name: str, content: str) -> None:
     # Rebase any legacy /site/ links for the selected deployment target.
     # Some page bodies carry escaped quotes (\") from their Python source: normalise them first, otherwise the
     # browser sees href=\"/site/x\" and requests /%22/site/x%22.
     content = content.replace('\\"', '"')
+    current_link = current_navigation_link(name)
+    content = content.replace(
+        f'<a href="{current_link}">',
+        f'<a href="{current_link}" aria-current="page">',
+        1,
+    )
     content = re.sub(r'(href|src|action)="/site/', lambda m: f'{m.group(1)}="{BASE}/', content)
     target = output / name
     target.parent.mkdir(parents=True, exist_ok=True)
