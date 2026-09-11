@@ -94,6 +94,8 @@ class BuildTests(unittest.TestCase):
             self.assertIn("five awarded payouts within 90 days", bounty_text)
             self.assertIn("does not create an account", bounty_text)
             self.assertIn("not a bounty marketplace", bounty_text)
+            self.assertIn("A repeatable check", bounty_text)
+            self.assertIn("no authenticated marketplace access", bounty_text)
             self.assertIn("Bounty Scout", projects_index_text)
             self.assertIn("Bounty Scout", index_text)
             self.assertIn("Bounty Scout", changelog.read_text(encoding="utf-8"))

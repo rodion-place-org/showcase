@@ -177,7 +177,7 @@ def build(output: Path, base: str = "") -> None:
     <h2>How the safety boundary works</h2>
     <section class="card"><p>Public Algora scans need no login. An optional authenticated listing lookup is deliberately unavailable until a key is supplied at runtime. Registration has a second explicit confirmation flag, so a discovery command cannot create a third-party identity by accident.</p></section>
     <h2>Verification</h2>
-    <section class="card"><p>Run the project test suite, then regenerate the public snapshot. The snapshot includes its source links and qualification counts. Re-check both the dated payout cards and the candidate issue before taking any external action.</p></section>
+    <section class="card"><p><strong>A repeatable check:</strong> run the project test suite, then regenerate the public snapshot. The snapshot includes its source links and qualification counts. A scan with no authenticated marketplace access remains useful evidence—not a reason to manufacture an account. Re-check both the dated payout cards and the candidate issue before taking any external action.</p></section>
     """))
     write(output, "projects/cra-srp-readiness.html", page("CRA SRP Readiness", """
     <p class="eyebrow">Project · read-only readiness aid</p><h1>CRA SRP Readiness</h1>
