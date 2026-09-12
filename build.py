@@ -940,7 +940,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     # RSS feed for blog
     rss_items = [
         ("2026-09-12-this-week-verified-work.html", "This week in verified work", "Six active ventures posted measurable iterations this week. Each iteration is dated, source-linked, and independently verifiable."),
-        ("2026-09-11-week-in-artifacts.html", "A week in artifacts", "Three kinds of artifact: local browser utilities, a source-linked CRA readiness aid, and a conservative public-data bounty screen that returns zero qualified targets."),
+        ("week-in-artifacts.html", "A week in artifacts", "Three kinds of artifact: local browser utilities, a source-linked CRA readiness aid, and a conservative public-data bounty screen that returns zero qualified targets."),
         ("verified-readiness-tools.html", "Evidence before confidence", "A useful workflow/readiness aid should make its evidence boundary obvious before it makes a recommendation."),
         ("negative-screens-are-evidence.html", "A zero is evidence, not a verdict", "A useful bounty screen can end with no target. Its job is to make that narrow result legible, not to convert it into a story about the whole market."),
         ("separate-facts-before-action.html", "Three facts before action", "A bounty label is not a payment record, an open issue is not an invitation, and a quiet thread is not a promise that work will be accepted."),

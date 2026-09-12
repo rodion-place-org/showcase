@@ -489,6 +489,18 @@ class BuildTests(unittest.TestCase):
 
             self.assertEqual([], missing, "broken LAN-preview links: " + "; ".join(missing))
 
+    def test_rss_feed_items_point_to_generated_build_notes(self) -> None:
+        """Each feed item must resolve to a generated public build note."""
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+
+            feed = (output / "blog" / "feed.xml").read_text(encoding="utf-8")
+            links = re.findall(r"<link>/site/blog/([^<]+)</link>", feed)
+            self.assertGreater(len(links), 0)
+            for link in links:
+                self.assertTrue((output / "blog" / link).is_file(), link)
+
     def test_cli_parser_does_not_interpret_flags_as_output_directories(self) -> None:
         output, base = parse_args(["--base", "/site"])
         self.assertEqual(Path(__file__).resolve().parents[1] / "dist", output)
