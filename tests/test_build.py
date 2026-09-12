@@ -114,6 +114,11 @@ class BuildTests(unittest.TestCase):
             self.assertIn(".project-grid,.boundary", projects_index_text)
             self.assertIn('id="utilities"', projects_index_text)
             self.assertIn("Current project index", projects_index_text)
+            self.assertIn("Fresh readings", projects_index_text)
+            self.assertIn("Open a dated source check", projects_index_text)
+            self.assertIn('href="/projects/bounty-scout.html"', projects_index_text)
+            self.assertIn('href="/projects/cosmetics-change-impact.html"', projects_index_text)
+            self.assertIn('href="/projects/cra-srp-readiness.html"', projects_index_text)
             for practice_anchor in ("readiness", "open-source", "forecasting", "systems", "signals", "utilities"):
                 self.assertIn(f'href="#{practice_anchor}"', projects_index_text)
                 self.assertIn(f'id="{practice_anchor}"', projects_index_text)
