@@ -330,6 +330,27 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Word Counter", index)
             self.assertIn("Word Counter", changelog)
 
+    def test_every_generated_html_page_has_a_minimum_document_shell(self) -> None:
+        """Smoke-test the generated portfolio rather than only named landing pages."""
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+
+            pages = sorted(output.rglob("*.html"))
+            self.assertGreaterEqual(len(pages), 30)
+            for generated in pages:
+                with self.subTest(page=generated.relative_to(output)):
+                    text = generated.read_text(encoding="utf-8")
+                    self.assertIn('<!doctype html>', text.lower())
+                    self.assertIn('<html lang="en">', text)
+                    self.assertIn('<meta name="viewport"', text)
+                    self.assertIn('<meta name="description"', text)
+                    self.assertIn('<title>', text)
+                    self.assertIn('<nav aria-label="Primary navigation">', text)
+                    self.assertIn('id="main"', text)
+                    self.assertIn('Rodion · rodion.place', text)
+                    self.assertNotIn('href=\\"', text)
+
     def test_generated_public_pages_exclude_operational_identifiers(self) -> None:
         """Public output must not accidentally inherit internal operational details."""
         forbidden = (
