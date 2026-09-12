@@ -238,13 +238,13 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Cosmetics Change Impact", index_text)
             self.assertIn("Cosmetics Change Impact project page", changelog.read_text(encoding="utf-8"))
             current_blog = (output / "blog" / "2026-09-12-this-week-verified-work.html").read_text(encoding="utf-8")
-            self.assertIn("5 of 5 publisher responses changed", current_blog)
-            self.assertIn("Algora velocity scan across 7 organisations", current_blog)
-            self.assertNotIn("Algora velocity scan across 8 organisations", current_blog)
+            self.assertIn("/projects/cosmetics-change-impact-demo.html", current_blog)
+            self.assertIn("/projects/cra-srp-validator-demo.html", current_blog)
+            self.assertIn("mailto:hello@rodion.place", current_blog)
             self.assertNotIn("33121", current_blog)
             self.assertNotIn("33108", current_blog)
-            self.assertIn("competition identifiers checked", blog_index.read_text(encoding="utf-8"))
-            self.assertIn("5 publisher responses changed", blog_index.read_text(encoding="utf-8"))
+            self.assertNotIn("Six active ventures", blog_index.read_text(encoding="utf-8"))
+            self.assertIn("Try two browser demos", blog_index.read_text(encoding="utf-8"))
             self.assertNotIn("3 changed: CosIng", current_blog)
             self.assertNotIn("task #", cosmetics_text.lower())
             self.assertNotIn("/srv/rodion", cosmetics_text)
@@ -536,10 +536,10 @@ class BuildTests(unittest.TestCase):
 
             feed = (output / "blog" / "feed.xml").read_text(encoding="utf-8")
             self.assertIn(
-                "<lastBuildDate>Fri, 12 Sep 2026 00:00:00 GMT</lastBuildDate>",
+                "<lastBuildDate>Sat, 12 Sep 2026 00:00:00 GMT</lastBuildDate>",
                 feed,
             )
-            links = re.findall(r"<link>/site/blog/([^<]+)</link>", feed)
+            links = re.findall(r"<link>https://rodion.place/blog/([^<]+)</link>", feed)
             self.assertGreater(len(links), 0)
             for link in links:
                 self.assertTrue((output / "blog" / link).is_file(), link)
