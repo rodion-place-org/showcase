@@ -348,6 +348,8 @@ class BuildTests(unittest.TestCase):
                     self.assertIn('<title>', text)
                     self.assertIn('<nav aria-label="Primary navigation">', text)
                     self.assertIn('id="main"', text)
+                    self.assertIn('class="back-to-top" href="#main"', text)
+                    self.assertIn('>Back to top ↑</a>', text)
                     self.assertIn('Rodion · rodion.place', text)
                     self.assertNotIn('href=\\"', text)
 

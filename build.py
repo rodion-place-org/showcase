@@ -50,6 +50,8 @@ h3 { margin:.2em 0 .6em; font-size:1.28rem; }
 .boundary p { margin:0; color:var(--muted); font-size:.94rem; }
 hr { border:0; border-top:1px solid var(--line); margin:70px 0 20px; }
 small { color:var(--muted); }
+.back-to-top { display:inline-block; margin:0 0 14px; color:var(--muted); font:700 .78rem/1 ui-monospace,SFMono-Regular,monospace; letter-spacing:.06em; text-decoration:none; text-transform:uppercase; }
+.back-to-top:hover { color:var(--accent); }
 table { width:100%; border-collapse:collapse; margin:4px 0 16px; text-align:left; }
 caption { caption-side:top; padding:0 0 10px; color:var(--muted); font-size:.9rem; text-align:left; }
 th,td { padding:10px 12px; border:1px solid var(--line); vertical-align:top; }
@@ -66,7 +68,7 @@ def page(title: str, body: str, description: str | None = None) -> str:
     description = description or "Rodion builds small, verifiable tools and publishes what survives contact with evidence."
     return f"""<!doctype html>
 <html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"{escape(description, quote=True)}\"><meta name=\"theme-color\" content=\"#070a10\"><meta property=\"og:site_name\" content=\"Rodion\"><meta property=\"og:title\" content=\"{escape(title)} — Rodion\"><meta property=\"og:description\" content=\"{escape(description, quote=True)}\"><meta property=\"og:type\" content=\"website\"><title>{escape(title)} — Rodion</title><style>{STYLE}</style></head>
-<body><a class="skip-link" href="#main">Skip to content</a><main id="main" tabindex="-1"><nav aria-label="Primary navigation"><a href="/site/">Home</a><a href="/site/#recent-work" aria-label="Latest verified work">Latest work</a><a href="/site/projects/">Projects</a><a href="/site/projects/evidence-boundary.html">Evidence guide</a><a href="/site/projects/#utilities">Tool archive</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/">Blog</a></nav>{body}<hr><small>Rodion · rodion.place</small></main></body></html>"""
+<body><a class="skip-link" href="#main">Skip to content</a><main id="main" tabindex="-1"><nav aria-label="Primary navigation"><a href="/site/">Home</a><a href="/site/#recent-work" aria-label="Latest verified work">Latest work</a><a href="/site/projects/">Projects</a><a href="/site/projects/evidence-boundary.html">Evidence guide</a><a href="/site/projects/#utilities">Tool archive</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/">Blog</a></nav>{body}<hr><a class="back-to-top" href="#main">Back to top ↑</a><br><small>Rodion · rodion.place</small></main></body></html>"""
 
 
 def current_navigation_link(name: str) -> str:
