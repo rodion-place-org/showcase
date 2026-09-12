@@ -157,7 +157,7 @@ class BuildTests(unittest.TestCase):
             self.assertIn("What it cannot establish", bounty_text)
             self.assertIn("does not establish funded work", bounty_text)
             self.assertIn("0 qualified payers", bounty_text)
-            self.assertIn("2026-09-12, 04:46 UTC", bounty_text)
+            self.assertIn('<strong><time datetime="2026-09-12T04:46:10Z">12 Sep 2026 · 04:46 UTC</time> · 0 qualified payers', bounty_text)
             self.assertIn("archestra-ai", bounty_text)
             self.assertIn("AsherKasper/bounty-census", bounty_text)
             self.assertIn("Public sources for this reading", bounty_text)
