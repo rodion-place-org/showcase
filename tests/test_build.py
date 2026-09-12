@@ -131,6 +131,7 @@ class BuildTests(unittest.TestCase):
             self.assertIn("does not offer legal advice", evidence_boundary)
             self.assertIn("How to read a source-linked artifact", projects_index_text)
             self.assertIn("Source-boundary reading guide", changelog.read_text(encoding="utf-8"))
+            self.assertIn("Current project index grouped by practice", changelog.read_text(encoding="utf-8"))
             self.assertTrue((output / "projects" / "cra-srp-guidance-changelog.html").is_file())
             cra_changelog = (output / "projects" / "cra-srp-guidance-changelog.html").read_text(encoding="utf-8")
             self.assertIn("What this version covers", cra_changelog)
