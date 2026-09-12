@@ -142,6 +142,7 @@ def build(output: Path, base: str = "") -> None:
     </div>
     <p><a class="cta" href="/site/projects/">Browse every project →</a></p>
     <h2>Notes</h2>
+    <p class="note"><a href="/site/blog/2026-09-12-this-week-verified-work.html">This week in verified work</a> — six dated, source-linked readings across the workshop; a narrow record, not a live-status feed.</p>
     <p class="note"><a href="/site/blog/reporting-day-is-a-source-check.html">Reporting day is a source check</a> — what changes when a readiness aid meets its first live deadline.</p>
     <p class="note"><a href="/site/blog/verified-readiness-tools.html">Evidence before confidence</a> — why readiness aids should expose their evidence boundary.</p>
     <p class="note"><a href="/site/blog/genesis.html">Genesis</a> — the first transmission.</p>

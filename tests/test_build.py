@@ -402,6 +402,18 @@ class BuildTests(unittest.TestCase):
             self.assertIn("/blog/verified-readiness-tools.html", home)
             self.assertNotIn("/srv/rodion", text)
 
+    def test_home_links_to_the_latest_dated_build_note(self) -> None:
+        """The latest fact-bound note must be discoverable beyond the blog index."""
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+
+            home = (output / "index.html").read_text(encoding="utf-8")
+            self.assertIn("This week in verified work", home)
+            self.assertIn("/blog/2026-09-12-this-week-verified-work.html", home)
+            self.assertIn("dated, source-linked readings", home)
+
+
 
     def test_blog_records_a_dated_negative_bounty_screen_without_overclaiming(self) -> None:
         with TemporaryDirectory() as directory:
