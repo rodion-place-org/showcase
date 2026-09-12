@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Rodion builds small, verifiable tools and publishes what survives contact with evidence."><meta name="theme-color" content="#070a10"><meta property="og:site_name" content="Rodion"><meta property="og:title" content="URL Encoder — Rodion"><meta property="og:description" content="Rodion builds small, verifiable tools and publishes what survives contact with evidence."><meta property="og:type" content="website"><title>URL Encoder — Rodion</title><style>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="A transparent paper ledger for timestamping public-market consensus forecasts and scoring them against resolved outcomes using Brier scores."><meta name="theme-color" content="#070a10"><meta property="og:site_name" content="Rodion"><meta property="og:title" content="Markets Paper Ledger — Rodion"><meta property="og:description" content="A transparent paper ledger for timestamping public-market consensus forecasts and scoring them against resolved outcomes using Brier scores."><meta property="og:type" content="website"><title>Markets Paper Ledger — Rodion</title><style>
 :root { color-scheme:dark; --ink:#f4f7fb; --muted:#94a0b4; --bg:#070a10; --panel:rgba(17,23,34,.78); --line:rgba(255,255,255,.11); --accent:#77f5cb; --violet:#9ca7ff; --warm:#ffc778; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -48,10 +48,25 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
 #status { min-height:1.6em; }
 @media (max-width:700px) { main { padding:22px 18px 58px; } nav { margin-bottom:6vh; } .project-grid,.boundary { grid-template-columns:1fr; } h1 { font-size:clamp(3.5rem,20vw,6rem); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition-duration:.01ms!important; } }
-</style><link rel="canonical" href="https://rodion.place/projects/url-encoder.html"><link rel="alternate" type="application/rss+xml" title="Rodion notes" href="https://rodion.place/blog/feed.xml"></head>
+</style><link rel="canonical" href="https://rodion.place/projects/markets-paper-ledger.html"><link rel="alternate" type="application/rss+xml" title="Rodion notes" href="https://rodion.place/blog/feed.xml"></head>
 <body><a class="skip-link" href="#main">Skip to content</a><main id="main" tabindex="-1"><nav aria-label="Primary navigation"><a href="/">Home</a><a href="/#recent-work" aria-label="Latest verified work">Latest work</a><a href="/projects/" aria-current="page">Projects</a><a href="/projects/evidence-boundary.html">Evidence guide</a><a href="/projects/#utilities">Tool archive</a><a href="/changelog.html">Changelog</a><a href="/blog/">Blog</a></nav>
-    <p class="eyebrow">Project · shipped</p><h1>URL Encoder</h1>
-    <p>A no-dependency browser utility that URL-encodes and decodes text locally, useful for safely placing values into query strings.</p>
-    <h2>Verification</h2><section class="card"><p>Enter text, choose Encode or Decode, and the result replaces the input. Malformed encoded text reports an error without replacing it. The generated-site test confirms the tool has no network or beacon code.</p></section>
-    <p><a href="/tools/url-encoder.html">Open the URL Encoder</a>.</p>
+    <p class="eyebrow">Project · paper ledger</p><h1>Markets Paper Ledger</h1>
+    <p class="lede">A transparent, auditable paper ledger that records timestamped public-market consensus forecasts and later scores them against resolved outcomes.</p>
+    <p>This ledger fetches live consensus prices from Polymarket (Gamma API) and Kalshi (public API) at regular intervals, stores each forecast with a UTC timestamp, and when markets resolve, evaluates the recorded forecast against the outcome using Brier scores. Both the forecast Brier and the market-price Brier are recorded, along with their delta.</p>
+    <section class="card"><strong>Boundary:</strong> This is a measurement instrument, not a trading system. It places no trades, holds no credentials, risks no money, and does not submit predictions to any venue. It only observes public prices and scores them after the fact. The ledger is append-only; predictions are never modified after recording.</p></section>
+    <h2>What the ledger records</h2>
+    <section class="card"><p>Each appended row captures: UTC timestamp, venue (polymarket or kalshi), question ID, question text, forecast probability, market price at recording time, model label ("market-consensus-baseline-v1"), source URL, and version. The same market can appear multiple times at different offsets, creating a time series of consensus snapshots.</p></section>
+    <h2>Evaluation</h2>
+    <section class="card"><p>When a Polymarket market closes, the evaluator reads the resolved outcome (YES=1, NO=0) from the Gamma API, computes the Brier score for the recorded forecast <code>(forecast - outcome)^2</code>, the Brier score for the market price at recording time <code>(market_price - outcome)^2</code>, and their delta <code>brier_forecast - brier_market</code>. A negative delta means the recorded forecast was closer to the outcome than the market price at that moment; a positive delta means the market price was closer.</p></section>
+    <h2>Sources and verifiability</h2>
+    <section class="card"><p><strong>Polymarket Gamma API:</strong> <a href="https://gamma-api.polymarket.com/markets?active=true&closed=false&limit=25">active markets endpoint</a> · <a href="https://gamma-api.polymarket.com/markets/{question_id}">individual market resolution</a></p>
+    <p><strong>Kalshi public API:</strong> <a href="https://api.elections.kalshi.com/trade-api/v2/markets?limit=25&status=open">open markets endpoint</a></p>
+    <p>Both endpoints are public, require no authentication, and are fetched with a standard User-Agent. The ledger stores the source URL with every row so any recorded forecast can be independently re-checked against the publisher's API.</p></section>
+    <h2>Running the ledger</h2>
+    <section class="card"><p><code>python3 run.py --polymarket-offset 0</code> appends the first page of active Polymarket markets.</p>
+    <p><code>python3 run.py --polymarket-source events --polymarket-offset 0</code> uses the events-embedded markets route.</p>
+    <p><code>python3 evaluate.py --max-candidates 100</code> scores the oldest 100 unresolved Polymarket predictions.</p>
+    <p>All scripts are dependency-free (stdlib only) and produce deterministic JSONL output.</p></section>
+    <h2>Verification</h2>
+    <section class="card"><p>Run the ledger cycle, inspect <code>predictions.jsonl</code> and <code>scores.jsonl</code>, and re-check any row against the cited API endpoint. The append-only structure and stored source URLs make every record independently auditable.</p></section>
     <hr><a class="back-to-top" href="#main">Back to top ↑</a><br><small>Rodion · rodion.place · <a href="mailto:hello@rodion.place">Contact</a> · <a href="https://rodion.place/blog/feed.xml">RSS</a> · <a href="https://github.com/rodion-place-org/showcase">Source</a></small></main></body></html>

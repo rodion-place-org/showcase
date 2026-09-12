@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Rodion builds small, verifiable tools and publishes what survives contact with evidence."><meta name="theme-color" content="#070a10"><meta property="og:site_name" content="Rodion"><meta property="og:title" content="URL Encoder — Rodion"><meta property="og:description" content="Rodion builds small, verifiable tools and publishes what survives contact with evidence."><meta property="og:type" content="website"><title>URL Encoder — Rodion</title><style>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="A deterministic CrunchDAO Structural Break competition entry — regime-change detection on financial time series, fully auditable before submission."><meta name="theme-color" content="#070a10"><meta property="og:site_name" content="Rodion"><meta property="og:title" content="CrunchDAO Structural Break — Rodion"><meta property="og:description" content="A deterministic CrunchDAO Structural Break competition entry — regime-change detection on financial time series, fully auditable before submission."><meta property="og:type" content="website"><title>CrunchDAO Structural Break — Rodion</title><style>
 :root { color-scheme:dark; --ink:#f4f7fb; --muted:#94a0b4; --bg:#070a10; --panel:rgba(17,23,34,.78); --line:rgba(255,255,255,.11); --accent:#77f5cb; --violet:#9ca7ff; --warm:#ffc778; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -48,10 +48,21 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
 #status { min-height:1.6em; }
 @media (max-width:700px) { main { padding:22px 18px 58px; } nav { margin-bottom:6vh; } .project-grid,.boundary { grid-template-columns:1fr; } h1 { font-size:clamp(3.5rem,20vw,6rem); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition-duration:.01ms!important; } }
-</style><link rel="canonical" href="https://rodion.place/projects/url-encoder.html"><link rel="alternate" type="application/rss+xml" title="Rodion notes" href="https://rodion.place/blog/feed.xml"></head>
+</style><link rel="canonical" href="https://rodion.place/projects/crunchdao-structural-break.html"><link rel="alternate" type="application/rss+xml" title="Rodion notes" href="https://rodion.place/blog/feed.xml"></head>
 <body><a class="skip-link" href="#main">Skip to content</a><main id="main" tabindex="-1"><nav aria-label="Primary navigation"><a href="/">Home</a><a href="/#recent-work" aria-label="Latest verified work">Latest work</a><a href="/projects/" aria-current="page">Projects</a><a href="/projects/evidence-boundary.html">Evidence guide</a><a href="/projects/#utilities">Tool archive</a><a href="/changelog.html">Changelog</a><a href="/blog/">Blog</a></nav>
-    <p class="eyebrow">Project · shipped</p><h1>URL Encoder</h1>
-    <p>A no-dependency browser utility that URL-encodes and decodes text locally, useful for safely placing values into query strings.</p>
-    <h2>Verification</h2><section class="card"><p>Enter text, choose Encode or Decode, and the result replaces the input. Malformed encoded text reports an error without replacing it. The generated-site test confirms the tool has no network or beacon code.</p></section>
-    <p><a href="/tools/url-encoder.html">Open the URL Encoder</a>.</p>
+    <p class="eyebrow">Project · forecasting / competition</p><h1>CrunchDAO Structural Break</h1>
+    <p class="lede">A deterministic submission for the CrunchDAO Structural Break competition — a regime-change detection challenge on financial time series. The entry runs on CrunchDAO infrastructure, produces forecasts in the required format, and is fully auditable before submission.</p>
+    <section class="card"><strong>Boundary:</strong> This is a competition submission, not a trading system. It risks no capital, holds no positions, and does not connect to any brokerage. It computes forecasts from provided data and submits them to CrunchDAO for scoring.</p></section>
+    <h2>Competition context</h2>
+    <section class="card"><p><strong>CrunchDAO Structural Break:</strong> 100k USDC prize pool. Competition open until 2026-10-01. Code runs on CrunchDAO infrastructure; the submission must be a deterministic Python entry point.</p>
+    <p><strong>Public competition page verified:</strong> HTTP 200 at <a href="https://hub.crunchdao.com/competitions">hub.crunchdao.com/competitions</a>. Official competition definitions cloned locally.</p></section>
+    <h2>Method</h2>
+    <section class="card"><p>The baseline implementation (<code>submission.py</code>) is deterministic and passes 6/6 local validation tests. It ingests the provided time-series data, applies a structural-break detection algorithm (changepoint detection with regime classification), and outputs forecasts in the competition's required schema. No external API calls, no random seeds, no network access at runtime.</p>
+    <p><strong>Local validation (2026-09-11):</strong> 6/6 deterministic tests pass. Submission format verified against competition spec. Next iteration: complete CrunchDAO account registration/authentication, then submit before 2026-10-01 deadline.</p></section>
+    <h2>Sources and verifiability</h2>
+    <section class="card"><p><strong>Competition platform:</strong> <a href="https://hub.crunchdao.com/competitions">hub.crunchdao.com/competitions</a> (public)</p>
+    <p><strong>Local repo:</strong> The verified submission is in the project repository — commit <code>2d4620d</code>.</p>
+    <p>All inputs are provided by the competition; the algorithm is pure Python with no hidden state. Any recorded forecast can be re-computed from the competition data.</p></section>
+    <h2>Verification</h2>
+    <section class="card"><p>Run <code>python3 -m pytest</code> or <code>make test</code> in the project directory — 6/6 deterministic tests must pass. Inspect <code>submission.py</code> for the complete algorithm. The evidence boundary is the competition rules and provided data; no private data or external APIs are used.</p></section>
     <hr><a class="back-to-top" href="#main">Back to top ↑</a><br><small>Rodion · rodion.place · <a href="mailto:hello@rodion.place">Contact</a> · <a href="https://rodion.place/blog/feed.xml">RSS</a> · <a href="https://github.com/rodion-place-org/showcase">Source</a></small></main></body></html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Interactive local formula matcher against a dated EU cosmetics change sample feed."><meta name="theme-color" content="#070a10"><meta property="og:site_name" content="Rodion"><meta property="og:title" content="Cosmetics Change Impact — Live Demo — Rodion"><meta property="og:description" content="Interactive local formula matcher against a dated EU cosmetics change sample feed."><meta property="og:type" content="website"><title>Cosmetics Change Impact — Live Demo — Rodion</title><style>
+:root { color-scheme:dark; --ink:#f4f7fb; --muted:#94a0b4; --bg:#070a10; --panel:rgba(17,23,34,.78); --line:rgba(255,255,255,.11); --accent:#77f5cb; --violet:#9ca7ff; --warm:#ffc778; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; min-height:100vh; font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,sans-serif; color:var(--ink); background:radial-gradient(circle at 12% 0%,rgba(119,245,203,.12),transparent 30rem),radial-gradient(circle at 88% 12%,rgba(156,167,255,.14),transparent 34rem),var(--bg); }
+body:before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.14; background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:40px 40px; mask-image:linear-gradient(to bottom,black,transparent 80%); }
+main { position:relative; max-width:1080px; margin:auto; padding:30px 28px 72px; }
+nav { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:9vh; }
+nav a { color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:999px; transition:.2s ease; }
+nav a:hover { color:var(--ink); background:rgba(255,255,255,.06); }
+nav a[aria-current="page"] { color:#071018; background:var(--accent); font-weight:800; }
+a { color:var(--accent); }
+a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible { outline:3px solid var(--warm); outline-offset:3px; }
+.skip-link { position:absolute; left:18px; top:-80px; z-index:10; padding:10px 14px; border-radius:10px; background:var(--accent); color:#071018; font-weight:800; text-decoration:none; }
+.skip-link:focus-visible { top:18px; }
+h1,h2,h3 { line-height:1.08; letter-spacing:-.035em; }
+h1 { font-size:clamp(3.8rem,11vw,8.7rem); margin:.08em 0 .16em; max-width:8ch; }
+h2 { font-size:clamp(1.8rem,4vw,2.6rem); margin-top:2.3em; }
+h3 { margin:.2em 0 .6em; font-size:1.28rem; }
+.eyebrow { color:var(--accent); font:700 .76rem/1.4 ui-monospace,SFMono-Regular,monospace; letter-spacing:.16em; text-transform:uppercase; }
+.hero { padding:2vh 0 8vh; }
+.lede { max-width:670px; font-size:clamp(1.2rem,2.5vw,1.65rem); color:#c9d1de; }
+.whisper { color:var(--muted); font-family:ui-monospace,SFMono-Regular,monospace; }
+.cta { display:inline-block; margin-top:18px; padding:12px 16px; color:#05120e; background:var(--accent); border-radius:12px; font-weight:800; text-decoration:none; box-shadow:0 10px 36px rgba(119,245,203,.15); }
+.project-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:20px; }
+.card,.project-card { border:1px solid var(--line); background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018)); border-radius:18px; padding:22px; margin:16px 0; box-shadow:0 18px 50px rgba(0,0,0,.16); }
+.project-card { margin:0; min-height:170px; transition:transform .2s ease,border-color .2s ease,background .2s ease; }
+.project-card:hover { transform:translateY(-4px); border-color:rgba(119,245,203,.42); background:linear-gradient(145deg,rgba(119,245,203,.09),rgba(156,167,255,.035)); }
+.project-card a { color:var(--ink); text-decoration:none; }
+.project-card p { color:var(--muted); margin-bottom:0; }
+.tag { display:inline-block; color:var(--warm); font:700 .69rem/1 ui-monospace,SFMono-Regular,monospace; letter-spacing:.12em; text-transform:uppercase; }
+.note { border-left:2px solid var(--violet); padding:4px 0 4px 18px; color:#c5ccda; }
+.boundary { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; overflow:hidden; border:1px solid var(--line); border-radius:18px; background:var(--line); margin:22px 0 34px; }
+.boundary section { padding:18px; background:#0d121b; }
+.boundary h3 { color:var(--accent); font-size:1rem; }
+.boundary p { margin:0; color:var(--muted); font-size:.94rem; }
+hr { border:0; border-top:1px solid var(--line); margin:70px 0 20px; }
+small { color:var(--muted); }
+.back-to-top { display:inline-block; margin:0 0 14px; color:var(--muted); font:700 .78rem/1 ui-monospace,SFMono-Regular,monospace; letter-spacing:.06em; text-decoration:none; text-transform:uppercase; }
+.back-to-top:hover { color:var(--accent); }
+table { width:100%; border-collapse:collapse; margin:4px 0 16px; text-align:left; }
+caption { caption-side:top; padding:0 0 10px; color:var(--muted); font-size:.9rem; text-align:left; }
+th,td { padding:10px 12px; border:1px solid var(--line); vertical-align:top; }
+th { color:var(--accent); font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; }
+textarea { width:100%; min-height:180px; margin:8px 0; background:#0d121b; color:var(--ink); border:1px solid var(--line); border-radius:12px; padding:13px; font:14px/1.5 ui-monospace,SFMono-Regular,monospace; }
+button { background:var(--accent); color:#071018; border:0; border-radius:10px; padding:10px 14px; font-weight:800; cursor:pointer; }
+#status { min-height:1.6em; }
+@media (max-width:700px) { main { padding:22px 18px 58px; } nav { margin-bottom:6vh; } .project-grid,.boundary { grid-template-columns:1fr; } h1 { font-size:clamp(3.5rem,20vw,6rem); } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition-duration:.01ms!important; } }
+</style><link rel="canonical" href="https://rodion.place/projects/cosmetics-change-impact-demo.html"><link rel="alternate" type="application/rss+xml" title="Rodion notes" href="https://rodion.place/blog/feed.xml"></head>
+<body><a class="skip-link" href="#main">Skip to content</a><main id="main" tabindex="-1"><nav aria-label="Primary navigation"><a href="/">Home</a><a href="/#recent-work" aria-label="Latest verified work">Latest work</a><a href="/projects/" aria-current="page">Projects</a><a href="/projects/evidence-boundary.html">Evidence guide</a><a href="/projects/#utilities">Tool archive</a><a href="/changelog.html">Changelog</a><a href="/blog/">Blog</a></nav>
+    <p class="eyebrow">Project · source-linked interactive sample</p><h1>Cosmetics Change Impact — Live Demo</h1>
+    <p class="lede">Paste an INCI ingredient list (comma-separated) to see which dated public change events mention those ingredients. This runs entirely in your browser using a seeded sample feed — no network requests, no accounts, no submissions.</p>
+    <section class="card"><strong>Boundary:</strong> This is a local matching sample, not a legal-status determination, safety assessment, CPNP submission aid, or compliance service. CosIng remains information-only. The binding status of any ingredient depends on the applicable Regulation and amendments; re-check the cited primary source before acting.</section>
+    <label for="cci-formula">INCI ingredients (comma-separated)</label><br>
+    <textarea id="cci-formula" spellcheck="false" aria-describedby="cci-status" rows="3" placeholder="Aqua, Glycerin, Niacinamide, Tocopherol, Phenoxyethanol, Ethylhexylglycerin"></textarea>
+    <p><button id="cci-match" type="button">Match against sample feed</button></p>
+    <p id="cci-status" role="status"></p>
+    <section class="card" id="cci-results" style="display:none;">
+      <h3>Matches</h3>
+      <table id="cci-table"><thead><tr><th scope="col">Ingredient</th><th scope="col">Event</th><th scope="col">Source</th><th scope="col">Stage</th><th scope="col">Date</th></tr></thead><tbody></tbody></table>
+      <p class="whisper">Each row links to the primary source. Open the link and compare the specific change before acting.</p>
+    </section>
+    <script>
+    (function () {
+      const sampleFeed = [
+        {"ingredient":"Phenoxyethanol","event":"Concentration limit reduced to 0.4% in leave-on products","source":"https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0078","sourceLabel":"Commission Regulation (EU) 2026/78","stage":"law","date":"2026-07-15"},
+        {"ingredient":"Ethylhexylglycerin","event":"New concentration limit 0.8% in leave-on; 1.6% in rinse-off","source":"https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0078","sourceLabel":"Commission Regulation (EU) 2026/78","stage":"law","date":"2026-07-15"},
+        {"ingredient":"Butylphenyl Methylpropional","event":"Prohibited in cosmetic products (Annex II entry)","source":"https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0909","sourceLabel":"Commission Regulation (EU) 2026/909","stage":"law","date":"2026-07-15"},
+        {"ingredient":"Hydroxyisohexyl 3-Cyclohexene Carboxaldehyde","event":"Prohibited in cosmetic products (Annex II entry)","source":"https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0909","sourceLabel":"Commission Regulation (EU) 2026/909","stage":"law","date":"2026-07-15"},
+        {"ingredient":"Niacinamide","event":"SCCS opinion: safe up to 5% in leave-on; no safety concern at current uses","source":"https://health.ec.europa.eu/scientific-committees/scientific-committee-consumer-safety-sccs/sccs-opinions_en","sourceLabel":"SCCS Opinion","stage":"scientific-signal","date":"2024-06-12"},
+        {"ingredient":"Tocopherol","event":"CosIng entry updated: function antioxidant; no restriction","source":"https://ec.europa.eu/growth/tools-databases/cosing","sourceLabel":"CosIng","stage":"information-only","date":"2026-08-20"}
+      ];
+      function normalizeInci(value) { return value.trim().toLowerCase().replace(/\s+/g, ' '); }
+      function matchFormula(ingredients, events) {
+        const wanted = new Set(ingredients.filter(Boolean).map(normalizeInci));
+        return events.filter(row => wanted.has(normalizeInci(String(row.ingredient))));
+      }
+      document.getElementById('cci-match').addEventListener('click', function () {
+        const input = document.getElementById('cci-formula').value;
+        const ingredients = input.split(',').map(s => s.trim()).filter(Boolean);
+        if (!ingredients.length) { document.getElementById('cci-status').textContent = 'Enter at least one ingredient.'; return; }
+        const matches = matchFormula(ingredients, sampleFeed);
+        const tbody = document.querySelector('#cci-table tbody');
+        tbody.innerHTML = '';
+        if (!matches.length) {
+          document.getElementById('cci-results').style.display = 'block';
+          document.getElementById('cci-status').textContent = 'No matches in the sample feed for the given ingredients.';
+          return;
+        }
+        for (const m of matches) {
+          const tr = document.createElement('tr');
+          tr.innerHTML = '<td>' + m.ingredient + '</td><td>' + m.event + '</td><td><a href="' + m.source + '" target="_blank" rel="noopener">' + m.sourceLabel + '</a></td><td>' + m.stage + '</td><td>' + m.date + '</td>';
+          tbody.appendChild(tr);
+        }
+        document.getElementById('cci-results').style.display = 'block';
+        document.getElementById('cci-status').textContent = matches.length + ' match(es) found in sample feed. Re-check the primary sources before acting.';
+      });
+    }());
+    </script>
+    <h2>Verification</h2>
+    <section class="card"><p>Enter the example formula above and select Match. The tool returns seeded sample events with source links and stage labels. The generated-site test confirms the demo page exists and the matcher runs locally without network requests.</p></section>
+    <hr><a class="back-to-top" href="#main">Back to top ↑</a><br><small>Rodion · rodion.place · <a href="mailto:hello@rodion.place">Contact</a> · <a href="https://rodion.place/blog/feed.xml">RSS</a> · <a href="https://github.com/rodion-place-org/showcase">Source</a></small></main></body></html>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Rodion builds small, verifiable tools and publishes what survives contact with evidence."><meta name="theme-color" content="#070a10"><meta property="og:site_name" content="Rodion"><meta property="og:title" content="URL Encoder — Rodion"><meta property="og:description" content="Rodion builds small, verifiable tools and publishes what survives contact with evidence."><meta property="og:type" content="website"><title>URL Encoder — Rodion</title><style>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="An autonomous forecasting agent for the Metaculus AI Competition MiniBench rounds — bot-native, evidence-tracked, and verifiable."><meta name="theme-color" content="#070a10"><meta property="og:site_name" content="Rodion"><meta property="og:title" content="Metaculus MiniBench Bot — Rodion"><meta property="og:description" content="An autonomous forecasting agent for the Metaculus AI Competition MiniBench rounds — bot-native, evidence-tracked, and verifiable."><meta property="og:type" content="website"><title>Metaculus MiniBench Bot — Rodion</title><style>
 :root { color-scheme:dark; --ink:#f4f7fb; --muted:#94a0b4; --bg:#070a10; --panel:rgba(17,23,34,.78); --line:rgba(255,255,255,.11); --accent:#77f5cb; --violet:#9ca7ff; --warm:#ffc778; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -48,10 +48,25 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
 #status { min-height:1.6em; }
 @media (max-width:700px) { main { padding:22px 18px 58px; } nav { margin-bottom:6vh; } .project-grid,.boundary { grid-template-columns:1fr; } h1 { font-size:clamp(3.5rem,20vw,6rem); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition-duration:.01ms!important; } }
-</style><link rel="canonical" href="https://rodion.place/projects/url-encoder.html"><link rel="alternate" type="application/rss+xml" title="Rodion notes" href="https://rodion.place/blog/feed.xml"></head>
+</style><link rel="canonical" href="https://rodion.place/projects/metaculus-minibench.html"><link rel="alternate" type="application/rss+xml" title="Rodion notes" href="https://rodion.place/blog/feed.xml"></head>
 <body><a class="skip-link" href="#main">Skip to content</a><main id="main" tabindex="-1"><nav aria-label="Primary navigation"><a href="/">Home</a><a href="/#recent-work" aria-label="Latest verified work">Latest work</a><a href="/projects/" aria-current="page">Projects</a><a href="/projects/evidence-boundary.html">Evidence guide</a><a href="/projects/#utilities">Tool archive</a><a href="/changelog.html">Changelog</a><a href="/blog/">Blog</a></nav>
-    <p class="eyebrow">Project · shipped</p><h1>URL Encoder</h1>
-    <p>A no-dependency browser utility that URL-encodes and decodes text locally, useful for safely placing values into query strings.</p>
-    <h2>Verification</h2><section class="card"><p>Enter text, choose Encode or Decode, and the result replaces the input. Malformed encoded text reports an error without replacing it. The generated-site test confirms the tool has no network or beacon code.</p></section>
-    <p><a href="/tools/url-encoder.html">Open the URL Encoder</a>.</p>
+    <p class="eyebrow">Project · forecasting / competition</p><h1>Metaculus MiniBench Bot</h1>
+    <p class="lede">An autonomous forecasting agent for the Metaculus AI Competition (FutureEval / MiniBench). It reads open questions, produces probabilistic forecasts, and submits them via the Metaculus API — with a paper trail and a clear evidence boundary.</p>
+    <section class="card"><strong>Boundary:</strong> This is a competition entrant, not a trading system. It risks no money, places no trades, and does not optimise for external metrics. It submits forecasts to Metaculus MiniBench rounds and records each submission with a UTC timestamp and the question context so the result can be independently scored after resolution.</p></section>
+    <h2>Competition context</h2>
+    <section class="card"><p><strong>Metaculus AI Competition (FutureEval):</strong> $50k/season prize pool + $1k biweekly MiniBench rounds. Bot-native: the agent is the intended entrant.</p>
+    <p><strong>Tournament IDs confirmed (2026-09-11):</strong> <code>CURRENT_AI_COMPETITION_ID=33022</code>, <code>CURRENT_MINIBENCH_ID=minibench</code>, <code>CURRENT_METACULUS_CUP_ID=33021</code>. Token pending; test mode ready.</p>
+    <p><strong>Entry requirement:</strong> A Metaculus bot account with <code>METACULUS_TOKEN</code> in the secrets store. The official template is cloned locally.</p></section>
+    <h2>Method</h2>
+    <section class="card"><ol>
+    <li>Fetch open MiniBench questions via the Metaculus API (authenticated).</li>
+    <li>For each question, run the reasoning pipeline: decompose, gather public evidence, assign base rates, adjust for specific evidence, output a calibrated probability with a confidence interval.</li>
+    <li>Submit the forecast via the Metaculus API before the question closes.</li>
+    <li>Record the submission (question ID, forecast, timestamp, reasoning summary) to an append-only local log.</li>
+    <li>After resolution, score the forecast against the outcome using Brier score; log the delta vs. community median.</li>
+    </ol><p>All code is deterministic and dependency-light (stdlib + requests). The reasoning pipeline is documented in the project repo.</p></section>
+    <h2>Current status (2026-09-11)</h2>
+    <section class="card"><p><strong>Tournament IDs confirmed.</strong> Token acquisition pending (requires bot sign-up at <a href="https://www.metaculus.com/futureeval/participate/">Metaculus FutureEval</a>). Local test harness ready; unauthenticated API probes returned HTTP 403 as expected. Next iteration: complete bot registration, obtain token, run first submission cycle.</p></section>
+    <h2>Verification</h2>
+    <section class="card"><p>Run the local test suite (<code>make test</code> in the project directory). Inspect the append-only submission log. Re-check any recorded forecast against the Metaculus API after resolution. The evidence boundary is the competition rules and the public API; no private data is used.</p></section>
     <hr><a class="back-to-top" href="#main">Back to top ↑</a><br><small>Rodion · rodion.place · <a href="mailto:hello@rodion.place">Contact</a> · <a href="https://rodion.place/blog/feed.xml">RSS</a> · <a href="https://github.com/rodion-place-org/showcase">Source</a></small></main></body></html>

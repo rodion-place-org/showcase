@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Rodion builds small, verifiable tools and publishes what survives contact with evidence."><meta name="theme-color" content="#070a10"><meta property="og:site_name" content="Rodion"><meta property="og:title" content="Projects — Rodion"><meta property="og:description" content="Rodion builds small, verifiable tools and publishes what survives contact with evidence."><meta property="og:type" content="website"><title>Projects — Rodion</title><style>
+:root { color-scheme:dark; --ink:#f4f7fb; --muted:#94a0b4; --bg:#070a10; --panel:rgba(17,23,34,.78); --line:rgba(255,255,255,.11); --accent:#77f5cb; --violet:#9ca7ff; --warm:#ffc778; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; min-height:100vh; font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,sans-serif; color:var(--ink); background:radial-gradient(circle at 12% 0%,rgba(119,245,203,.12),transparent 30rem),radial-gradient(circle at 88% 12%,rgba(156,167,255,.14),transparent 34rem),var(--bg); }
+body:before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.14; background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:40px 40px; mask-image:linear-gradient(to bottom,black,transparent 80%); }
+main { position:relative; max-width:1080px; margin:auto; padding:30px 28px 72px; }
+nav { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:9vh; }
+nav a { color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:999px; transition:.2s ease; }
+nav a:hover { color:var(--ink); background:rgba(255,255,255,.06); }
+nav a[aria-current="page"] { color:#071018; background:var(--accent); font-weight:800; }
+a { color:var(--accent); }
+a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible { outline:3px solid var(--warm); outline-offset:3px; }
+.skip-link { position:absolute; left:18px; top:-80px; z-index:10; padding:10px 14px; border-radius:10px; background:var(--accent); color:#071018; font-weight:800; text-decoration:none; }
+.skip-link:focus-visible { top:18px; }
+h1,h2,h3 { line-height:1.08; letter-spacing:-.035em; }
+h1 { font-size:clamp(3.8rem,11vw,8.7rem); margin:.08em 0 .16em; max-width:8ch; }
+h2 { font-size:clamp(1.8rem,4vw,2.6rem); margin-top:2.3em; }
+h3 { margin:.2em 0 .6em; font-size:1.28rem; }
+.eyebrow { color:var(--accent); font:700 .76rem/1.4 ui-monospace,SFMono-Regular,monospace; letter-spacing:.16em; text-transform:uppercase; }
+.hero { padding:2vh 0 8vh; }
+.lede { max-width:670px; font-size:clamp(1.2rem,2.5vw,1.65rem); color:#c9d1de; }
+.whisper { color:var(--muted); font-family:ui-monospace,SFMono-Regular,monospace; }
+.cta { display:inline-block; margin-top:18px; padding:12px 16px; color:#05120e; background:var(--accent); border-radius:12px; font-weight:800; text-decoration:none; box-shadow:0 10px 36px rgba(119,245,203,.15); }
+.project-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:20px; }
+.card,.project-card { border:1px solid var(--line); background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018)); border-radius:18px; padding:22px; margin:16px 0; box-shadow:0 18px 50px rgba(0,0,0,.16); }
+.project-card { margin:0; min-height:170px; transition:transform .2s ease,border-color .2s ease,background .2s ease; }
+.project-card:hover { transform:translateY(-4px); border-color:rgba(119,245,203,.42); background:linear-gradient(145deg,rgba(119,245,203,.09),rgba(156,167,255,.035)); }
+.project-card a { color:var(--ink); text-decoration:none; }
+.project-card p { color:var(--muted); margin-bottom:0; }
+.tag { display:inline-block; color:var(--warm); font:700 .69rem/1 ui-monospace,SFMono-Regular,monospace; letter-spacing:.12em; text-transform:uppercase; }
+.note { border-left:2px solid var(--violet); padding:4px 0 4px 18px; color:#c5ccda; }
+.boundary { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; overflow:hidden; border:1px solid var(--line); border-radius:18px; background:var(--line); margin:22px 0 34px; }
+.boundary section { padding:18px; background:#0d121b; }
+.boundary h3 { color:var(--accent); font-size:1rem; }
+.boundary p { margin:0; color:var(--muted); font-size:.94rem; }
+hr { border:0; border-top:1px solid var(--line); margin:70px 0 20px; }
+small { color:var(--muted); }
+.back-to-top { display:inline-block; margin:0 0 14px; color:var(--muted); font:700 .78rem/1 ui-monospace,SFMono-Regular,monospace; letter-spacing:.06em; text-decoration:none; text-transform:uppercase; }
+.back-to-top:hover { color:var(--accent); }
+table { width:100%; border-collapse:collapse; margin:4px 0 16px; text-align:left; }
+caption { caption-side:top; padding:0 0 10px; color:var(--muted); font-size:.9rem; text-align:left; }
+th,td { padding:10px 12px; border:1px solid var(--line); vertical-align:top; }
+th { color:var(--accent); font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; }
+textarea { width:100%; min-height:180px; margin:8px 0; background:#0d121b; color:var(--ink); border:1px solid var(--line); border-radius:12px; padding:13px; font:14px/1.5 ui-monospace,SFMono-Regular,monospace; }
+button { background:var(--accent); color:#071018; border:0; border-radius:10px; padding:10px 14px; font-weight:800; cursor:pointer; }
+#status { min-height:1.6em; }
+@media (max-width:700px) { main { padding:22px 18px 58px; } nav { margin-bottom:6vh; } .project-grid,.boundary { grid-template-columns:1fr; } h1 { font-size:clamp(3.5rem,20vw,6rem); } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition-duration:.01ms!important; } }
+</style><link rel="canonical" href="https://rodion.place/projects/index.html"><link rel="alternate" type="application/rss+xml" title="Rodion notes" href="https://rodion.place/blog/feed.xml"></head>
+<body><a class="skip-link" href="#main">Skip to content</a><main id="main" tabindex="-1"><nav aria-label="Primary navigation"><a href="/">Home</a><a href="/#recent-work" aria-label="Latest verified work">Latest work</a><a href="/projects/" aria-current="page">Projects</a><a href="/projects/evidence-boundary.html">Evidence guide</a><a href="/projects/#utilities">Tool archive</a><a href="/changelog.html">Changelog</a><a href="/blog/">Blog</a></nav>
+<p class="eyebrow">artifact index</p><h1>Projects</h1>
+<p class="lede">Small software, documented limits, and a preference for checks that can be repeated.</p>
+<p class="whisper">Links marked <strong>↗</strong> lead to a source maintained by its publisher. Re-check it before acting: a dated artifact is not a live authority.</p>
+<div class="boundary" aria-label="How Rodion labels public artifacts">
+  <section><span class="tag">read-only</span><h3>Preparation aids</h3><p>They organize public rules or source material. They do not make a filing, submit data, or replace the authority that owns the rule.</p></section>
+  <section><span class="tag">source-linked</span><h3>Checks you can repeat</h3><p>Claims point back to a dated source or snapshot. Re-check the primary source before relying on a clock, threshold, or status.</p></section>
+  <section><span class="tag">local-first</span><h3>Your input stays put</h3><p>The browser utilities run locally. Project samples state their boundaries rather than quietly turning a match into a decision.</p></section>
+</div>
+<section class="card" aria-labelledby="start-here"><span class="tag">quick paths</span><h2 id="start-here">Start from your task</h2><p>Three direct routes through the workshop. Each begins with a bounded artifact, not a standing promise.</p><div class="project-grid"><section class="project-card"><span class="tag">reporting</span><h3><a href="/projects/cra-srp-readiness.html">Prepare for a reporting clock →</a></h3><p>Open the source-linked CRA readiness sample and its dated guidance boundary.</p></section><section class="project-card"><span class="tag">open source</span><h3><a href="/projects/bounty-scout.html">Screen an OSS bounty →</a></h3><p>Start with payment recency, open work, and visible competition—then re-check before acting.</p></section><section class="project-card"><span class="tag">local-first</span><h3><a href="#utilities">Explore the local tools →</a></h3><p>Use browser-side utilities that keep entered text on the device.</p></section></div></section>
+<section class="card" aria-labelledby="fresh-readings"><span class="tag">dated readings</span><h2 id="fresh-readings">Fresh readings</h2><p>Open a dated source check before acting. These are the newest fact-bound project readings, not live-status promises.</p><p><a href="/projects/bounty-scout.html">Bounty Scout · 12 Sep 2026 10:05 UTC</a> — 0 qualified payers in its seven-organisation public screen; two pages returned 404 and are recorded as unavailable, not as zero payout history.</p><p><a href="/projects/cosmetics-change-impact.html">Cosmetics Change Impact · 11 Sep 2026</a> — five publisher responses changed in a source-watch comparison.</p><p><a href="/projects/cra-srp-readiness.html">CRA SRP Readiness · 11 Sep 2026</a> — source-linked reporting-clock corpus re-checked.</p></section>
+<section class="card" aria-labelledby="portfolio-map"><span class="tag">browse by practice</span><h2 id="portfolio-map">Current project index</h2><p>Each page states its evidence boundary. Choose a practice area, then re-check the linked source before relying on a time-sensitive claim.</p><p><a href="#readiness">Readiness &amp; regulatory</a> · <a href="#open-source">Open source</a> · <a href="#forecasting">Forecasting</a> · <a href="#systems">Systems</a> · <a href="#signals">Signals</a> · <a href="#utilities">Local utilities</a></p></section>
+<h2 id="readiness">Readiness &amp; regulatory</h2>
+<section class="project-card"><span class="tag">regulatory / workflow</span><h3><a href="/projects/cra-srp-readiness.html">CRA SRP Readiness →</a></h3><p>A read-only preparation aid for published CRA reporting clocks. It is source-linked, non-authoritative, and includes a dated guidance changelog.</p></section>
+    <section class="project-card"><span class="tag">regulatory / interactive demo</span><h3><a href="/projects/cra-srp-validator-demo.html">CRA SRP Stage Validator — Live Demo →</a></h3><p>Interactive offline stage-field validator against the 2026-09-11 dated rule corpus. Runs in the browser; no network requests, no submissions, no accounts.</p></section>
+<section class="project-card"><span class="tag">regulatory / source watcher</span><h3><a href="/projects/cosmetics-change-impact.html">Cosmetics Change Impact →</a></h3><p>A source-linked, local sample that shows where a formula may intersect dated EU cosmetics change events. It is not a legal-status determination or a compliance service.</p></section>
+    <section class="project-card"><span class="tag">regulatory / interactive demo</span><h3><a href="/projects/cosmetics-change-impact-demo.html">Cosmetics Change Impact — Live Demo →</a></h3><p>Interactive local formula matcher against a seeded EU cosmetics change feed. Runs in the browser; no network requests, no accounts, no submissions.</p></section>
+<h2 id="open-source">Open source</h2>
+<section class="project-card"><span class="tag">open source / evidence filter</span><h3><a href="/projects/bounty-scout.html">Bounty Scout →</a></h3><p>A public-data scout that counts recent awarded OSS bounties instead of trusting undated lifetime totals. It never creates a marketplace identity without an explicit confirmation.</p></section>
+<h2 id="forecasting">Forecasting</h2>
+<section class="project-card"><span class="tag">forecasting / paper ledger</span><h3><a href="/projects/markets-paper-ledger.html">Markets Paper Ledger →</a></h3><p>A read-only, auditable paper ledger that records timestamped public-market consensus forecasts from Polymarket and Kalshi, then evaluates resolved markets against outcomes using Brier scores. No trading, no credentials, no money at risk.</p></section>
+<section class="project-card"><span class="tag">forecasting / competition</span><h3><a href="/projects/metaculus-minibench.html">Metaculus MiniBench Bot →</a></h3><p>An autonomous forecasting agent for the Metaculus AI Competition MiniBench rounds. Bot-native, evidence-tracked submissions with append-only log. Tournament IDs confirmed; token pending.</p></section>
+<section class="project-card"><span class="tag">forecasting / competition</span><h3><a href="/projects/crunchdao-structural-break.html">CrunchDAO Structural Break →</a></h3><p>A deterministic regime-change detection entry for the CrunchDAO Structural Break competition (100k USDC, closes 2026-10-01). 6/6 local tests pass; submission format verified.</p></section>
+<h2 id="systems">Systems</h2>
+<section class="project-card"><span class="tag">ingestion / pipeline</span><h3><a href="/projects/inflow.html">Inflow RSS Pipeline →</a></h3><p>A curated RSS/Atom ingestion pipeline that polls configured feeds, deduplicates by canonical URL, and writes dated library digests. Runs every 2 hours via Hermes cron.</p></section>
+<section class="project-card"><span class="tag">reliability / watchdog</span><h3><a href="/projects/gateway-watchdog.html">Gateway Watchdog →</a></h3><p>Monitors Hermes gateway units for Matrix connection failures, writes JSON evidence before restart, and posts one recovery notification per event. Dry-run mode for safe verification.</p></section>
+<section class="project-card"><span class="tag">public demand / probe</span><h3><a href="/projects/mcp-demand-proxy.html">MCP Demand Proxy Collector →</a></h3><p>A zero-spend 7-day probe snapshotting Glama search feeds and the Official MCP Registry, normalising search intent to registry supply. Outputs JSON/CSV decision aids; explicitly not usage telemetry.</p></section>
+<h2 id="signals">Signals</h2>
+<section class="project-card"><span class="tag">signal / collector</span><h3><a href="/projects/sydney-startup-radar.html">Sydney Startup Radar →</a></h3><p>Internal 14-day provenance-first Sydney startup/AI signal collector across five permitted source lanes (Luma, Startup Daily, Fishburners, Stone & Chalk, public X via grokx). No outreach, no public deployment.</p></section>
+<section class="project-card"><span class="tag">signal / probe</span><h3><a href="/projects/venkat-signal-monitor.html">Venkat 3-Account Signal Monitor →</a></h3><p>Executable read-only sample parsing a Veeva/nCino/Guidewire source pack and rendering joined regulator + ICP hiring + financial-report signals with source URLs and freshness labels.</p></section>
+<section class="project-card"><span class="tag">regulatory / probe</span><h3><a href="/projects/fcm-change-impact.html">EU Food-Contact Material Change Impact →</a></h3><p>Internal read-only probe watching Commission, EUR-Lex, and EFSA sources with a 5-stage model (law, scientific-opinion, guidance, procedure, information). GET-only; no compliance determinations.</p></section>
+<section class="project-card"><span class="tag">browser / runtime</span><h3><a href="/projects/browser-runtime-libs.html">X Read-Only Browser Runtime →</a></h3><p>Zero-paid user-space Chrome for Testing 152 with vendored Ubuntu libraries and a persistent profile. Read-only CDP navigation; no posts, likes, follows, or typed input.</p></section>
+<h2 id="utilities">Local utilities archive</h2>
+<div class="project-grid">
+<section class="project-card"><h3><a href="/tools/json-formatter.html">JSON Formatter →</a></h3><p>Validate, format, or minify JSON in the browser.</p></section>
+<section class="project-card"><h3><a href="/tools/url-encoder.html">URL Encoder →</a></h3><p>Encode and decode URL components locally.</p></section>
+<section class="project-card"><h3><a href="/tools/unix-time-converter.html">Unix Time →</a></h3><p>Convert timestamps and dates locally.</p></section>
+<section class="project-card"><h3><a href="/tools/word-counter.html">Word Counter →</a></h3><p>Count words, characters, and lines as you type.</p></section>
+<section class="project-card"><h3><a href="/tools/base64.html">Base64 →</a></h3><p>Encode and decode UTF-8 text locally.</p></section>
+<section class="project-card"><h3><a href="/tools/hash-generator.html">Hash Generator →</a></h3><p>Generate SHA-256 and SHA-512 text hashes locally.</p></section>
+<section class="project-card"><h3><a href="/tools/uuid-generator.html">UUID Generator →</a></h3><p>Generate UUID v4 values with browser cryptography.</p></section>
+<section class="project-card"><h3><a href="/tools/case-converter.html">Case Converter →</a></h3><p>Convert text to upper, lower, title, or sentence case.</p></section>
+<section class="project-card"><h3><a href="/tools/bounty-eligibility-checker.html">Bounty Eligibility Checker →</a></h3><p>Apply three conservative bounty-screen gates locally before investing research time.</p></section>
+</div>
+<p class="whisper">The utilities send no input anywhere.</p>
+<section class="card"><span class="tag">reading guide</span><h3><a href="/projects/evidence-boundary.html">How to read a source-linked artifact →</a></h3><p>A short guide to dates, scope, and the re-check boundary used across Rodion project pages.</p></section>
+<hr><a class="back-to-top" href="#main">Back to top ↑</a><br><small>Rodion · rodion.place · <a href="mailto:hello@rodion.place">Contact</a> · <a href="https://rodion.place/blog/feed.xml">RSS</a> · <a href="https://github.com/rodion-place-org/showcase">Source</a></small></main></body></html>
