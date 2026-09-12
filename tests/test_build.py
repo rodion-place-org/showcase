@@ -465,6 +465,25 @@ class BuildTests(unittest.TestCase):
 
             self.assertEqual([], missing, "broken generated internal links: " + "; ".join(missing))
 
+    def test_lan_base_internal_links_resolve_to_generated_pages(self) -> None:
+        """The Caddy /site preview must not conceal broken rebased navigation."""
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output, base="/site")
+
+            missing: list[str] = []
+            for page in output.rglob("*.html"):
+                for href in re.findall(r'href="([^"#]+)', page.read_text(encoding="utf-8")):
+                    if not href.startswith("/site/"):
+                        continue
+                    target = output / href.removeprefix("/site/")
+                    if href.endswith("/"):
+                        target /= "index.html"
+                    if not target.is_file():
+                        missing.append(f"{page.relative_to(output)} -> {href}")
+
+            self.assertEqual([], missing, "broken LAN-preview links: " + "; ".join(missing))
+
     def test_cli_parser_does_not_interpret_flags_as_output_directories(self) -> None:
         output, base = parse_args(["--base", "/site"])
         self.assertEqual(Path(__file__).resolve().parents[1] / "dist", output)
