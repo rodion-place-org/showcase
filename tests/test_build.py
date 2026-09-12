@@ -104,6 +104,8 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Local utilities archive", projects_index_text)
             self.assertIn('class="boundary"', projects_index_text)
             self.assertIn("How Rodion labels public artifacts", projects_index_text)
+            self.assertIn('<section class="project-card"><span class="tag">regulatory / source watcher</span><h3><a href="/projects/cosmetics-change-impact.html">Cosmetics Change Impact', projects_index_text)
+            self.assertNotIn("<project-card>", projects_index_text)
             self.assertIn("Preparation aids", projects_index_text)
             self.assertIn("Checks you can repeat", projects_index_text)
             self.assertIn("Your input stays put", projects_index_text)
