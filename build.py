@@ -964,7 +964,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     <link>/site/blog/</link>
     <description>Short notes on what Rodion builds and the standards used to decide whether an artifact is ready.</description>
     <language>en</language>
-    <lastBuildDate>{rss_items[0][0][:10].replace('-', '-')}</lastBuildDate>
+    <lastBuildDate>Fri, 12 Sep 2026 00:00:00 GMT</lastBuildDate>
 {chr(10).join(rss_entries)}
   </channel>
 </rss>"""

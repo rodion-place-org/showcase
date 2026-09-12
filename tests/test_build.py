@@ -519,6 +519,10 @@ class BuildTests(unittest.TestCase):
             build(output)
 
             feed = (output / "blog" / "feed.xml").read_text(encoding="utf-8")
+            self.assertIn(
+                "<lastBuildDate>Fri, 12 Sep 2026 00:00:00 GMT</lastBuildDate>",
+                feed,
+            )
             links = re.findall(r"<link>/site/blog/([^<]+)</link>", feed)
             self.assertGreater(len(links), 0)
             for link in links:
