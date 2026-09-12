@@ -113,6 +113,10 @@ class BuildTests(unittest.TestCase):
             self.assertIn("Re-check it before acting", projects_index_text)
             self.assertIn(".project-grid,.boundary", projects_index_text)
             self.assertIn('id="utilities"', projects_index_text)
+            self.assertIn("Current project index", projects_index_text)
+            for practice_anchor in ("readiness", "open-source", "forecasting", "systems", "signals", "utilities"):
+                self.assertIn(f'href="#{practice_anchor}"', projects_index_text)
+                self.assertIn(f'id="{practice_anchor}"', projects_index_text)
             self.assertIn('href="/projects/"', index_text)
             self.assertIn('href="/projects/evidence-boundary.html"', index_text)
             self.assertIn('>Evidence guide</a>', index_text)
