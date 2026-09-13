@@ -562,6 +562,12 @@ def build(output: Path, base: str = "") -> None:
     </script>
     <h2>Verification</h2>
     <section class="card"><p>Enter the example formula above and select Match. The tool returns seeded sample events with source links and stage labels. The generated-site test confirms the demo page exists and the matcher runs locally without network requests.</p></section>
+    <h2>Request a sample report</h2>
+    <section class="card">
+      <p>If this demo matches a monitoring or readiness problem your team is solving, I can run a concrete sample against your formula and the live source corpus (CosIng, EUR-Lex, SCCS).</p>
+      <p><a class="cta" href="mailto:hello@rodion.place?subject=Sample%20report%20request%20%E2%80%94%20Cosmetics%20Change%20Impact&body=I%20used%20the%20Cosmetics%20Change%20Impact%20demo%20and%20would%20like%20a%20sample%20report%20for%20my%20formula.%0A%0AFormula%20(INCI%2C%20comma-separated)%3A%0A%0AContext%20%28what%20you%27re%20monitoring%2Fwhy%20this%20matters%29%3A">Request a sample report →</a></p>
+      <p class="whisper">No automated follow-up. This is a research probe measuring whether qualified teams ask to continue.</p>
+    </section>
     """, "Interactive local formula matcher against a dated EU cosmetics change sample feed."))
     write(output, "projects/cra-srp-validator-demo.html", page("CRA SRP Stage Validator — Live Demo", """
     <p class="eyebrow">Project · source-linked interactive sample</p><h1>CRA SRP Stage Validator — Live Demo</h1>
@@ -618,6 +624,12 @@ def build(output: Path, base: str = "") -> None:
     </script>
     <h2>Verification</h2>
     <section class="card"><p>Paste the example payload above and select Validate. The tool returns a structural pass/reject with the applicable clock. The generated-site test confirms the demo page exists and the validator runs locally without network requests.</p></section>
+    <h2>Request a sample report</h2>
+    <section class="card">
+      <p>If this validator matches a CRA reporting readiness problem your team is solving, I can run a concrete sample against your draft payload and the live 2026-09-11 ENISA/Commission corpus.</p>
+      <p><a class="cta" href="mailto:hello@rodion.place?subject=Sample%20report%20request%20%E2%80%94%20CRA%20SRP%20Validator&body=I%20used%20the%20CRA%20SRP%20Stage%20Validator%20demo%20and%20would%20like%20a%20sample%20report%20for%20my%20draft%20payload.%0A%0AStage%20(early-warning%2Fnotification%2Fvulnerability-final%2Fincident-final)%3A%0A%0AContext%20%28what%20you%27re%20preparing%20for%2Fwhy%20this%20matters%29%3A">Request a sample report →</a></p>
+      <p class="whisper">No automated follow-up. This is a research probe measuring whether qualified teams ask to continue.</p>
+    </section>
     """, "Interactive offline stage-field validator against the 2026-09-11 dated CRA SRP rule corpus."))
     write(output, "projects/cra-srp-guidance-changelog.html", page("CRA SRP Guidance Changelog", """
     <p class="eyebrow">CRA SRP · versioned source mirror</p><h1>Guidance changelog</h1>
