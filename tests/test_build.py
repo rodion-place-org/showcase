@@ -207,7 +207,7 @@ class BuildTests(unittest.TestCase):
             self.assertIn('datetime="2026-09-13T20:49:11Z"', bounty_text)
             self.assertIn('datetime="2026-09-13T20:52:00Z"', bounty_text)
             self.assertIn('datetime="2026-09-14T20:49:11Z"', bounty_text)
-            self.assertIn("a payout-velocity scan, and an expiry boundary are different observations", bounty_text)
+            self.assertIn("an open-board snapshot, a payout-velocity scan, a targeted recency re-check, and an expiry boundary are different observations", bounty_text)
             self.assertIn("What this dated screen did—and did not—measure", bounty_text)
             self.assertIn("Payout recency (five completed awards in 360 days)", bounty_text)
             self.assertIn("Not measured by this screen", bounty_text)
