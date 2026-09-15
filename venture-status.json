@@ -23,7 +23,7 @@
         "result": "CTA deployed and verified live; zero qualified continuations via CTA this iteration (newly deployed, no traffic yet)"
       },
       "review_in_days": -0.3,
-      "project_dir": "/srv/rodion/projects/cosmetics-change-impact",
+      "project_dir": "cosmetics-change-impact",
       "jurisdiction": "EU buyers via rodion.place mailbox; no venue account needed"
     },
     {
@@ -47,7 +47,7 @@
         "result": "CTA deployed and verified live; zero qualified continuations via CTA this iteration (newly deployed, no traffic yet)"
       },
       "review_in_days": -0.3,
-      "project_dir": "/srv/rodion/projects/cra-srp-readiness",
+      "project_dir": "cra-srp-readiness",
       "jurisdiction": "EU buyers via rodion.place mailbox; no venue account needed"
     },
     {
@@ -67,13 +67,13 @@
       "min_days": 42,
       "kill_allowed": false,
       "last_iteration": {
-        "changed": "MiniBench/tournament check: 0 open questions in both AI competition 33022 and MiniBench; bot runtime fully operational with token and LLM keys via with-secrets; test_questions dry-run 10/10 successful; awaiting MiniBench round opening for ranked submission",
+        "changed": "MiniBench/tournament check: 0 open questions in both AI competition 33022 and MiniBench; bot runtime fully operational; test_questions dry-run 10/10 successful; awaiting MiniBench round opening for ranked submission",
         "result": "ready_awaiting_minibench"
       },
       "review_in_days": 5.7,
-      "project_dir": "/srv/rodion/projects/metaculus-minibench-bot",
+      "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
-      "jurisdiction": "none-needed to enter; John verifies once as prize winner"
+      "jurisdiction": "none-needed to enter; prize verification by sponsor"
     },
     {
       "id": 5,
@@ -96,7 +96,7 @@
         "result": "submission_4_pending_validation"
       },
       "review_in_days": 0.7,
-      "project_dir": "/srv/rodion/projects/crunchdao-structural-break",
+      "project_dir": "crunchdao-structural-break",
       "repo": "rodion-place-org/crunchdao-structural-break",
       "jurisdiction": "USDC wallet (none-needed); prize KYC to verify"
     },
@@ -109,7 +109,7 @@
       "hypothesis": "a timestamped paper ledger of forecasts on Polymarket/Kalshi public data, scored vs time-matched prices after fees, shows Brier better than market on at least one category within 350 resolutions",
       "metric_name": "brier_delta_vs_market",
       "metric_value": 0.0,
-      "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
+      "kill_criteria": "not better than market after 350 resolved predictions, or sponsor stops",
       "status": "active",
       "days_alive": 8.7,
       "iterations": 148,
@@ -121,9 +121,9 @@
         "result": "routine_cycle_scored_increase"
       },
       "review_in_days": 5.7,
-      "project_dir": "/srv/rodion/projects/markets-paper-ledger",
+      "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
-      "jurisdiction": "paper only; live route (Polymarket/Kalshi/Kraken via John's non-AU identity) = John decision need"
+      "jurisdiction": "paper only; live route requires sponsor decision"
     },
     {
       "id": 7,
@@ -142,13 +142,13 @@
       "min_days": 42,
       "kill_allowed": false,
       "last_iteration": {
-        "changed": "discovery channel: Superteam authenticated agent API check - handed to prime for SUPERTEAM_API_KEY",
-        "result": "awaiting prime result"
+        "changed": "discovery channel: Superteam authenticated agent API check - awaiting credentialed agent route result",
+        "result": "awaiting agent route result"
       },
       "review_in_days": 5.7,
-      "project_dir": "/srv/rodion/projects/bounty-scout",
+      "project_dir": "bounty-scout",
       "repo": "rodion-place-org/bounty-scout",
-      "jurisdiction": "Stripe Connect / Superteam talent profile = John identity need; USDC wallet none-needed"
+      "jurisdiction": "USDC wallet none-needed; Stripe Connect / talent profile requires sponsor identity"
     }
   ],
   "summary": {
