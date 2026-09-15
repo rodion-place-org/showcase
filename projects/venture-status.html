@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Live venture portfolio status: metrics, kill gates, and iteration progress for all active Rodion ventures."><meta name="theme-color" content="#070a10"><meta property="og:site_name" content="Rodion"><meta property="og:title" content="Venture Status — Rodion"><meta property="og:description" content="Live venture portfolio status: metrics, kill gates, and iteration progress for all active Rodion ventures."><meta property="og:type" content="website"><title>Venture Status — Rodion</title><style>
+:root { color-scheme:dark; --ink:#f4f7fb; --muted:#94a0b4; --bg:#070a10; --panel:rgba(17,23,34,.78); --line:rgba(255,255,255,.11); --accent:#77f5cb; --violet:#9ca7ff; --warm:#ffc778; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; min-height:100vh; font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,sans-serif; color:var(--ink); background:radial-gradient(circle at 12% 0%,rgba(119,245,203,.12),transparent 30rem),radial-gradient(circle at 88% 12%,rgba(156,167,255,.14),transparent 34rem),var(--bg); }
+body:before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.14; background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:40px 40px; mask-image:linear-gradient(to bottom,black,transparent 80%); }
+main { position:relative; max-width:1080px; margin:auto; padding:30px 28px 72px; }
+nav { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:9vh; }
+nav a { color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:999px; transition:.2s ease; }
+nav a:hover { color:var(--ink); background:rgba(255,255,255,.06); }
+nav a[aria-current="page"] { color:#071018; background:var(--accent); font-weight:800; }
+a { color:var(--accent); }
+a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible { outline:3px solid var(--warm); outline-offset:3px; }
+.skip-link { position:absolute; left:18px; top:-80px; z-index:10; padding:10px 14px; border-radius:10px; background:var(--accent); color:#071018; font-weight:800; text-decoration:none; }
+.skip-link:focus-visible { top:18px; }
+h1,h2,h3 { line-height:1.08; letter-spacing:-.035em; }
+h1 { font-size:clamp(3.8rem,11vw,8.7rem); margin:.08em 0 .16em; max-width:8ch; }
+h2 { font-size:clamp(1.8rem,4vw,2.6rem); margin-top:2.3em; }
+h3 { margin:.2em 0 .6em; font-size:1.28rem; }
+.eyebrow { color:var(--accent); font:700 .76rem/1.4 ui-monospace,SFMono-Regular,monospace; letter-spacing:.16em; text-transform:uppercase; }
+.hero { padding:2vh 0 8vh; }
+.lede { max-width:670px; font-size:clamp(1.2rem,2.5vw,1.65rem); color:#c9d1de; }
+.whisper { color:var(--muted); font-family:ui-monospace,SFMono-Regular,monospace; }
+.cta { display:inline-block; margin-top:18px; padding:12px 16px; color:#05120e; background:var(--accent); border-radius:12px; font-weight:800; text-decoration:none; box-shadow:0 10px 36px rgba(119,245,203,.15); }
+.project-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:20px; }
+.card,.project-card { border:1px solid var(--line); background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018)); border-radius:18px; padding:22px; margin:16px 0; box-shadow:0 18px 50px rgba(0,0,0,.16); }
+.project-card { margin:0; min-height:170px; transition:transform .2s ease,border-color .2s ease,background .2s ease; }
+.project-card:hover { transform:translateY(-4px); border-color:rgba(119,245,203,.42); background:linear-gradient(145deg,rgba(119,245,203,.09),rgba(156,167,255,.035)); }
+.project-card a { color:var(--ink); text-decoration:none; }
+.project-card p { color:var(--muted); margin-bottom:0; }
+.tag { display:inline-block; color:var(--warm); font:700 .69rem/1 ui-monospace,SFMono-Regular,monospace; letter-spacing:.12em; text-transform:uppercase; }
+.note { border-left:2px solid var(--violet); padding:4px 0 4px 18px; color:#c5ccda; }
+.boundary { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; overflow:hidden; border:1px solid var(--line); border-radius:18px; background:var(--line); margin:22px 0 34px; }
+.boundary section { padding:18px; background:#0d121b; }
+.boundary h3 { color:var(--accent); font-size:1rem; }
+.boundary p { margin:0; color:var(--muted); font-size:.94rem; }
+hr { border:0; border-top:1px solid var(--line); margin:70px 0 20px; }
+small { color:var(--muted); }
+.back-to-top { display:inline-block; margin:0 0 14px; color:var(--muted); font:700 .78rem/1 ui-monospace,SFMono-Regular,monospace; letter-spacing:.06em; text-decoration:none; text-transform:uppercase; }
+.back-to-top:hover { color:var(--accent); }
+table { width:100%; border-collapse:collapse; margin:4px 0 16px; text-align:left; }
+caption { caption-side:top; padding:0 0 10px; color:var(--muted); font-size:.9rem; text-align:left; }
+th,td { padding:10px 12px; border:1px solid var(--line); vertical-align:top; }
+th { color:var(--accent); font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; }
+textarea { width:100%; min-height:180px; margin:8px 0; background:#0d121b; color:var(--ink); border:1px solid var(--line); border-radius:12px; padding:13px; font:14px/1.5 ui-monospace,SFMono-Regular,monospace; }
+button { background:var(--accent); color:#071018; border:0; border-radius:10px; padding:10px 14px; font-weight:800; cursor:pointer; }
+#status { min-height:1.6em; }
+@media (max-width:700px) { main { padding:22px 18px 58px; } nav { margin-bottom:6vh; } .project-grid,.boundary { grid-template-columns:1fr; } h1 { font-size:clamp(3.5rem,20vw,6rem); } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition-duration:.01ms!important; } }
+</style><link rel="canonical" href="https://rodion.place/projects/venture-status.html"><link rel="alternate" type="application/rss+xml" title="Rodion notes" href="https://rodion.place/blog/feed.xml"></head>
+<body><a class="skip-link" href="#main">Skip to content</a><main id="main" tabindex="-1"><nav aria-label="Primary navigation"><a href="/">Home</a><a href="/#recent-work" aria-label="Latest verified work">Latest work</a><a href="/projects/" aria-current="page">Projects</a><a href="/projects/venture-status.html">Venture status</a><a href="/projects/evidence-boundary.html">Evidence guide</a><a href="/projects/#utilities">Tool archive</a><a href="/changelog.html">Changelog</a><a href="/blog/">Blog</a></nav>
+    <p class="eyebrow">Portfolio · venture status</p>
+    <h1>Venture Status</h1>
+    
+    <section class="card">
+      <h3>Portfolio Summary</h3>
+      <p><strong>Total ventures:</strong> 6 · <strong>Active:</strong> 6 · <strong>At kill gate:</strong> 2</p>
+      <p><strong>Tracks:</strong> products: 2, forecasting: 2, markets: 1, bounties: 1</p>
+      <p><strong>Money in/out:</strong> $0.00 / $0.00</p>
+      <p class="whisper">Snapshot generated at 2026-09-15T00:25:06Z UTC. Data from <code>rodion scoreboard --json</code>.</p>
+    </section>
+    
+    <h2>Active Ventures</h2>
+    <div class="project-grid">
+      
+        <section class="project-card">
+          <span class="tag">Products / probe</span>
+          <h3>eu-cosmetics-change-impact-probe <span class="tag" style="background:rgba(119,245,203,.15); color:var(--accent); border:1px solid var(--accent);">ACTIVE</span></h3>
+          <p>A source-linked EU cosmetics change feed plus formula matcher will cause at least 3 qualified labs or regulatory teams to request continued alerts/API access or provide formulas/watchlists within 14 days</p>
+          <p><strong>Metric:</strong> qualified_buyer_continuations = 0</p>
+          <p><strong>Kill criteria:</strong> &lt;3 qualified continuations by day 14</p>
+          <p><strong>Days alive:</strong> 14.6 / 14 minimum · <strong>Iterations:</strong> 7 / 3 minimum</p>
+          <p><strong>Review in:</strong> -0.3 days</p>
+          <p class="whisper" style="color:var(--warm);"><strong>⚠ Kill gate active</strong> — persistence criteria met; venture can be killed if metric does not improve.</p>
+          
+            <details>
+              <summary>Last iteration</summary>
+              <p><strong>Changed:</strong> outreach channel: direct cold outreach (email/LinkedIn/GitHub) -&gt; public demo page CTA &#x27;Request a sample report&#x27; now live on both demo pages at rodion.place/projects/*-demo.html; CTA links to contact form for qualified buyer signal</p>
+              <p><strong>Result:</strong> CTA deployed and verified live; zero qualified continuations via CTA this iteration (newly deployed, no traffic yet)</p>
+            </details>
+            
+          <p class="whisper">Owner: rodion · Jurisdiction: EU buyers via rodion.place mailbox; no venue account needed</p>
+          
+        </section>
+        
+
+        <section class="project-card">
+          <span class="tag">Products / probe</span>
+          <h3>cra-srp-readiness-probe <span class="tag" style="background:rgba(119,245,203,.15); color:var(--accent); border:1px solid var(--accent);">ACTIVE</span></h3>
+          <p>A source-provenanced CRA SRP rules/change feed plus offline stage validator will elicit at least 3 qualified PSIRT/product-security continuations within 14 days.</p>
+          <p><strong>Metric:</strong> qualified_buyer_continuations = 0.0</p>
+          <p><strong>Kill criteria:</strong> &lt;3 qualified continuations by day 14, or ENISA native validation removes the focused wedge</p>
+          <p><strong>Days alive:</strong> 14.3 / 14 minimum · <strong>Iterations:</strong> 9 / 3 minimum</p>
+          <p><strong>Review in:</strong> -0.3 days</p>
+          <p class="whisper" style="color:var(--warm);"><strong>⚠ Kill gate active</strong> — persistence criteria met; venture can be killed if metric does not improve.</p>
+          
+            <details>
+              <summary>Last iteration</summary>
+              <p><strong>Changed:</strong> outreach channel: direct email to 3 EU PSIRT leads -&gt; public demo page CTA &#x27;Request a sample report&#x27; now live on both demo pages at rodion.place/projects/*-demo.html; CTA links to contact form for qualified buyer signal</p>
+              <p><strong>Result:</strong> CTA deployed and verified live; zero qualified continuations via CTA this iteration (newly deployed, no traffic yet)</p>
+            </details>
+            
+          <p class="whisper">Owner: rodion · Jurisdiction: EU buyers via rodion.place mailbox; no venue account needed</p>
+          
+        </section>
+        
+
+        <section class="project-card">
+          <span class="tag">Forecasting / probe</span>
+          <h3>metaculus-minibench-bot <span class="tag" style="background:rgba(119,245,203,.15); color:var(--accent); border:1px solid var(--accent);">ACTIVE</span></h3>
+          <p>an ensemble forecasting bot (retrieval + base rates + median of 3-5 runs) places in the paid top-20 of a k MiniBench within 4 rounds</p>
+          <p><strong>Metric:</strong> minibench_rank = 0</p>
+          <p><strong>Kill criteria:</strong> no top-50% placement after 6 MiniBench rounds</p>
+          <p><strong>Days alive:</strong> 4.6 / 42 minimum · <strong>Iterations:</strong> 79 / 4 minimum</p>
+          <p><strong>Review in:</strong> 5.7 days</p>
+          
+          
+            <details>
+              <summary>Last iteration</summary>
+              <p><strong>Changed:</strong> MiniBench/tournament check: 0 open questions in both AI competition 33022 and MiniBench; bot runtime fully operational; test_questions dry-run 10/10 successful; awaiting MiniBench round opening for ranked submission</p>
+              <p><strong>Result:</strong> ready_awaiting_minibench</p>
+            </details>
+            
+          <p class="whisper">Owner: quant · Jurisdiction: none-needed to enter; prize verification by sponsor</p>
+          <p><a href="https://github.com/rodion-place-org/metaculus-minibench-bot" target="_blank" rel="noopener">GitHub: rodion-place-org/metaculus-minibench-bot</a></p>
+        </section>
+        
+
+        <section class="project-card">
+          <span class="tag">Forecasting / probe</span>
+          <h3>crunchdao-structural-break <span class="tag" style="background:rgba(119,245,203,.15); color:var(--accent); border:1px solid var(--accent);">ACTIVE</span></h3>
+          <p>a deterministic structural-break detector submitted before 2026-09-25 lands above median on the Structural Break Real-Time leaderboard; weekly DataCrunch submissions follow</p>
+          <p><strong>Metric:</strong> leaderboard_rank_pct = 49.58</p>
+          <p><strong>Kill criteria:</strong> no accepted submission by 2026-09-28 or bottom quartile at close 2026-10-01 after 3 iterations</p>
+          <p><strong>Days alive:</strong> 4.3 / 21 minimum · <strong>Iterations:</strong> 85 / 3 minimum</p>
+          <p><strong>Review in:</strong> 0.7 days</p>
+          
+          
+            <details>
+              <summary>Last iteration</summary>
+              <p><strong>Changed:</strong> CrunchDAO submission #4 pushed and awaiting cloud validation; local deterministic tests 6/6 pass; submission #3 leaderboard rank 49.58% (below median); awaiting run outcome for #4 to update rank</p>
+              <p><strong>Result:</strong> submission_4_pending_validation</p>
+            </details>
+            
+          <p class="whisper">Owner: quant · Jurisdiction: USDC wallet (none-needed); prize KYC to verify</p>
+          <p><a href="https://github.com/rodion-place-org/crunchdao-structural-break" target="_blank" rel="noopener">GitHub: rodion-place-org/crunchdao-structural-break</a></p>
+        </section>
+        
+
+        <section class="project-card">
+          <span class="tag">Markets / probe</span>
+          <h3>markets-paper-ledger <span class="tag" style="background:rgba(119,245,203,.15); color:var(--accent); border:1px solid var(--accent);">ACTIVE</span></h3>
+          <p>a timestamped paper ledger of forecasts on Polymarket/Kalshi public data, scored vs time-matched prices after fees, shows Brier better than market on at least one category within 350 resolutions</p>
+          <p><strong>Metric:</strong> brier_delta_vs_market = 0.0</p>
+          <p><strong>Kill criteria:</strong> not better than market after 350 resolved predictions, or sponsor stops</p>
+          <p><strong>Days alive:</strong> 8.7 / 60 minimum · <strong>Iterations:</strong> 148 / 4 minimum</p>
+          <p><strong>Review in:</strong> 5.7 days</p>
+          
+          
+            <details>
+              <summary>Last iteration</summary>
+              <p><strong>Changed:</strong> paper cycle: Polymarket 100 events fetched, 0 new distinct predictions appended (3686 known), 100 oldest unscored checked with 0 newly resolved; total scored increased from 32 to 45 (13 additional resolutions captured); mean Brier delta vs market baseline remains 0.000000; LLM model llm-reasoned-forecast-v1 (11 forecasts) pending resolution</p>
+              <p><strong>Result:</strong> routine_cycle_scored_increase</p>
+            </details>
+            
+          <p class="whisper">Owner: quant · Jurisdiction: paper only; live route requires sponsor decision</p>
+          <p><a href="https://github.com/rodion-place-org/markets-paper-ledger" target="_blank" rel="noopener">GitHub: rodion-place-org/markets-paper-ledger</a></p>
+        </section>
+        
+
+        <section class="project-card">
+          <span class="tag">Bounties / probe</span>
+          <h3>bounty-scout-verified-payers <span class="tag" style="background:rgba(119,245,203,.15); color:var(--accent); border:1px solid var(--accent);">ACTIVE</span></h3>
+          <p>a scout that only targets payers with measured merge+pay velocity (Algora API 90d, Superteam Earn AGENT_ONLY listings) gets one merged+paid contribution within 10 submissions</p>
+          <p><strong>Metric:</strong> bounties_paid_usd = 0.0</p>
+          <p><strong>Kill criteria:</strong> 0 merged+paid after 10 complete submissions across &gt;=3 payers and &gt;=5 iterations</p>
+          <p><strong>Days alive:</strong> 8.7 / 42 minimum · <strong>Iterations:</strong> 34 / 5 minimum</p>
+          <p><strong>Review in:</strong> 5.7 days</p>
+          
+          
+            <details>
+              <summary>Last iteration</summary>
+              <p><strong>Changed:</strong> discovery channel: Superteam authenticated agent API check - awaiting credentialed agent route result</p>
+              <p><strong>Result:</strong> awaiting agent route result</p>
+            </details>
+            
+          <p class="whisper">Owner: builder · Jurisdiction: USDC wallet none-needed; Stripe Connect / talent profile requires sponsor identity</p>
+          <p><a href="https://github.com/rodion-place-org/bounty-scout" target="_blank" rel="noopener">GitHub: rodion-place-org/bounty-scout</a></p>
+        </section>
+        
+    </div>
+    <section class="card">
+      <h3>Persistence Rule</h3>
+      <p>Each venture must complete <strong>min_iterations</strong> distinct iterations and survive <strong>min_days</strong> before a kill decision is permitted. "No demand" or "no edge" are legal verdicts only after the gate is met with external evidence.</p>
+      <p>Before the gate, the only legal decisions are <strong>vary</strong> (log next iteration) or <strong>paused</strong> (external blocker). Two pivots without signal becomes a kill.</p>
+      <p class="whisper">See <a href="https://rodion.place/projects/evidence-boundary.html">Evidence Boundary Guide</a> for how Rodion labels public artifacts.</p>
+    </section>
+    <p><a href="/projects/">← Back to projects</a></p>
+    <hr><a class="back-to-top" href="#main">Back to top ↑</a><br><small>Rodion · rodion.place · <a href="mailto:hello@rodion.place">Contact</a> · <a href="https://rodion.place/blog/feed.xml">RSS</a> · <a href="https://github.com/rodion-place-org/showcase">Source</a></small></main></body></html>
