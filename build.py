@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 from html import escape
 from pathlib import Path
+import json
 import re
 import shutil
 
@@ -68,7 +69,7 @@ def page(title: str, body: str, description: str | None = None) -> str:
     description = description or "Rodion builds small, verifiable tools and publishes what survives contact with evidence."
     return f"""<!doctype html>
 <html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"{escape(description, quote=True)}\"><meta name=\"theme-color\" content=\"#070a10\"><meta property=\"og:site_name\" content=\"Rodion\"><meta property=\"og:title\" content=\"{escape(title)} — Rodion\"><meta property=\"og:description\" content=\"{escape(description, quote=True)}\"><meta property=\"og:type\" content=\"website\"><title>{escape(title)} — Rodion</title><style>{STYLE}</style></head>
-<body><a class="skip-link" href="#main">Skip to content</a><main id="main" tabindex="-1"><nav aria-label="Primary navigation"><a href="/site/">Home</a><a href="/site/#recent-work" aria-label="Latest verified work">Latest work</a><a href="/site/projects/">Projects</a><a href="/site/projects/evidence-boundary.html">Evidence guide</a><a href="/site/projects/#utilities">Tool archive</a><a href="/site/changelog.html">Changelog</a><a href="/site/blog/">Blog</a></nav>{body}<hr><a class="back-to-top" href="#main">Back to top ↑</a><br><small>Rodion · rodion.place</small></main></body></html>"""
+<body><a class=\"skip-link\" href=\"#main\">Skip to content</a><main id=\"main\" tabindex=\"-1\"><nav aria-label=\"Primary navigation\"><a href=\"/site/\">Home</a><a href=\"/site/#recent-work\" aria-label=\"Latest verified work\">Latest work</a><a href=\"/site/projects/\">Projects</a><a href=\"/site/projects/venture-status.html\">Venture status</a><a href=\"/site/projects/evidence-boundary.html\">Evidence guide</a><a href=\"/site/projects/#utilities\">Tool archive</a><a href=\"/site/changelog.html\">Changelog</a><a href=\"/site/blog/\">Blog</a></nav>{body}<hr><a class=\"back-to-top\" href=\"#main\">Back to top ↑</a><br><small>Rodion · rodion.place</small></main></body></html>"""
 
 
 def current_navigation_link(name: str) -> str:
@@ -105,6 +106,130 @@ def write(output: Path, name: str, content: str) -> None:
     target = output / name
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(content, encoding="utf-8")
+
+
+def load_venture_status(project_root: Path) -> dict | None:
+    """Load venture status from venture-status.json if present."""
+    status_file = project_root / "venture-status.json"
+    if status_file.exists():
+        try:
+            return json.loads(status_file.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            return None
+    return None
+
+
+def build_venture_status_page(venture_data: dict | None) -> str:
+    """Generate the venture status page HTML."""
+    if venture_data is None:
+        return """
+    <p class="eyebrow">Portfolio · venture status</p>
+    <h1>Venture Status</h1>
+    <section class="card">
+      <p>Venture status data was not available at build time. This page is a snapshot; the live ledger is the source of truth.</p>
+      <p>Run <code>rodion scoreboard</code> locally for current status, or check the <a href="/site/projects/">project index</a> for per-project readings.</p>
+    </section>
+    <p><a href="/site/projects/">← Back to projects</a></p>
+    """
+
+    ventures = venture_data.get("ventures", [])
+    summary = venture_data.get("summary", {})
+    generated_at = venture_data.get("generated_at", "unknown")
+
+    # Build venture cards
+    cards = []
+    for v in ventures:
+        track_tag = v.get("track", "").replace("_", " ").title()
+        stage = v.get("stage", "probe")
+        status = v.get("status", "active")
+        metric_name = v.get("metric_name", "")
+        metric_value = v.get("metric_value", 0)
+        kill_criteria = v.get("kill_criteria", "")
+        days_alive = v.get("days_alive", 0)
+        iterations = v.get("iterations", 0)
+        min_iterations = v.get("min_iterations", 3)
+        min_days = v.get("min_days", 14)
+        kill_allowed = v.get("kill_allowed", False)
+        last_iteration = v.get("last_iteration", {})
+        review_in_days = v.get("review_in_days", 0)
+        project_dir = v.get("project_dir", "")
+        repo = v.get("repo", "")
+        jurisdiction = v.get("jurisdiction", "")
+
+        # Status badge
+        if status == "active":
+            status_badge = f'<span class="tag" style="background:rgba(119,245,203,.15); color:var(--accent); border:1px solid var(--accent);">ACTIVE</span>'
+        else:
+            status_badge = f'<span class="tag">{status.upper()}</span>'
+
+        # Kill gate indicator
+        kill_gate_html = ""
+        if kill_allowed:
+            kill_gate_html = '<p class="whisper" style="color:var(--warm);"><strong>⚠ Kill gate active</strong> — persistence criteria met; venture can be killed if metric does not improve.</p>'
+
+        # Last iteration
+        iter_html = ""
+        if last_iteration:
+            changed = last_iteration.get("changed", "")
+            result = last_iteration.get("result", "")
+            iter_html = f"""
+            <details>
+              <summary>Last iteration</summary>
+              <p><strong>Changed:</strong> {escape(changed)}</p>
+              <p><strong>Result:</strong> {escape(result)}</p>
+            </details>
+            """
+
+        # Repo link
+        repo_html = ""
+        if repo:
+            repo_html = f'<p><a href="https://github.com/{repo}" target="_blank" rel="noopener">GitHub: {repo}</a></p>'
+
+        card = f"""
+        <section class="project-card">
+          <span class="tag">{track_tag} / {stage}</span>
+          <h3>{escape(v.get("name", "Unknown"))} {status_badge}</h3>
+          <p>{escape(v.get("hypothesis", ""))}</p>
+          <p><strong>Metric:</strong> {escape(metric_name)} = {escape(str(metric_value))}</p>
+          <p><strong>Kill criteria:</strong> {escape(kill_criteria)}</p>
+          <p><strong>Days alive:</strong> {days_alive:.1f} / {min_days} minimum · <strong>Iterations:</strong> {iterations} / {min_iterations} minimum</p>
+          <p><strong>Review in:</strong> {review_in_days:.1f} days</p>
+          {kill_gate_html}
+          {iter_html}
+          <p class="whisper">Owner: {escape(v.get("owner", ""))} · Jurisdiction: {escape(jurisdiction)}</p>
+          {repo_html}
+        </section>
+        """
+        cards.append(card)
+
+    cards_html = "\n".join(cards)
+
+    summary_html = f"""
+    <section class="card">
+      <h3>Portfolio Summary</h3>
+      <p><strong>Total ventures:</strong> {summary.get("total_ventures", 0)} · <strong>Active:</strong> {summary.get("active_ventures", 0)} · <strong>At kill gate:</strong> {summary.get("ventures_at_kill_gate", 0)}</p>
+      <p><strong>Tracks:</strong> {", ".join(f"{k}: {v}" for k, v in summary.get("tracks", {}).items())}</p>
+      <p><strong>Money in/out:</strong> ${summary.get("money_in_usd", 0):.2f} / ${summary.get("money_out_usd", 0):.2f}</p>
+      <p class="whisper">Snapshot generated at {generated_at} UTC. Data from <code>rodion scoreboard --json</code>.</p>
+    </section>
+    """
+
+    return f"""
+    <p class="eyebrow">Portfolio · venture status</p>
+    <h1>Venture Status</h1>
+    {summary_html}
+    <h2>Active Ventures</h2>
+    <div class="project-grid">
+      {cards_html}
+    </div>
+    <section class="card">
+      <h3>Persistence Rule</h3>
+      <p>Each venture must complete <strong>min_iterations</strong> distinct iterations and survive <strong>min_days</strong> before a kill decision is permitted. "No demand" or "no edge" are legal verdicts only after the gate is met with external evidence.</p>
+      <p>Before the gate, the only legal decisions are <strong>vary</strong> (log next iteration) or <strong>paused</strong> (external blocker). Two pivots without signal becomes a kill.</p>
+      <p class="whisper">See <a href="https://rodion.place/projects/evidence-boundary.html">Evidence Boundary Guide</a> for how Rodion labels public artifacts.</p>
+    </section>
+    <p><a href="/site/projects/">← Back to projects</a></p>
+    """
 
 
 def build(output: Path, base: str = "") -> None:
@@ -166,7 +291,7 @@ def build(output: Path, base: str = "") -> None:
 </div>
 <section class="card" aria-labelledby="start-here"><span class="tag">quick paths</span><h2 id="start-here">Start from your task</h2><p>Three direct routes through the workshop. Each begins with a bounded artifact, not a standing promise.</p><div class="project-grid"><section class="project-card"><span class="tag">reporting</span><h3><a href="/site/projects/cra-srp-readiness.html">Prepare for a reporting clock →</a></h3><p>Open the source-linked CRA readiness sample and its dated guidance boundary.</p></section><section class="project-card"><span class="tag">open source</span><h3><a href="/site/projects/bounty-scout.html">Screen an OSS bounty →</a></h3><p>Start with payment recency, open work, and visible competition—then re-check before acting.</p></section><section class="project-card"><span class="tag">local-first</span><h3><a href="#utilities">Explore the local tools →</a></h3><p>Use browser-side utilities that keep entered text on the device.</p></section></div></section>
 <section class="card" aria-labelledby="fresh-readings"><span class="tag">dated readings</span><h2 id="fresh-readings">Fresh readings</h2><p>Open a dated source check before acting. These are the newest fact-bound project readings, not live-status promises.</p><p><a href="/site/projects/bounty-scout.html">Bounty Scout · 14 Sep 2026</a> — recency gate re-check: capsoftware (4 paid, 90d) and projectdiscovery (0 paid, 90d) both fail 90-day velocity threshold; 0 qualified payers across tracked organisations.</p><p><a href="/site/projects/cosmetics-change-impact.html">Cosmetics Change Impact · 14 Sep 2026</a> — outreach iteration 7 deployed: direct cold outreach CTA live; zero qualified buyer continuations via CTA this iteration (day 13.8/14).</p><p><a href="/site/projects/cra-srp-readiness.html">CRA SRP Readiness · 14 Sep 2026</a> — outreach iteration 9 deployed: direct email to 3 EU PSIRT leads; zero qualified buyer continuations via CTA this iteration (day 13.5/14).</p></section>
-<section class="card" aria-labelledby="portfolio-map"><span class="tag">browse by practice</span><h2 id="portfolio-map">Current project index</h2><p>Each page states its evidence boundary. Choose a practice area, then re-check the linked source before relying on a time-sensitive claim.</p><p><a href="#readiness">Readiness &amp; regulatory</a> · <a href="#open-source">Open source</a> · <a href="#forecasting">Forecasting</a> · <a href="#systems">Systems</a> · <a href="#signals">Signals</a> · <a href="#utilities">Local utilities</a></p></section>
+<section class="card" aria-labelledby="portfolio-map"><span class="tag">browse by practice</span><h2 id="portfolio-map">Current project index</h2><p>Each page states its evidence boundary. Choose a practice area, then re-check the linked source before relying on a time-sensitive claim.</p><p><a href="#readiness">Readiness & regulatory</a> · <a href="#open-source">Open source</a> · <a href="#forecasting">Forecasting</a> · <a href="#systems">Systems</a> · <a href="#signals">Signals</a> · <a href="#utilities">Local utilities</a> · <a href="/site/projects/venture-status.html">Venture status</a></p></section>
 <h2 id="readiness">Readiness &amp; regulatory</h2>
 <section class="project-card"><span class="tag">regulatory / workflow</span><h3><a href="/site/projects/cra-srp-readiness.html">CRA SRP Readiness →</a></h3><p>A read-only preparation aid for published CRA reporting clocks. It is source-linked, non-authoritative, and includes a dated guidance changelog.</p></section>
     <section class="project-card"><span class="tag">regulatory / interactive demo</span><h3><a href="/site/projects/cra-srp-validator-demo.html">CRA SRP Stage Validator — Live Demo →</a></h3><p>Interactive offline stage-field validator against the 2026-09-11 dated rule corpus. Runs in the browser; no network requests, no submissions, no accounts.</p></section>
@@ -959,6 +1084,12 @@ document.getElementById('minify').addEventListener('click', function () { transf
 <p>The first things were small: tools that worked, notes worth keeping, a place to put the next thing.</p>
 <p class="whisper">This site is that place.</p>
 """))
+    # Venture status page (loaded from venture-status.json at build time)
+    project_root = Path(__file__).resolve().parent
+    venture_data = load_venture_status(project_root)
+    write(output, "projects/venture-status.html", page("Venture Status", build_venture_status_page(venture_data),
+        "Live venture portfolio status: metrics, kill gates, and iteration progress for all active Rodion ventures."))
+
     # RSS feed for blog
     rss_items = [
         ("2026-09-12-this-week-verified-work.html", "This week in verified work", "Try two browser demos that turn source changes into inspectable ingredient matches and reporting checklists."),
