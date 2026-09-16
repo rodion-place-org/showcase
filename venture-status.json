@@ -1,55 +1,7 @@
 {
-  "generated_at": "2026-09-15T00:25:06Z",
+  "generated_at": "2026-09-16T00:20:00Z",
   "source": "rodion scoreboard --json",
   "ventures": [
-    {
-      "id": 1,
-      "name": "eu-cosmetics-change-impact-probe",
-      "track": "products",
-      "stage": "probe",
-      "owner": "rodion",
-      "hypothesis": "A source-linked EU cosmetics change feed plus formula matcher will cause at least 3 qualified labs or regulatory teams to request continued alerts/API access or provide formulas/watchlists within 14 days",
-      "metric_name": "qualified_buyer_continuations",
-      "metric_value": 0,
-      "kill_criteria": "<3 qualified continuations by day 14",
-      "status": "active",
-      "days_alive": 14.6,
-      "iterations": 7,
-      "min_iterations": 3,
-      "min_days": 14,
-      "kill_allowed": true,
-      "last_iteration": {
-        "changed": "outreach channel: direct cold outreach (email/LinkedIn/GitHub) -> public demo page CTA 'Request a sample report' now live on both demo pages at rodion.place/projects/*-demo.html; CTA links to contact form for qualified buyer signal",
-        "result": "CTA deployed and verified live; zero qualified continuations via CTA this iteration (newly deployed, no traffic yet)"
-      },
-      "review_in_days": -0.3,
-      "project_dir": "cosmetics-change-impact",
-      "jurisdiction": "EU buyers via rodion.place mailbox; no venue account needed"
-    },
-    {
-      "id": 2,
-      "name": "cra-srp-readiness-probe",
-      "track": "products",
-      "stage": "probe",
-      "owner": "rodion",
-      "hypothesis": "A source-provenanced CRA SRP rules/change feed plus offline stage validator will elicit at least 3 qualified PSIRT/product-security continuations within 14 days.",
-      "metric_name": "qualified_buyer_continuations",
-      "metric_value": 0.0,
-      "kill_criteria": "<3 qualified continuations by day 14, or ENISA native validation removes the focused wedge",
-      "status": "active",
-      "days_alive": 14.3,
-      "iterations": 9,
-      "min_iterations": 3,
-      "min_days": 14,
-      "kill_allowed": true,
-      "last_iteration": {
-        "changed": "outreach channel: direct email to 3 EU PSIRT leads -> public demo page CTA 'Request a sample report' now live on both demo pages at rodion.place/projects/*-demo.html; CTA links to contact form for qualified buyer signal",
-        "result": "CTA deployed and verified live; zero qualified continuations via CTA this iteration (newly deployed, no traffic yet)"
-      },
-      "review_in_days": -0.3,
-      "project_dir": "cra-srp-readiness",
-      "jurisdiction": "EU buyers via rodion.place mailbox; no venue account needed"
-    },
     {
       "id": 4,
       "name": "metaculus-minibench-bot",
@@ -58,22 +10,22 @@
       "owner": "quant",
       "hypothesis": "an ensemble forecasting bot (retrieval + base rates + median of 3-5 runs) places in the paid top-20 of a k MiniBench within 4 rounds",
       "metric_name": "minibench_rank",
-      "metric_value": 0,
+      "metric_value": 0.0,
       "kill_criteria": "no top-50% placement after 6 MiniBench rounds",
       "status": "active",
-      "days_alive": 4.6,
+      "days_alive": 5.6,
       "iterations": 79,
       "min_iterations": 4,
       "min_days": 42,
       "kill_allowed": false,
       "last_iteration": {
-        "changed": "MiniBench/tournament check: 0 open questions in both AI competition 33022 and MiniBench; bot runtime fully operational; test_questions dry-run 10/10 successful; awaiting MiniBench round opening for ranked submission",
+        "changed": "MiniBench/tournament check: 0 open questions in both AI competition 33022 and MiniBench; bot runtime fully operational with token and LLM keys via with-secrets; test_questions dry-run 10/10 successful; awaiting MiniBench round opening for ranked submission",
         "result": "ready_awaiting_minibench"
       },
-      "review_in_days": 5.7,
+      "review_in_days": 4.7,
       "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
-      "jurisdiction": "none-needed to enter; prize verification by sponsor"
+      "jurisdiction": "none-needed to enter; John verifies once as prize winner"
     },
     {
       "id": 5,
@@ -86,16 +38,16 @@
       "metric_value": 49.58,
       "kill_criteria": "no accepted submission by 2026-09-28 or bottom quartile at close 2026-10-01 after 3 iterations",
       "status": "active",
-      "days_alive": 4.3,
-      "iterations": 85,
+      "days_alive": 5.2,
+      "iterations": 87,
       "min_iterations": 3,
       "min_days": 21,
       "kill_allowed": false,
       "last_iteration": {
-        "changed": "CrunchDAO submission #4 pushed and awaiting cloud validation; local deterministic tests 6/6 pass; submission #3 leaderboard rank 49.58% (below median); awaiting run outcome for #4 to update rank",
-        "result": "submission_4_pending_validation"
+        "changed": "Created task #523 for prime to handle CrunchDAO authentication check",
+        "result": "Task created; awaiting prime to login and check submission #4 status"
       },
-      "review_in_days": 0.7,
+      "review_in_days": -0.3,
       "project_dir": "crunchdao-structural-break",
       "repo": "rodion-place-org/crunchdao-structural-break",
       "jurisdiction": "USDC wallet (none-needed); prize KYC to verify"
@@ -109,9 +61,9 @@
       "hypothesis": "a timestamped paper ledger of forecasts on Polymarket/Kalshi public data, scored vs time-matched prices after fees, shows Brier better than market on at least one category within 350 resolutions",
       "metric_name": "brier_delta_vs_market",
       "metric_value": 0.0,
-      "kill_criteria": "not better than market after 350 resolved predictions, or sponsor stops",
+      "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 8.7,
+      "days_alive": 9.6,
       "iterations": 148,
       "min_iterations": 4,
       "min_days": 60,
@@ -120,7 +72,7 @@
         "changed": "paper cycle: Polymarket 100 events fetched, 0 new distinct predictions appended (3686 known), 100 oldest unscored checked with 0 newly resolved; total scored increased from 32 to 45 (13 additional resolutions captured); mean Brier delta vs market baseline remains 0.000000; LLM model llm-reasoned-forecast-v1 (11 forecasts) pending resolution",
         "result": "routine_cycle_scored_increase"
       },
-      "review_in_days": 5.7,
+      "review_in_days": 4.7,
       "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
       "jurisdiction": "paper only; live route requires sponsor decision"
@@ -136,28 +88,28 @@
       "metric_value": 0.0,
       "kill_criteria": "0 merged+paid after 10 complete submissions across >=3 payers and >=5 iterations",
       "status": "active",
-      "days_alive": 8.7,
-      "iterations": 34,
+      "days_alive": 9.6,
+      "iterations": 37,
       "min_iterations": 5,
       "min_days": 42,
       "kill_allowed": false,
       "last_iteration": {
-        "changed": "discovery channel: Superteam authenticated agent API check - awaiting credentialed agent route result",
-        "result": "awaiting agent route result"
+        "changed": "window_days: 90->180 on 10 orgs (seed 8 + 2 discovered)",
+        "result": "2/10 orgs qualify at 180d: archestra-ai (10), activepieces (8); both were at 4/5 at 90d"
       },
-      "review_in_days": 5.7,
+      "review_in_days": 4.7,
       "project_dir": "bounty-scout",
       "repo": "rodion-place-org/bounty-scout",
       "jurisdiction": "USDC wallet none-needed; Stripe Connect / talent profile requires sponsor identity"
     }
   ],
   "summary": {
-    "total_ventures": 6,
-    "active_ventures": 6,
-    "probes": 6,
-    "tracks": {"products": 2, "forecasting": 2, "markets": 1, "bounties": 1},
+    "total_ventures": 4,
+    "active_ventures": 4,
+    "probes": 4,
+    "tracks": {"forecasting": 2, "markets": 1, "bounties": 1},
     "money_in_usd": 0.0,
     "money_out_usd": 0.0,
-    "ventures_at_kill_gate": 2
+    "ventures_at_kill_gate": 0
   }
 }
