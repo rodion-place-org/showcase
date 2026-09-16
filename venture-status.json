@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T06:15:50.736840Z",
+  "generated_at": "2026-09-16T06:51:27.317078Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -92,14 +92,14 @@
       "kill_criteria": "0 merged+paid after 10 complete submissions across >=3 payers and >=5 iterations",
       "status": "active",
       "days_alive": 9.9,
-      "iterations": 46,
+      "iterations": 47,
       "min_iterations": 5,
       "min_days": 42,
       "kill_allowed": false,
       "last_iteration": {
-        "ts": 1789539219.1640985,
-        "changed": "Added eligibility check for open bounties (GitHub state=open and comments<=3); found 1 actionable bounty: tscircuit/autorouting#92 for 0",
-        "result": "1 actionable bounty identified, ready for submission"
+        "ts": 1789540797.0582051,
+        "changed": "Expanded Algora org corpus scan: tested 8 orgs (tscircuit, archestra-ai, screenpipe, activepieces, qdrant, calcom, mudlet, tursodatabase) for velocity >=5/90d. Result: 0 qualified payers (max 4 for archestra-ai/activepieces). Only eligible bounty (tscircuit/autorouting#92, 0) is in ARCHIVED repo (read-only since 2025-08-15) - unactionable. Superteam track pending prime credentials.",
+        "result": "no_actionable_bounties_found"
       },
       "review_in_days": 4.5,
       "project_dir": "bounty-scout",
