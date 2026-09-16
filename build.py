@@ -122,9 +122,29 @@ def load_venture_status(project_root: Path) -> dict | None:
 def _sanitize_public(text: str) -> str:
     """Remove internal operational identifiers from public-facing text."""
     import re
-    # Remove task/need references with numbers
+    # Remove internal credential handling mechanism
+    text = re.sub(r'\bvia\s+with[- ]?secrets\b', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bwith[- ]?secrets\b', '', text, flags=re.IGNORECASE)
+    # Remove internal agent references
+    text = re.sub(r'\bwith\s+prime\s+checks?\b', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bprime\b', '', text, flags=re.IGNORECASE)
+    # Remove internal model names (llm-*-v* pattern)
+    text = re.sub(r'\bllm-[a-z0-9-]+-v\d+\b', '', text, flags=re.IGNORECASE)
+    # Remove internal task/need references with numbers (any case)
     text = re.sub(r'\btask\s*#\s*\d+\b', '', text, flags=re.IGNORECASE)
     text = re.sub(r'\bneed\s*#\s*\d+\b', '', text, flags=re.IGNORECASE)
+    # Remove bare #N references in internal context (e.g., "when #523 completes", "on #3")
+    text = re.sub(r'\b(on|when)\s*#\d+\b', '', text, flags=re.IGNORECASE)
+    # Remove submission #N when it's an internal task reference, keep "submission"
+    text = re.sub(r'\bsubmission\s*#\d+\b', 'submission', text, flags=re.IGNORECASE)
+    # Fix specific awkward patterns left by above removals
+    text = re.sub(r'\bpending\s+submission\s+cloud\b', 'pending cloud', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bbelow median\s+but\b', 'below median, but', text, flags=re.IGNORECASE)
+    text = re.sub(r'\.\s*submission\s+status\.', '. ', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bin\s+\d+h\s+or\s+completes\.', ' when ready.', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bor\s+completes\.', ' when ready.', text, flags=re.IGNORECASE)
+    # Fix GitHub issue reference formatting
+    text = re.sub(r'(\w+)#(\d+)', r'\1 #\2', text)
     # Remove internal paths
     text = text.replace('/srv/rodion', '')
     # Remove internal IPs
@@ -133,6 +153,12 @@ def _sanitize_public(text: str) -> str:
     text = text.replace('ledger snapshot', '')
     # Clean up any double spaces left by removals
     text = re.sub(r'\s{2,}', ' ', text)
+    # Clean up dangling punctuation
+    text = re.sub(r'\s+([,.;:])', r'\1', text)
+    text = re.sub(r'([,.;:])\s+([,.;:])', r'\1 ', text)
+    # Clean up leading/trailing conjunctions/prepositions at clause boundaries
+    text = re.sub(r'[;,:]\s*(and|or|but|with|via)\s+', '; ', text, flags=re.IGNORECASE)
+    text = re.sub(r'\s+(and|or|but|with|via)\s*[;,:]', '', text, flags=re.IGNORECASE)
     return text.strip()
 
 
