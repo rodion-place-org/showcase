@@ -119,6 +119,23 @@ def load_venture_status(project_root: Path) -> dict | None:
     return None
 
 
+def _sanitize_public(text: str) -> str:
+    """Remove internal operational identifiers from public-facing text."""
+    import re
+    # Remove task/need references with numbers
+    text = re.sub(r'\btask\s*#\s*\d+\b', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bneed\s*#\s*\d+\b', '', text, flags=re.IGNORECASE)
+    # Remove internal paths
+    text = text.replace('/srv/rodion', '')
+    # Remove internal IPs
+    text = text.replace('10.10.5.15', '')
+    # Remove "ledger snapshot"
+    text = text.replace('ledger snapshot', '')
+    # Clean up any double spaces left by removals
+    text = re.sub(r'\s{2,}', ' ', text)
+    return text.strip()
+
+
 def build_venture_status_page(venture_data: dict | None) -> str:
     """Generate the venture status page HTML."""
     if venture_data is None:
@@ -170,8 +187,8 @@ def build_venture_status_page(venture_data: dict | None) -> str:
         # Last iteration
         iter_html = ""
         if last_iteration:
-            changed = last_iteration.get("changed", "")
-            result = last_iteration.get("result", "")
+            changed = _sanitize_public(last_iteration.get("changed", ""))
+            result = _sanitize_public(last_iteration.get("result", ""))
             iter_html = f"""
             <details>
               <summary>Last iteration</summary>

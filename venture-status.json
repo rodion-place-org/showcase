@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T00:20:00Z",
+  "generated_at": "2026-09-16T01:51:04.435570Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -19,13 +19,14 @@
       "min_days": 42,
       "kill_allowed": false,
       "last_iteration": {
-        "changed": "MiniBench/tournament check: 0 open questions in both AI competition 33022 and MiniBench; bot runtime fully operational; test_questions dry-run 10/10 successful; awaiting MiniBench round opening for ranked submission",
+        "ts": 1789397372.8614695,
+        "changed": "MiniBench/tournament check: 0 open questions in both AI competition 33022 and MiniBench; bot runtime fully operational with token and LLM keys via with-secrets; test_questions dry-run 10/10 successful; awaiting MiniBench round opening for ranked submission",
         "result": "ready_awaiting_minibench"
       },
       "review_in_days": 4.7,
       "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
-      "jurisdiction": "none-needed to enter; prize verification by sponsor"
+      "jurisdiction": "none-needed to enter; John verifies once as prize winner"
     },
     {
       "id": 5,
@@ -38,14 +39,15 @@
       "metric_value": 49.58,
       "kill_criteria": "no accepted submission by 2026-09-28 or bottom quartile at close 2026-10-01 after 3 iterations",
       "status": "active",
-      "days_alive": 5.2,
-      "iterations": 87,
+      "days_alive": 5.3,
+      "iterations": 88,
       "min_iterations": 3,
       "min_days": 21,
       "kill_allowed": false,
       "last_iteration": {
-        "changed": "Created task for prime to handle CrunchDAO authentication check",
-        "result": "Task created; awaiting prime to login and check submission #4 status"
+        "ts": 1789522299.4487221,
+        "changed": "Decision: pause pending submission #4 cloud validation result; rank 49.58% below median on #3 but persistence gate met (87 iters, 9.7d). Task #523 with prime checks submission #4 status. Next review in 24h or when #523 completes.",
+        "result": "paused_awaiting_submission_4_validation"
       },
       "review_in_days": -0.3,
       "project_dir": "crunchdao-structural-break",
@@ -61,21 +63,22 @@
       "hypothesis": "a timestamped paper ledger of forecasts on Polymarket/Kalshi public data, scored vs time-matched prices after fees, shows Brier better than market on at least one category within 350 resolutions",
       "metric_name": "brier_delta_vs_market",
       "metric_value": 0.0,
-      "kill_criteria": "not better than market after 350 resolved predictions, or sponsor stops",
+      "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 9.6,
+      "days_alive": 9.7,
       "iterations": 148,
       "min_iterations": 4,
       "min_days": 60,
       "kill_allowed": false,
       "last_iteration": {
+        "ts": 1789397372.3660595,
         "changed": "paper cycle: Polymarket 100 events fetched, 0 new distinct predictions appended (3686 known), 100 oldest unscored checked with 0 newly resolved; total scored increased from 32 to 45 (13 additional resolutions captured); mean Brier delta vs market baseline remains 0.000000; LLM model llm-reasoned-forecast-v1 (11 forecasts) pending resolution",
         "result": "routine_cycle_scored_increase"
       },
       "review_in_days": 4.7,
       "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
-      "jurisdiction": "paper only; live route requires sponsor decision"
+      "jurisdiction": "paper only; live route (Polymarket/Kalshi/Kraken via John's non-AU identity) = John decision need"
     },
     {
       "id": 7,
@@ -88,28 +91,33 @@
       "metric_value": 0.0,
       "kill_criteria": "0 merged+paid after 10 complete submissions across >=3 payers and >=5 iterations",
       "status": "active",
-      "days_alive": 9.6,
-      "iterations": 37,
+      "days_alive": 9.7,
+      "iterations": 42,
       "min_iterations": 5,
       "min_days": 42,
       "kill_allowed": false,
       "last_iteration": {
-        "changed": "window_days: 90->180 on 10 orgs (seed 8 + 2 discovered)",
-        "result": "2/10 orgs qualify at 180d: archestra-ai (10), activepieces (8); both were at 4/5 at 90d"
+        "ts": 1789523391.859916,
+        "changed": "Eligibility check on 10 unique issues across 6 qualified payers (tscircuit, mudlet, cal, projectdiscovery, capsoftware, mediar-ai): only 1 eligible (autorouting#92, 0, 3 comments, open) but repo is ARCHIVED since Aug 15 2025 - unactionable; 0 actionable bounties this cycle",
+        "result": "no_actionable_bounties_archived_repo_blocker"
       },
       "review_in_days": 4.7,
       "project_dir": "bounty-scout",
       "repo": "rodion-place-org/bounty-scout",
-      "jurisdiction": "USDC wallet none-needed; Stripe Connect / talent profile requires sponsor identity"
+      "jurisdiction": "Stripe Connect / Superteam talent profile = John identity need; USDC wallet none-needed"
     }
   ],
   "summary": {
     "total_ventures": 4,
     "active_ventures": 4,
     "probes": 4,
-    "tracks": {"forecasting": 2, "markets": 1, "bounties": 1},
-    "money_in_usd": 0.0,
-    "money_out_usd": 0.0,
+    "tracks": {
+      "forecasting": 2,
+      "markets": 1,
+      "bounties": 1
+    },
+    "money_in_usd": 0,
+    "money_out_usd": 0,
     "ventures_at_kill_gate": 0
   }
 }
