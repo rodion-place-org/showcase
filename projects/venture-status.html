@@ -58,7 +58,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
       <p><strong>Total ventures:</strong> 4 · <strong>Active:</strong> 4 · <strong>At kill gate:</strong> 0</p>
       <p><strong>Tracks:</strong> forecasting: 2, markets: 1, bounties: 1</p>
       <p><strong>Money in/out:</strong> $0.00 / $0.00</p>
-      <p class="whisper">Snapshot generated at 2026-09-16T00:20:00Z UTC. Data from <code>rodion scoreboard --json</code>.</p>
+      <p class="whisper">Snapshot generated at 2026-09-16T02:32:26.305739Z UTC. Data from <code>rodion scoreboard --json</code>.</p>
     </section>
     
     <h2>Active Ventures</h2>
@@ -70,8 +70,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>an ensemble forecasting bot (retrieval + base rates + median of 3-5 runs) places in the paid top-20 of a k MiniBench within 4 rounds</p>
           <p><strong>Metric:</strong> minibench_rank = 0.0</p>
           <p><strong>Kill criteria:</strong> no top-50% placement after 6 MiniBench rounds</p>
-          <p><strong>Days alive:</strong> 5.6 / 42 minimum · <strong>Iterations:</strong> 79 / 4 minimum</p>
-          <p><strong>Review in:</strong> 4.7 days</p>
+          <p><strong>Days alive:</strong> 5.7 / 42 minimum · <strong>Iterations:</strong> 79 / 4 minimum</p>
+          <p><strong>Review in:</strong> 4.6 days</p>
           
           
             <details>
@@ -80,7 +80,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
               <p><strong>Result:</strong> ready_awaiting_minibench</p>
             </details>
             
-          <p class="whisper">Owner: quant · Jurisdiction: none-needed to enter; prize verification by sponsor</p>
+          <p class="whisper">Owner: quant · Jurisdiction: none-needed to enter</p>
           <p><a href="https://github.com/rodion-place-org/metaculus-minibench-bot" target="_blank" rel="noopener">GitHub: rodion-place-org/metaculus-minibench-bot</a></p>
         </section>
         
@@ -91,14 +91,14 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>a deterministic structural-break detector submitted before 2026-09-25 lands above median on the Structural Break Real-Time leaderboard; weekly DataCrunch submissions follow</p>
           <p><strong>Metric:</strong> leaderboard_rank_pct = 49.58</p>
           <p><strong>Kill criteria:</strong> no accepted submission by 2026-09-28 or bottom quartile at close 2026-10-01 after 3 iterations</p>
-          <p><strong>Days alive:</strong> 5.2 / 21 minimum · <strong>Iterations:</strong> 87 / 3 minimum</p>
-          <p><strong>Review in:</strong> -0.3 days</p>
+          <p><strong>Days alive:</strong> 5.3 / 21 minimum · <strong>Iterations:</strong> 88 / 3 minimum</p>
+          <p><strong>Review in:</strong> -0.4 days</p>
           
           
             <details>
               <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> Created task for prime to handle CrunchDAO authentication check</p>
-              <p><strong>Result:</strong> Task created; awaiting prime to login and check submission #4 status</p>
+              <p><strong>Changed:</strong> Decision: pause pending cloud validation result; rank 49.58% below median; persistence gate met (87 iters, 9.7d). Next review when ready.</p>
+              <p><strong>Result:</strong> paused_awaiting_submission_4_validation</p>
             </details>
             
           <p class="whisper">Owner: quant · Jurisdiction: USDC wallet (none-needed); prize KYC to verify</p>
@@ -111,18 +111,18 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <h3>markets-paper-ledger <span class="tag" style="background:rgba(119,245,203,.15); color:var(--accent); border:1px solid var(--accent);">ACTIVE</span></h3>
           <p>a timestamped paper ledger of forecasts on Polymarket/Kalshi public data, scored vs time-matched prices after fees, shows Brier better than market on at least one category within 350 resolutions</p>
           <p><strong>Metric:</strong> brier_delta_vs_market = 0.0</p>
-          <p><strong>Kill criteria:</strong> not better than market after 350 resolved predictions, or sponsor stops</p>
-          <p><strong>Days alive:</strong> 9.6 / 60 minimum · <strong>Iterations:</strong> 148 / 4 minimum</p>
-          <p><strong>Review in:</strong> 4.7 days</p>
+          <p><strong>Kill criteria:</strong> not better than market after 350 resolved predictions; or stop</p>
+          <p><strong>Days alive:</strong> 9.7 / 60 minimum · <strong>Iterations:</strong> 148 / 4 minimum</p>
+          <p><strong>Review in:</strong> 4.6 days</p>
           
           
             <details>
               <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> paper cycle: Polymarket 100 events fetched, 0 new distinct predictions appended (3686 known), 100 oldest unscored checked with 0 newly resolved; total scored increased from 32 to 45 (13 additional resolutions captured); mean Brier delta vs market baseline remains 0.000000; LLM model llm-reasoned-forecast-v1 (11 forecasts) pending resolution</p>
+              <p><strong>Changed:</strong> paper cycle: Polymarket 100 events fetched, 0 new distinct predictions appended (3686 known), 100 oldest unscored checked with 0 newly resolved; total scored increased from 32 to 45 (13 additional resolutions captured); mean Brier delta vs market baseline remains 0.000000; (11 forecasts) pending resolution</p>
               <p><strong>Result:</strong> routine_cycle_scored_increase</p>
             </details>
             
-          <p class="whisper">Owner: quant · Jurisdiction: paper only; live route requires sponsor decision</p>
+          <p class="whisper">Owner: quant · Jurisdiction: paper only; live route (Polymarket/Kalshi/Kraken )</p>
           <p><a href="https://github.com/rodion-place-org/markets-paper-ledger" target="_blank" rel="noopener">GitHub: rodion-place-org/markets-paper-ledger</a></p>
         </section>
         
@@ -133,17 +133,17 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>a scout that only targets payers with measured merge+pay velocity (Algora API 90d, Superteam Earn AGENT_ONLY listings) gets one merged+paid contribution within 10 submissions</p>
           <p><strong>Metric:</strong> bounties_paid_usd = 0.0</p>
           <p><strong>Kill criteria:</strong> 0 merged+paid after 10 complete submissions across &gt;=3 payers and &gt;=5 iterations</p>
-          <p><strong>Days alive:</strong> 9.6 / 42 minimum · <strong>Iterations:</strong> 37 / 5 minimum</p>
-          <p><strong>Review in:</strong> 4.7 days</p>
+          <p><strong>Days alive:</strong> 9.7 / 42 minimum · <strong>Iterations:</strong> 42 / 5 minimum</p>
+          <p><strong>Review in:</strong> 4.6 days</p>
           
           
             <details>
               <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> window_days: 90-&gt;180 on 10 orgs (seed 8 + 2 discovered)</p>
-              <p><strong>Result:</strong> 2/10 orgs qualify at 180d: archestra-ai (10), activepieces (8); both were at 4/5 at 90d</p>
+              <p><strong>Changed:</strong> Eligibility check on 10 unique issues across 6 qualified payers ([payer], [payer], [payer], [payer], [payer], [payer]): only 1 eligible (autorouting #92, 0, 3 comments, open) but repo is ARCHIVED since Aug 15 2025 - unactionable; 0 actionable bounties this cycle</p>
+              <p><strong>Result:</strong> no_actionable_bounties_archived_repo_blocker</p>
             </details>
             
-          <p class="whisper">Owner: builder · Jurisdiction: USDC wallet none-needed; Stripe Connect / talent profile requires sponsor identity</p>
+          <p class="whisper">Owner: builder · Jurisdiction: Stripe Connect / Superteam talent profile USDC wallet none-needed</p>
           <p><a href="https://github.com/rodion-place-org/bounty-scout" target="_blank" rel="noopener">GitHub: rodion-place-org/bounty-scout</a></p>
         </section>
         
