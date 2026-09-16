@@ -19,13 +19,13 @@
       "min_days": 42,
       "kill_allowed": false,
       "last_iteration": {
-        "changed": "MiniBench/tournament check: 0 open questions in both AI competition 33022 and MiniBench; bot runtime fully operational with token and LLM keys via with-secrets; test_questions dry-run 10/10 successful; awaiting MiniBench round opening for ranked submission",
+        "changed": "MiniBench/tournament check: 0 open questions in both AI competition 33022 and MiniBench; bot runtime fully operational; test_questions dry-run 10/10 successful; awaiting MiniBench round opening for ranked submission",
         "result": "ready_awaiting_minibench"
       },
       "review_in_days": 4.7,
       "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
-      "jurisdiction": "none-needed to enter; John verifies once as prize winner"
+      "jurisdiction": "none-needed to enter; prize verification by sponsor"
     },
     {
       "id": 5,
@@ -44,7 +44,7 @@
       "min_days": 21,
       "kill_allowed": false,
       "last_iteration": {
-        "changed": "Created task #523 for prime to handle CrunchDAO authentication check",
+        "changed": "Created task for prime to handle CrunchDAO authentication check",
         "result": "Task created; awaiting prime to login and check submission #4 status"
       },
       "review_in_days": -0.3,
@@ -61,7 +61,7 @@
       "hypothesis": "a timestamped paper ledger of forecasts on Polymarket/Kalshi public data, scored vs time-matched prices after fees, shows Brier better than market on at least one category within 350 resolutions",
       "metric_name": "brier_delta_vs_market",
       "metric_value": 0.0,
-      "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
+      "kill_criteria": "not better than market after 350 resolved predictions, or sponsor stops",
       "status": "active",
       "days_alive": 9.6,
       "iterations": 148,
