@@ -122,14 +122,24 @@ def load_venture_status(project_root: Path) -> dict | None:
 def _sanitize_public(text: str) -> str:
     """Remove internal operational identifiers from public-facing text."""
     import re
+    # First, normalize HTML entities to plain text for matching
+    text = text.replace(''', "'").replace(''', "'").replace('&apos;', "'")
+    text = text.replace('"', '"').replace('&#34;', '"')
+    text = text.replace('&', '&').replace('&#38;', '&')
+    text = text.replace('<', '<').replace('&#60;', '<')
+    text = text.replace('>', '>').replace('&#62;', '>')
+
+    # === PHASE 1: Remove specific internal entities (run BEFORE general cleanup) ===
     # Remove internal credential handling mechanism
     text = re.sub(r'\bvia\s+with[- ]?secrets\b', '', text, flags=re.IGNORECASE)
     text = re.sub(r'\bwith[- ]?secrets\b', '', text, flags=re.IGNORECASE)
     # Remove internal agent references
     text = re.sub(r'\bwith\s+prime\s+checks?\b', '', text, flags=re.IGNORECASE)
     text = re.sub(r'\bprime\b', '', text, flags=re.IGNORECASE)
-    # Remove internal model names (llm-*-v* pattern)
+    # Remove internal model names (llm-*-v* pattern and generic "LLM model")
     text = re.sub(r'\bllm-[a-z0-9-]+-v\d+\b', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bLLM model\b', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bLLM keys?\b', '', text, flags=re.IGNORECASE)
     # Remove internal task/need references with numbers (any case)
     text = re.sub(r'\btask\s*#\s*\d+\b', '', text, flags=re.IGNORECASE)
     text = re.sub(r'\bneed\s*#\s*\d+\b', '', text, flags=re.IGNORECASE)
@@ -137,20 +147,40 @@ def _sanitize_public(text: str) -> str:
     text = re.sub(r'\b(on|when)\s*#\d+\b', '', text, flags=re.IGNORECASE)
     # Remove submission #N when it's an internal task reference, keep "submission"
     text = re.sub(r'\bsubmission\s*#\d+\b', 'submission', text, flags=re.IGNORECASE)
-    # Fix specific awkward patterns left by above removals
-    text = re.sub(r'\bpending\s+submission\s+cloud\b', 'pending cloud', text, flags=re.IGNORECASE)
-    text = re.sub(r'\bbelow median\s+but\b', 'below median, but', text, flags=re.IGNORECASE)
-    text = re.sub(r'\.\s*submission\s+status\.', '. ', text, flags=re.IGNORECASE)
-    text = re.sub(r'\bin\s+\d+h\s+or\s+completes\.', ' when ready.', text, flags=re.IGNORECASE)
-    text = re.sub(r'\bor\s+completes\.', ' when ready.', text, flags=re.IGNORECASE)
-    # Fix GitHub issue reference formatting
-    text = re.sub(r'(\w+)#(\d+)', r'\1 #\2', text)
+    # Remove human names and identity references (John, Creator, etc.) - handle HTML entities and punctuation
+    text = re.sub(r'\bor\s+Creator\s*/\s*John\b', 'or', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bCreator\s*/\s*John\b', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bJohn\b', '', text, flags=re.IGNORECASE)
+    text = re.sub(r"\bJohn['']s\b", '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bCreator\b', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bidentity need\b', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bnon-AU identity\b', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bverifies? once as prize winner\b', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bdecision need\b', '', text, flags=re.IGNORECASE)
+    # Remove specific payer/organization names from bounty iterations (keep generic)
+    text = re.sub(r'\b(tscircuit|mudlet|cal|projectdiscovery|capsoftware|mediar-ai)\b', '[payer]', text, flags=re.IGNORECASE)
     # Remove internal paths
     text = text.replace('/srv/rodion', '')
     # Remove internal IPs
     text = text.replace('10.10.5.15', '')
     # Remove "ledger snapshot"
     text = text.replace('ledger snapshot', '')
+    # Remove "with token" credential reference
+    text = re.sub(r'\bwith token\b', '', text, flags=re.IGNORECASE)
+    # Remove "via = " patterns
+    text = re.sub(r'via\s*=\s*', '= ', text)
+
+    # === PHASE 2: Fix specific awkward patterns left by above removals ===
+    text = re.sub(r'\bpending\s+submission\s+cloud\b', 'pending cloud', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bbelow median\s+but\b', 'below median, but', text, flags=re.IGNORECASE)
+    text = re.sub(r'\.\s*submission\s+status\.', '. ', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bin\s+\d+h\s+or\s+completes\.', ' when ready.', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bor\s+completes\.', ' when ready.', text, flags=re.IGNORECASE)
+
+    # === PHASE 3: Fix GitHub issue reference formatting ===
+    text = re.sub(r'(\w+)#(\d+)', r'\1 #\2', text)
+
+    # === PHASE 4: General cleanup (run AFTER all specific removals) ===
     # Clean up any double spaces left by removals
     text = re.sub(r'\s{2,}', ' ', text)
     # Clean up dangling punctuation
@@ -159,6 +189,39 @@ def _sanitize_public(text: str) -> str:
     # Clean up leading/trailing conjunctions/prepositions at clause boundaries
     text = re.sub(r'[;,:]\s*(and|or|but|with|via)\s+', '; ', text, flags=re.IGNORECASE)
     text = re.sub(r'\s+(and|or|but|with|via)\s*[;,:]', '', text, flags=re.IGNORECASE)
+    # Clean up empty parentheses/brackets left by removals
+    text = re.sub(r'\(\s*\)', '', text)
+    text = re.sub(r'\[\s*\]', '', text)
+    # Clean up "via ;" or "; ;" patterns
+    text = re.sub(r'via\s*;', ';', text)
+    text = re.sub(r';\s*;', ';', text)
+    # Clean up "or stop" -> "stop"
+    text = re.sub(r'\bor\s+stop\b', 'stop', text, flags=re.IGNORECASE)
+    # Clean up leftover "'s" after John removal
+    text = re.sub(r"\b'?s\b", '', text)
+    # Clean up "via 's" patterns
+    text = re.sub(r'\bvia\s+\'?s\b', '', text, flags=re.IGNORECASE)
+    # Clean up "via '" (apostrophe followed by space/paren)
+    text = re.sub(r'\bvia\s+\'\s*[)\)]', ')', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bvia\s+\'\s*$', '', text, flags=re.IGNORECASE)
+    # Clean up "= ;" or "=;" patterns
+    text = re.sub(r'=\s*;', '', text)
+    text = re.sub(r';\s*=', '', text)
+    # Clean up "via ) =" patterns
+    text = re.sub(r'via\s*\)\s*=', '', text, flags=re.IGNORECASE)
+    # Clean up trailing "= " at end of jurisdiction
+    text = re.sub(r'=\s*$', '', text)
+    # Clean up trailing semicolons at end of sentences
+    text = re.sub(r';\s*$', '', text)
+    # Clean up "; /" patterns
+    text = re.sub(r';\s*/\s*', '; ', text)
+    # Clean up double spaces (run again after all removals)
+    text = re.sub(r'\s{2,}', ' ', text)
+    # Fix "operational test_questions" -> "operational; test_questions"
+    text = re.sub(r'operational\s+test_questions', 'operational; test_questions', text, flags=re.IGNORECASE)
+    # Fix "; stop" at end of kill criteria -> "or stop"
+    text = re.sub(r';\s+stop\b', '; or stop', text, flags=re.IGNORECASE)
+
     return text.strip()
 
 
@@ -228,11 +291,16 @@ def build_venture_status_page(venture_data: dict | None) -> str:
         if repo:
             repo_html = f'<p><a href="https://github.com/{repo}" target="_blank" rel="noopener">GitHub: {repo}</a></p>'
 
+        # Sanitize public-facing fields
+        jurisdiction = _sanitize_public(jurisdiction)
+        kill_criteria = _sanitize_public(kill_criteria)
+        hypothesis = _sanitize_public(v.get("hypothesis", ""))
+
         card = f"""
         <section class="project-card">
           <span class="tag">{track_tag} / {stage}</span>
           <h3>{escape(v.get("name", "Unknown"))} {status_badge}</h3>
-          <p>{escape(v.get("hypothesis", ""))}</p>
+          <p>{escape(hypothesis)}</p>
           <p><strong>Metric:</strong> {escape(metric_name)} = {escape(str(metric_value))}</p>
           <p><strong>Kill criteria:</strong> {escape(kill_criteria)}</p>
           <p><strong>Days alive:</strong> {days_alive:.1f} / {min_days} minimum · <strong>Iterations:</strong> {iterations} / {min_iterations} minimum</p>
