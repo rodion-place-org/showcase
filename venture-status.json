@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T10:47:57.104632Z",
+  "generated_at": "2026-09-17T07:07:53.675568Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -13,7 +13,7 @@
       "metric_value": 0.0,
       "kill_criteria": "no top-50% placement after 6 MiniBench rounds",
       "status": "active",
-      "days_alive": 6.0,
+      "days_alive": 6.9,
       "iterations": 79,
       "min_iterations": 4,
       "min_days": 42,
@@ -23,7 +23,7 @@
         "changed": "MiniBench/tournament check: 0 open questions in both AI competition 33022 and MiniBench; bot runtime fully operational with token and LLM keys via with-secrets; test_questions dry-run 10/10 successful; awaiting MiniBench round opening for ranked submission",
         "result": "ready_awaiting_minibench"
       },
-      "review_in_days": 4.3,
+      "review_in_days": 3.5,
       "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
       "jurisdiction": "none-needed to enter; John verifies once as prize winner"
@@ -39,7 +39,7 @@
       "metric_value": 49.58,
       "kill_criteria": "no accepted submission by 2026-09-28 or bottom quartile at close 2026-10-01 after 3 iterations",
       "status": "active",
-      "days_alive": 5.7,
+      "days_alive": 6.5,
       "iterations": 90,
       "min_iterations": 3,
       "min_days": 21,
@@ -49,7 +49,7 @@
         "changed": "Decision: continue pause awaiting submission #4 cloud validation; task #523 (prime auth check) still open after ~26h; competition ends 2026-10-01, kill criteria deadline 2026-09-28 for accepted submission; persistence gate min_days=21 not yet met (10d elapsed), kill_ok=NO. Submission #3 accepted at 49.58% (below median, not bottom quartile). Hypothesis (above median) falsified for #3; #4 pending. Next review set for 2026-09-18 10:30 UTC (48h) or when #523 completes. If #4 doesn't beat median by next review, evaluate pivot/kill once min_days met (2026-09-27).",
         "result": "paused_awaiting_submission_4_validation_continued_2"
       },
-      "review_in_days": -0.7,
+      "review_in_days": -1.5,
       "project_dir": "crunchdao-structural-break",
       "repo": "rodion-place-org/crunchdao-structural-break",
       "jurisdiction": "USDC wallet (none-needed); prize KYC to verify"
@@ -65,7 +65,7 @@
       "metric_value": 0.0,
       "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 10.1,
+      "days_alive": 10.9,
       "iterations": 148,
       "min_iterations": 4,
       "min_days": 60,
@@ -75,7 +75,7 @@
         "changed": "paper cycle: Polymarket 100 events fetched, 0 new distinct predictions appended (3686 known), 100 oldest unscored checked with 0 newly resolved; total scored increased from 32 to 45 (13 additional resolutions captured); mean Brier delta vs market baseline remains 0.000000; LLM model llm-reasoned-forecast-v1 (11 forecasts) pending resolution",
         "result": "routine_cycle_scored_increase"
       },
-      "review_in_days": 4.3,
+      "review_in_days": 3.5,
       "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
       "jurisdiction": "paper only; live route (Polymarket/Kalshi/Kraken via John's non-AU identity) = John decision need"
@@ -91,17 +91,17 @@
       "metric_value": 0.0,
       "kill_criteria": "0 merged+paid after 10 complete submissions across >=3 payers and >=5 iterations",
       "status": "active",
-      "days_alive": 10.1,
-      "iterations": 51,
+      "days_alive": 10.9,
+      "iterations": 53,
       "min_iterations": 5,
       "min_days": 42,
       "kill_allowed": false,
       "last_iteration": {
-        "ts": 1789547467.5944653,
-        "changed": "routine cycle: open-bounties scan + Algora competition gate check on 8 unique issues -> 1 eligible (autorouting#92, 0, 0 Algora claims)",
-        "result": "1 actionable bounty found, 7 rejected by competition gate"
+        "ts": 1789624902.2908797,
+        "changed": "Implemented fix for tscircuit/autorouting#92: changed getNeighbors() filter from node.parent?.obstacleHit to node.obstacleHit in MultilayerIjump.ts lines 350-357. Fix allows forward direction when parent hit obstacle but current node did not, enabling overcomeDistance logic to work. Documented in data/tscircuit-autorouting-92-fix.md. Repo archived prevents PR submission.",
+        "result": "Fix implemented and documented. Reproduction confirmed via repro1 test timeout. Cannot submit PR to archived repo. Venture evidence recorded."
       },
-      "review_in_days": 4.3,
+      "review_in_days": 3.5,
       "project_dir": "bounty-scout",
       "repo": "rodion-place-org/bounty-scout",
       "jurisdiction": "Stripe Connect / Superteam talent profile = John identity need; USDC wallet none-needed"

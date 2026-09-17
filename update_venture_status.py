@@ -4,7 +4,9 @@ import datetime
 import subprocess
 
 # Get scoreboard data
-result = subprocess.run(['rodion', 'scoreboard', '--json'], capture_output=True, text=True)
+result = subprocess.run(['/srv/rodion/projects/venv_builder/bin/rodion', 'scoreboard', '--json'], capture_output=True, text=True)
+if result.returncode != 0:
+    raise RuntimeError(f"rodion scoreboard failed: {result.stderr}")
 scoreboard = json.loads(result.stdout)
 
 # Convert to the format build.py expects
