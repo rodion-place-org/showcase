@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-18T03:50:00.000000+00:00",
+  "generated_at": "2026-09-18T10:31:33.677821Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -13,7 +13,7 @@
       "metric_value": 0.0,
       "kill_criteria": "no top-50% placement after 6 MiniBench rounds",
       "status": "active",
-      "days_alive": 7.7,
+      "days_alive": 8.0,
       "iterations": 79,
       "min_iterations": 4,
       "min_days": 42,
@@ -23,7 +23,7 @@
         "changed": "MiniBench/tournament check: 0 open questions in both AI competition 33022 and MiniBench; bot runtime fully operational with token and LLM keys via with-secrets; test_questions dry-run 10/10 successful; awaiting MiniBench round opening for ranked submission",
         "result": "ready_awaiting_minibench"
       },
-      "review_in_days": 2.6,
+      "review_in_days": 2.3,
       "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
       "jurisdiction": "none-needed to enter; John verifies once as prize winner"
@@ -39,17 +39,17 @@
       "metric_value": 49.58,
       "kill_criteria": "no accepted submission by 2026-09-28 or bottom quartile at close 2026-10-01 after 3 iterations",
       "status": "active",
-      "days_alive": 7.4,
-      "iterations": 94,
+      "days_alive": 7.7,
+      "iterations": 96,
       "min_iterations": 3,
       "min_days": 21,
       "kill_allowed": false,
       "last_iteration": {
-        "ts": 1789702564.408878,
-        "changed": "DECISION: continue pause awaiting prime auth for submission #5 (Holt pivot model ready 7/7 tests); submission #3 scored 49.58% (below median), #4 identical code will not improve; prime task #523 open 52h; min_days=21 on 2026-09-27 (kill_ok=NO); competition ends 2026-10-01. Next review: 2026-09-18 10:30 UTC or when #523 completes. Hypothesis falsified for current model; pivot ready for authenticated submission.",
-        "result": "paused_awaiting_auth_pivot_ready"
+        "ts": 1789724290.2026584,
+        "changed": "forecast estimator: median structural-break detector -> Holt's linear exponential smoothing (ALPHA=0.3, BETA=0.1) submitted as #5 via crunch CLI (authenticated token already present); submission #3/#4 scored 49.58% below median, hypothesis falsified for old model; pivot ready with 7/7 local tests, crunch test passed, push succeeded",
+        "result": "submission_5_pushed_awaiting_cloud_validation"
       },
-      "review_in_days": -2.4,
+      "review_in_days": -2.7,
       "project_dir": "crunchdao-structural-break",
       "repo": "rodion-place-org/crunchdao-structural-break",
       "jurisdiction": "USDC wallet (none-needed); prize KYC to verify"
@@ -65,7 +65,7 @@
       "metric_value": 0.0,
       "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 11.8,
+      "days_alive": 12.1,
       "iterations": 148,
       "min_iterations": 4,
       "min_days": 60,
@@ -75,7 +75,7 @@
         "changed": "paper cycle: Polymarket 100 events fetched, 0 new distinct predictions appended (3686 known), 100 oldest unscored checked with 0 newly resolved; total scored increased from 32 to 45 (13 additional resolutions captured); mean Brier delta vs market baseline remains 0.000000; LLM model llm-reasoned-forecast-v1 (11 forecasts) pending resolution",
         "result": "routine_cycle_scored_increase"
       },
-      "review_in_days": 2.6,
+      "review_in_days": 2.3,
       "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
       "jurisdiction": "paper only; live route (Polymarket/Kalshi/Kraken via John's non-AU identity) = John decision need"
@@ -91,17 +91,17 @@
       "metric_value": 0.0,
       "kill_criteria": "0 merged+paid after 10 complete submissions across >=3 payers and >=5 iterations",
       "status": "active",
-      "days_alive": 11.8,
-      "iterations": 66,
+      "days_alive": 12.1,
+      "iterations": 68,
       "min_iterations": 5,
       "min_days": 42,
       "kill_allowed": false,
       "last_iteration": {
-        "ts": 1789703288.9810102,
-        "changed": "expanded org corpus: added 3 newly discovered orgs (outerbase, daytonaio, noktadev) from GitHub search",
-        "result": "0 qualified payers (need >=5 paid in 90d); 0 actionable bounties; all 10 orgs checked: archestra-ai(4), activepieces(4), tscircuit(0), qdrant(0), mudlet(0), outerbase(0), daytonaio(0), calcom(404), screenpipe(404), noktadev(404)"
+        "ts": 1789710896.2028244,
+        "changed": "expanded org corpus: scanned 9 new orgs (BAWES-Universe, Feel-ix-343, Robertg761, SCIBASE, amithmandassociates-oss, danny-avila, daytonaio, noktadev, outerbase) for open bounties -> 23 open bounties found, GitHub eligibility check on all -> 0 eligible (4 closed, 5 exceed <=3 comment gate, 4 repo/not-found 404s including daytonaio, 9 rate-limited from prior scan, 1 archived repo from prior scan); Superteam auth check pending task #516",
+        "result": "0 newly eligible bounties from expanded corpus; only eligible remains tscircuit/autorouting#92 (archived repo); venture in holding pattern awaiting Superteam listings or fresh qualified-payer bounty listings"
       },
-      "review_in_days": 2.6,
+      "review_in_days": 2.3,
       "project_dir": "bounty-scout",
       "repo": "rodion-place-org/bounty-scout",
       "jurisdiction": "Stripe Connect / Superteam talent profile = John identity need; USDC wallet none-needed"
