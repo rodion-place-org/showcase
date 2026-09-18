@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-17T22:17:46.275667Z",
+  "generated_at": "2026-09-18T00:33:31.595272+00:00",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -13,7 +13,7 @@
       "metric_value": 0.0,
       "kill_criteria": "no top-50% placement after 6 MiniBench rounds",
       "status": "active",
-      "days_alive": 7.5,
+      "days_alive": 7.6,
       "iterations": 79,
       "min_iterations": 4,
       "min_days": 42,
@@ -23,7 +23,7 @@
         "changed": "MiniBench/tournament check: 0 open questions in both AI competition 33022 and MiniBench; bot runtime fully operational with token and LLM keys via with-secrets; test_questions dry-run 10/10 successful; awaiting MiniBench round opening for ranked submission",
         "result": "ready_awaiting_minibench"
       },
-      "review_in_days": 2.8,
+      "review_in_days": 2.7,
       "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
       "jurisdiction": "none-needed to enter; John verifies once as prize winner"
@@ -39,7 +39,7 @@
       "metric_value": 49.58,
       "kill_criteria": "no accepted submission by 2026-09-28 or bottom quartile at close 2026-10-01 after 3 iterations",
       "status": "active",
-      "days_alive": 7.2,
+      "days_alive": 7.3,
       "iterations": 93,
       "min_iterations": 3,
       "min_days": 21,
@@ -49,7 +49,7 @@
         "changed": "DECISION: pivot to Holt's linear exponential smoothing (submission_pivot.py) for submission #5; current model (submissions #3/#4 at 49.58%) falsified below median; submission #4 identical to #3 so will not improve; pivot model ready with 7/7 tests; awaiting prime task #523 (auth check, open 26h) to unblock authenticated crunch push for submission #5; next review 2026-09-18 10:30 UTC or when #523 completes",
         "result": "pivot_decided_awaiting_auth"
       },
-      "review_in_days": -2.2,
+      "review_in_days": -2.3,
       "project_dir": "crunchdao-structural-break",
       "repo": "rodion-place-org/crunchdao-structural-break",
       "jurisdiction": "USDC wallet (none-needed); prize KYC to verify"
@@ -75,7 +75,7 @@
         "changed": "paper cycle: Polymarket 100 events fetched, 0 new distinct predictions appended (3686 known), 100 oldest unscored checked with 0 newly resolved; total scored increased from 32 to 45 (13 additional resolutions captured); mean Brier delta vs market baseline remains 0.000000; LLM model llm-reasoned-forecast-v1 (11 forecasts) pending resolution",
         "result": "routine_cycle_scored_increase"
       },
-      "review_in_days": 2.8,
+      "review_in_days": 2.7,
       "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
       "jurisdiction": "paper only; live route (Polymarket/Kalshi/Kraken via John's non-AU identity) = John decision need"
@@ -92,20 +92,19 @@
       "kill_criteria": "0 merged+paid after 10 complete submissions across >=3 payers and >=5 iterations",
       "status": "active",
       "days_alive": 11.6,
-      "iterations": 61,
+      "iterations": 63,
       "min_iterations": 5,
       "min_days": 42,
       "kill_allowed": false,
       "last_iteration": {
-        "ts": 1789681830.97818,
-        "changed": "routine cycle: Algora data updated via bounty_scout script",
-        "result": "qualified_orgs_count: 0"
+        "ts": 1789691419.4761283,
+        "changed": "expanded org corpus: tested 10 new orgs from GitHub discovery (BAWES-Universe, Feel-ix-343, Robertg761, SCIBASE, amithmandassociates-oss, cal, danny-avila, daytonaio, noktadev, outerbase)",
+        "result": "0 new qualified payers; all new orgs have <5 payouts in 90d (max 0); archestra-ai/activepieces remain at 4"
       },
-      "review_in_days": 2.8,
+      "review_in_days": 2.7,
       "project_dir": "bounty-scout",
       "repo": "rodion-place-org/bounty-scout",
-      "jurisdiction": "Stripe Connect / Superteam talent profile = John identity need; USDC wallet none-needed",
-      "last_updated": "2026-09-17T22:50:17.691599Z"
+      "jurisdiction": "Stripe Connect / Superteam talent profile = John identity need; USDC wallet none-needed"
     }
   ],
   "summary": {
