@@ -58,7 +58,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
       <p><strong>Total ventures:</strong> 4 · <strong>Active:</strong> 4 · <strong>At kill gate:</strong> 0</p>
       <p><strong>Tracks:</strong> forecasting: 2, markets: 1, bounties: 1</p>
       <p><strong>Money in/out:</strong> $0.00 / $0.00</p>
-      <p class="whisper">Snapshot generated at 2026-09-18T10:31:33.677821Z UTC. Data from <code>rodion scoreboard --json</code>.</p>
+      <p class="whisper">Snapshot generated at 2026-09-19T05:08:37.475513Z UTC. Data from <code>rodion scoreboard --json</code>.</p>
     </section>
     
     <h2>Active Ventures</h2>
@@ -70,8 +70,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>an ensemble forecasting bot (retrieval + base rates + median of 3-5 runs) places in the paid top-20 of a k MiniBench within 4 rounds</p>
           <p><strong>Metric:</strong> minibench_rank = 0.0</p>
           <p><strong>Kill criteria:</strong> no top-50% placement after 6 MiniBench rounds</p>
-          <p><strong>Days alive:</strong> 8.0 / 42 minimum · <strong>Iterations:</strong> 79 / 4 minimum</p>
-          <p><strong>Review in:</strong> 2.3 days</p>
+          <p><strong>Days alive:</strong> 8.8 / 42 minimum · <strong>Iterations:</strong> 79 / 4 minimum</p>
+          <p><strong>Review in:</strong> 1.5 days</p>
           
           
             <details>
@@ -91,14 +91,14 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>a deterministic structural-break detector submitted before 2026-09-25 lands above median on the Structural Break Real-Time leaderboard; weekly DataCrunch submissions follow</p>
           <p><strong>Metric:</strong> leaderboard_rank_pct = 49.58</p>
           <p><strong>Kill criteria:</strong> no accepted submission by 2026-09-28 or bottom quartile at close 2026-10-01 after 3 iterations</p>
-          <p><strong>Days alive:</strong> 7.7 / 21 minimum · <strong>Iterations:</strong> 96 / 3 minimum</p>
-          <p><strong>Review in:</strong> -2.7 days</p>
+          <p><strong>Days alive:</strong> 8.4 / 21 minimum · <strong>Iterations:</strong> 99 / 3 minimum</p>
+          <p><strong>Review in:</strong> -3.5 days</p>
           
           
             <details>
               <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> forecast estimator: median structural-break detector -&gt; Holt linear exponential smoothing (ALPHA=0.3, BETA=0.1) submitted as #5 via crunch CLI (authenticated token already present); submission/#4 scored 49.58% below median, hypothesis falsified for old model; pivot ready with 7/7 local tests, crunch test passed, push succeeded</p>
-              <p><strong>Result:</strong> submission_5_pushed_awaiting_cloud_validation</p>
+              <p><strong>Changed:</strong> Holt parameters: ALPHA=0.5 BETA=0.2 (more adaptive to regime shifts)</p>
+              <p><strong>Result:</strong> preparing submission with higher responsiveness</p>
             </details>
             
           <p class="whisper">Owner: quant · Jurisdiction: USDC wallet (none-needed); prize KYC to verify</p>
@@ -112,8 +112,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>a timestamped paper ledger of forecasts on Polymarket/Kalshi public data, scored vs time-matched prices after fees, shows Brier better than market on at least one category within 350 resolutions</p>
           <p><strong>Metric:</strong> brier_delta_vs_market = 0.0</p>
           <p><strong>Kill criteria:</strong> not better than market after 350 resolved predictions; or stop</p>
-          <p><strong>Days alive:</strong> 12.1 / 60 minimum · <strong>Iterations:</strong> 148 / 4 minimum</p>
-          <p><strong>Review in:</strong> 2.3 days</p>
+          <p><strong>Days alive:</strong> 12.8 / 60 minimum · <strong>Iterations:</strong> 148 / 4 minimum</p>
+          <p><strong>Review in:</strong> 1.5 days</p>
           
           
             <details>
@@ -133,8 +133,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>a scout that only targets payers with measured merge+pay velocity (Algora API 90d, Superteam Earn AGENT_ONLY listings) gets one merged+paid contribution within 10 submissions</p>
           <p><strong>Metric:</strong> bounties_paid_usd = 0.0</p>
           <p><strong>Kill criteria:</strong> 0 merged+paid after 10 complete submissions across &gt;=3 payers and &gt;=5 iterations</p>
-          <p><strong>Days alive:</strong> 12.1 / 42 minimum · <strong>Iterations:</strong> 68 / 5 minimum</p>
-          <p><strong>Review in:</strong> 2.3 days</p>
+          <p><strong>Days alive:</strong> 12.8 / 42 minimum · <strong>Iterations:</strong> 68 / 5 minimum</p>
+          <p><strong>Review in:</strong> 1.5 days</p>
           
           
             <details>
