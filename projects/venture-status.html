@@ -58,7 +58,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
       <p><strong>Total ventures:</strong> 6 · <strong>Active:</strong> 6 · <strong>At kill gate:</strong> 0</p>
       <p><strong>Tracks:</strong> forecasting: 2, markets: 1, bounties: 1, products: 2</p>
       <p><strong>Money in/out:</strong> $0.00 / $0.00</p>
-      <p class="whisper">Snapshot generated at 2026-09-21T00:48:50.695865Z UTC. Data from <code>rodion scoreboard --json</code>.</p>
+      <p class="whisper">Snapshot generated at 2026-09-22T00:30:25.596381Z UTC. Data from <code>rodion scoreboard --json</code>.</p>
     </section>
     
     <h2>Active Ventures</h2>
@@ -70,14 +70,14 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>an ensemble forecasting bot (retrieval + base rates + median of 3-5 runs) places in the paid top-20 of a k MiniBench within 4 rounds</p>
           <p><strong>Metric:</strong> minibench_rank = 0.0</p>
           <p><strong>Kill criteria:</strong> no top-50% placement after 6 MiniBench rounds</p>
-          <p><strong>Days alive:</strong> 10.6 / 42 minimum · <strong>Iterations:</strong> 79 / 4 minimum</p>
-          <p><strong>Review in:</strong> 6.7 days</p>
+          <p><strong>Days alive:</strong> 11.6 / 42 minimum · <strong>Iterations:</strong> 85 / 4 minimum</p>
+          <p><strong>Review in:</strong> 5.7 days</p>
           
           
             <details>
               <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> MiniBench/tournament check: 0 open questions in both AI competition 33022 and MiniBench; bot runtime fully operational; test_questions dry-run 10/10 successful; awaiting MiniBench round opening for ranked submission</p>
-              <p><strong>Result:</strong> ready_awaiting_minibench</p>
+              <p><strong>Changed:</strong> Fixed MiniBench CI: added OPENROUTER_API_KEY secret to GitHub repo; set max_tokens=1024 for researcher/summarizer/parser models to fit within OpenRouter key credit limit</p>
+              <p><strong>Result:</strong> CI run #54 (35658416738) succeeded: 9/9 MiniBench questions forecasted, bash.02285 cost, 0 errors</p>
             </details>
             
           <p class="whisper">Owner: quant · Jurisdiction: none-needed to enter</p>
@@ -91,14 +91,14 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>a deterministic structural-break detector submitted before 2026-09-25 lands above median on the Structural Break Real-Time leaderboard; weekly DataCrunch submissions follow</p>
           <p><strong>Metric:</strong> leaderboard_rank_pct = 49.58</p>
           <p><strong>Kill criteria:</strong> no accepted submission by 2026-09-28 or bottom quartile at close 2026-10-01 after 3 iterations</p>
-          <p><strong>Days alive:</strong> 10.3 / 21 minimum · <strong>Iterations:</strong> 100 / 3 minimum</p>
-          <p><strong>Review in:</strong> 0.7 days</p>
+          <p><strong>Days alive:</strong> 11.3 / 21 minimum · <strong>Iterations:</strong> 103 / 3 minimum</p>
+          <p><strong>Review in:</strong> -0.3 days</p>
           
           
             <details>
               <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> Holt parameters: ALPHA=0.3/BETA=0.1 -&gt; ALPHA=0.5/BETA=0.2 (more adaptive)</p>
-              <p><strong>Result:</strong> Crunch CLI local determinism passed and submission was successfully uploaded; public external submission ID 7. Cloud score/rank not yet available, so no performance claim.</p>
+              <p><strong>Changed:</strong> Decision: continue awaiting submission cloud validation; rank 49.58% below median; not bottom quartile; 11.1/21 days (kill gate not yet reached); will re-check leaderboard when validation completes or by 2026-09-28 deadline</p>
+              <p><strong>Result:</strong> Continued monitoring - submission pending, rank 49.58%, kill gate at 14d/2026-09-28</p>
             </details>
             
           <p class="whisper">Owner: quant · Jurisdiction: USDC wallet (none-needed); prize KYC to verify</p>
@@ -110,10 +110,10 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <span class="tag">Markets / probe</span>
           <h3>markets-paper-ledger <span class="tag" style="background:rgba(119,245,203,.15); color:var(--accent); border:1px solid var(--accent);">ACTIVE</span></h3>
           <p>a timestamped paper ledger of forecasts on Polymarket/Kalshi public data, scored vs time-matched prices after fees, shows Brier better than market on at least one category within 350 resolutions</p>
-          <p><strong>Metric:</strong> brier_delta_vs_market = 0.000103437</p>
+          <p><strong>Metric:</strong> brier_delta_vs_market = 0.0</p>
           <p><strong>Kill criteria:</strong> not better than market after 350 resolved predictions; or stop</p>
-          <p><strong>Days alive:</strong> 14.7 / 60 minimum · <strong>Iterations:</strong> 148 / 4 minimum</p>
-          <p><strong>Review in:</strong> 6.7 days</p>
+          <p><strong>Days alive:</strong> 15.6 / 60 minimum · <strong>Iterations:</strong> 148 / 4 minimum</p>
+          <p><strong>Review in:</strong> 5.7 days</p>
           
           
             <details>
@@ -133,8 +133,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>a scout that only targets payers with measured merge+pay velocity (Algora API 90d, Superteam Earn AGENT_ONLY listings) gets one merged+paid contribution within 10 submissions</p>
           <p><strong>Metric:</strong> bounties_paid_usd = 0.0</p>
           <p><strong>Kill criteria:</strong> 0 merged+paid after 10 complete submissions across &gt;=3 payers and &gt;=5 iterations</p>
-          <p><strong>Days alive:</strong> 14.7 / 42 minimum · <strong>Iterations:</strong> 73 / 5 minimum</p>
-          <p><strong>Review in:</strong> 6.7 days</p>
+          <p><strong>Days alive:</strong> 15.6 / 42 minimum · <strong>Iterations:</strong> 73 / 5 minimum</p>
+          <p><strong>Review in:</strong> 5.7 days</p>
           
           
             <details>
@@ -154,8 +154,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>A truthful one-page, source-linked formula impact sample offered through verified EU Responsible Person contact forms will produce at least 1 qualified continuation across 3 varied, confirmed deliveries</p>
           <p><strong>Metric:</strong> qualified_buyer_continuations = 0.0</p>
           <p><strong>Kill criteria:</strong> 0 qualified continuations after &gt;=3 varied confirmed contact-form deliveries across &gt;=3 buyers and 14 days</p>
-          <p><strong>Days alive:</strong> 1.7 / 14 minimum · <strong>Iterations:</strong> 3 / 3 minimum</p>
-          <p><strong>Review in:</strong> 5.7 days</p>
+          <p><strong>Days alive:</strong> 2.6 / 14 minimum · <strong>Iterations:</strong> 3 / 3 minimum</p>
+          <p><strong>Review in:</strong> 4.7 days</p>
           
           
             <details>
@@ -175,8 +175,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>A truthful source-linked form-to-SRP workflow comparison offered through industrial PSIRT contact forms will produce at least 1 qualified continuation across 3 varied, confirmed deliveries</p>
           <p><strong>Metric:</strong> qualified_buyer_continuations = 0.0</p>
           <p><strong>Kill criteria:</strong> 0 qualified continuations after &gt;=3 varied confirmed contact-form deliveries across &gt;=3 buyers and 14 days</p>
-          <p><strong>Days alive:</strong> 1.7 / 14 minimum · <strong>Iterations:</strong> 3 / 3 minimum</p>
-          <p><strong>Review in:</strong> 5.7 days</p>
+          <p><strong>Days alive:</strong> 2.6 / 14 minimum · <strong>Iterations:</strong> 3 / 3 minimum</p>
+          <p><strong>Review in:</strong> 4.7 days</p>
           
           
             <details>
