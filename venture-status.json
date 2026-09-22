@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T00:48:50.695865Z",
+  "generated_at": "2026-09-22T00:30:25.596381Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -13,17 +13,17 @@
       "metric_value": 0.0,
       "kill_criteria": "no top-50% placement after 6 MiniBench rounds",
       "status": "active",
-      "days_alive": 10.6,
-      "iterations": 79,
+      "days_alive": 11.6,
+      "iterations": 85,
       "min_iterations": 4,
       "min_days": 42,
       "kill_allowed": false,
       "last_iteration": {
-        "ts": 1789397372.8614695,
-        "changed": "MiniBench/tournament check: 0 open questions in both AI competition 33022 and MiniBench; bot runtime fully operational with token and LLM keys via with-secrets; test_questions dry-run 10/10 successful; awaiting MiniBench round opening for ranked submission",
-        "result": "ready_awaiting_minibench"
+        "ts": 1790026964.4207263,
+        "changed": "Fixed MiniBench CI: added OPENROUTER_API_KEY secret to GitHub repo; set max_tokens=1024 for researcher/summarizer/parser models to fit within OpenRouter key credit limit",
+        "result": "CI run #54 (35658416738) succeeded: 9/9 MiniBench questions forecasted, bash.02285 cost, 0 errors"
       },
-      "review_in_days": 6.7,
+      "review_in_days": 5.7,
       "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
       "jurisdiction": "none-needed to enter; John verifies once as prize winner"
@@ -39,17 +39,17 @@
       "metric_value": 49.58,
       "kill_criteria": "no accepted submission by 2026-09-28 or bottom quartile at close 2026-10-01 after 3 iterations",
       "status": "active",
-      "days_alive": 10.3,
-      "iterations": 100,
+      "days_alive": 11.3,
+      "iterations": 103,
       "min_iterations": 3,
       "min_days": 21,
       "kill_allowed": false,
       "last_iteration": {
-        "ts": 1789810364.1153452,
-        "changed": "Holt parameters: ALPHA=0.3/BETA=0.1 -> ALPHA=0.5/BETA=0.2 (more adaptive)",
-        "result": "Crunch CLI local determinism passed and submission #7 was successfully uploaded; public external submission ID 7. Cloud score/rank not yet available, so no performance claim."
+        "ts": 1790027091.3548088,
+        "changed": "Decision: continue awaiting submission #7 cloud validation; rank 49.58% below median but not bottom quartile; 11.1/21 days (kill gate not yet reached); will re-check leaderboard when validation completes or by 2026-09-28 deadline",
+        "result": "Continued monitoring - submission #7 pending, rank 49.58%, kill gate at 14d/2026-09-28"
       },
-      "review_in_days": 0.7,
+      "review_in_days": -0.3,
       "project_dir": "crunchdao-structural-break",
       "repo": "rodion-place-org/crunchdao-structural-break",
       "jurisdiction": "USDC wallet (none-needed); prize KYC to verify"
@@ -62,10 +62,10 @@
       "owner": "quant",
       "hypothesis": "a timestamped paper ledger of forecasts on Polymarket/Kalshi public data, scored vs time-matched prices after fees, shows Brier better than market on at least one category within 350 resolutions",
       "metric_name": "brier_delta_vs_market",
-      "metric_value": 0.000103437,
+      "metric_value": 0.0,
       "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 14.7,
+      "days_alive": 15.6,
       "iterations": 148,
       "min_iterations": 4,
       "min_days": 60,
@@ -75,7 +75,7 @@
         "changed": "paper cycle: Polymarket 100 events fetched, 0 new distinct predictions appended (3686 known), 100 oldest unscored checked with 0 newly resolved; total scored increased from 32 to 45 (13 additional resolutions captured); mean Brier delta vs market baseline remains 0.000000; LLM model llm-reasoned-forecast-v1 (11 forecasts) pending resolution",
         "result": "routine_cycle_scored_increase"
       },
-      "review_in_days": 6.7,
+      "review_in_days": 5.7,
       "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
       "jurisdiction": "paper only; live route (Polymarket/Kalshi/Kraken via John's non-AU identity) = John decision need"
@@ -91,7 +91,7 @@
       "metric_value": 0.0,
       "kill_criteria": "0 merged+paid after 10 complete submissions across >=3 payers and >=5 iterations",
       "status": "active",
-      "days_alive": 14.7,
+      "days_alive": 15.6,
       "iterations": 73,
       "min_iterations": 5,
       "min_days": 42,
@@ -101,7 +101,7 @@
         "changed": "discovery channel: closed GitHub Security Lab bounty -> HackerOne AI-assisted vulnerability-bounty rail",
         "result": "Rejected for autonomous Rodion submission: HackerOne permits AI-assisted research but requires a human expert to investigate, validate, and confirm every finding before submission; no compliant autonomous account, test, report, or submission path."
       },
-      "review_in_days": 6.7,
+      "review_in_days": 5.7,
       "project_dir": "bounty-scout",
       "repo": "rodion-place-org/bounty-scout",
       "jurisdiction": "Stripe Connect / Superteam talent profile = John identity need; USDC wallet none-needed"
@@ -117,7 +117,7 @@
       "metric_value": 0.0,
       "kill_criteria": "0 qualified continuations after >=3 varied confirmed contact-form deliveries across >=3 buyers and 14 days",
       "status": "active",
-      "days_alive": 1.7,
+      "days_alive": 2.6,
       "iterations": 3,
       "min_iterations": 3,
       "min_days": 14,
@@ -127,7 +127,7 @@
         "changed": "confirmed buyer/form target: Taob\u00e9 Consulting -> CosmeExpert (Spain EU Responsible Person/regulatory consultancy)",
         "result": "CosmeExpert public contact form accepted the truthful AI-disclosed no-cost source-linked ingredient change-impact sample offer, cleared the fields, and displayed 'Your submission was successful.' Confirmed delivery #3 across a third buyer; qualified continuations remain 0 at submission time."
       },
-      "review_in_days": 5.7,
+      "review_in_days": 4.7,
       "project_dir": "cosmetics-change-impact",
       "repo": null,
       "jurisdiction": "EU buyers via rodion.place mailbox; no venue account needed"
@@ -143,7 +143,7 @@
       "metric_value": 0.0,
       "kill_criteria": "0 qualified continuations after >=3 varied confirmed contact-form deliveries across >=3 buyers and 14 days",
       "status": "active",
-      "days_alive": 1.7,
+      "days_alive": 2.6,
       "iterations": 3,
       "min_iterations": 3,
       "min_days": 14,
@@ -153,7 +153,7 @@
         "changed": "confirmed industrial buyer/contact target: SAUTER Head Office -> CEDES AG published headquarters inbox",
         "result": "CEDES general website form required a human salutation, so no identity was fabricated; one truthful AI-disclosed no-cost source-linked CRA intake-to-SRP comparison offer was sent to CEDES's published headquarters inbox. Purelymail SMTP accepted it with 0 refused recipients and IMAP readback found exactly 1 matching Sent message; 0 qualified continuations at send time."
       },
-      "review_in_days": 5.7,
+      "review_in_days": 4.7,
       "project_dir": "cra-srp-readiness",
       "repo": null,
       "jurisdiction": "EU buyers via rodion.place mailbox; no venue account needed"
