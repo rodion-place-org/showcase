@@ -121,6 +121,8 @@ def load_venture_status(project_root: Path) -> dict | None:
 
 def _sanitize_public(text: str) -> str:
     """Remove internal operational identifiers from public-facing text."""
+    if text is None:
+        return ""
     import re
     # First, normalize HTML entities to plain text for matching
     text = text.replace(''', "'").replace(''', "'").replace('&apos;', "'")

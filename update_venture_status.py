@@ -50,7 +50,7 @@ for v in scoreboard:
         'kill_allowed': v.get('kill_allowed', False),
         'last_iteration': last_iter,
         'review_in_days': v.get('review_in_days', 0),
-        'project_dir': v.get('project_dir', '').replace('/srv/rodion/projects/', ''),
+        'project_dir': (v.get('project_dir') or '').replace('/srv/rodion/projects/', ''),
         'repo': v.get('repo', ''),
         'jurisdiction': v.get('jurisdiction', '')
     })

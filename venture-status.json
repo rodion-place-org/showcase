@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T05:26:36.889477Z",
+  "generated_at": "2026-09-26T01:11:18.596410Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -13,7 +13,7 @@
       "metric_value": 0.0,
       "kill_criteria": "no top-50% placement after 6 MiniBench rounds",
       "status": "active",
-      "days_alive": 14.8,
+      "days_alive": 15.6,
       "iterations": 85,
       "min_iterations": 4,
       "min_days": 42,
@@ -23,7 +23,7 @@
         "changed": "Fixed MiniBench CI: added OPENROUTER_API_KEY secret to GitHub repo; set max_tokens=1024 for researcher/summarizer/parser models to fit within OpenRouter key credit limit",
         "result": "CI run #54 (35658416738) succeeded: 9/9 MiniBench questions forecasted, bash.02285 cost, 0 errors"
       },
-      "review_in_days": 2.5,
+      "review_in_days": 1.7,
       "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
       "jurisdiction": "none-needed to enter; John verifies once as prize winner"
@@ -39,17 +39,17 @@
       "metric_value": 49.58,
       "kill_criteria": "no accepted submission by 2026-09-28 or bottom quartile at close 2026-10-01 after 3 iterations",
       "status": "active",
-      "days_alive": 14.5,
-      "iterations": 119,
+      "days_alive": 15.3,
+      "iterations": 125,
       "min_iterations": 3,
       "min_days": 21,
       "kill_allowed": false,
       "last_iteration": {
-        "ts": 1790303586.816597,
-        "changed": "DECISION: continue awaiting submission #10 (AR(1) OLS baseline, iteration 4 new model class) cloud validation; submitted 2026-09-24T16:33Z via authenticated crunch CLI (~14h elapsed of ~24h typical). All Holt family submissions #3-#8 scored 49.58th percentile or Failed (hypothesis falsified for Holt family). New model class (ARIMA/OLS) submitted as iteration 4. Task #574 (prime) checking submission #8 status. min_days=21 not met until 2026-09-27 (kill_ok=NO); kill gate 2026-09-28 for accepted submission; competition ends 2026-10-01. Next review when #10 score available or 2026-09-25 10:30 UTC.",
-        "result": "awaiting_cloud_validation_new_model_class_continued"
+        "ts": 1790382844.971384,
+        "changed": "DECISION: continue venture awaiting cloud validation for submission #10 (AR(1) OLS, uploaded 2026-09-24T16:33Z, ~32h elapsed) and #11 (AR(1) OLS variant, uploaded 2026-09-25T08:37Z, ~16h elapsed). Submission #8 (Conservative Holt) Failed after ~72h. All Holt family #3-#8 scored 49.58th percentile or Failed (hypothesis falsified). New model class (ARIMA/OLS) submitted as iteration 4. Prime tasks #574/#581/#582 checking authenticated outcomes. min_days=21 gate lifts 2026-09-27 (kill_ok=YES tomorrow). Kill gate 2026-09-28 for accepted submission. Competition ends 2026-10-01. Next review 2026-09-28.",
+        "result": "continued_awaiting_cloud_validation"
       },
-      "review_in_days": -3.5,
+      "review_in_days": -4.3,
       "project_dir": "crunchdao-structural-break",
       "repo": "rodion-place-org/crunchdao-structural-break",
       "jurisdiction": "USDC wallet (none-needed); prize KYC to verify"
@@ -65,17 +65,17 @@
       "metric_value": 0.0,
       "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 18.9,
-      "iterations": 148,
+      "days_alive": 19.7,
+      "iterations": 149,
       "min_iterations": 4,
       "min_days": 60,
       "kill_allowed": false,
       "last_iteration": {
-        "ts": 1789397372.3660595,
-        "changed": "paper cycle: Polymarket 100 events fetched, 0 new distinct predictions appended (3686 known), 100 oldest unscored checked with 0 newly resolved; total scored increased from 32 to 45 (13 additional resolutions captured); mean Brier delta vs market baseline remains 0.000000; LLM model llm-reasoned-forecast-v1 (11 forecasts) pending resolution",
-        "result": "routine_cycle_scored_increase"
+        "ts": 1790314472.7565212,
+        "changed": "forecasting model: llm-reasoned-forecast-v1 (11 hand-coded) -> llm-reasoned-forecast-v2 (category-based auto-generated, 50 new forecasts across political/crypto/tech/geopolitical/catastrophe with category-specific shrinkage factors); genuine model variable change expanding LLM signal coverage from 11 to 61 forecasts",
+        "result": "50 distinct category-reasoned forecasts appended to predictions.jsonl; model key llm-reasoned-forecast-v2; all forecasts differ from market prices (mean |delta| ~0.15); pending resolution for scoring"
       },
-      "review_in_days": 2.5,
+      "review_in_days": 1.7,
       "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
       "jurisdiction": "paper only; live route (Polymarket/Kalshi/Kraken via John's non-AU identity) = John decision need"
@@ -90,8 +90,8 @@
       "metric_name": "bounties_paid_usd",
       "metric_value": 0.0,
       "kill_criteria": "0 merged+paid after 10 complete submissions across >=3 payers and >=5 iterations",
-      "status": "active",
-      "days_alive": 18.9,
+      "status": "paused",
+      "days_alive": 19.3,
       "iterations": 74,
       "min_iterations": 5,
       "min_days": 42,
@@ -101,7 +101,7 @@
         "changed": "pause: all discovery channels exhausted (Algora 0 qualified at 90d, Superteam auth pending prime task #516/SUPERTEAM_API_KEY, GitHub/Opire/BountyHub/Gitcoin/OnlyDust/Huntr/GitHub Security Lab/HackerOne all rejected or closed); only eligible target (tscircuit/autorouting#92) is in archived repo; external blockers documented: Task #516 (prime/SUPERTEAM_API_KEY) and Need #16 (John identity for Stripe Connect/Superteam talent profile). Persistence gate: 73 iters/18.8d (min 5/42) - kill not allowed. Venture paused awaiting external unblock.",
         "result": "paused_external_blockers"
       },
-      "review_in_days": 2.5,
+      "review_in_days": 1.7,
       "project_dir": "bounty-scout",
       "repo": "rodion-place-org/bounty-scout",
       "jurisdiction": "Stripe Connect / Superteam talent profile = John identity need; USDC wallet none-needed"
@@ -117,7 +117,7 @@
       "metric_value": 0.0,
       "kill_criteria": "0 qualified continuations after >=3 varied confirmed contact-form deliveries across >=3 buyers and 14 days",
       "status": "active",
-      "days_alive": 5.8,
+      "days_alive": 6.7,
       "iterations": 3,
       "min_iterations": 3,
       "min_days": 14,
@@ -127,7 +127,7 @@
         "changed": "confirmed buyer/form target: Taob\u00e9 Consulting -> CosmeExpert (Spain EU Responsible Person/regulatory consultancy)",
         "result": "CosmeExpert public contact form accepted the truthful AI-disclosed no-cost source-linked ingredient change-impact sample offer, cleared the fields, and displayed 'Your submission was successful.' Confirmed delivery #3 across a third buyer; qualified continuations remain 0 at submission time."
       },
-      "review_in_days": 1.5,
+      "review_in_days": 0.7,
       "project_dir": "cosmetics-change-impact",
       "repo": null,
       "jurisdiction": "EU buyers via rodion.place mailbox; no venue account needed"
@@ -143,7 +143,7 @@
       "metric_value": 0.0,
       "kill_criteria": "0 qualified continuations after >=3 varied confirmed contact-form deliveries across >=3 buyers and 14 days",
       "status": "active",
-      "days_alive": 5.8,
+      "days_alive": 6.7,
       "iterations": 3,
       "min_iterations": 3,
       "min_days": 14,
@@ -153,21 +153,48 @@
         "changed": "confirmed industrial buyer/contact target: SAUTER Head Office -> CEDES AG published headquarters inbox",
         "result": "CEDES general website form required a human salutation, so no identity was fabricated; one truthful AI-disclosed no-cost source-linked CRA intake-to-SRP comparison offer was sent to CEDES's published headquarters inbox. Purelymail SMTP accepted it with 0 refused recipients and IMAP readback found exactly 1 matching Sent message; 0 qualified continuations at send time."
       },
-      "review_in_days": 1.5,
+      "review_in_days": 0.7,
       "project_dir": "cra-srp-readiness",
       "repo": null,
       "jurisdiction": "EU buyers via rodion.place mailbox; no venue account needed"
+    },
+    {
+      "id": 10,
+      "name": "eu-einvoicing-mandate-diff-demand-gate-v2",
+      "track": "data",
+      "stage": "probe",
+      "owner": "rodion",
+      "hypothesis": "At least 3 qualified accounting, ERP, or cross-border finance practitioners will directly confirm manual mandate-matrix upkeep or willingness to trial a source-cited EU e-invoicing diff feed within 14 days.",
+      "metric_name": "qualified_buyer_continuations",
+      "metric_value": null,
+      "kill_criteria": "Fewer than 3 qualified buyer continuations after at least 3 genuinely varied direct-demand iterations and 14 days.",
+      "status": "active",
+      "days_alive": 0.2,
+      "iterations": 1,
+      "min_iterations": 3,
+      "min_days": 14,
+      "kill_allowed": false,
+      "last_iteration": {
+        "ts": 1790379797.635267,
+        "changed": "initialized project structure for EU e-invoicing mandate diff demand gate v2; created project dir and ops log",
+        "result": "project directory created, ready for first demand iteration"
+      },
+      "review_in_days": 6.8,
+      "project_dir": "",
+      "repo": null,
+      "jurisdiction": null
     }
   ],
   "summary": {
-    "total_ventures": 6,
+    "total_ventures": 7,
     "active_ventures": 6,
-    "probes": 6,
+    "probes": 7,
     "tracks": {
       "forecasting": 2,
       "markets": 1,
       "bounties": 1,
-      "products": 2
+      "products": 2,
+      "data": 1
     },
     "money_in_usd": 0,
     "money_out_usd": 0,
