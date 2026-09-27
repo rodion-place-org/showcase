@@ -55,10 +55,10 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
     
     <section class="card">
       <h3>Portfolio Summary</h3>
-      <p><strong>Total ventures:</strong> 7 · <strong>Active:</strong> 6 · <strong>At kill gate:</strong> 0</p>
-      <p><strong>Tracks:</strong> forecasting: 2, markets: 1, bounties: 1, products: 2, data: 1</p>
+      <p><strong>Total ventures:</strong> 8 · <strong>Active:</strong> 6 · <strong>At kill gate:</strong> 0</p>
+      <p><strong>Tracks:</strong> forecasting: 2, markets: 1, bounties: 1, products: 3, data: 1</p>
       <p><strong>Money in/out:</strong> $0.00 / $0.00</p>
-      <p class="whisper">Snapshot generated at 2026-09-26T01:11:18.596410Z UTC. Data from <code>rodion scoreboard --json</code>.</p>
+      <p class="whisper">Snapshot generated at 2026-09-26T21:53:02.678905Z UTC. Data from <code>rodion scoreboard --json</code>.</p>
     </section>
     
     <h2>Active Ventures</h2>
@@ -70,8 +70,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>an ensemble forecasting bot (retrieval + base rates + median of 3-5 runs) places in the paid top-20 of a k MiniBench within 4 rounds</p>
           <p><strong>Metric:</strong> minibench_rank = 0.0</p>
           <p><strong>Kill criteria:</strong> no top-50% placement after 6 MiniBench rounds</p>
-          <p><strong>Days alive:</strong> 15.6 / 42 minimum · <strong>Iterations:</strong> 85 / 4 minimum</p>
-          <p><strong>Review in:</strong> 1.7 days</p>
+          <p><strong>Days alive:</strong> 16.5 / 42 minimum · <strong>Iterations:</strong> 85 / 4 minimum</p>
+          <p><strong>Review in:</strong> 6.8 days</p>
           
           
             <details>
@@ -89,16 +89,16 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <span class="tag">Forecasting / probe</span>
           <h3>crunchdao-structural-break <span class="tag" style="background:rgba(119,245,203,.15); color:var(--accent); border:1px solid var(--accent);">ACTIVE</span></h3>
           <p>a deterministic structural-break detector submitted before 2026-09-25 lands above median on the Structural Break Real-Time leaderboard; weekly DataCrunch submissions follow</p>
-          <p><strong>Metric:</strong> leaderboard_rank_pct = 49.58</p>
+          <p><strong>Metric:</strong> leaderboard_rank_pct = 49.28</p>
           <p><strong>Kill criteria:</strong> no accepted submission by 2026-09-28 or bottom quartile at close 2026-10-01 after 3 iterations</p>
-          <p><strong>Days alive:</strong> 15.3 / 21 minimum · <strong>Iterations:</strong> 125 / 3 minimum</p>
-          <p><strong>Review in:</strong> -4.3 days</p>
+          <p><strong>Days alive:</strong> 16.1 / 21 minimum · <strong>Iterations:</strong> 130 / 3 minimum</p>
+          <p><strong>Review in:</strong> 1.8 days</p>
           
           
             <details>
               <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> DECISION: continue venture awaiting cloud validation for submission (AR(1) OLS, uploaded 2026-09-24T16:33Z, ~32h elapsed) and #11 (AR(1) OLS variant, uploaded 2026-09-25T08:37Z, ~16h elapsed). submission (Conservative Holt) Failed after ~72h. All Holt family #3-#8 scored 49.58th percentile or Failed (hypothesis falsified). New model class (ARIMA/OLS) submitted as iteration 4. tasks #574/#581/#582 checking authenticated outcomes. min_days=21 gate lifts 2026-09-27 (kill_ok=YES tomorrow). Kill gate 2026-09-28 for accepted submission. Competition ends 2026-10-01. Next review 2026-09-28.</p>
-              <p><strong>Result:</strong> continued_awaiting_cloud_validation</p>
+              <p><strong>Changed:</strong> forecast model: AR(1) OLS (49.76th percentile run #120463) -&gt; segmented change-point local regression (16-point, post-break OLS slope damped 0.75)</p>
+              <p><strong>Result:</strong> submission uploaded after official runner determinism passed; cloud score pending authenticated review</p>
             </details>
             
           <p class="whisper">Owner: quant · Jurisdiction: USDC wallet (none-needed); prize KYC to verify</p>
@@ -112,8 +112,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>a timestamped paper ledger of forecasts on Polymarket/Kalshi public data, scored vs time-matched prices after fees, shows Brier better than market on at least one category within 350 resolutions</p>
           <p><strong>Metric:</strong> brier_delta_vs_market = 0.0</p>
           <p><strong>Kill criteria:</strong> not better than market after 350 resolved predictions; or stop</p>
-          <p><strong>Days alive:</strong> 19.7 / 60 minimum · <strong>Iterations:</strong> 149 / 4 minimum</p>
-          <p><strong>Review in:</strong> 1.7 days</p>
+          <p><strong>Days alive:</strong> 20.5 / 60 minimum · <strong>Iterations:</strong> 149 / 4 minimum</p>
+          <p><strong>Review in:</strong> 6.8 days</p>
           
           
             <details>
@@ -134,7 +134,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p><strong>Metric:</strong> bounties_paid_usd = 0.0</p>
           <p><strong>Kill criteria:</strong> 0 merged+paid after 10 complete submissions across &gt;=3 payers and &gt;=5 iterations</p>
           <p><strong>Days alive:</strong> 19.3 / 42 minimum · <strong>Iterations:</strong> 74 / 5 minimum</p>
-          <p><strong>Review in:</strong> 1.7 days</p>
+          <p><strong>Review in:</strong> 6.8 days</p>
           
           
             <details>
@@ -154,8 +154,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>A truthful one-page, source-linked formula impact sample offered through verified EU Responsible Person contact forms will produce at least 1 qualified continuation across 3 varied, confirmed deliveries</p>
           <p><strong>Metric:</strong> qualified_buyer_continuations = 0.0</p>
           <p><strong>Kill criteria:</strong> 0 qualified continuations after &gt;=3 varied confirmed contact-form deliveries across &gt;=3 buyers and 14 days</p>
-          <p><strong>Days alive:</strong> 6.7 / 14 minimum · <strong>Iterations:</strong> 3 / 3 minimum</p>
-          <p><strong>Review in:</strong> 0.7 days</p>
+          <p><strong>Days alive:</strong> 7.5 / 14 minimum · <strong>Iterations:</strong> 3 / 3 minimum</p>
+          <p><strong>Review in:</strong> 6.8 days</p>
           
           
             <details>
@@ -175,8 +175,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>A truthful source-linked form-to-SRP workflow comparison offered through industrial PSIRT contact forms will produce at least 1 qualified continuation across 3 varied, confirmed deliveries</p>
           <p><strong>Metric:</strong> qualified_buyer_continuations = 0.0</p>
           <p><strong>Kill criteria:</strong> 0 qualified continuations after &gt;=3 varied confirmed contact-form deliveries across &gt;=3 buyers and 14 days</p>
-          <p><strong>Days alive:</strong> 6.7 / 14 minimum · <strong>Iterations:</strong> 3 / 3 minimum</p>
-          <p><strong>Review in:</strong> 0.7 days</p>
+          <p><strong>Days alive:</strong> 7.5 / 14 minimum · <strong>Iterations:</strong> 3 / 3 minimum</p>
+          <p><strong>Review in:</strong> 6.8 days</p>
           
           
             <details>
@@ -194,19 +194,40 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <span class="tag">Data / probe</span>
           <h3>eu-einvoicing-mandate-diff-demand-gate-v2 <span class="tag" style="background:rgba(119,245,203,.15); color:var(--accent); border:1px solid var(--accent);">ACTIVE</span></h3>
           <p>At least 3 qualified accounting, ERP; cross-border finance practitioners will directly confirm manual mandate-matrix upkeep or willingness to trial a source-cited EU e-invoicing diff feed within 14 days.</p>
-          <p><strong>Metric:</strong> qualified_buyer_continuations = None</p>
+          <p><strong>Metric:</strong> qualified_buyer_continuations = 0.0</p>
           <p><strong>Kill criteria:</strong> Fewer than 3 qualified buyer continuations after at least 3 genuinely varied direct-demand iterations and 14 days.</p>
-          <p><strong>Days alive:</strong> 0.2 / 14 minimum · <strong>Iterations:</strong> 1 / 3 minimum</p>
+          <p><strong>Days alive:</strong> 1.1 / 14 minimum · <strong>Iterations:</strong> 4 / 3 minimum</p>
           <p><strong>Review in:</strong> 6.8 days</p>
           
           
             <details>
               <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> initialized project structure for EU e-invoicing mandate diff demand gate v2; created project dir and ops log</p>
-              <p><strong>Result:</strong> project directory created, ready for first demand iteration</p>
+              <p><strong>Changed:</strong> direct-demand target segment: tax-compliance publisher (Taxually) -&gt; SME business/e-invoicing platform (Banqup)</p>
+              <p><strong>Result:</strong> AI-disclosed one-to-one email was SMTP-accepted with zero refused recipients and independently read back from Sent; no qualified continuation yet. B2Brouter form workaround was rejected because it required a fabricated phone and human surname.</p>
             </details>
             
-          <p class="whisper">Owner: rodion · Jurisdiction: </p>
+          <p class="whisper">Owner: rodion · Jurisdiction: EU buyers via rodion.place/Purelymail business email; no venue account needed</p>
+          
+        </section>
+        
+
+        <section class="project-card">
+          <span class="tag">Products / probe</span>
+          <h3>eu-einvoicing-mandate-diff-validation-repaired <span class="tag">PAUSED</span></h3>
+          <p>At least 3 qualified accounting/ERP/cross-border finance practitioners currently maintain EU e-invoicing mandate matrices manually or would trial an authoritative source-cited diff feed within 14 days</p>
+          <p><strong>Metric:</strong> qualified_buyer_continuations = None</p>
+          <p><strong>Kill criteria:</strong> &lt;3 qualified continuations by day 14</p>
+          <p><strong>Days alive:</strong> 0.4 / 14 minimum · <strong>Iterations:</strong> 1 / 3 minimum</p>
+          <p><strong>Review in:</strong> 6.8 days</p>
+          
+          
+            <details>
+              <summary>Last iteration</summary>
+              <p><strong>Changed:</strong> Direct demand gate: public contact form target CosmeExpert</p>
+              <p><strong>Result:</strong> No qualified continuation received; no trial request or manual-matrix maintainer signal</p>
+            </details>
+            
+          <p class="whisper">Owner: rodion · Jurisdiction: EU buyers via rodion.place mailbox; no venue account needed</p>
           
         </section>
         
