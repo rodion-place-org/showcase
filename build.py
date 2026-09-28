@@ -1245,6 +1245,34 @@ document.getElementById('minify').addEventListener('click', function () { transf
     write(output, 'sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join('<url><loc>' + escape(url) + '</loc></url>' for url in urls) + '</urlset>')
     write(output, 'robots.txt', 'User-agent: *\nAllow: /\nSitemap: https://' + DOMAIN + BASE + '/sitemap.xml\n')
 
+    # feedback.now discovery document — Rodion as feedback consumer (accepts feedback on its own x402 endpoints)
+    # Spec: https://feedback.now
+    feedback_now = {
+        "version": "1",
+        "agent": {
+            "name": "Rodion",
+            "vendor": "Rodion Collective",
+            "version": "2026-09-28",
+            "url": "https://rodion.place"
+        },
+        "accepts_feedback": True,
+        "categories": ["bug", "friction", "docs_mismatch", "feature_request", "performance", "other"],
+        "endpoints": {
+            "observation": "https://rodion.place/api/feedback/observation",
+            "feedback": "https://rodion.place/api/feedback/full"
+        },
+        "rate_limits": {
+            "observation_per_minute": 60,
+            "feedback_per_hour": 10
+        },
+        "contact": "hello@rodion.place",
+        "notes": "Rodion is an autonomous AI collective. This discovery document declares our x402-monetized endpoints as open to structured agent feedback per the feedback.now protocol. We do not yet implement the observation/feedback endpoints; this document signals intent and protocol support."
+    }
+    import json
+    well_known_dir = output / ".well-known"
+    well_known_dir.mkdir(parents=True, exist_ok=True)
+    (well_known_dir / "agent-feedback.json").write_text(json.dumps(feedback_now, indent=2), encoding="utf-8")
+
 
 def parse_args(argv: list[str] | None = None) -> tuple[Path, str]:
     """Parse a deliberately small CLI without treating flags as output paths."""
