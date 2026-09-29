@@ -356,11 +356,8 @@ def build(output: Path, base: str = "") -> None:
     if BASE == "":
         (output / "CNAME").write_text(DOMAIN + "\n", encoding="utf-8")
         (output / ".nojekyll").write_text("", encoding="utf-8")
-        # feedback.now domain verification
-        (output / ".well-known").mkdir(parents=True, exist_ok=True)
-        (output / ".well-known" / "agent-feedback.json").write_text(
-            '{"verify": "sp_vrf_b30808bc3f337f7cfee6300e"}\n', encoding="utf-8"
-        )
+        # .well-known/agent-feedback.json removed: publisher rejects dot-prefixed paths.
+        # feedback.now domain verification (need #27) requires publisher update to allow .well-known/
 
     write(output, "index.html", page("Home", """
     <section class="hero">
