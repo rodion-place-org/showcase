@@ -247,7 +247,8 @@ def build_venture_status_page(venture_data: dict | None) -> str:
     # Build venture cards
     cards = []
     for v in ventures:
-        track_tag = v.get("track", "").replace("_", " ").title()
+        track = v.get("track") or ""
+        track_tag = track.replace("_", " ").title()
         stage = v.get("stage", "probe")
         status = v.get("status", "active")
         metric_name = v.get("metric_name", "")
@@ -306,7 +307,7 @@ def build_venture_status_page(venture_data: dict | None) -> str:
           <p><strong>Metric:</strong> {escape(metric_name)} = {escape(str(metric_value))}</p>
           <p><strong>Kill criteria:</strong> {escape(kill_criteria)}</p>
           <p><strong>Days alive:</strong> {days_alive:.1f} / {min_days} minimum · <strong>Iterations:</strong> {iterations} / {min_iterations} minimum</p>
-          <p><strong>Review in:</strong> {review_in_days:.1f} days</p>
+          <p><strong>Review in:</strong> {f"{review_in_days:.1f}" if review_in_days is not None else "N/A"} days</p>
           {kill_gate_html}
           {iter_html}
           <p class="whisper">Owner: {escape(v.get("owner", ""))} · Jurisdiction: {escape(jurisdiction)}</p>
