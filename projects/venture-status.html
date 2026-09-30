@@ -58,7 +58,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
       <p><strong>Total ventures:</strong> 8 · <strong>Active:</strong> 6 · <strong>At kill gate:</strong> 0</p>
       <p><strong>Tracks:</strong> forecasting: 2, markets: 1, bounties: 1, products: 3, data: 1</p>
       <p><strong>Money in/out:</strong> $0.00 / $0.00</p>
-      <p class="whisper">Snapshot generated at 2026-09-30T14:08:16.280068Z UTC. Data from <code>rodion scoreboard --json</code>.</p>
+      <p class="whisper">Snapshot generated at 2026-09-30T15:53:40.376323Z UTC. Data from <code>rodion scoreboard --json</code>.</p>
     </section>
     
     <h2>Active Ventures</h2>
@@ -70,14 +70,14 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>an ensemble forecasting bot (retrieval + base rates + median of 3-5 runs) places in the paid top-20 of a k MiniBench within 4 rounds</p>
           <p><strong>Metric:</strong> minibench_rank = 0.0</p>
           <p><strong>Kill criteria:</strong> no top-50% placement after 6 MiniBench rounds</p>
-          <p><strong>Days alive:</strong> 20.2 / 42 minimum · <strong>Iterations:</strong> 89 / 4 minimum</p>
-          <p><strong>Review in:</strong> 4.2 days</p>
+          <p><strong>Days alive:</strong> 20.2 / 42 minimum · <strong>Iterations:</strong> 90 / 4 minimum</p>
+          <p><strong>Review in:</strong> 4.1 days</p>
           
           
             <details>
               <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> ZAI rate limiter refresh_rate from 0.2 to 0.1 to avoid 429 errors</p>
-              <p><strong>Result:</strong> Bot fetched 9 questions and completed research for at least two questions before session timeout</p>
+              <p><strong>Changed:</strong> Ran Metaculus bot tournament mode - fetched 2 AI competition questions, 0 MiniBench questions; bot functional with ZAI API but experiencing rate limits on forecast generation</p>
+              <p><strong>Result:</strong> Bot retrieved questions successfully, research completed on available questions, forecast generation blocked by ZAI free tier rate limits (429 errors)</p>
             </details>
             
           <p class="whisper">Owner: quant · Jurisdiction: none-needed to enter</p>
@@ -91,14 +91,14 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>a timestamped paper ledger of forecasts on Polymarket/Kalshi public data, scored vs time-matched prices after fees, shows Brier better than market on at least one category within 350 resolutions</p>
           <p><strong>Metric:</strong> brier_delta_vs_market = 0.0</p>
           <p><strong>Kill criteria:</strong> not better than market after 350 resolved predictions; or stop</p>
-          <p><strong>Days alive:</strong> 24.2 / 60 minimum · <strong>Iterations:</strong> 154 / 4 minimum</p>
-          <p><strong>Review in:</strong> 4.2 days</p>
+          <p><strong>Days alive:</strong> 24.3 / 60 minimum · <strong>Iterations:</strong> 155 / 4 minimum</p>
+          <p><strong>Review in:</strong> 4.1 days</p>
           
           
             <details>
               <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> crypto shrinkage factor from 0.40 to 0.30 in model</p>
-              <p><strong>Result:</strong> Appended 50 new distinct predictions from Polymarket to predictions.jsonl; crypto forecasts now shrink more aggressively toward 0.5 base rate; total unique predictions from v2 model increased</p>
+              <p><strong>Changed:</strong> Tested paper trading cycle with current Polymarket data - fetched 100 events, 0 new distinct predictions, 0 newly resolved predictions</p>
+              <p><strong>Result:</strong> Paper ledger updated: 3693 existing unique predictions, 4303 unscored, 156 total scored with Brier delta vs market = 0.000000</p>
             </details>
             
           <p class="whisper">Owner: quant · Jurisdiction: paper only; live route (Polymarket/Kalshi/Kraken )</p>
@@ -113,7 +113,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p><strong>Metric:</strong> bounties_paid_usd = 0.0</p>
           <p><strong>Kill criteria:</strong> 0 merged+paid after 10 complete submissions across &gt;=3 payers and &gt;=5 iterations</p>
           <p><strong>Days alive:</strong> 19.3 / 42 minimum · <strong>Iterations:</strong> 74 / 5 minimum</p>
-          <p><strong>Review in:</strong> 4.2 days</p>
+          <p><strong>Review in:</strong> 4.1 days</p>
           
           
             <details>
@@ -133,8 +133,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>A truthful one-page, source-linked formula impact sample offered through verified EU Responsible Person contact forms will produce at least 1 qualified continuation across 3 varied, confirmed deliveries</p>
           <p><strong>Metric:</strong> qualified_buyer_continuations = 0.0</p>
           <p><strong>Kill criteria:</strong> 0 qualified continuations after &gt;=3 varied confirmed contact-form deliveries across &gt;=3 buyers and 14 days</p>
-          <p><strong>Days alive:</strong> 11.2 / 14 minimum · <strong>Iterations:</strong> 3 / 3 minimum</p>
-          <p><strong>Review in:</strong> 4.2 days</p>
+          <p><strong>Days alive:</strong> 11.3 / 14 minimum · <strong>Iterations:</strong> 3 / 3 minimum</p>
+          <p><strong>Review in:</strong> 4.1 days</p>
           
           
             <details>
@@ -154,8 +154,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>A truthful source-linked form-to-SRP workflow comparison offered through industrial PSIRT contact forms will produce at least 1 qualified continuation across 3 varied, confirmed deliveries</p>
           <p><strong>Metric:</strong> qualified_buyer_continuations = 0.0</p>
           <p><strong>Kill criteria:</strong> 0 qualified continuations after &gt;=3 varied confirmed contact-form deliveries across &gt;=3 buyers and 14 days</p>
-          <p><strong>Days alive:</strong> 11.2 / 14 minimum · <strong>Iterations:</strong> 3 / 3 minimum</p>
-          <p><strong>Review in:</strong> 4.2 days</p>
+          <p><strong>Days alive:</strong> 11.3 / 14 minimum · <strong>Iterations:</strong> 3 / 3 minimum</p>
+          <p><strong>Review in:</strong> 4.1 days</p>
           
           
             <details>
@@ -175,8 +175,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>At least 3 qualified accounting, ERP; cross-border finance practitioners will directly confirm manual mandate-matrix upkeep or willingness to trial a source-cited EU e-invoicing diff feed within 14 days.</p>
           <p><strong>Metric:</strong> qualified_buyer_continuations = 0.0</p>
           <p><strong>Kill criteria:</strong> Fewer than 3 qualified buyer continuations after at least 3 genuinely varied direct-demand iterations and 14 days.</p>
-          <p><strong>Days alive:</strong> 4.8 / 14 minimum · <strong>Iterations:</strong> 5 / 3 minimum</p>
-          <p><strong>Review in:</strong> 4.2 days</p>
+          <p><strong>Days alive:</strong> 4.9 / 14 minimum · <strong>Iterations:</strong> 5 / 3 minimum</p>
+          <p><strong>Review in:</strong> 4.1 days</p>
           
           
             <details>
@@ -197,7 +197,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p><strong>Metric:</strong> qualified_buyer_continuations = None</p>
           <p><strong>Kill criteria:</strong> &lt;3 qualified continuations by day 14</p>
           <p><strong>Days alive:</strong> 0.4 / 14 minimum · <strong>Iterations:</strong> 1 / 3 minimum</p>
-          <p><strong>Review in:</strong> 4.2 days</p>
+          <p><strong>Review in:</strong> 4.1 days</p>
           
           
             <details>
@@ -217,8 +217,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>A reproducible, unstaked Numerai Classic model can complete at least 8 scored weekly rounds with non-negative mean MMC versus the official example model before any capital is committed.</p>
           <p><strong>Metric:</strong> mean_mmc_vs_example = None</p>
           <p><strong>Kill criteria:</strong> Mean MMC below 0 after 8 scored unstaked rounds; stops.</p>
-          <p><strong>Days alive:</strong> 1.3 / 56 minimum · <strong>Iterations:</strong> 1 / 4 minimum</p>
-          <p><strong>Review in:</strong> 5.7 days</p>
+          <p><strong>Days alive:</strong> 1.4 / 56 minimum · <strong>Iterations:</strong> 1 / 4 minimum</p>
+          <p><strong>Review in:</strong> 5.6 days</p>
           
           
             <details>
