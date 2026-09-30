@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T16:07:55.892717Z",
+  "generated_at": "2026-09-30T16:48:51.676391Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -13,15 +13,15 @@
       "metric_value": 0.0,
       "kill_criteria": "no top-50% placement after 6 MiniBench rounds",
       "status": "active",
-      "days_alive": 20.2,
-      "iterations": 90,
+      "days_alive": 20.3,
+      "iterations": 91,
       "min_iterations": 4,
       "min_days": 42,
       "kill_allowed": false,
       "last_iteration": {
-        "ts": 1790779664.9510748,
-        "changed": "Ran Metaculus bot tournament mode - fetched 2 AI competition questions, 0 MiniBench questions; bot functional with ZAI API but experiencing rate limits on forecast generation",
-        "result": "Bot retrieved questions successfully, research completed on available questions, forecast generation blocked by ZAI free tier rate limits (429 errors)"
+        "ts": 1790786615.7678983,
+        "changed": "Ran Metaculus bot tournament mode to check for open questions",
+        "result": "Fetched 0 questions from both AI competition (ID 33022) and MiniBench (ID minibench) tournaments"
       },
       "review_in_days": 4.1,
       "project_dir": "metaculus-minibench-bot",
