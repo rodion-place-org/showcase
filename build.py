@@ -426,6 +426,7 @@ def build(output: Path, base: str = "") -> None:
 <section class="project-card"><span class="tag">signal / collector</span><h3><a href="/site/projects/sydney-startup-radar.html">Sydney Startup Radar →</a></h3><p>Internal 14-day provenance-first Sydney startup/AI signal collector across five permitted source lanes (Luma, Startup Daily, Fishburners, Stone & Chalk, public X via grokx). No outreach, no public deployment.</p></section>
 <section class="project-card"><span class="tag">signal / probe</span><h3><a href="/site/projects/venkat-signal-monitor.html">Venkat 3-Account Signal Monitor →</a></h3><p>Executable read-only sample parsing a Veeva/nCino/Guidewire source pack and rendering joined regulator + ICP hiring + financial-report signals with source URLs and freshness labels.</p></section>
 <section class="project-card"><span class="tag">regulatory / probe</span><h3><a href="/site/projects/fcm-change-impact.html">EU Food-Contact Material Change Impact →</a></h3><p>Internal read-only probe watching Commission, EUR-Lex, and EFSA sources with a 5-stage model (law, scientific-opinion, guidance, procedure, information). GET-only; no compliance determinations.</p></section>
+<section class="project-card"><span class="tag">data / demand probe</span><h3><a href="/site/projects/eu-einvoicing-mandate-diff.html">EU E-Invoicing Mandate Diff →</a></h3><p>A zero-spend demand probe testing whether qualified accounting, ERP, and cross-border finance practitioners manually maintain EU e-invoicing mandate matrices and would trial a source-cited diff feed. Direct professional contact only; no public deployment.</p></section>
 <section class="project-card"><span class="tag">browser / runtime</span><h3><a href="/site/projects/browser-runtime-libs.html">X Read-Only Browser Runtime →</a></h3><p>Zero-paid user-space Chrome for Testing 152 with vendored Ubuntu libraries and a persistent profile. Read-only CDP navigation; no posts, likes, follows, or typed input.</p></section>
 <h2 id="utilities">Local utilities archive</h2>
 <div class="project-grid">
@@ -508,6 +509,31 @@ def build(output: Path, base: str = "") -> None:
     <h2>Verification</h2>
     <section class="card"><p>Run <code>python3 -m unittest discover -s tests -v</code>. <code>watch</code> mode records HTTP/network errors per source and continues; a blocked source does not halt the probe.</p></section>
     """))
+    write(output, "projects/eu-einvoicing-mandate-diff.html", page("EU E-Invoicing Mandate Diff", """
+    <p class="eyebrow">Project · data demand probe</p><h1>EU E-Invoicing Mandate Diff</h1>
+    <p class="lede">A zero-spend demand probe testing whether qualified accounting, ERP, and cross-border finance practitioners manually maintain EU e-invoicing mandate matrices (country → format → deadline → spec) and would trial a source-cited diff feed that tracks what changed, when, and the official source URL.</p>
+    <section class="card"><strong>Boundary:</strong> This is a demand-validation probe, not a live data product. It does not publish a feed, syndicate data, or offer a subscription. Each iteration is a dated, direct professional contact to a qualified practitioner; the metric is a qualified continuation (substantive reply confirming pain or willingness to trial), not a click or impression.</section>
+    <h2>Hypothesis</h2>
+    <section class="card"><p>The EU ViDA / e-invoicing mandate rolls out 2026–2030 with per-member-state implementation timelines and formats. Practitioners manually maintain mandate matrices; an authoritative, source-cited diff feed would reduce that monitoring burden. The probe tests whether at least 3 qualified practitioners confirm this pain or request a trial within 14 days of a varied, confirmed delivery.</p></section>
+    <h2>Method</h2>
+    <section class="card"><ol>
+    <li>Identify qualified practitioners: accounting firms with cross-border VAT/e-invoicing desks, ERP vendors with e-invoicing modules, B2B integration providers.</li>
+    <li>Contact via public business routes only: published company contact forms, professional email addresses from first-party websites, public professional profiles.</li>
+    <li>Each message is AI-disclosed, states the probe purpose, asks one direct question, and promises no automated follow-up.</li>
+    <li>Record SMTP acceptance and IMAP Sent-mailbox verification for each delivery.</li>
+    </ol></section>
+    <h2>Iterations (public log)</h2>
+    <section class="card">
+    <p><strong>Iteration 1 (2025-09-25):</strong> Project initialized; target segment defined.</p>
+    <p><strong>Iteration 2 (2025-09-26):</strong> Banqup (SME e-invoicing platform) — public contact form delivery confirmed.</p>
+    <p><strong>Iteration 3 (2025-09-27):</strong> Taxually (cross-border VAT/e-invoicing) — public contact form delivery confirmed.</p>
+    <p><strong>Iteration 4 (2025-09-27):</strong> Basware (enterprise e-invoicing) — public Kontakt form delivery confirmed.</p>
+    <p><strong>Iteration 5 (2025-09-27):</strong> SEEBURGER (enterprise B2B integration) — direct email to info@seeburger.de; SMTP accepted, IMAP Sent-mailbox verified; 0 qualified continuations at send time.</p>
+    <p class="whisper">All deliveries are AI-disclosed and logged with Message-ID, timestamp, and verification evidence in the project's ops/ directory.</p>
+    </section>
+    <h2>Verification</h2>
+    <section class="card"><p>Each iteration produces a dated ops/ log with the exact message, recipient, public route source, SMTP acceptance, and IMAP Sent-mailbox readback. Run <code>cat ops/*.md</code> to inspect the full delivery chain. The probe is deterministic given the same target list and contact routes.</p></section>
+    """, "Zero-spend demand probe testing whether qualified practitioners manually maintain EU e-invoicing mandate matrices and would trial a source-cited diff feed."))
     write(output, "projects/browser-runtime-libs.html", page("X Read-Only Browser Runtime", """
     <p class="eyebrow">Project · browser runtime</p><h1>X Read-Only Browser Runtime</h1>
     <p class="lede">A zero-paid user-space runtime for Chrome for Testing 152 using an existing persistent profile. Missing Ubuntu runtime libraries are vendored under <code>root/</code>; no root or apt install is required.</p>
