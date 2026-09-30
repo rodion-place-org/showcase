@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T21:12:04.288781Z",
+  "generated_at": "2026-09-30T22:12:51.288026Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -35,7 +35,7 @@
       "metric_value": 0.0,
       "kill_criteria": "no top-50% placement after 6 MiniBench rounds",
       "status": "active",
-      "days_alive": 20.4,
+      "days_alive": 20.5,
       "iterations": 91,
       "min_iterations": 4,
       "min_days": 42,
@@ -45,7 +45,7 @@
         "changed": "Ran Metaculus bot tournament mode to check for open questions",
         "result": "Fetched 0 questions from both AI competition (ID 33022) and MiniBench (ID minibench) tournaments"
       },
-      "review_in_days": 3.9,
+      "review_in_days": 3.8,
       "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
       "jurisdiction": "none-needed to enter; John verifies once as prize winner"
@@ -61,7 +61,7 @@
       "metric_value": 0.0,
       "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 24.5,
+      "days_alive": 24.6,
       "iterations": 157,
       "min_iterations": 4,
       "min_days": 60,
@@ -71,7 +71,7 @@
         "changed": "Paper trading cycle with current Polymarket data - fetched 100 events, 0 new distinct predictions, 0 newly resolved -> Paper ledger: 3693 existing unique predictions, 4301 unscored, 158 total scored with Brier delta vs market = 0.000000",
         "result": "Paper cycle completed; no new predictions or resolutions; baseline remains at market parity"
       },
-      "review_in_days": 3.9,
+      "review_in_days": 3.8,
       "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
       "jurisdiction": "paper only; live route (Polymarket/Kalshi/Kraken via John's non-AU identity) = John decision need"
@@ -97,7 +97,7 @@
         "changed": "pause: all discovery channels exhausted (Algora 0 qualified at 90d, Superteam auth pending prime task #516/SUPERTEAM_API_KEY, GitHub/Opire/BountyHub/Gitcoin/OnlyDust/Huntr/GitHub Security Lab/HackerOne all rejected or closed); only eligible target (tscircuit/autorouting#92) is in archived repo; external blockers documented: Task #516 (prime/SUPERTEAM_API_KEY) and Need #16 (John identity for Stripe Connect/Superteam talent profile). Persistence gate: 73 iters/18.8d (min 5/42) - kill not allowed. Venture paused awaiting external unblock.",
         "result": "paused_external_blockers"
       },
-      "review_in_days": 3.9,
+      "review_in_days": 3.8,
       "project_dir": "bounty-scout",
       "repo": "rodion-place-org/bounty-scout",
       "jurisdiction": "Stripe Connect / Superteam talent profile = John identity need; USDC wallet none-needed"
@@ -123,7 +123,7 @@
         "changed": "confirmed buyer/form target: Taob\u00e9 Consulting -> CosmeExpert (Spain EU Responsible Person/regulatory consultancy)",
         "result": "CosmeExpert public contact form accepted the truthful AI-disclosed no-cost source-linked ingredient change-impact sample offer, cleared the fields, and displayed 'Your submission was successful.' Confirmed delivery #3 across a third buyer; qualified continuations remain 0 at submission time."
       },
-      "review_in_days": 3.9,
+      "review_in_days": 3.8,
       "project_dir": "cosmetics-change-impact",
       "repo": null,
       "jurisdiction": "EU buyers via rodion.place mailbox; no venue account needed"
@@ -149,7 +149,7 @@
         "changed": "confirmed industrial buyer/contact target: SAUTER Head Office -> CEDES AG published headquarters inbox",
         "result": "CEDES general website form required a human salutation, so no identity was fabricated; one truthful AI-disclosed no-cost source-linked CRA intake-to-SRP comparison offer was sent to CEDES's published headquarters inbox. Purelymail SMTP accepted it with 0 refused recipients and IMAP readback found exactly 1 matching Sent message; 0 qualified continuations at send time."
       },
-      "review_in_days": 3.9,
+      "review_in_days": 3.8,
       "project_dir": "cra-srp-readiness",
       "repo": null,
       "jurisdiction": "EU buyers via rodion.place mailbox; no venue account needed"
@@ -175,7 +175,7 @@
         "changed": "direct-demand target segment: SME e-invoicing business platform (Banqup) -> enterprise B2B integration/e-invoicing provider (SEEBURGER); channel remains one-to-one public business email",
         "result": "AI-disclosed research question sent to SEEBURGER's first-party published info@seeburger.de route; sender SMTP accepted with zero refused recipients, and exact recipient/subject/Message-ID were read back from the rodion@rodion.place Sent mailbox. Valid buyer-exposure count is now 3; qualified continuations remain 0/3 pending response or DSN."
       },
-      "review_in_days": 3.9,
+      "review_in_days": 3.8,
       "project_dir": "",
       "repo": null,
       "jurisdiction": "EU buyers via rodion.place/Purelymail business email; no venue account needed"
@@ -201,7 +201,7 @@
         "changed": "Direct demand gate: public contact form target CosmeExpert",
         "result": "No qualified continuation received; no trial request or manual-matrix maintainer signal"
       },
-      "review_in_days": 3.9,
+      "review_in_days": 3.8,
       "project_dir": "",
       "repo": null,
       "jurisdiction": "EU buyers via rodion.place mailbox; no venue account needed"
@@ -217,7 +217,7 @@
       "metric_value": null,
       "kill_criteria": "Mean MMC below 0 after 8 scored unstaked rounds, or John/Creator stops.",
       "status": "active",
-      "days_alive": 1.6,
+      "days_alive": 1.7,
       "iterations": 1,
       "min_iterations": 4,
       "min_days": 56,
@@ -227,7 +227,7 @@
         "changed": "baseline created: deterministic feature-mean on v5.3 small feature set, tested public data flow + API round 1364; repo rodion-place/numerai-unstaked-track-record pushed; tests pass; next step requires NUMERAI_PUBLIC_ID/SECRET_KEY/MODEL_ID credentials from John for first submission",
         "result": "baseline.py produces valid 6923-row prediction file in [0,1]; test_baseline.py passes deterministic + live tests; repo live at https://github.com/rodion-place/numerai-unstaked-track-record"
       },
-      "review_in_days": 5.4,
+      "review_in_days": 5.3,
       "project_dir": "numerai-unstaked-track-record",
       "repo": "rodion-place-org/numerai-unstaked-track-record",
       "jurisdiction": "none-needed for free unstaked submissions; staking requires John's payment decision"
