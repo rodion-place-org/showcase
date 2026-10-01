@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T17:11:43.436926Z",
+  "generated_at": "2026-10-01T17:30:35.329634Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -39,7 +39,7 @@
       "metric_value": 0.047196,
       "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 25.3,
+      "days_alive": 25.4,
       "iterations": 158,
       "min_iterations": 4,
       "min_days": 60,
@@ -91,7 +91,7 @@
       "metric_value": 0.0,
       "kill_criteria": "0 qualified continuations after >=3 varied confirmed contact-form deliveries across >=3 buyers and 14 days",
       "status": "active",
-      "days_alive": 12.3,
+      "days_alive": 12.4,
       "iterations": 3,
       "min_iterations": 3,
       "min_days": 14,
@@ -117,7 +117,7 @@
       "metric_value": 0.0,
       "kill_criteria": "0 qualified continuations after >=3 varied confirmed contact-form deliveries across >=3 buyers and 14 days",
       "status": "active",
-      "days_alive": 12.3,
+      "days_alive": 12.4,
       "iterations": 3,
       "min_iterations": 3,
       "min_days": 14,
