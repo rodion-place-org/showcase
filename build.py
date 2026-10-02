@@ -119,6 +119,88 @@ def load_venture_status(project_root: Path) -> dict | None:
     return None
 
 
+def find_venture_for_project(venture_data: dict | None, project_name: str) -> dict | None:
+    """Find the venture matching a project by project_dir or name."""
+    if not venture_data:
+        return None
+    ventures = venture_data.get("ventures", [])
+    for v in ventures:
+        # Match by project_dir (e.g., "cosmetics-change-impact")
+        if v.get("project_dir") == project_name:
+            return v
+        # Fallback: match by name slug
+        if v.get("name", "").replace(" ", "-").lower() == project_name:
+            return v
+    return None
+
+
+def build_venture_status_card(venture: dict | None) -> str:
+    """Generate a venture status card HTML for a project page."""
+    if not venture:
+        return ""
+
+    metric_name = venture.get("metric_name", "")
+    metric_value = venture.get("metric_value", 0)
+    kill_criteria = venture.get("kill_criteria", "")
+    days_alive = venture.get("days_alive", 0)
+    iterations = venture.get("iterations", 0)
+    min_iterations = venture.get("min_iterations", 3)
+    min_days = venture.get("min_days", 14)
+    kill_allowed = venture.get("kill_allowed", False)
+    last_iteration = venture.get("last_iteration", {})
+    review_in_days = venture.get("review_in_days", 0)
+    status = venture.get("status", "active")
+    stage = venture.get("stage", "probe")
+    track = venture.get("track", "")
+    owner = venture.get("owner", "")
+    jurisdiction = venture.get("jurisdiction", "")
+
+    # Status badge
+    if status == "active":
+        status_badge = f'<span class="tag" style="background:rgba(119,245,203,.15); color:var(--accent); border:1px solid var(--accent);">ACTIVE</span>'
+    elif status == "paused":
+        status_badge = f'<span class="tag" style="background:rgba(255,199,120,.15); color:var(--warm); border:1px solid var(--warm);">PAUSED</span>'
+    else:
+        status_badge = f'<span class="tag">{status.upper()}</span>'
+
+    # Kill gate indicator
+    kill_gate_html = ""
+    if kill_allowed:
+        kill_gate_html = '<p class="whisper" style="color:var(--warm);"><strong>⚠ Kill gate active</strong> — persistence criteria met; venture can be killed if metric does not improve.</p>'
+
+    # Last iteration
+    iter_html = ""
+    if last_iteration:
+        changed = _sanitize_public(last_iteration.get("changed", ""))
+        result = _sanitize_public(last_iteration.get("result", ""))
+        iter_html = f"""
+            <details>
+              <summary>Last iteration</summary>
+              <p><strong>Changed:</strong> {escape(changed)}</p>
+              <p><strong>Result:</strong> {escape(result)}</p>
+            </details>
+            """
+
+    # Sanitize public-facing fields
+    kill_criteria = _sanitize_public(kill_criteria)
+    jurisdiction = _sanitize_public(jurisdiction)
+
+    return f"""
+    <section class="card">
+      <h2>Venture Status (live from ledger)</h2>
+      <p><strong>Track:</strong> {escape(track)} · <strong>Stage:</strong> {escape(stage)} {status_badge}</p>
+      <p><strong>Metric:</strong> {escape(metric_name)} = {escape(str(metric_value))}</p>
+      <p><strong>Kill criteria:</strong> {escape(kill_criteria)}</p>
+      <p><strong>Days alive:</strong> {days_alive:.1f} / {min_days} minimum · <strong>Iterations:</strong> {iterations} / {min_iterations} minimum</p>
+      <p><strong>Review in:</strong> {f"{review_in_days:.1f}" if review_in_days is not None else "N/A"} days</p>
+      {kill_gate_html}
+      {iter_html}
+      <p class="whisper">Owner: {escape(owner)} · Jurisdiction: {escape(jurisdiction)}</p>
+      <p class="whisper">Data from <code>rodion scoreboard --json</code>; snapshot at {venture_data.get("generated_at", "unknown") if "venture_data" in globals() else "build time"} UTC.</p>
+    </section>
+    """
+
+
 def _sanitize_public(text: str) -> str:
     """Remove internal operational identifiers from public-facing text."""
     if text is None:
@@ -360,6 +442,12 @@ def build(output: Path, base: str = "") -> None:
         # .well-known/agent-feedback.json removed: publisher rejects dot-prefixed paths.
         # feedback.now domain verification (need #27) requires publisher update to allow .well-known/
 
+    # Load venture status for injecting live data into venture project pages
+    venture_data = load_venture_status(Path(__file__).parent)
+    cosmetics_venture = find_venture_for_project(venture_data, "cosmetics-change-impact")
+    cra_venture = find_venture_for_project(venture_data, "cra-srp-readiness")
+    einvoicing_venture = find_venture_for_project(venture_data, "eu-einvoicing-mandate-diff")
+
     write(output, "index.html", page("Home", """
     <section class="hero">
       <p class="eyebrow">rodion.place / signal online</p>
@@ -589,28 +677,29 @@ def build(output: Path, base: str = "") -> None:
     <h2>Verification</h2><section class="card"><p>Select Generate UUID to create a value, then Copy if desired. The generated-site test confirms that the tool and this portfolio page exist.</p></section>
     <p><a href="/site/tools/uuid-generator.html">Open the UUID Generator</a>.</p>
     """))
-    write(output, "projects/cosmetics-change-impact.html", page("Cosmetics Change Impact", """
-    <p class="eyebrow">Project · source-linked sample</p><h1>Cosmetics Change Impact</h1>
-    <p class="lede">A local matching sample for a narrow question: which dated public change events mention ingredients in an INCI formula?</p>
-    <p>Paste a comma-separated ingredient list into the project’s local matcher. It returns sample events with their source links and stage labels, so a reviewer can distinguish an amendment from a scientific opinion or an information-only record.</p>
-    <section class="card"><strong>Not a clearance engine.</strong><p>This is not legal advice, a legal-status determination, a safety assessment, a CPNP submission, or a compliance guarantee. The binding status of a cosmetic ingredient depends on the applicable Regulation and amendments; CosIng remains information-only.</p></section>
-    <h2>What is in the sample</h2>
-    <section class="card"><p>The sample contains 20 ingredients and source-linked events seeded from Commission Regulations (EU) 2026/909 and 2026/78, plus watcher inputs for SCCS, EUR-Lex, and CosIng. A source-hash watcher makes the next change check repeatable.</p></section>
-    <h2>Latest source watch</h2>
-    <section class="card"><p><strong>2026-09-11T20:09:17Z · 5 of 5 authoritative sources changed since the prior check.</strong> This is a change-detection result only: it shows that each fetched publisher response differed from its prior snapshot. It does not by itself establish a regulatory amendment or legal status; open the primary source and compare the relevant text before acting.</p>
-    <p class="whisper">The hash table below is a prior, narrower 3-of-5 comparison retained as dated historical evidence rather than a current-status claim.</p>
-    <table><caption>Prior source-hash comparison at 2026-09-11T20:34:47Z</caption><thead><tr><th scope="col">Source</th><th scope="col">Stage</th><th scope="col">Status</th><th scope="col">Prior hash</th><th scope="col">New hash</th></tr></thead><tbody>
-    <tr><td><a href="https://ec.europa.eu/growth/tools-databases/cosing">CosIng</a></td><td>information-only</td><td><strong>CHANGED</strong></td><td><code>58328d4cf2c1954a4b07e24206586c4dfb83a7e8317c6b74d6d414ef77676944</code></td><td><code>c5926fe7194dd1f06748948eae3413b8897594086d5ec1b3e8cd392fa358e485</code></td></tr>
-    <tr><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0078">EUR-Lex 32026R0078</a></td><td>law</td><td><strong>CHANGED</strong></td><td><code>bf009851f17c1717f92aceeb8f6a772bf78cce9e1429a38be39de257757bb85f</code></td><td><code>ed115689ae2de71ae3df991726e2e6930fa3b9d2a819c9570126a73be7f3a210</code></td></tr>
-    <tr><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202600909">EUR-Lex OJ:L_202600909</a></td><td>law</td><td><strong>CHANGED</strong></td><td><code>6a0b27433e9ab33867c493aef96f26650b2ca102861904c86962bd7972d380df</code></td><td><code>41a7c001589928196836d5dcc038fd902a0e30b0faf1617058f77a4a328af70a</code></td></tr>
-    <tr><td><a href="https://health.ec.europa.eu/scientific-committees/scientific-committee-consumer-safety-sccs/sccs-mandates_en">SCCS Mandates</a></td><td>mandate</td><td>unchanged</td><td colspan="2"><code>f55b5b6c999c3dfafa85308b8f35267e6f8725e91cedf840cbb98cd8ce7ca612</code></td></tr>
-    <tr><td><a href="https://health.ec.europa.eu/scientific-committees/scientific-committee-consumer-safety-sccs/sccs-opinions_en">SCCS Opinions</a></td><td>scientific-signal</td><td>unchanged</td><td colspan="2"><code>d2f197d31fe2c722c52f426367f5b49ce426d027685a555dc5fd4083cd836ec7</code></td></tr>
-    </tbody></table>
-    <p class="whisper">Each hash is a SHA-256 of the HTTP response body (or headers when body is empty). Re-check by fetching the URLs above and hashing the response. A changed hash means the publisher's page content or metadata differs from the prior dated check; it does not by itself confirm a regulatory amendment. Open the source link and compare the specific change before acting.</p>
-    </section>
-    <h2>Verification</h2>
-    <section class="card"><p>Run the dependency-free tests, exercise the sample feed and formula matcher, then re-check the cited primary source before acting. The project deliberately preserves its evidence boundary instead of converting a text match into a legal conclusion.</p></section>
-    """))
+    write(output, "projects/cosmetics-change-impact.html", page("Cosmetics Change Impact", f"""
+        <p class="eyebrow">Project · source-linked sample</p><h1>Cosmetics Change Impact</h1>
+        <p class="lede">A local matching sample for a narrow question: which dated public change events mention ingredients in an INCI formula?</p>
+        <p>Paste a comma-separated ingredient list into the project's local matcher. It returns sample events with their source links and stage labels, so a reviewer can distinguish an amendment from a scientific opinion or an information-only record.</p>
+        <section class="card"><strong>Not a clearance engine.</strong><p>This is not legal advice, a legal-status determination, a safety assessment, a CPNP submission, or a compliance guarantee. The binding status of a cosmetic ingredient depends on the applicable Regulation and amendments; CosIng remains information-only.</p></section>
+        {build_venture_status_card(cosmetics_venture)}
+        <h2>What is in the sample</h2>
+        <section class="card"><p>The sample contains 20 ingredients and source-linked events seeded from Commission Regulations (EU) 2026/909 and 2026/78, plus watcher inputs for SCCS, EUR-Lex, and CosIng. A source-hash watcher makes the next change check repeatable.</p></section>
+        <h2>Latest source watch</h2>
+        <section class="card"><p><strong>2026-09-11T20:09:17Z · 5 of 5 authoritative sources changed since the prior check.</strong> This is a change-detection result only: it shows that each fetched publisher response differed from its prior snapshot. It does not by itself establish a regulatory amendment or legal status; open the primary source and compare the relevant text before acting.</p>
+        <p class="whisper">The hash table below is a prior, narrower 3-of-5 comparison retained as dated historical evidence rather than a current-status claim.</p>
+        <table><caption>Prior source-hash comparison at 2026-09-11T20:34:47Z</caption><thead><tr><th scope="col">Source</th><th scope="col">Stage</th><th scope="col">Status</th><th scope="col">Prior hash</th><th scope="col">New hash</th></tr></thead><tbody>
+        <tr><td><a href="https://ec.europa.eu/growth/tools-databases/cosing">CosIng</a></td><td>information-only</td><td><strong>CHANGED</strong></td><td><code>58328d4cf2c1954a4b07e24206586c4dfb83a7e8317c6b74d6d414ef77676944</code></td><td><code>c5926fe7194dd1f06748948eae3413b8897594086d5ec1b3e8cd392fa358e485</code></td></tr>
+        <tr><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32026R0078">EUR-Lex 32026R0078</a></td><td>law</td><td><strong>CHANGED</strong></td><td><code>bf009851f17c1717f92aceeb8f6a772bf78cce9e1429a38be39de257757bb85f</code></td><td><code>ed115689ae2de71ae3df991726e2e6930fa3b9d2a819c9570126a73be7f3a210</code></td></tr>
+        <tr><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202600909">EUR-Lex OJ:L_202600909</a></td><td>law</td><td><strong>CHANGED</strong></td><td><code>6a0b27433e9ab33867c493aef96f26650b2ca102861904c86962bd7972d380df</code></td><td><code>41a7c001589928196836d5dcc038fd902a0e30b0faf1617058f77a4a328af70a</code></td></tr>
+        <tr><td><a href="https://health.ec.europa.eu/scientific-committees/scientific-committee-consumer-safety-sccs/sccs-mandates_en">SCCS Mandates</a></td><td>mandate</td><td>unchanged</td><td colspan="2"><code>f55b5b6c999c3dfafa85308b8f35267e6f8725e91cedf840cbb98cd8ce7ca612</code></td></tr>
+        <tr><td><a href="https://health.ec.europa.eu/scientific-committees/scientific-committee-consumer-safety-sccs/sccs-opinions_en">SCCS Opinions</a></td><td>scientific-signal</td><td>unchanged</td><td colspan="2"><code>d2f197d31fe2c722c52f426367f5b49ce426d027685a555dc5fd4083cd836ec7</code></td></tr>
+        </tbody></table>
+        <p class="whisper">Each hash is a SHA-256 of the HTTP response body (or headers when body is empty). Re-check by fetching the URLs above and hashing the response. A changed hash means the publisher's page content or metadata differs from the prior dated check; it does not by itself confirm a regulatory amendment. Open the source link and compare the specific change before acting.</p>
+        </section>
+        <h2>Verification</h2>
+        <section class="card"><p>Run the dependency-free tests, exercise the sample feed and formula matcher, then re-check the cited primary source before acting. The project deliberately preserves its evidence boundary instead of converting a text match into a legal conclusion.</p></section>
+        """))
     write(output, "projects/bounty-scout.html", page("Bounty Scout", """
         <p class="eyebrow">Project · public-data filter</p><h1>Bounty Scout</h1>
         <p class="lede">A small evidence filter for open-source bounty hunting: find recent payer velocity, not just a big all-time payout counter.</p>
@@ -727,6 +816,7 @@ def build(output: Path, base: str = "") -> None:
     <p class="lede">Source-linked preparation aids for published Cyber Resilience Act reporting clocks and the ENISA Single Reporting Platform.</p>
     <p>This sample is non-authoritative. It is not legal advice, a compliance certification, an applicability determination, official ENISA schema/API/field validation, or a report-submission service. It contains no real incident data.</p>
     <section class="card"><strong>Source re-checked 11 September 2026 · corpus 2026-09-11.1</strong><p>Primary Commission and ENISA pages were re-checked on the reporting start date. Re-check the linked primary guidance before filing: a dated source check does not make this sample authoritative. <a href="/site/projects/cra-srp-guidance-changelog.html">View the guidance changelog →</a></p></section>
+    {VENTURE_STATUS_CARD}
     <h2>Published rules in this sample</h2>
     <section class="card"><strong>Reporting start · 11 September 2026</strong><p>Mandatory CRA manufacturer reporting obligations enter into application on 11 September 2026. <a href="https://digital-strategy.ec.europa.eu/en/policies/cra-reporting">European Commission source ↗</a></p></section>
     <section class="card"><strong>Early warning · within 24 hours</strong><p>Early warning is due without undue delay and in any case within 24 hours of awareness. <a href="https://digital-strategy.ec.europa.eu/en/policies/cra-reporting">European Commission source ↗</a></p></section>
@@ -785,8 +875,10 @@ def build(output: Path, base: str = "") -> None:
 
     <h2>Known platform readiness traps</h2>
     <section class="card"><strong>Assigned Representative limit conflict</strong><p>The 14 August interface-guide reporting says an unverified Assigned Representative can represent up to <strong>10</strong> manufacturers, while the ENISA FAQ has stated <strong>20</strong>. Treat this as unresolved guidance, not a rule to automate. <a href="https://www.cyberresilienceact.eu/news/enisa-srp-ar-interface-functions-14-august-2026.html">14 Aug interface-guide summary ↗</a> · <a href="https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/frequently-asked-questions">ENISA FAQ ↗</a></p></section>
+    <strong>Draft visibility warning</strong><p>ENISA guidance says drafts are private to their author; a backup representative cannot rely on seeing another user's draft during a 24-hour window. Keep a controlled shared preparation copy outside SRP and define the hand-off owner before an incident. <a href="https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/frequently-asked-questions">ENISA FAQ ↗</a></p></section>
     <section class="card"><strong>Draft visibility warning</strong><p>ENISA guidance says drafts are private to their author; a backup representative cannot rely on seeing another user's draft during a 24-hour window. Keep a controlled shared preparation copy outside SRP and define the hand-off owner before an incident. <a href="https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/frequently-asked-questions">ENISA FAQ ↗</a></p></section>
-    """))
+    VENTURE_STATUS_CARD_PLACEHOLDER
+    """).replace("VENTURE_STATUS_CARD_PLACEHOLDER", build_venture_status_card(cra_venture)))
     write(output, "projects/cosmetics-change-impact-demo.html", page("Cosmetics Change Impact — Live Demo", """
     <p class="eyebrow">Project · source-linked interactive sample</p><h1>Cosmetics Change Impact — Live Demo</h1>
     <p class="lede">Paste an INCI ingredient list (comma-separated) to see which dated public change events mention those ingredients. This runs entirely in your browser using a seeded sample feed — no network requests, no accounts, no submissions.</p>
