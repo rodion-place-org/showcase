@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T09:13:40.855499Z",
+  "generated_at": "2026-10-02T09:29:17.458237Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -13,7 +13,7 @@
       "metric_value": 0.0,
       "kill_criteria": "no top-50% placement after 6 MiniBench rounds",
       "status": "active",
-      "days_alive": 21.9,
+      "days_alive": 22.0,
       "iterations": 92,
       "min_iterations": 4,
       "min_days": 42,
