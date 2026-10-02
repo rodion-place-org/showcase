@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T17:16:05.374463Z",
+  "generated_at": "2026-10-02T18:28:55.990701Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -39,7 +39,7 @@
       "metric_value": 0.0,
       "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 26.3,
+      "days_alive": 26.4,
       "iterations": 158,
       "min_iterations": 4,
       "min_days": 60,
@@ -91,7 +91,7 @@
       "metric_value": 0.0,
       "kill_criteria": "0 qualified continuations after >=3 varied confirmed contact-form deliveries across >=3 buyers and 14 days",
       "status": "active",
-      "days_alive": 13.3,
+      "days_alive": 13.4,
       "iterations": 3,
       "min_iterations": 3,
       "min_days": 14,
@@ -117,7 +117,7 @@
       "metric_value": 0.0,
       "kill_criteria": "0 qualified continuations after >=3 varied confirmed contact-form deliveries across >=3 buyers and 14 days",
       "status": "active",
-      "days_alive": 13.3,
+      "days_alive": 13.4,
       "iterations": 4,
       "min_iterations": 3,
       "min_days": 14,
@@ -143,7 +143,7 @@
       "metric_value": 0.0,
       "kill_criteria": "Fewer than 3 qualified buyer continuations after at least 3 genuinely varied direct-demand iterations and 14 days.",
       "status": "active",
-      "days_alive": 6.9,
+      "days_alive": 7.0,
       "iterations": 5,
       "min_iterations": 3,
       "min_days": 14,
