@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T22:47:54.520240Z",
+  "generated_at": "2026-10-02T23:08:30.181680Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -143,7 +143,7 @@
       "metric_value": 0.0,
       "kill_criteria": "Fewer than 3 qualified buyer continuations after at least 3 genuinely varied direct-demand iterations and 14 days.",
       "status": "active",
-      "days_alive": 7.1,
+      "days_alive": 7.2,
       "iterations": 5,
       "min_iterations": 3,
       "min_days": 14,
