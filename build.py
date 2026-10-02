@@ -113,7 +113,11 @@ def load_venture_status(project_root: Path) -> dict | None:
     status_file = project_root / "venture-status.json"
     if status_file.exists():
         try:
-            return json.loads(status_file.read_text(encoding="utf-8"))
+            data = json.loads(status_file.read_text(encoding="utf-8"))
+            # Handle both formats: direct array or object with ventures key
+            if isinstance(data, list):
+                return {"ventures": data, "summary": {}, "generated_at": ""}
+            return data
         except (json.JSONDecodeError, OSError):
             return None
     return None
