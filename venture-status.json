@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T23:48:48.374627Z",
+  "generated_at": "2026-10-03T02:07:54.082387Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -13,7 +13,7 @@
       "metric_value": 0.0,
       "kill_criteria": "no top-50% placement after 6 MiniBench rounds",
       "status": "active",
-      "days_alive": 22.6,
+      "days_alive": 22.7,
       "iterations": 94,
       "min_iterations": 4,
       "min_days": 42,
@@ -23,7 +23,7 @@
         "changed": "reduced structure_output_validation_samples from 2 to 1 to avoid validation errors with stochastic LLMs",
         "result": "Bot ran in test_questions mode, processed 9 questions, produced research and reasoning; occasional ZAI empty string warnings but no validation errors"
       },
-      "review_in_days": 1.8,
+      "review_in_days": 1.7,
       "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
       "jurisdiction": "none-needed to enter; John verifies once as prize winner"
@@ -39,7 +39,7 @@
       "metric_value": 0.0,
       "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 26.6,
+      "days_alive": 26.7,
       "iterations": 158,
       "min_iterations": 4,
       "min_days": 60,
@@ -49,7 +49,7 @@
         "changed": "forecast model: market-copy baseline -> category-specific shrinkage v2, with an explicit uncertainty/base-rate rationale",
         "result": "50 distinct model-v2 forecasts appended; 3 immediately resolved and scored. Mean Brier delta vs time-matched market = +0.047196 (worse than market); all 3 resolved NO against market probabilities 0.003\u20130.037. Early n=3 is negative evidence, not a stable quality estimate. Baseline's 0.000000 delta is tautological because it copies market prices."
       },
-      "review_in_days": 1.8,
+      "review_in_days": 1.7,
       "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
       "jurisdiction": "paper only; live route (Polymarket/Kalshi/Kraken via John's non-AU identity) = John decision need"
@@ -75,7 +75,7 @@
         "changed": "pause: all discovery channels exhausted (Algora 0 qualified at 90d, Superteam auth pending prime task #516/SUPERTEAM_API_KEY, GitHub/Opire/BountyHub/Gitcoin/OnlyDust/Huntr/GitHub Security Lab/HackerOne all rejected or closed); only eligible target (tscircuit/autorouting#92) is in archived repo; external blockers documented: Task #516 (prime/SUPERTEAM_API_KEY) and Need #16 (John identity for Stripe Connect/Superteam talent profile). Persistence gate: 73 iters/18.8d (min 5/42) - kill not allowed. Venture paused awaiting external unblock.",
         "result": "paused_external_blockers"
       },
-      "review_in_days": 1.8,
+      "review_in_days": 1.7,
       "project_dir": "bounty-scout",
       "repo": "rodion-place-org/bounty-scout",
       "jurisdiction": "Stripe Connect / Superteam talent profile = John identity need; USDC wallet none-needed"
@@ -91,7 +91,7 @@
       "metric_value": 0.0,
       "kill_criteria": "0 qualified continuations after >=3 varied confirmed contact-form deliveries across >=3 buyers and 14 days",
       "status": "active",
-      "days_alive": 13.6,
+      "days_alive": 13.7,
       "iterations": 3,
       "min_iterations": 3,
       "min_days": 14,
@@ -101,7 +101,7 @@
         "changed": "confirmed buyer/form target: Taob\u00e9 Consulting -> CosmeExpert (Spain EU Responsible Person/regulatory consultancy)",
         "result": "CosmeExpert public contact form accepted the truthful AI-disclosed no-cost source-linked ingredient change-impact sample offer, cleared the fields, and displayed 'Your submission was successful.' Confirmed delivery #3 across a third buyer; qualified continuations remain 0 at submission time."
       },
-      "review_in_days": 1.8,
+      "review_in_days": 1.7,
       "project_dir": "cosmetics-change-impact",
       "repo": null,
       "jurisdiction": "EU buyers via rodion.place mailbox; no venue account needed"
@@ -117,7 +117,7 @@
       "metric_value": 0.0,
       "kill_criteria": "0 qualified continuations after >=3 varied confirmed contact-form deliveries across >=3 buyers and 14 days",
       "status": "active",
-      "days_alive": 13.6,
+      "days_alive": 13.7,
       "iterations": 4,
       "min_iterations": 3,
       "min_days": 14,
@@ -127,7 +127,7 @@
         "changed": "renewed-vary: re-audit cra-srp after 4.4d STALE",
         "result": "no confirmed industrial continuations since 2026-10-01; decision due by 2026-10-05 or vary contact strategy"
       },
-      "review_in_days": 1.8,
+      "review_in_days": 1.7,
       "project_dir": "cra-srp-readiness",
       "repo": null,
       "jurisdiction": "EU buyers via rodion.place mailbox; no venue account needed"
@@ -143,7 +143,7 @@
       "metric_value": 0.0,
       "kill_criteria": "Fewer than 3 qualified buyer continuations after at least 3 genuinely varied direct-demand iterations and 14 days.",
       "status": "active",
-      "days_alive": 7.2,
+      "days_alive": 7.3,
       "iterations": 5,
       "min_iterations": 3,
       "min_days": 14,
@@ -153,7 +153,7 @@
         "changed": "direct-demand target segment: SME e-invoicing business platform (Banqup) -> enterprise B2B integration/e-invoicing provider (SEEBURGER); channel remains one-to-one public business email",
         "result": "AI-disclosed research question sent to SEEBURGER's first-party published info@seeburger.de route; sender SMTP accepted with zero refused recipients, and exact recipient/subject/Message-ID were read back from the rodion@rodion.place Sent mailbox. Valid buyer-exposure count is now 3; qualified continuations remain 0/3 pending response or DSN."
       },
-      "review_in_days": 1.8,
+      "review_in_days": 1.7,
       "project_dir": "",
       "repo": null,
       "jurisdiction": "EU buyers via rodion.place/Purelymail business email; no venue account needed"
@@ -169,7 +169,7 @@
       "metric_value": null,
       "kill_criteria": "Mean MMC below 0 after 8 scored unstaked rounds, or John/Creator stops.",
       "status": "active",
-      "days_alive": 3.7,
+      "days_alive": 3.8,
       "iterations": 1,
       "min_iterations": 4,
       "min_days": 56,
@@ -179,7 +179,7 @@
         "changed": "baseline created: deterministic feature-mean on v5.3 small feature set, tested public data flow + API round 1364; repo rodion-place/numerai-unstaked-track-record pushed; tests pass; next step requires NUMERAI_PUBLIC_ID/SECRET_KEY/MODEL_ID credentials from John for first submission",
         "result": "baseline.py produces valid 6923-row prediction file in [0,1]; test_baseline.py passes deterministic + live tests; repo live at https://github.com/rodion-place/numerai-unstaked-track-record"
       },
-      "review_in_days": 3.3,
+      "review_in_days": 3.2,
       "project_dir": "numerai-unstaked-track-record",
       "repo": "rodion-place-org/numerai-unstaked-track-record",
       "jurisdiction": "none-needed for free unstaked submissions; staking requires John's payment decision"
