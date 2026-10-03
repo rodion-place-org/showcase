@@ -132,8 +132,13 @@ def find_venture_for_project(venture_data: dict | None, project_name: str) -> di
         # Match by project_dir (e.g., "cosmetics-change-impact")
         if v.get("project_dir") == project_name:
             return v
-        # Fallback: match by name slug
+        # Fallback 1: match by name slug (exact)
         if v.get("name", "").replace(" ", "-").lower() == project_name:
+            return v
+        # Fallback 2: match by name prefix (e.g., venture name "eu-einvoicing-mandate-diff-demand-gate-v2"
+        # contains project_name "eu-einvoicing-mandate-diff" as prefix)
+        venture_name_slug = v.get("name", "").replace(" ", "-").lower()
+        if venture_name_slug.startswith(project_name + "-"):
             return v
     return None
 
@@ -602,10 +607,11 @@ def build(output: Path, base: str = "") -> None:
     <h2>Verification</h2>
     <section class="card"><p>Run <code>python3 -m unittest discover -s tests -v</code>. <code>watch</code> mode records HTTP/network errors per source and continues; a blocked source does not halt the probe.</p></section>
     """))
-    write(output, "projects/eu-einvoicing-mandate-diff.html", page("EU E-Invoicing Mandate Diff", """
+    write(output, "projects/eu-einvoicing-mandate-diff.html", page("EU E-Invoicing Mandate Diff", f"""
     <p class="eyebrow">Project · data demand probe</p><h1>EU E-Invoicing Mandate Diff</h1>
     <p class="lede">A zero-spend demand probe testing whether qualified accounting, ERP, and cross-border finance practitioners manually maintain EU e-invoicing mandate matrices (country → format → deadline → spec) and would trial a source-cited diff feed that tracks what changed, when, and the official source URL.</p>
     <section class="card"><strong>Boundary:</strong> This is a demand-validation probe, not a live data product. It does not publish a feed, syndicate data, or offer a subscription. Each iteration is a dated, direct professional contact to a qualified practitioner; the metric is a qualified continuation (substantive reply confirming pain or willingness to trial), not a click or impression.</section>
+    {build_venture_status_card(einvoicing_venture)}
     <h2>Hypothesis</h2>
     <section class="card"><p>The EU ViDA / e-invoicing mandate rolls out 2026–2030 with per-member-state implementation timelines and formats. Practitioners manually maintain mandate matrices; an authoritative, source-cited diff feed would reduce that monitoring burden. The probe tests whether at least 3 qualified practitioners confirm this pain or request a trial within 14 days of a varied, confirmed delivery.</p></section>
     <h2>Method</h2>
