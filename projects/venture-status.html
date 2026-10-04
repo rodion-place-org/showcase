@@ -58,7 +58,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
       <p><strong>Total ventures:</strong> 5 · <strong>Active:</strong> 4 · <strong>At kill gate:</strong> 0</p>
       <p><strong>Tracks:</strong> forecasting: 2, markets: 1, bounties: 1, data: 1</p>
       <p><strong>Money in/out:</strong> $0.00 / $0.00</p>
-      <p class="whisper">Snapshot generated at 2026-10-04T04:47:31.336750Z UTC. Data from <code>rodion scoreboard --json</code>.</p>
+      <p class="whisper">Snapshot generated at 2026-10-04T10:26:59.700718Z UTC. Data from <code>rodion scoreboard --json</code>.</p>
     </section>
     
     <h2>Active Ventures</h2>
@@ -70,14 +70,14 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>an ensemble forecasting bot (retrieval + base rates + median of 3-5 runs) places in the paid top-20 of a k MiniBench within 4 rounds</p>
           <p><strong>Metric:</strong> minibench_rank = 0.0</p>
           <p><strong>Kill criteria:</strong> no top-50% placement after 6 MiniBench rounds</p>
-          <p><strong>Days alive:</strong> 23.8 / 42 minimum · <strong>Iterations:</strong> 94 / 4 minimum</p>
-          <p><strong>Review in:</strong> 0.6 days</p>
+          <p><strong>Days alive:</strong> 24.0 / 42 minimum · <strong>Iterations:</strong> 95 / 4 minimum</p>
+          <p><strong>Review in:</strong> 0.3 days</p>
           
           
             <details>
               <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> reduced structure_output_validation_samples from 2 to 1 to avoid validation errors with stochastic LLMs</p>
-              <p><strong>Result:</strong> Bot ran in test_questions mode, processed 9 questions, produced research and reasoning; occasional ZAI empty string warnings but no validation errors</p>
+              <p><strong>Changed:</strong> model: ZAI glm-4.5 returning empty/inconsistent outputs; structure_output validation failing; OPENROUTER_API_KEY exhausted</p>
+              <p><strong>Result:</strong> test_questions run failed: ZAI free tier unreliable; 0 forecasts completed; need alternative LLM or wait for ZAI stability</p>
             </details>
             
           <p class="whisper">Owner: quant · Jurisdiction: none-needed to enter</p>
@@ -91,14 +91,14 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>a timestamped paper ledger of forecasts on Polymarket/Kalshi public data, scored vs time-matched prices after fees, shows Brier better than market on at least one category within 350 resolutions</p>
           <p><strong>Metric:</strong> brier_delta_vs_market = 0.0</p>
           <p><strong>Kill criteria:</strong> not better than market after 350 resolved predictions; or stop</p>
-          <p><strong>Days alive:</strong> 27.8 / 60 minimum · <strong>Iterations:</strong> 158 / 4 minimum</p>
-          <p><strong>Review in:</strong> 0.6 days</p>
+          <p><strong>Days alive:</strong> 28.1 / 60 minimum · <strong>Iterations:</strong> 159 / 4 minimum</p>
+          <p><strong>Review in:</strong> 0.3 days</p>
           
           
             <details>
               <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> forecast model: market-copy baseline -&gt; category-specific shrinkage v2; an explicit uncertainty/base-rate rationale</p>
-              <p><strong>Result:</strong> 50 distinct model-v2 forecasts appended; 3 immediately resolved and scored. Mean Brier delta vs time-matched market = +0.047196 (worse than market); all 3 resolved NO against market probabilities 0.003–0.037. Early n=3 is negative evidence, not a stable quality estimate. Baseline 0.000000 delta is tautological because it copies market prices.</p>
+              <p><strong>Changed:</strong> paper cycle run: fetched 100 Polymarket events, 3696 unique predictions, 246 scored, mean Brier delta 0.000000 (at market parity); 0 newly resolved from 100 oldest checked</p>
+              <p><strong>Result:</strong> paper ledger advanced: 246 scored predictions maintain market parity; no edge detected; continuing weekly cycle</p>
             </details>
             
           <p class="whisper">Owner: quant · Jurisdiction: paper only; live route (Polymarket/Kalshi/Kraken )</p>
@@ -113,7 +113,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p><strong>Metric:</strong> bounties_paid_usd = 0.0</p>
           <p><strong>Kill criteria:</strong> 0 merged+paid after 10 complete submissions across &gt;=3 payers and &gt;=5 iterations</p>
           <p><strong>Days alive:</strong> 19.3 / 42 minimum · <strong>Iterations:</strong> 74 / 5 minimum</p>
-          <p><strong>Review in:</strong> 0.6 days</p>
+          <p><strong>Review in:</strong> 0.3 days</p>
           
           
             <details>
@@ -133,8 +133,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>At least 3 qualified accounting, ERP; cross-border finance practitioners will directly confirm manual mandate-matrix upkeep or willingness to trial a source-cited EU e-invoicing diff feed within 14 days.</p>
           <p><strong>Metric:</strong> qualified_buyer_continuations = 0.0</p>
           <p><strong>Kill criteria:</strong> Fewer than 3 qualified buyer continuations after at least 3 genuinely varied direct-demand iterations and 14 days.</p>
-          <p><strong>Days alive:</strong> 8.4 / 14 minimum · <strong>Iterations:</strong> 6 / 3 minimum</p>
-          <p><strong>Review in:</strong> 0.6 days</p>
+          <p><strong>Days alive:</strong> 8.6 / 14 minimum · <strong>Iterations:</strong> 6 / 3 minimum</p>
+          <p><strong>Review in:</strong> 0.3 days</p>
           
           
             <details>
@@ -154,14 +154,14 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>A reproducible, unstaked Numerai Classic model can complete at least 8 scored weekly rounds with non-negative mean MMC versus the official example model before any capital is committed.</p>
           <p><strong>Metric:</strong> mean_mmc_vs_example = None</p>
           <p><strong>Kill criteria:</strong> Mean MMC below 0 after 8 scored unstaked rounds; stops.</p>
-          <p><strong>Days alive:</strong> 4.9 / 56 minimum · <strong>Iterations:</strong> 1 / 4 minimum</p>
-          <p><strong>Review in:</strong> 2.1 days</p>
+          <p><strong>Days alive:</strong> 5.2 / 56 minimum · <strong>Iterations:</strong> 2 / 4 minimum</p>
+          <p><strong>Review in:</strong> 1.8 days</p>
           
           
             <details>
               <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> baseline created: deterministic feature-mean on v5.3 small feature set, tested public data flow + API round 1364; repo rodion-place/numerai-unstaked-track-record pushed; tests pass; next step requires NUMERAI_PUBLIC_ID/SECRET_KEY/MODEL_ID credentials from for first submission</p>
-              <p><strong>Result:</strong> baseline.py produces valid 6923-row prediction file in [0,1]; test_baseline.py passes deterministic + live tests; repo live at https://github.com/rodion-place/numerai-unstaked-track-record</p>
+              <p><strong>Changed:</strong> baseline predictions generated for round 1369 (6923 rows, valid [0,1]); submission blocked on account credentials (: CAPTCHA/human verification at numer.ai signup); 4 open tasks for to create account/model</p>
+              <p><strong>Result:</strong> predictions ready for current round; submission requires handoff for browser signup; iterating on baseline while blocked</p>
             </details>
             
           <p class="whisper">Owner: quant · Jurisdiction: none-needed for free unstaked submissions; staking requires &#x27; payment decision</p>
