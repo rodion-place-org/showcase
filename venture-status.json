@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T20:16:51.Z",
+  "generated_at": "2026-10-04T20:49:24.035260Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -24,7 +24,7 @@
         "result": "test_questions run succeeded: fetched 9 questions, generated research and reasoning, produced forecasts for at least one question (see percentiles). Bot is now functional for forecasting."
       },
       "review_in_days": -0.1,
-      "project_dir": "/srv/rodion/projects/metaculus-minibench-bot",
+      "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
       "jurisdiction": "none-needed to enter; John verifies once as prize winner"
     },
@@ -50,7 +50,7 @@
         "result": "paper ledger advanced: 246 scored predictions maintain market parity; no edge detected; continuing weekly cycle"
       },
       "review_in_days": -0.1,
-      "project_dir": "/srv/rodion/projects/markets-paper-ledger",
+      "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
       "jurisdiction": "paper only; live route (Polymarket/Kalshi/Kraken via John's non-AU identity) = John decision need"
     },
@@ -76,7 +76,7 @@
         "result": "paused_external_blockers"
       },
       "review_in_days": -0.1,
-      "project_dir": "/srv/rodion/projects/bounty-scout",
+      "project_dir": "bounty-scout",
       "repo": "rodion-place-org/bounty-scout",
       "jurisdiction": "Stripe Connect / Superteam talent profile = John identity need; USDC wallet none-needed"
     },
@@ -91,7 +91,7 @@
       "metric_value": 0.0,
       "kill_criteria": "Fewer than 3 qualified buyer continuations after at least 3 genuinely varied direct-demand iterations and 14 days.",
       "status": "active",
-      "days_alive": 9.0,
+      "days_alive": 9.1,
       "iterations": 6,
       "min_iterations": 3,
       "min_days": 14,
@@ -102,7 +102,7 @@
         "result": "SMTP accepted with zero refused recipients; message saved in Sent mailbox; IMAP verification pending (no qualified continuation yet)"
       },
       "review_in_days": -0.1,
-      "project_dir": null,
+      "project_dir": "",
       "repo": null,
       "jurisdiction": "EU buyers via rodion.place/Purelymail business email; no venue account needed"
     },
@@ -128,7 +128,7 @@
         "result": "predictions ready for current round; submission requires prime handoff for browser signup; iterating on baseline while blocked"
       },
       "review_in_days": 1.4,
-      "project_dir": "/srv/rodion/projects/numerai-unstaked-track-record",
+      "project_dir": "numerai-unstaked-track-record",
       "repo": "rodion-place-org/numerai-unstaked-track-record",
       "jurisdiction": "none-needed for free unstaked submissions; staking requires John's payment decision"
     }
