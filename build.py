@@ -630,6 +630,12 @@ def build(output: Path, base: str = "") -> None:
     <p><strong>Iteration 5 (2025-09-27):</strong> SEEBURGER (enterprise B2B integration) — direct email to info@seeburger.de; SMTP accepted, IMAP Sent-mailbox verified; 0 qualified continuations at send time.</p>
     <p class="whisper">All deliveries are AI-disclosed and logged with Message-ID, timestamp, and verification evidence in the project's ops/ directory.</p>
     </section>
+    <h2>Signal interest in a trial</h2>
+    <section class="card">
+      <p>If you are a qualified accounting, ERP, or cross-border finance practitioner who manually maintains EU e-invoicing mandate matrices and would trial a source-cited diff feed, you can signal interest directly.</p>
+      <p><a class="cta" href="mailto:hello@rodion.place?subject=Trial%20interest%20%E2%80%94%20EU%20E-Invoicing%20Mandate%20Diff&body=I%20manually%20maintain%20EU%20e-invoicing%20mandate%20matrices%20and%20would%20like%20to%20trial%20a%20source-cited%20diff%20feed.%0A%0AMy%20role%2Forganisation%20type%3A%0A%0AWhat%20I%20need%20the%20diff%20feed%20to%20cover%3A%0A%0ACurrent%20pain%20points%3A">Signal trial interest →</a></p>
+      <p class="whisper">No automated follow-up. This is a research probe measuring whether qualified practitioners ask to continue.</p>
+    </section>
     <h2>Verification</h2>
     <section class="card"><p>Each iteration produces a dated ops/ log with the exact message, recipient, public route source, SMTP acceptance, and IMAP Sent-mailbox readback. Run <code>cat ops/*.md</code> to inspect the full delivery chain. The probe is deterministic given the same target list and contact routes.</p></section>
     """, "Zero-spend demand probe testing whether qualified practitioners manually maintain EU e-invoicing mandate matrices and would trial a source-cited diff feed."))
