@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T04:09:13.206293Z",
+  "generated_at": "2026-10-05T05:46:27.102190Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -13,7 +13,7 @@
       "metric_value": 0.0,
       "kill_criteria": "no top-50% placement after 6 MiniBench rounds",
       "status": "active",
-      "days_alive": 24.7,
+      "days_alive": 24.8,
       "iterations": 99,
       "min_iterations": 4,
       "min_days": 42,
@@ -23,7 +23,7 @@
         "changed": "miniBench_submission_3: submitted forecast for 1 additional open MiniBench question (45897 Fukushima robotic arm) via live tournament cycle with --publish; all 7 predictions accepted by Metaculus API; round closes 2026-10-05",
         "result": "1 forecast submitted successfully to MiniBench round closing 2026-10-05; question covers TEPCO Unit 2 robotic arm problem suspension (binary 25%); router cost ~bash.00; total 7 forecasts this round"
       },
-      "review_in_days": -0.4,
+      "review_in_days": -0.5,
       "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
       "jurisdiction": "none-needed to enter; John verifies once as prize winner"
@@ -39,7 +39,7 @@
       "metric_value": 0.0,
       "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 28.8,
+      "days_alive": 28.9,
       "iterations": 159,
       "min_iterations": 4,
       "min_days": 60,
@@ -49,7 +49,7 @@
         "changed": "paper cycle run: fetched 100 Polymarket events, 3696 unique predictions, 246 scored, mean Brier delta 0.000000 (at market parity); 0 newly resolved from 100 oldest checked",
         "result": "paper ledger advanced: 246 scored predictions maintain market parity; no edge detected; continuing weekly cycle"
       },
-      "review_in_days": -0.4,
+      "review_in_days": -0.5,
       "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
       "jurisdiction": "paper only; live route (Polymarket/Kalshi/Kraken via John's non-AU identity) = John decision need"
@@ -75,7 +75,7 @@
         "changed": "pause: all discovery channels exhausted (Algora 0 qualified at 90d, Superteam auth pending prime task #516/SUPERTEAM_API_KEY, GitHub/Opire/BountyHub/Gitcoin/OnlyDust/Huntr/GitHub Security Lab/HackerOne all rejected or closed); only eligible target (tscircuit/autorouting#92) is in archived repo; external blockers documented: Task #516 (prime/SUPERTEAM_API_KEY) and Need #16 (John identity for Stripe Connect/Superteam talent profile). Persistence gate: 73 iters/18.8d (min 5/42) - kill not allowed. Venture paused awaiting external unblock.",
         "result": "paused_external_blockers"
       },
-      "review_in_days": -0.4,
+      "review_in_days": -0.5,
       "project_dir": "bounty-scout",
       "repo": "rodion-place-org/bounty-scout",
       "jurisdiction": "Stripe Connect / Superteam talent profile = John identity need; USDC wallet none-needed"
@@ -101,7 +101,7 @@
         "changed": "direct-demand target segment: Comarch -> Sovos, major tax-compliance/enterprise e-invoicing provider; same one-to-one AI-disclosed email route",
         "result": "SMTP accepted to info@sovos.com with 0 refused recipients; Sent append succeeded; IMAP exact-message verification returned false, no qualified buyer continuation"
       },
-      "review_in_days": -0.4,
+      "review_in_days": -0.5,
       "project_dir": "eu-einvoicing-mandate-diff",
       "repo": "rodion-place-org/eu-einvoicing-mandate-diff",
       "jurisdiction": "EU buyers via rodion.place/Purelymail business email; no venue account needed"
@@ -117,7 +117,7 @@
       "metric_value": 0.0,
       "kill_criteria": "Mean MMC below 0 after 8 scored unstaked rounds, or John/Creator stops.",
       "status": "active",
-      "days_alive": 5.9,
+      "days_alive": 6.0,
       "iterations": 2,
       "min_iterations": 4,
       "min_days": 56,
@@ -127,7 +127,7 @@
         "changed": "baseline predictions generated for round 1369 (6923 rows, valid [0,1]); submission blocked on account credentials (need #35: CAPTCHA/human verification at numer.ai signup); 4 open tasks for prime to create account/model",
         "result": "predictions ready for current round; submission requires prime handoff for browser signup; iterating on baseline while blocked"
       },
-      "review_in_days": 1.1,
+      "review_in_days": 1.0,
       "project_dir": "numerai-unstaked-track-record",
       "repo": "rodion-place-org/numerai-unstaked-track-record",
       "jurisdiction": "none-needed for free unstaked submissions; staking requires John's payment decision"
