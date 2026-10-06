@@ -55,10 +55,10 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
     
     <section class="card">
       <h3>Portfolio Summary</h3>
-      <p><strong>Total ventures:</strong> 5 · <strong>Active:</strong> 4 · <strong>At kill gate:</strong> 0</p>
+      <p><strong>Total ventures:</strong> 5 · <strong>Active:</strong> 3 · <strong>At kill gate:</strong> 0</p>
       <p><strong>Tracks:</strong> forecasting: 2, markets: 1, bounties: 1, data: 1</p>
       <p><strong>Money in/out:</strong> $0.00 / $0.00</p>
-      <p class="whisper">Snapshot generated at 2026-10-06T02:28:16.591259Z UTC. Data from <code>rodion scoreboard --json</code>.</p>
+      <p class="whisper">Snapshot generated at 2026-10-06T23:26:46.497295Z UTC. Data from <code>rodion scoreboard --json</code>.</p>
     </section>
     
     <h2>Active Ventures</h2>
@@ -70,14 +70,14 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>an ensemble forecasting bot (retrieval + base rates + median of 3-5 runs) places in the paid top-20 of a k MiniBench within 4 rounds</p>
           <p><strong>Metric:</strong> minibench_rank = 0.0</p>
           <p><strong>Kill criteria:</strong> no top-50% placement after 6 MiniBench rounds</p>
-          <p><strong>Days alive:</strong> 25.7 / 42 minimum · <strong>Iterations:</strong> 107 / 4 minimum</p>
-          <p><strong>Review in:</strong> -1.3 days</p>
+          <p><strong>Days alive:</strong> 26.5 / 42 minimum · <strong>Iterations:</strong> 112 / 4 minimum</p>
+          <p><strong>Review in:</strong> -2.2 days</p>
           
           
             <details>
               <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> submitted forecasts for 4 new open MiniBench questions</p>
-              <p><strong>Result:</strong> 4 forecasts submitted successfully to Metaculus; all predictions accepted by Metaculus API</p>
+              <p><strong>Changed:</strong> MiniBench submission: 1 new question (45944 Zcash 000 Oct 15-16) forecasted and submitted via live tournament cycle with --publish; prediction accepted by Metaculus API; Round 2 now has 21+ total forecasts from this bot; Round 1 (7 forecasts) closed 2026-10-05, rankings pending publication; bot fully operational with Rodion router key</p>
+              <p><strong>Result:</strong> 1 forecast submitted successfully to current MiniBench round; cumulative 21+ forecasts this round; Round 1 rankings pending; bot fully operational</p>
             </details>
             
           <p class="whisper">Owner: quant · Jurisdiction: none-needed to enter</p>
@@ -91,14 +91,14 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>a timestamped paper ledger of forecasts on Polymarket/Kalshi public data, scored vs time-matched prices after fees, shows Brier better than market on at least one category within 350 resolutions</p>
           <p><strong>Metric:</strong> brier_delta_vs_market = 0.0</p>
           <p><strong>Kill criteria:</strong> not better than market after 350 resolved predictions; or stop</p>
-          <p><strong>Days alive:</strong> 29.7 / 60 minimum · <strong>Iterations:</strong> 160 / 4 minimum</p>
-          <p><strong>Review in:</strong> -1.3 days</p>
+          <p><strong>Days alive:</strong> 30.6 / 60 minimum · <strong>Iterations:</strong> 162 / 4 minimum</p>
+          <p><strong>Review in:</strong> -2.2 days</p>
           
           
             <details>
               <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> decision: continue - 246 scored predictions at market parity (Brier delta 0.0); LLM v1 (11) and v2 (150+) forecasts pending resolution; only 3 v2 resolved so far (n=3, +0.047 delta); wait for more resolutions to reach meaningful sample; kill gate (350 resolved) not met at 246; persistence gate (60d) not met at 29d</p>
-              <p><strong>Result:</strong> continue</p>
+              <p><strong>Changed:</strong> paper cycle run: fetched 100 Polymarket events, 3697 unique predictions, 246 scored, mean Brier delta 0.000000 (at market parity); 0 newly resolved from 100 oldest checked; LLM v1 (11) and v2 (150+) forecasts differ from market (mean |delta| ~0.15) and await resolution; 3 v2 resolved (n=3, +0.047 delta) insufficient sample; kill gate (350) not met at 246; persistence gate (60d) not met at 30d</p>
+              <p><strong>Result:</strong> routine monitoring cycle; no new predictions or resolutions; baseline at market parity; LLM models pending resolution for edge test</p>
             </details>
             
           <p class="whisper">Owner: quant · Jurisdiction: paper only; live route (Polymarket/Kalshi/Kraken )</p>
@@ -113,7 +113,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p><strong>Metric:</strong> bounties_paid_usd = 0.0</p>
           <p><strong>Kill criteria:</strong> 0 merged+paid after 10 complete submissions across &gt;=3 payers and &gt;=5 iterations</p>
           <p><strong>Days alive:</strong> 19.3 / 42 minimum · <strong>Iterations:</strong> 74 / 5 minimum</p>
-          <p><strong>Review in:</strong> -1.3 days</p>
+          <p><strong>Review in:</strong> -2.2 days</p>
           
           
             <details>
@@ -133,8 +133,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
           <p>At least 3 qualified accounting, ERP; cross-border finance practitioners will directly confirm manual mandate-matrix upkeep or willingness to trial a source-cited EU e-invoicing diff feed within 14 days.</p>
           <p><strong>Metric:</strong> qualified_buyer_continuations = 0.0</p>
           <p><strong>Kill criteria:</strong> Fewer than 3 qualified buyer continuations after at least 3 genuinely varied direct-demand iterations and 14 days.</p>
-          <p><strong>Days alive:</strong> 10.3 / 14 minimum · <strong>Iterations:</strong> 12 / 3 minimum</p>
-          <p><strong>Review in:</strong> 3.2 days</p>
+          <p><strong>Days alive:</strong> 11.2 / 14 minimum · <strong>Iterations:</strong> 12 / 3 minimum</p>
+          <p><strong>Review in:</strong> 2.3 days</p>
           
           
             <details>
@@ -150,12 +150,12 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
 
         <section class="project-card">
           <span class="tag">Forecasting / hold</span>
-          <h3>numerai-unstaked-track-record <span class="tag" style="background:rgba(119,245,203,.15); color:var(--accent); border:1px solid var(--accent);">ACTIVE</span></h3>
+          <h3>numerai-unstaked-track-record <span class="tag">PAUSED</span></h3>
           <p>A reproducible, unstaked Numerai Classic model can complete at least 8 scored weekly rounds with non-negative mean MMC versus the official example model before any capital is committed.</p>
           <p><strong>Metric:</strong> mean_mmc_vs_example = 0.0</p>
           <p><strong>Kill criteria:</strong> Mean MMC below 0 after 8 scored unstaked rounds; stops.</p>
-          <p><strong>Days alive:</strong> 6.9 / 56 minimum · <strong>Iterations:</strong> 3 / 4 minimum</p>
-          <p><strong>Review in:</strong> 0.1 days</p>
+          <p><strong>Days alive:</strong> 7.0 / 56 minimum · <strong>Iterations:</strong> 3 / 4 minimum</p>
+          <p><strong>Review in:</strong> -0.7 days</p>
           
           
             <details>
