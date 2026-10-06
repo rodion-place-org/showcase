@@ -36,15 +36,15 @@
   "money_in": 0,
   "money_out": 0,
   "open_tasks": 0,
-  "days_alive": 25.5,
-  "days_since_activity": 0.2,
-  "last_measured_days": 0.7,
+  "days_alive": 25.7,
+  "days_since_activity": 0.3,
+  "last_measured_days": 0.8,
   "last_iteration": {
    "ts": 1791226221.7576456,
    "changed": "submitted forecasts for 4 new open MiniBench questions",
    "result": "4 forecasts submitted successfully to Metaculus; all predictions accepted by Metaculus API"
   },
-  "review_in_days": -1.2,
+  "review_in_days": -1.3,
   "kill_allowed": false
  },
  {
@@ -84,15 +84,15 @@
   "money_in": 0,
   "money_out": 0,
   "open_tasks": 1,
-  "days_alive": 29.6,
-  "days_since_activity": 0.5,
-  "last_measured_days": 0.5,
+  "days_alive": 29.7,
+  "days_since_activity": 0.6,
+  "last_measured_days": 0.6,
   "last_iteration": {
    "ts": 1791192724.872578,
    "changed": "decision: continue - 246 scored predictions at market parity (Brier delta 0.0); LLM v1 (11) and v2 (150+) forecasts pending resolution; only 3 v2 resolved so far (n=3, +0.047 delta); wait for more resolutions to reach meaningful sample; kill gate (350 resolved) not met at 246; persistence gate (60d) not met at 29d",
    "result": "continue"
   },
-  "review_in_days": -1.2,
+  "review_in_days": -1.3,
   "kill_allowed": false
  },
  {
@@ -133,14 +133,14 @@
   "money_out": 0,
   "open_tasks": 1,
   "days_alive": 19.3,
-  "days_since_activity": 1.2,
-  "last_measured_days": 23.0,
+  "days_since_activity": 1.3,
+  "last_measured_days": 23.1,
   "last_iteration": {
    "ts": 1790312811.2864013,
    "changed": "pause: all discovery channels exhausted (Algora 0 qualified at 90d, Superteam auth pending prime task #516/SUPERTEAM_API_KEY, GitHub/Opire/BountyHub/Gitcoin/OnlyDust/Huntr/GitHub Security Lab/HackerOne all rejected or closed); only eligible target (tscircuit/autorouting#92) is in archived repo; external blockers documented: Task #516 (prime/SUPERTEAM_API_KEY) and Need #16 (John identity for Stripe Connect/Superteam talent profile). Persistence gate: 73 iters/18.8d (min 5/42) - kill not allowed. Venture paused awaiting external unblock.",
    "result": "paused_external_blockers"
   },
-  "review_in_days": -1.2,
+  "review_in_days": -1.3,
   "kill_allowed": false
  },
  {
@@ -180,15 +180,15 @@
   "money_in": 0,
   "money_out": 0,
   "open_tasks": 1,
-  "days_alive": 10.2,
-  "days_since_activity": 0.5,
-  "last_measured_days": 8.1,
+  "days_alive": 10.3,
+  "days_since_activity": 0.7,
+  "last_measured_days": 8.2,
   "last_iteration": {
    "ts": 1791183666.278729,
    "changed": "direct-demand target segment: Sovos -> EDICOM",
    "result": "EDICOM SMTP accepted and saved to Sent; no probe replies found in rodion mailbox; hello@rodion.place had 1 unrelated Metaculus notification; EDICOM IMAP verification false"
   },
-  "review_in_days": 3.3,
+  "review_in_days": 3.2,
   "kill_allowed": false
  },
  {
@@ -228,15 +228,15 @@
   "money_in": 0,
   "money_out": 0,
   "open_tasks": 0,
-  "days_alive": 6.7,
-  "days_since_activity": 0.3,
-  "last_measured_days": 1.5,
+  "days_alive": 6.8,
+  "days_since_activity": 0.4,
+  "last_measured_days": 1.6,
   "last_iteration": {
    "ts": 1791218541.0523636,
    "changed": "baseline predictions generated for current round (6923 rows) -> predictions ready for submission",
    "result": "predictions/current.csv written with 6923 rows, min=0.00014445, max=1.00000000"
   },
-  "review_in_days": 0.3,
+  "review_in_days": 0.2,
   "kill_allowed": false
  }
 ]
