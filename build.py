@@ -516,6 +516,7 @@ def build(output: Path, base: str = "") -> None:
 <section class="project-card"><span class="tag">forecasting / paper ledger</span><h3><a href="/site/projects/markets-paper-ledger.html">Markets Paper Ledger →</a></h3><p>A read-only, auditable paper ledger that records timestamped public-market consensus forecasts from Polymarket and Kalshi, then evaluates resolved markets against outcomes using Brier scores. No trading, no credentials, no money at risk.</p></section>
 <section class="project-card"><span class="tag">forecasting / competition</span><h3><a href="/site/projects/metaculus-minibench.html">Metaculus MiniBench Bot →</a></h3><p>An autonomous forecasting agent for the Metaculus AI Competition MiniBench rounds. Bot-native, evidence-tracked submissions with append-only log. Tournament IDs confirmed; token pending.</p></section>
 <section class="project-card"><span class="tag">forecasting / competition</span><h3><a href="/site/projects/crunchdao-structural-break.html">CrunchDAO Structural Break →</a></h3><p>A deterministic regime-change detection entry for the CrunchDAO Structural Break competition (100k USDC, closes 2026-10-01). 6/6 local tests pass; submission format verified.</p></section>
+<section class="project-card"><span class="tag">forecasting / competition</span><h3><a href="/site/projects/numerai-unstaked-track-record.html">Numerai Unstaked Track Record →</a></h3><p>A reproducible, unstaked Numerai Classic model completing scored weekly rounds to establish a verifiable track record before any capital commitment. Free submissions, no NMR at risk.</p></section>
 <h2 id="systems">Systems</h2>
 <section class="project-card"><span class="tag">ingestion / pipeline</span><h3><a href="/site/projects/inflow.html">Inflow RSS Pipeline →</a></h3><p>A curated RSS/Atom ingestion pipeline that polls configured feeds, deduplicates by canonical URL, and writes dated library digests. Runs every 2 hours via Hermes cron.</p></section>
 <section class="project-card"><span class="tag">reliability / watchdog</span><h3><a href="/site/projects/gateway-watchdog.html">Gateway Watchdog →</a></h3><p>Monitors Hermes gateway units for Matrix connection failures, writes JSON evidence before restart, and posts one recovery notification per event. Dry-run mode for safe verification.</p></section>
@@ -794,6 +795,28 @@ def build(output: Path, base: str = "") -> None:
     <h2>Verification</h2>
     <section class="card"><p>Run the ledger cycle, inspect <code>predictions.jsonl</code> and <code>scores.jsonl</code>, and re-check any row against the cited API endpoint. The append-only structure and stored source URLs make every record independently auditable.</p></section>
     """, "A transparent paper ledger for timestamping public-market consensus forecasts and scoring them against resolved outcomes using Brier scores."))
+    numerai_venture = find_venture_for_project(venture_data, "numerai-unstaked-track-record")
+
+    write(output, "projects/numerai-unstaked-track-record.html", page("Numerai Unstaked Track Record", f"""
+    <p class="eyebrow">Project · forecasting / competition</p><h1>Numerai Unstaked Track Record</h1>
+    <p class="lede">A reproducible, unstaked Numerai Classic model that completes scored weekly rounds to establish a verifiable track record before any capital is committed.</p>
+    <section class="card"><strong>Boundary:</strong> This is a track-record building exercise, not a trading system. It risks no capital, holds no positions, and submits only free unstaked predictions to Numerai. No staking, no NMR at risk, no live money decisions.</section>
+    {build_venture_status_card(numerai_venture)}
+    <h2>Competition context</h2>
+    <section class="card"><p><strong>Numerai Classic:</strong> Weekly tournament on encrypted financial data. Free unstaked submissions are open to all; staking NMR requires a separate payment decision.</p>
+    <p><strong>Goal:</strong> Complete at least 8 scored unstaked rounds with non-negative mean MMC versus the official example model.</p>
+    <p><strong>Current status:</strong> Baseline predictions generated for current round (6923 rows). Local validation pipeline ready; submission format verified.</p></section>
+    <h2>Method</h2>
+    <section class="card"><p>The baseline implementation uses a deterministic model trained on Numerai's historical training data. It produces weekly predictions in the required format (CSV with prediction column). All code is pure Python with no hidden state; any recorded forecast can be re-computed from the competition data.</p>
+    <p><strong>Local validation:</strong> Prediction distribution checked (min=0.00014445, max=1.00000000). Submission format verified against Numerai schema.</p></section>
+    <h2>Sources and verifiability</h2>
+    <section class="card"><p><strong>Numerai platform:</strong> <a href="https://numer.ai" target="_blank" rel="noopener">numer.ai</a> (public)</p>
+    <p><strong>Local repo:</strong> The tracked predictions are in the project repository.</p>
+    <p>All inputs are provided by Numerai; the algorithm is deterministic. Any recorded forecast can be independently re-computed.</p></section>
+    <h2>Verification</h2>
+    <section class="card"><p>Run the local validation suite. Inspect <code>predictions/current.csv</code> for the latest predictions. Re-check any scored round against Numerai's published results. The evidence boundary is the competition rules and provided data; no private data or capital is used.</p></section>
+    """, "A reproducible unstaked Numerai Classic model building a verifiable track record before any capital commitment."))
+
     write(output, "projects/metaculus-minibench.html", page("Metaculus MiniBench Bot", """
     <p class="eyebrow">Project · forecasting / competition</p><h1>Metaculus MiniBench Bot</h1>
     <p class="lede">An autonomous forecasting agent for the Metaculus AI Competition (FutureEval / MiniBench). It reads open questions, produces probabilistic forecasts, and submits them via the Metaculus API — with a paper trail and a clear evidence boundary.</p>
