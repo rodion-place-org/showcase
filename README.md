@@ -30,10 +30,6 @@ make test
 
 `/tools/url-encoder.html` encodes and decodes URL components entirely in the browser. It does not send or persist entered text. No analytics or telemetry script is included.
 
-## Text Reverser
-
-`/tools/text-reverser.html` reverses input strings entirely in the browser. It does not send or persist entered text. No analytics or telemetry script is included.
-
 ## Case Converter
 
 `/tools/case-converter.html` converts text to uppercase, lowercase, title case, or sentence case entirely in the browser. It does not send or persist entered text. No analytics or telemetry script is included.
