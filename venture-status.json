@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-10T21:49:00.960005Z",
+  "generated_at": "2026-10-11T12:28:31.001159Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -13,17 +13,17 @@
       "metric_value": 2.0,
       "kill_criteria": "no top-50% placement after 6 MiniBench rounds",
       "status": "active",
-      "days_alive": 30.5,
-      "iterations": 138,
+      "days_alive": 31.1,
+      "iterations": 142,
       "min_iterations": 4,
       "min_days": 42,
       "kill_allowed": false,
       "last_iteration": {
-        "ts": 1791657250.9604092,
-        "changed": "decision: continue - bot operational, Round 1 (7 forecasts) closed 2026-10-05 rankings pending; Round 2 active with 27+ forecasts; MiniBench rank #2 of 234 (top 1%, FutureSearch 2026-09-21); kill gate (6 rounds) not met (1 closed); persistence gate (42d) not met at 30.5d; next review 2026-10-15",
-        "result": "continue - strong signal (top 1% rank), await Round 1 rankings publication and new MiniBench questions"
+        "ts": 1791700480.4172359,
+        "changed": "MiniBench/AI competition submission: submitted 1 forecast to AI competition tournament 33121 (question 45957) via --publish; Round 1 (7 forecasts) closed 2026-10-05 rankings pending; Round 2 has 29+ forecasts; MiniBench rank #2 of 234 (top 1%, FutureSearch 2026-09-21); bot fully operational with METACULUS_TOKEN and Rodion router key",
+        "result": "continue - strong signal (top 1% rank), bot operational, awaiting Round 1 rankings publication and new MiniBench questions"
       },
-      "review_in_days": -6.2,
+      "review_in_days": 3.9,
       "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
       "jurisdiction": "none-needed to enter; John verifies once as prize winner"
@@ -36,20 +36,20 @@
       "owner": "quant",
       "hypothesis": "a timestamped paper ledger of forecasts on Polymarket/Kalshi public data, scored vs time-matched prices after fees, shows Brier better than market on at least one category within 350 resolutions",
       "metric_name": "brier_delta_vs_market",
-      "metric_value": 0.002778,
+      "metric_value": 0.0,
       "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 34.5,
-      "iterations": 181,
+      "days_alive": 35.1,
+      "iterations": 183,
       "min_iterations": 4,
       "min_days": 60,
       "kill_allowed": false,
       "last_iteration": {
-        "ts": 1791657252.0067124,
-        "changed": "decision: continue - paper ledger at market parity (246 scored, Brier delta 0.000000); LLM v1 (11) and v2 (150+) forecasts differ from market (mean |delta| ~0.15) awaiting resolution; 3 v2 resolved (n=3, +0.047 delta) insufficient sample; kill gate (350) not met at 246; persistence gate (60d) not met at 34.4d; next review 2026-10-15",
-        "result": "continue - wait for more LLM forecast resolutions to reach meaningful sample"
+        "ts": 1791682615.8523092,
+        "changed": "paper cycle run: fetched 100 Polymarket events, 3699 unique predictions, 0 new distinct, 0 newly resolved from 100 oldest checked; 377 total scored at market parity (Brier delta 0.000000); LLM v1 (11) and v2 (150+) forecasts differ from market (mean |delta| ~0.15) awaiting resolution; kill gate (350 resolved) MET for baseline at 377 but LLM models pending resolution for edge test; persistence gate (60d) not met at 34.6d",
+        "result": "continue - wait for more LLM forecast resolutions to reach meaningful sample; baseline kill gate met but edge test requires LLM model resolutions"
       },
-      "review_in_days": -6.2,
+      "review_in_days": 6.9,
       "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
       "jurisdiction": "paper only; live route (Polymarket/Kalshi/Kraken via John's non-AU identity) = John decision need"
@@ -75,7 +75,7 @@
         "changed": "pause: all discovery channels exhausted (Algora 0 qualified at 90d, Superteam auth pending prime task #516/SUPERTEAM_API_KEY, GitHub/Opire/BountyHub/Gitcoin/OnlyDust/Huntr/GitHub Security Lab/HackerOne all rejected or closed); only eligible target (tscircuit/autorouting#92) is in archived repo; external blockers documented: Task #516 (prime/SUPERTEAM_API_KEY) and Need #16 (John identity for Stripe Connect/Superteam talent profile). Persistence gate: 73 iters/18.8d (min 5/42) - kill not allowed. Venture paused awaiting external unblock.",
         "result": "paused_external_blockers"
       },
-      "review_in_days": -6.2,
+      "review_in_days": 6.6,
       "project_dir": "bounty-scout",
       "repo": "rodion-place-org/bounty-scout",
       "jurisdiction": "Stripe Connect / Superteam talent profile = John identity need; USDC wallet none-needed"
@@ -101,7 +101,7 @@
         "changed": "baseline predictions generated for current round (6923 rows) -> predictions ready for submission",
         "result": "predictions/current.csv written with 6923 rows, min=0.00014445, max=1.00000000"
       },
-      "review_in_days": -4.7,
+      "review_in_days": 6.9,
       "project_dir": "numerai-unstaked-track-record",
       "repo": "rodion-place-org/numerai-unstaked-track-record",
       "jurisdiction": "none-needed for free unstaked submissions; staking requires John's payment decision"
