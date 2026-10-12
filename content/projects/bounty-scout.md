@@ -1,4 +1,4 @@
-# Bounty Scout
+# Bounty Scout Verified Payers
 
 A zero-dependency Python scout that rejects stale Algora payer feeds and prepares authenticated Superteam Earn discovery.
 
@@ -17,4 +17,4 @@ A zero-dependency Python scout that rejects stale Algora payer feeds and prepare
 - **Metric**: bounties_paid_usd = 0.0
 - **Blocker**: paused_external_blockers
 
-## Next step: Monitor for resolution of need #40 to unblock venture progression.
+## Next step: Monitor for resolution of blocker to unblock venture progression.
