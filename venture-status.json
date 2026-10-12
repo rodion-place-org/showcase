@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T21:49:55.031402Z",
+  "generated_at": "2026-10-12T22:32:51.947520Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -39,7 +39,7 @@
       "metric_value": 0.0,
       "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 36.5,
+      "days_alive": 36.6,
       "iterations": 183,
       "min_iterations": 4,
       "min_days": 60,
