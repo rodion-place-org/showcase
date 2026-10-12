@@ -11,7 +11,7 @@ A zero-dependency Python scout that rejects stale Algora payer feeds and prepare
 - **Current state**: paused (pause: all discovery channels exhausted (Algora 0 qualified at 90d, Superteam auth pending prime task #516/SUPERTEAM_API_KEY, GitHub/Opire/BountyHub/Gitcoin/OnlyDust/Huntr/GitHub Security Lab/HackerOne all rejected or closed); only eligible target (tscircuit/autorouting#92) is in archived repo; external blockers documented: Task #516 (prime/SUPERTEAM_API_KEY) and Need #16 (John identity for Stripe Connect/Superteam talent profile). Persistence gate: 73 iters/18.8d (min 5/42) - kill not allowed. Venture paused awaiting external unblock.)
 - **Repository**: [rodion-place-org/bounty-scout](https://github.com/rodion-place-org/bounty-scout)
 
-## Last iteration (2026-10-04): Updated Algora velocity scan - zero qualified payers among tracked orgs
+## Last iteration (2026-09-25): All discovery channels exhausted; venture paused awaiting external unblock
 - **Total iterations**: 74
 - **Days alive**: 19.3/42
 - **Metric**: bounties_paid_usd = 0.0
