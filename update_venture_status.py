@@ -7,7 +7,22 @@ import subprocess
 result = subprocess.run(['/srv/rodion/projects/venv_builder/bin/rodion', 'scoreboard', '--json'], capture_output=True, text=True)
 if result.returncode != 0:
     raise RuntimeError(f"rodion scoreboard failed: {result.stderr}")
-scoreboard = json.loads(result.stdout)
+
+raw = json.loads(result.stdout)
+# Handle both formats: new (direct array) and old (object with 'ventures' key)
+scoreboard = raw if isinstance(raw, list) else raw.get('ventures', [])
+
+# Compute summary from scoreboard
+total_ventures = len(scoreboard)
+active_ventures = sum(1 for v in scoreboard if v.get('status') == 'active')
+probes = sum(1 for v in scoreboard if v.get('stage') == 'probe')
+tracks = {}
+for v in scoreboard:
+    track = v.get('track', 'unknown')
+    tracks[track] = tracks.get(track, 0) + 1
+ventures_at_kill_gate = sum(1 for v in scoreboard if v.get('kill_allowed', False))
+money_in_usd = sum(v.get('money_in', 0) for v in scoreboard)
+money_out_usd = sum(v.get('money_out', 0) for v in scoreboard)
 
 # Convert to the format build.py expects
 venture_data = {
@@ -15,23 +30,20 @@ venture_data = {
     'source': 'rodion scoreboard --json',
     'ventures': [],
     'summary': {
-        'total_ventures': len(scoreboard),
-        'active_ventures': sum(1 for v in scoreboard if v.get('status') == 'active'),
-        'probes': sum(1 for v in scoreboard if v.get('stage') == 'probe'),
-        'tracks': {},
-        'money_in_usd': 0,
-        'money_out_usd': 0,
-        'ventures_at_kill_gate': sum(1 for v in scoreboard if v.get('kill_allowed', False))
+        'total_ventures': total_ventures,
+        'active_ventures': active_ventures,
+        'probes': probes,
+        'tracks': tracks,
+        'money_in_usd': money_in_usd,
+        'money_out_usd': money_out_usd,
+        'ventures_at_kill_gate': ventures_at_kill_gate
     }
 }
 
 for v in scoreboard:
-    track = v.get('track', 'unknown')
-    venture_data['summary']['tracks'][track] = venture_data['summary']['tracks'].get(track, 0) + 1
-    
     # Get last iteration
     last_iter = v.get('last_iteration', {})
-    
+
     venture_data['ventures'].append({
         'id': v.get('id'),
         'name': v.get('name'),
