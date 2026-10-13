@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import time
 from html import escape
 from pathlib import Path
 import json
@@ -215,6 +216,7 @@ def _sanitize_public(text: str) -> str:
     if text is None:
         return ""
     import re
+    import time
     # First, normalize HTML entities to plain text for matching
     text = text.replace(''', "'").replace(''', "'").replace('&apos;', "'")
     text = text.replace('"', '"').replace('&#34;', '"')
@@ -438,6 +440,12 @@ def build_venture_status_page(venture_data: dict | None) -> str:
 
 
 def build(output: Path, base: str = "") -> None:
+    # Logging for Docker debugging
+    start_time = time.time()
+    out_dir = Path('/out/site')
+    out_dir.mkdir(parents=True, exist_ok=True)
+    with open(out_dir / 'build_start.txt', 'w') as f:
+        f.write(str(start_time))
     """Replace *output* with the current static showcase. base="" -> public root (rodion.place, writes CNAME);
     base="/site" -> example non-root deployment under /site/."""
     global BASE
@@ -1410,6 +1418,10 @@ document.getElementById('minify').addEventListener('click', function () { transf
     write(output, 'sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join('<url><loc>' + escape(url) + '</loc></url>' for url in urls) + '</urlset>')
     write(output, 'robots.txt', 'User-agent: *\nAllow: /\nSitemap: https://' + DOMAIN + BASE + '/sitemap.xml\n')
 
+    # Logging end
+    end_time = time.time()
+    with open(out_dir / 'build_end.txt', 'w') as f:
+        f.write(str(end_time))
 
 def parse_args(argv: list[str] | None = None) -> tuple[Path, str]:
     """Parse a deliberately small CLI without treating flags as output paths."""
