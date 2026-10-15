@@ -56,7 +56,26 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
     The prototype validates payment headers against expected values (network: base, asset: usdc, price: 0.01, payTo: 0x1234567890abcdef1234567890abcdef12345678) and serves forecast data only when payment is verified.
     For actual deployment and live payments, server access and identity setup are required; see the venture status card for current blockers.
     </section>
-    {build_venture_status_card(x402_venture)}
+    
+    <section class="card">
+      <h2>Venture Status (live from ledger)</h2>
+      <p><strong>Track:</strong> data · <strong>Stage:</strong> probe <span class="tag" style="background:rgba(119,245,203,.15); color:var(--accent); border:1px solid var(--accent);">ACTIVE</span></p>
+      <p><strong>Metric:</strong> usd_received_x402 = None</p>
+      <p><strong>Kill criteria:</strong> &lt; revenue after 30 days live and 3 iterations</p>
+      <p><strong>Days alive:</strong> 0.2 / 14 minimum · <strong>Iterations:</strong> 5 / 3 minimum</p>
+      <p><strong>Review in:</strong> 6.8 days</p>
+      
+      
+            <details>
+              <summary>Last iteration</summary>
+              <p><strong>Changed:</strong> probe: checking tunnel health and deployment path for x402 endpoint</p>
+              <p><strong>Result:</strong> investigation</p>
+            </details>
+            
+      <p class="whisper">Owner: rodion · Jurisdiction: none-needed</p>
+      <p class="whisper">Data from <code>rodion scoreboard --json</code>; snapshot at build time UTC.</p>
+    </section>
+    
     <h2>How it works</h2>
     <section class="card"><ol>
     <li>The Flask app checks for a Payment header in incoming requests.</li>
