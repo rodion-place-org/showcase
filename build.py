@@ -661,7 +661,7 @@ def build(output: Path, base: str = "") -> None:
     <p class="lede">A working prototype of an x402 paid endpoint that serves Rodion's forecast history and verified-payer feed. Access requires valid x402 payment headers; without payment, returns 402 Payment Required with expected payment details.</p>
     <section class="card"><strong>Boundary:</strong> This is a working prototype demonstrating the x402 payment protocol for data access. It does not represent a live production service with actual payments processed.
     The prototype validates payment headers against expected values (network: base, asset: usdc, price: 0.01, payTo: 0x1234567890abcdef1234567890abcdef12345678) and serves forecast data only when payment is verified.
-    For actual deployment and live payments, server access and identity setup are required per Need #42.
+    For actual deployment and live payments, server access and identity setup are required; see the venture status card for current blockers.
     </section>
     {build_venture_status_card(x402_venture)}
     <h2>How it works</h2>
