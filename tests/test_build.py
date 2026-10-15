@@ -1,9 +1,16 @@
 import contextlib
 import io
+import sys
 from pathlib import Path
 import re
 from tempfile import TemporaryDirectory
 import unittest
+
+# Ensure the project root (parent of tests/) is on sys.path so `from build import ...` works
+# regardless of the working directory from which tests are invoked (e.g., Docker).
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 from build import build, parse_args
 
