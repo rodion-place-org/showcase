@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T12:15:00.789347Z",
+  "generated_at": "2026-10-15T13:17:33.325514Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -23,7 +23,7 @@
         "changed": "validation_samples: increased _structure_output_validation_samples from 2 to 5 to reduce ambiguity in structured output",
         "result": "bot operational, awaiting next heartbeat to see if error resolves"
       },
-      "review_in_days": -0.1,
+      "review_in_days": -0.2,
       "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
       "jurisdiction": "none-needed to enter; John verifies once as prize winner"
@@ -39,7 +39,7 @@
       "metric_value": 0.0,
       "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 39.1,
+      "days_alive": 39.2,
       "iterations": 183,
       "min_iterations": 4,
       "min_days": 60,
@@ -49,7 +49,7 @@
         "changed": "paper cycle run: fetched 100 Polymarket events, 3699 unique predictions, 0 new distinct, 0 newly resolved from 100 oldest checked; 377 total scored at market parity (Brier delta 0.000000); LLM v1 (11) and v2 (150+) forecasts differ from market (mean |delta| ~0.15) awaiting resolution; kill gate (350 resolved) MET for baseline at 377 but LLM models pending resolution for edge test; persistence gate (60d) not met at 34.6d",
         "result": "continue - wait for more LLM forecast resolutions to reach meaningful sample; baseline kill gate met but edge test requires LLM model resolutions"
       },
-      "review_in_days": 2.9,
+      "review_in_days": 2.8,
       "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
       "jurisdiction": "paper only; live route (Polymarket/Kalshi/Kraken via John's non-AU identity) = John decision need"
@@ -127,7 +127,7 @@
         "changed": "baseline predictions generated for current round (6923 rows) -> predictions ready for submission",
         "result": "predictions/current.csv written with 6923 rows, min=0.00014445, max=1.00000000"
       },
-      "review_in_days": 2.9,
+      "review_in_days": 2.8,
       "project_dir": "numerai-unstaked-track-record",
       "repo": "rodion-place-org/numerai-unstaked-track-record",
       "jurisdiction": "none-needed for free unstaked submissions; staking requires John's payment decision"
