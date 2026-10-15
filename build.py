@@ -526,6 +526,8 @@ def build(output: Path, base: str = "") -> None:
 <section class="project-card"><span class="tag">forecasting / competition</span><h3><a href="/site/projects/metaculus-minibench.html">Metaculus MiniBench Bot →</a></h3><p>An autonomous forecasting agent for the Metaculus AI Competition MiniBench rounds. Bot-native, evidence-tracked submissions with append-only log. Tournament IDs confirmed; token pending.</p></section>
 <section class="project-card"><span class="tag">forecasting / competition</span><h3><a href="/site/projects/crunchdao-structural-break.html">CrunchDAO Structural Break →</a></h3><p>A deterministic regime-change detection entry for the CrunchDAO Structural Break competition (100k USDC, closes 2026-10-01). 6/6 local tests pass; submission format verified.</p></section>
 <section class="project-card"><span class="tag">forecasting / competition</span><h3><a href="/site/projects/numerai-unstaked-track-record.html">Numerai Unstaked Track Record →</a></h3><p>A reproducible, unstaked Numerai Classic model completing scored weekly rounds to establish a verifiable track record before any capital commitment. Free submissions, no NMR at risk.</p></section>
+<h2 id="data">Data</h2>
+<section class="project-card"><span class="tag">data / demand probe</span><h3><a href="/site/projects/x402-feed.html">x402 Forecast and Payer Feed →</a></h3><p>A working prototype of an x402 paid endpoint serving forecast history and verified-payer data. Returns 402 Payment Required without valid payment; serves BTC/USDT forecasts with valid x402 header. 8 tests pass; deployment pending server access.</p></section>
 <h2 id="systems">Systems</h2>
 <section class="project-card"><span class="tag">ingestion / pipeline</span><h3><a href="/site/projects/inflow.html">Inflow RSS Pipeline →</a></h3><p>A curated RSS/Atom ingestion pipeline that polls configured feeds, deduplicates by canonical URL, and writes dated library digests. Runs every 2 hours via Hermes cron.</p></section>
 <section class="project-card"><span class="tag">reliability / watchdog</span><h3><a href="/site/projects/gateway-watchdog.html">Gateway Watchdog →</a></h3><p>Monitors Hermes gateway units for Matrix connection failures, writes JSON evidence before restart, and posts one recovery notification per event. Dry-run mode for safe verification.</p></section>
@@ -663,7 +665,7 @@ def build(output: Path, base: str = "") -> None:
     The prototype validates payment headers against expected values (network: base, asset: usdc, price: 0.01, payTo: 0x1234567890abcdef1234567890abcdef12345678) and serves forecast data only when payment is verified.
     For actual deployment and live payments, server access and identity setup are required; see the venture status card for current blockers.
     </section>
-    {build_venture_status_card(x402_venture)}
+    VENTURE_STATUS_CARD_PLACEHOLDER
     <h2>How it works</h2>
     <section class="card"><ol>
     <li>The Flask app checks for a Payment header in incoming requests.</li>
@@ -677,7 +679,7 @@ def build(output: Path, base: str = "") -> None:
     <br><code>curl -i -H 'Payment: {"network":"base","asset":"usdc","price":"0.01","payTo":"0x1234567890abcdef1234567890abcdef12345678"}' http://localhost:5001/forecast</code> should return 200 OK with forecast data.
     The prototype has been tested locally and shows correct 402/200 behavior.
     </p></section>
-        """))
+        """).replace("VENTURE_STATUS_CARD_PLACEHOLDER", build_venture_status_card(x402_venture)))
     write(output, "projects/browser-runtime-libs.html", page("X Read-Only Browser Runtime", """
     <p class="eyebrow">Project · browser runtime</p><h1>X Read-Only Browser Runtime</h1>
     <p class="lede">A zero-paid user-space runtime for Chrome for Testing 152 using an existing persistent profile. Missing Ubuntu runtime libraries are vendored under <code>root/</code>; no root or apt install is required.</p>
