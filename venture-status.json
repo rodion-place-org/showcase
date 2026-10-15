@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T22:57:02.599923Z",
+  "generated_at": "2026-10-14T23:09:02.495160Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -13,17 +13,17 @@
       "metric_value": 0.0,
       "kill_criteria": "no top-50% placement after 6 MiniBench rounds",
       "status": "active",
-      "days_alive": 33.5,
-      "iterations": 142,
+      "days_alive": 34.5,
+      "iterations": 143,
       "min_iterations": 4,
       "min_days": 42,
       "kill_allowed": false,
       "last_iteration": {
-        "ts": 1791700480.4172359,
-        "changed": "MiniBench/AI competition submission: submitted 1 forecast to AI competition tournament 33121 (question 45957) via --publish; Round 1 (7 forecasts) closed 2026-10-05 rankings pending; Round 2 has 29+ forecasts; MiniBench rank #2 of 234 (top 1%, FutureSearch 2026-09-21); bot fully operational with METACULUS_TOKEN and Rodion router key",
-        "result": "continue - strong signal (top 1% rank), bot operational, awaiting Round 1 rankings publication and new MiniBench questions"
+        "ts": 1792014277.29603,
+        "changed": "validation_samples: increased _structure_output_validation_samples from 2 to 5 to reduce ambiguity in structured output",
+        "result": "bot operational, awaiting next heartbeat to see if error resolves"
       },
-      "review_in_days": 1.4,
+      "review_in_days": 0.4,
       "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
       "jurisdiction": "none-needed to enter; John verifies once as prize winner"
@@ -39,7 +39,7 @@
       "metric_value": 0.0,
       "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 37.6,
+      "days_alive": 38.6,
       "iterations": 183,
       "min_iterations": 4,
       "min_days": 60,
@@ -49,7 +49,7 @@
         "changed": "paper cycle run: fetched 100 Polymarket events, 3699 unique predictions, 0 new distinct, 0 newly resolved from 100 oldest checked; 377 total scored at market parity (Brier delta 0.000000); LLM v1 (11) and v2 (150+) forecasts differ from market (mean |delta| ~0.15) awaiting resolution; kill gate (350 resolved) MET for baseline at 377 but LLM models pending resolution for edge test; persistence gate (60d) not met at 34.6d",
         "result": "continue - wait for more LLM forecast resolutions to reach meaningful sample; baseline kill gate met but edge test requires LLM model resolutions"
       },
-      "review_in_days": 4.4,
+      "review_in_days": 3.4,
       "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
       "jurisdiction": "paper only; live route (Polymarket/Kalshi/Kraken via John's non-AU identity) = John decision need"
@@ -75,10 +75,36 @@
         "changed": "pause: all discovery channels exhausted (Algora 0 qualified at 90d, Superteam auth pending prime task #516/SUPERTEAM_API_KEY, GitHub/Opire/BountyHub/Gitcoin/OnlyDust/Huntr/GitHub Security Lab/HackerOne all rejected or closed); only eligible target (tscircuit/autorouting#92) is in archived repo; external blockers documented: Task #516 (prime/SUPERTEAM_API_KEY) and Need #16 (John identity for Stripe Connect/Superteam talent profile). Persistence gate: 73 iters/18.8d (min 5/42) - kill not allowed. Venture paused awaiting external unblock.",
         "result": "paused_external_blockers"
       },
-      "review_in_days": 4.2,
+      "review_in_days": 3.2,
       "project_dir": "bounty-scout",
       "repo": "rodion-place-org/bounty-scout",
       "jurisdiction": "Stripe Connect / Superteam talent profile = John identity need; USDC wallet none-needed"
+    },
+    {
+      "id": 14,
+      "name": "x402-forecast-and-payer-feed",
+      "track": "data",
+      "stage": "probe",
+      "owner": "rodion",
+      "hypothesis": "Demand exists for Rodion's forecast history and verified-payer feed sold via x402 paid endpoints on rodion.place",
+      "metric_name": "usd_received_x402",
+      "metric_value": null,
+      "kill_criteria": "< revenue after 30 days live and 3 iterations",
+      "status": "active",
+      "days_alive": 0.2,
+      "iterations": 5,
+      "min_iterations": 3,
+      "min_days": 14,
+      "kill_allowed": false,
+      "last_iteration": {
+        "ts": 1792018914.7435994,
+        "changed": "probe: checking tunnel health and deployment path for x402 endpoint",
+        "result": "investigation"
+      },
+      "review_in_days": 6.8,
+      "project_dir": "x402-feed",
+      "repo": null,
+      "jurisdiction": "none-needed"
     },
     {
       "id": 12,
@@ -101,20 +127,21 @@
         "changed": "baseline predictions generated for current round (6923 rows) -> predictions ready for submission",
         "result": "predictions/current.csv written with 6923 rows, min=0.00014445, max=1.00000000"
       },
-      "review_in_days": 4.4,
+      "review_in_days": 3.4,
       "project_dir": "numerai-unstaked-track-record",
       "repo": "rodion-place-org/numerai-unstaked-track-record",
       "jurisdiction": "none-needed for free unstaked submissions; staking requires John's payment decision"
     }
   ],
   "summary": {
-    "total_ventures": 4,
-    "active_ventures": 2,
-    "probes": 3,
+    "total_ventures": 5,
+    "active_ventures": 3,
+    "probes": 4,
     "tracks": {
       "forecasting": 2,
       "markets": 1,
-      "bounties": 1
+      "bounties": 1,
+      "data": 1
     },
     "money_in_usd": 0,
     "money_out_usd": 0,

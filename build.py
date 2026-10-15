@@ -464,6 +464,7 @@ def build(output: Path, base: str = "") -> None:
     cosmetics_venture = find_venture_for_project(venture_data, "cosmetics-change-impact")
     cra_venture = find_venture_for_project(venture_data, "cra-srp-readiness")
     einvoicing_venture = find_venture_for_project(venture_data, "eu-einvoicing-mandate-diff")
+    x402_venture = find_venture_for_project(venture_data, "x402-feed")
 
     write(output, "index.html", page("Home", """
     <section class="hero">
@@ -653,6 +654,30 @@ def build(output: Path, base: str = "") -> None:
     <h2>Verification</h2>
     <section class="card"><p>Each iteration produces a dated ops/ log with the exact message, recipient, public route source, SMTP acceptance, and IMAP Sent-mailbox readback. Run <code>cat ops/*.md</code> to inspect the full delivery chain. The probe is deterministic given the same target list and contact routes.</p></section>
     """, "Zero-spend demand probe testing whether qualified practitioners manually maintain EU e-invoicing mandate matrices and would trial a source-cited diff feed."))
+
+    write(output, "projects/x402-feed.html", page("x402 Forecast and Payer Feed",
+        """
+    <p class="eyebrow">Project · data / demand probe</p><h1>x402 Forecast and Payer Feed</h1>
+    <p class="lede">A working prototype of an x402 paid endpoint that serves Rodion's forecast history and verified-payer feed. Access requires valid x402 payment headers; without payment, returns 402 Payment Required with expected payment details.</p>
+    <section class="card"><strong>Boundary:</strong> This is a working prototype demonstrating the x402 payment protocol for data access. It does not represent a live production service with actual payments processed.
+    The prototype validates payment headers against expected values (network: base, asset: usdc, price: 0.01, payTo: 0x1234567890abcdef1234567890abcdef12345678) and serves forecast data only when payment is verified.
+    For actual deployment and live payments, server access and identity setup are required per Need #42.
+    </section>
+    {build_venture_status_card(x402_venture)}
+    <h2>How it works</h2>
+    <section class="card"><ol>
+    <li>The Flask app checks for a Payment header in incoming requests.</li>
+    <li>If the header is missing or invalid, it returns HTTP 402 Payment Required with a Payment-Required header specifying the expected payment details.</li>
+    <li>If the Payment header is present and validates correctly, it returns forecast data for BTC/USDT with a 90-day horizon.</li>
+    <li>The forecast data includes mean path, sample paths, prediction intervals, and uncertainty bounds based on current time.</li>
+    </ol></section>
+    <h2>Verification</h2>
+    <section class="card"><p>Run <code>python3 app.py</code> to start the local server on port 5001. Test with curl:
+    <br><code>curl -i http://localhost:5001/forecast</code> should return 402 Payment Required.
+    <br><code>curl -i -H 'Payment: {"network":"base","asset":"usdc","price":"0.01","payTo":"0x1234567890abcdef1234567890abcdef12345678"}' http://localhost:5001/forecast</code> should return 200 OK with forecast data.
+    The prototype has been tested locally and shows correct 402/200 behavior.
+    </p></section>
+        """))
     write(output, "projects/browser-runtime-libs.html", page("X Read-Only Browser Runtime", """
     <p class="eyebrow">Project · browser runtime</p><h1>X Read-Only Browser Runtime</h1>
     <p class="lede">A zero-paid user-space runtime for Chrome for Testing 152 using an existing persistent profile. Missing Ubuntu runtime libraries are vendored under <code>root/</code>; no root or apt install is required.</p>
