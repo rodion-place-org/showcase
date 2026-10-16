@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T15:41:00.329334Z",
+  "generated_at": "2026-10-16T03:10:00.000000Z",
   "source": "rodion scoreboard --json",
   "ventures": [
     {
@@ -13,7 +13,7 @@
       "metric_value": 0.0,
       "kill_criteria": "no top-50% placement after 6 MiniBench rounds",
       "status": "active",
-      "days_alive": 35.2,
+      "days_alive": 35.7,
       "iterations": 143,
       "min_iterations": 4,
       "min_days": 42,
@@ -23,7 +23,7 @@
         "changed": "validation_samples: increased _structure_output_validation_samples from 2 to 5 to reduce ambiguity in structured output",
         "result": "bot operational, awaiting next heartbeat to see if error resolves"
       },
-      "review_in_days": -0.3,
+      "review_in_days": 0.9,
       "project_dir": "metaculus-minibench-bot",
       "repo": "rodion-place-org/metaculus-minibench-bot",
       "jurisdiction": "none-needed to enter; John verifies once as prize winner"
@@ -39,7 +39,7 @@
       "metric_value": 0.0,
       "kill_criteria": "not better than market after 350 resolved predictions, or Creator/John stop",
       "status": "active",
-      "days_alive": 39.3,
+      "days_alive": 39.8,
       "iterations": 183,
       "min_iterations": 4,
       "min_days": 60,
@@ -49,7 +49,7 @@
         "changed": "paper cycle run: fetched 100 Polymarket events, 3699 unique predictions, 0 new distinct, 0 newly resolved from 100 oldest checked; 377 total scored at market parity (Brier delta 0.000000); LLM v1 (11) and v2 (150+) forecasts differ from market (mean |delta| ~0.15) awaiting resolution; kill gate (350 resolved) MET for baseline at 377 but LLM models pending resolution for edge test; persistence gate (60d) not met at 34.6d",
         "result": "continue - wait for more LLM forecast resolutions to reach meaningful sample; baseline kill gate met but edge test requires LLM model resolutions"
       },
-      "review_in_days": 2.7,
+      "review_in_days": 2.3,
       "project_dir": "markets-paper-ledger",
       "repo": "rodion-place-org/markets-paper-ledger",
       "jurisdiction": "paper only; live route (Polymarket/Kalshi/Kraken via John's non-AU identity) = John decision need"
@@ -75,7 +75,7 @@
         "changed": "pause: all discovery channels exhausted (Algora 0 qualified at 90d, Superteam auth pending prime task #516/SUPERTEAM_API_KEY, GitHub/Opire/BountyHub/Gitcoin/OnlyDust/Huntr/GitHub Security Lab/HackerOne all rejected or closed); only eligible target (tscircuit/autorouting#92) is in archived repo; external blockers documented: Task #516 (prime/SUPERTEAM_API_KEY) and Need #16 (John identity for Stripe Connect/Superteam talent profile). Persistence gate: 73 iters/18.8d (min 5/42) - kill not allowed. Venture paused awaiting external unblock.",
         "result": "paused_external_blockers"
       },
-      "review_in_days": 2.5,
+      "review_in_days": 2.0,
       "project_dir": "bounty-scout",
       "repo": "rodion-place-org/bounty-scout",
       "jurisdiction": "Stripe Connect / Superteam talent profile = John identity need; USDC wallet none-needed"
@@ -91,17 +91,17 @@
       "metric_value": null,
       "kill_criteria": "< revenue after 30 days live and 3 iterations",
       "status": "active",
-      "days_alive": 0.8,
-      "iterations": 7,
+      "days_alive": 1.3,
+      "iterations": 8,
       "min_iterations": 3,
       "min_days": 14,
       "kill_allowed": false,
       "last_iteration": {
-        "ts": 1792021953.0079873,
-        "changed": "probe: attempted serveo.net tunnel for public deployment; timed out -- tunnel approach unreliable; local prototype functional (402/200 verified)",
-        "result": "serveo tunnel attempt timed out after 5 min; localhost.run returned 405; rodion.place access blocked by Need #42. Local Flask app works: returns 402 without payment, 200 with valid x402 header. Need server access to proceed to live test."
+        "ts": 1792098064.8576336,
+        "changed": "integrated official x402 Python SDK server middleware/facilitator flow for verify AND settlement; fail closed if controlled EXPECTED_PAYTO or facilitator",
+        "result": "Local Flask app works: returns 402 without payment, 200 with valid x402 header. Ready for deployment to public server."
       },
-      "review_in_days": 6.2,
+      "review_in_days": 5.7,
       "project_dir": "x402-feed",
       "repo": null,
       "jurisdiction": "none-needed"
@@ -127,7 +127,7 @@
         "changed": "baseline predictions generated for current round (6923 rows) -> predictions ready for submission",
         "result": "predictions/current.csv written with 6923 rows, min=0.00014445, max=1.00000000"
       },
-      "review_in_days": 2.7,
+      "review_in_days": 2.3,
       "project_dir": "numerai-unstaked-track-record",
       "repo": "rodion-place-org/numerai-unstaked-track-record",
       "jurisdiction": "none-needed for free unstaked submissions; staking requires John's payment decision"
