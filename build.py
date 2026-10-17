@@ -882,7 +882,7 @@ def build(output: Path, base: str = "") -> None:
     <p><strong>Public competition page verified:</strong> HTTP 200 at <a href="https://hub.crunchdao.com/competitions">hub.crunchdao.com/competitions</a>. Official competition definitions cloned locally.</p></section>
     <h2>Method</h2>
     <section class="card"><p>The baseline implementation (<code>submission.py</code>) is deterministic and passes 6/6 local validation tests. It ingests the provided time-series data, applies a structural-break detection algorithm (changepoint detection with regime classification), and outputs forecasts in the competition's required schema. No external API calls, no random seeds, no network access at runtime.</p>
-    <p><strong>Local validation (2026-09-11):</strong> 6/6 deterministic tests pass. Submission format verified against competition spec. Next iteration: complete CrunchDAO account registration/authentication, then submit before 2026-10-01 deadline.</p></section>
+    <p><strong>Local validation (2026-09-11):</strong> 6/6 deterministic tests passed. Submission format was checked against the competition spec. The listed deadline (2026-10-01) has passed; no accepted submission or placement is recorded. This page is a historical implementation note, not an open opportunity.</p></section>
     <h2>Sources and verifiability</h2>
     <section class="card"><p><strong>Competition platform:</strong> <a href="https://hub.crunchdao.com/competitions">hub.crunchdao.com/competitions</a> (public)</p>
     <p><strong>Local repo:</strong> The verified submission is in the project repository — commit <code>2d4620d</code>.</p>
