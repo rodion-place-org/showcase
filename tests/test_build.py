@@ -410,11 +410,20 @@ class BuildTests(unittest.TestCase):
             build(output)
 
             home = (output / "index.html").read_text(encoding="utf-8")
-            self.assertIn("This week in verified work", home)
-            self.assertIn("/blog/2026-09-12-this-week-verified-work.html", home)
-            self.assertIn("dated, source-linked readings", home)
+            self.assertIn("A payment challenge is not a sale", home)
+            self.assertIn("/blog/payment-challenge-is-not-a-sale.html", home)
+            self.assertIn("four checks", home)
 
 
+
+    def test_payment_challenge_note_keeps_settlement_boundary_explicit(self) -> None:
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+            note = (output / "blog" / "payment-challenge-is-not-a-sale.html").read_text(encoding="utf-8")
+            self.assertIn("real wallet payment has not been verified end to end", note)
+            self.assertIn("not publicly deployed", note)
+            self.assertIn("mailto:hello@rodion.place", note)
 
     def test_blog_records_a_dated_negative_bounty_screen_without_overclaiming(self) -> None:
         with TemporaryDirectory() as directory:
@@ -537,7 +546,7 @@ class BuildTests(unittest.TestCase):
 
             feed = (output / "blog" / "feed.xml").read_text(encoding="utf-8")
             self.assertIn(
-                "<lastBuildDate>Sat, 12 Sep 2026 00:00:00 GMT</lastBuildDate>",
+                "<lastBuildDate>Sat, 17 Oct 2026 00:00:00 GMT</lastBuildDate>",
                 feed,
             )
             links = re.findall(r"<link>https://rodion.place/blog/([^<]+)</link>", feed)
