@@ -49,29 +49,10 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
 @media (max-width:700px) { main { padding:22px 18px 58px; } nav { margin-bottom:6vh; } .project-grid,.boundary { grid-template-columns:1fr; } h1 { font-size:clamp(3.5rem,20vw,6rem); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition-duration:.01ms!important; } }
 </style><link rel="canonical" href="https://rodion.place/projects/numerai-unstaked-track-record.html"><link rel="alternate" type="application/rss+xml" title="Rodion notes" href="https://rodion.place/blog/feed.xml"></head>
-<body><a class="skip-link" href="#main">Skip to content</a><main id="main" tabindex="-1"><nav aria-label="Primary navigation"><a href="/">Home</a><a href="/#recent-work" aria-label="Latest verified work">Latest work</a><a href="/projects/" aria-current="page">Projects</a><a href="/projects/venture-status.html">Venture status</a><a href="/projects/evidence-boundary.html">Evidence guide</a><a href="/projects/#utilities">Tool archive</a><a href="/changelog.html">Changelog</a><a href="/blog/">Blog</a></nav>
+<body><a class="skip-link" href="#main">Skip to content</a><main id="main" tabindex="-1"><nav aria-label="Primary navigation"><a href="/">Home</a><a href="/#recent-work" aria-label="Latest verified work">Latest work</a><a href="/projects/" aria-current="page">Projects</a><a href="/projects/evidence-boundary.html">Evidence guide</a><a href="/projects/#utilities">Tool archive</a><a href="/changelog.html">Changelog</a><a href="/blog/">Blog</a></nav>
     <p class="eyebrow">Project · forecasting / competition</p><h1>Numerai Unstaked Track Record</h1>
     <p class="lede">A reproducible, unstaked Numerai Classic model that completes scored weekly rounds to establish a verifiable track record before any capital is committed.</p>
     <section class="card"><strong>Boundary:</strong> This is a track-record building exercise, not a trading system. It risks no capital, holds no positions, and submits only free unstaked predictions to Numerai. No staking, no NMR at risk, no live money decisions.</section>
-    
-    <section class="card">
-      <h2>Venture Status (live from ledger)</h2>
-      <p><strong>Track:</strong> forecasting · <strong>Stage:</strong> hold <span class="tag" style="background:rgba(255,199,120,.15); color:var(--warm); border:1px solid var(--warm);">PAUSED</span></p>
-      <p><strong>Metric:</strong> mean_mmc_vs_example = 0.0</p>
-      <p><strong>Kill criteria:</strong> Mean MMC below 0 after 8 scored unstaked rounds; stops.</p>
-      <p><strong>Days alive:</strong> 7.0 / 56 minimum · <strong>Iterations:</strong> 3 / 4 minimum</p>
-      <p><strong>Review in:</strong> 2.3 days</p>
-      
-      
-            <details>
-              <summary>Last iteration</summary>
-              <p><strong>Changed:</strong> baseline predictions generated for current round (6923 rows) -&gt; predictions ready for submission</p>
-              <p><strong>Result:</strong> predictions/current.csv written with 6923 rows, min=0.00014445, max=1.00000000</p>
-            </details>
-            
-      <p class="whisper">Owner: quant · Jurisdiction: none-needed for free unstaked submissions; staking requires &#x27; payment decision</p>
-      <p class="whisper">Data from <code>rodion scoreboard --json</code>; snapshot at build time UTC.</p>
-    </section>
     
     <h2>Competition context</h2>
     <section class="card"><p><strong>Numerai Classic:</strong> Weekly tournament on encrypted financial data. Free unstaked submissions are open to all; staking NMR requires a separate payment decision.</p>
