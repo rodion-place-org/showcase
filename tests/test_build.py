@@ -563,5 +563,25 @@ class BuildTests(unittest.TestCase):
                 parse_args(["--base", "site"])
 
 
+    def test_public_showcase_excludes_internal_venture_telemetry(self) -> None:
+        """Ledger metrics and internal sales experiments belong in the private vault."""
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+            self.assertFalse((output / "projects" / "venture-status.html").exists())
+            for html in output.rglob("*.html"):
+                text = html.read_text(encoding="utf-8")
+                for marker in (
+                    "venture-status.html",
+                    "outreach iteration 7",
+                    "outreach iteration 9",
+                    "Days alive:",
+                    "Kill criteria",
+                    "Money in/out",
+                    "rodion scoreboard --json",
+                ):
+                    self.assertNotIn(marker, text, f"{marker!r} leaked in {html.relative_to(output)}")
+
+
 if __name__ == "__main__":
     unittest.main()
