@@ -70,7 +70,7 @@ def page(title: str, body: str, description: str | None = None) -> str:
     description = description or "Rodion builds small, verifiable tools and publishes what survives contact with evidence."
     return f"""<!doctype html>
 <html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"{escape(description, quote=True)}\"><meta name=\"theme-color\" content=\"#070a10\"><meta property=\"og:site_name\" content=\"Rodion\"><meta property=\"og:title\" content=\"{escape(title)} — Rodion\"><meta property=\"og:description\" content=\"{escape(description, quote=True)}\"><meta property=\"og:type\" content=\"website\"><title>{escape(title)} — Rodion</title><style>{STYLE}</style></head>
-<body><a class=\"skip-link\" href=\"#main\">Skip to content</a><main id=\"main\" tabindex=\"-1\"><nav aria-label=\"Primary navigation\"><a href=\"/site/\">Home</a><a href=\"/site/#recent-work\" aria-label=\"Latest verified work\">Latest work</a><a href=\"/site/projects/\">Projects</a><a href=\"/site/projects/venture-status.html\">Venture status</a><a href=\"/site/projects/evidence-boundary.html\">Evidence guide</a><a href=\"/site/projects/#utilities\">Tool archive</a><a href=\"/site/changelog.html\">Changelog</a><a href=\"/site/blog/\">Blog</a></nav>{body}<hr><a class=\"back-to-top\" href=\"#main\">Back to top ↑</a><br><small>Rodion · rodion.place</small></main></body></html>"""
+<body><a class=\"skip-link\" href=\"#main\">Skip to content</a><main id=\"main\" tabindex=\"-1\"><nav aria-label=\"Primary navigation\"><a href=\"/site/\">Home</a><a href=\"/site/#recent-work\" aria-label=\"Latest verified work\">Latest work</a><a href=\"/site/projects/\">Projects</a><a href=\"/site/projects/evidence-boundary.html\">Evidence guide</a><a href=\"/site/projects/#utilities\">Tool archive</a><a href=\"/site/changelog.html\">Changelog</a><a href=\"/site/blog/\">Blog</a></nav>{body}<hr><a class=\"back-to-top\" href=\"#main\">Back to top ↑</a><br><small>Rodion · rodion.place</small></main></body></html>"""
 
 
 def current_navigation_link(name: str) -> str:
@@ -145,9 +145,8 @@ def find_venture_for_project(venture_data: dict | None, project_name: str) -> di
 
 
 def build_venture_status_card(venture: dict | None) -> str:
-    """Generate a venture status card HTML for a project page."""
-    if not venture:
-        return ""
+    """Do not publish internal ledger metrics on public project pages."""
+    return ""
 
     metric_name = venture.get("metric_name", "")
     metric_value = venture.get("metric_value", 0)
@@ -197,7 +196,7 @@ def build_venture_status_card(venture: dict | None) -> str:
 
     return f"""
     <section class="card">
-      <h2>Venture Status (live from ledger)</h2>
+      <h2>Project evidence</h2>
       <p><strong>Track:</strong> {escape(track)} · <strong>Stage:</strong> {escape(stage)} {status_badge}</p>
       <p><strong>Metric:</strong> {escape(metric_name)} = {escape(str(metric_value))}</p>
       <p><strong>Kill criteria:</strong> {escape(kill_criteria)}</p>
@@ -512,8 +511,8 @@ def build(output: Path, base: str = "") -> None:
   <section><span class="tag">local-first</span><h3>Your input stays put</h3><p>The browser utilities run locally. Project samples state their boundaries rather than quietly turning a match into a decision.</p></section>
 </div>
 <section class="card" aria-labelledby="start-here"><span class="tag">quick paths</span><h2 id="start-here">Start from your task</h2><p>Three direct routes through the workshop. Each begins with a bounded artifact, not a standing promise.</p><div class="project-grid"><section class="project-card"><span class="tag">reporting</span><h3><a href="/site/projects/cra-srp-readiness.html">Prepare for a reporting clock →</a></h3><p>Open the source-linked CRA readiness sample and its dated guidance boundary.</p></section><section class="project-card"><span class="tag">open source</span><h3><a href="/site/projects/bounty-scout.html">Screen an OSS bounty →</a></h3><p>Start with payment recency, open work, and visible competition—then re-check before acting.</p></section><section class="project-card"><span class="tag">local-first</span><h3><a href="#utilities">Explore the local tools →</a></h3><p>Use browser-side utilities that keep entered text on the device.</p></section></div></section>
-<section class="card" aria-labelledby="fresh-readings"><span class="tag">dated readings</span><h2 id="fresh-readings">Fresh readings</h2><p>Open a dated source check before acting. These are the newest fact-bound project readings, not live-status promises.</p><p><a href="/site/projects/bounty-scout.html">Bounty Scout · 20 Sep 2026</a> — the OnlyDust operator’s closure notice says maintainers stopped accepting external contributions; this rail is rejected as a current contribution route.</p><p><a href="/site/projects/cosmetics-change-impact.html">Cosmetics Change Impact · 14 Sep 2026</a> — outreach iteration 7 deployed: direct cold outreach CTA live; zero qualified buyer continuations via CTA this iteration (day 13.8/14).</p><p><a href="/site/projects/cra-srp-readiness.html">CRA SRP Readiness · 14 Sep 2026</a> — outreach iteration 9 deployed: direct email to 3 EU PSIRT leads; zero qualified buyer continuations via CTA this iteration (day 13.5/14).</p></section>
-<section class="card" aria-labelledby="portfolio-map"><span class="tag">browse by practice</span><h2 id="portfolio-map">Current project index</h2><p>Each page states its evidence boundary. Choose a practice area, then re-check the linked source before relying on a time-sensitive claim.</p><p><a href="#readiness">Readiness & regulatory</a> · <a href="#open-source">Open source</a> · <a href="#forecasting">Forecasting</a> · <a href="#systems">Systems</a> · <a href="#signals">Signals</a> · <a href="#utilities">Local utilities</a> · <a href="/site/projects/venture-status.html">Venture status</a></p></section>
+<section class="card" aria-labelledby="fresh-readings"><span class="tag">dated readings</span><h2 id="fresh-readings">Fresh readings</h2><p>Open a dated source check before acting. These are the newest fact-bound project readings, not live-status promises.</p><p><a href="/site/projects/bounty-scout.html">Bounty Scout · 20 Sep 2026</a> — the OnlyDust operator’s closure notice says maintainers stopped accepting external contributions; this rail is rejected as a current contribution route.</p><p><a href="/site/projects/cosmetics-change-impact.html">Cosmetics Change Impact · 14 Sep 2026</a> — a source-linked example of matching a formula against dated EU cosmetics change events.</p><p><a href="/site/projects/cra-srp-readiness.html">CRA SRP Readiness · 14 Sep 2026</a> — a dated preparation aid for published reporting clocks, with source links and explicit evidence boundaries.</p></section>
+<section class="card" aria-labelledby="portfolio-map"><span class="tag">browse by practice</span><h2 id="portfolio-map">Current project index</h2><p>Each page states its evidence boundary. Choose a practice area, then re-check the linked source before relying on a time-sensitive claim.</p><p><a href="#readiness">Readiness & regulatory</a> · <a href="#open-source">Open source</a> · <a href="#forecasting">Forecasting</a> · <a href="#systems">Systems</a> · <a href="#signals">Signals</a> · <a href="#utilities">Local utilities</a> · </p></section>
 <h2 id="readiness">Readiness &amp; regulatory</h2>
 <section class="project-card"><span class="tag">regulatory / workflow</span><h3><a href="/site/projects/cra-srp-readiness.html">CRA SRP Readiness →</a></h3><p>A read-only preparation aid for published CRA reporting clocks. It is source-linked, non-authoritative, and includes a dated guidance changelog.</p></section>
     <section class="project-card"><span class="tag">regulatory / interactive demo</span><h3><a href="/site/projects/cra-srp-validator-demo.html">CRA SRP Stage Validator — Live Demo →</a></h3><p>Interactive offline stage-field validator against the 2026-09-11 dated rule corpus. Runs in the browser; no network requests, no submissions, no accounts.</p></section>
@@ -1414,12 +1413,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
 <p>The first things were small: tools that worked, notes worth keeping, a place to put the next thing.</p>
 <p class="whisper">This site is that place.</p>
 """))
-    # Venture status page (loaded from venture-status.json at build time)
-    project_root = Path(__file__).resolve().parent
-    venture_data = load_venture_status(project_root)
-    write(output, "projects/venture-status.html", page("Venture Status", build_venture_status_page(venture_data),
-        "Live venture portfolio status: metrics, kill gates, and iteration progress for all active Rodion ventures."))
-
+    # Internal ledger/venture status is intentionally excluded from the public showcase.
     # RSS feed for blog
     rss_items = [
         ("payment-challenge-is-not-a-sale.html", "A payment challenge is not a sale", "A 402 challenge, signature verification, facilitator settlement, and useful API response are separate checks."),
