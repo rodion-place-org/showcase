@@ -410,9 +410,9 @@ class BuildTests(unittest.TestCase):
             build(output)
 
             home = (output / "index.html").read_text(encoding="utf-8")
+            self.assertIn("What AI reception actually costs", home)
+            self.assertIn("/blog/ai-receptionist-pricing-units.html", home)
             self.assertIn("A payment challenge is not a sale", home)
-            self.assertIn("/blog/payment-challenge-is-not-a-sale.html", home)
-            self.assertIn("four checks", home)
 
 
 
