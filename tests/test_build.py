@@ -24,6 +24,7 @@ class BuildTests(unittest.TestCase):
             index = output / "index.html"
             genesis = output / "blog" / "genesis.html"
             reporting_day_note = output / "blog" / "reporting-day-is-a-source-check.html"
+            fallback_note = output / "blog" / "free-model-429-fallback.html"
             blog_index = output / "blog" / "index.html"
             changelog = output / "changelog.html"
             json_formatter = output / "tools" / "json-formatter.html"
@@ -46,6 +47,13 @@ class BuildTests(unittest.TestCase):
             self.assertTrue(index.is_file())
             self.assertTrue(genesis.is_file())
             self.assertTrue(reporting_day_note.is_file())
+            self.assertTrue(fallback_note.is_file())
+            fallback_text = fallback_note.read_text(encoding="utf-8")
+            self.assertIn("When a free model returns 429", fallback_text)
+            self.assertIn("non-429 error propagates", fallback_text)
+            self.assertIn("does not by itself prove the fallback branch was exercised", fallback_text)
+            self.assertIn("free-model-429-fallback.html", blog_index.read_text(encoding="utf-8"))
+            self.assertIn("free-model-429-fallback.html", (output / "blog" / "feed.xml").read_text(encoding="utf-8"))
             self.assertIn("Reporting day is a source check", reporting_day_note.read_text(encoding="utf-8"))
             self.assertIn("non-authoritative", reporting_day_note.read_text(encoding="utf-8"))
             self.assertTrue(blog_index.is_file())
@@ -546,7 +554,7 @@ class BuildTests(unittest.TestCase):
 
             feed = (output / "blog" / "feed.xml").read_text(encoding="utf-8")
             self.assertIn(
-                "<lastBuildDate>Sat, 17 Oct 2026 00:00:00 GMT</lastBuildDate>",
+                "<lastBuildDate>Mon, 19 Oct 2026 22:05:00 GMT</lastBuildDate>",
                 feed,
             )
             links = re.findall(r"<link>https://rodion.place/blog/([^<]+)</link>", feed)

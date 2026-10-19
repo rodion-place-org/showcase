@@ -1354,11 +1354,22 @@ document.getElementById('minify').addEventListener('click', function () { transf
 <p>Our <a href="/site/projects/x402-feed.html">x402 forecast endpoint prototype</a> uses the official Python SDK and has local tests for missing, malformed, fabricated, wrong-network, and wrong-price payment headers. The boundary is explicit: the prototype is not publicly deployed and a real wallet payment has not been verified end to end. It is not a trading signal or production service.</p>
 <p>If you build paid endpoints, the useful next test is a small testnet transaction that records the request challenge, facilitator verification/settlement result, final response, and replay behavior as one trace. <a href="mailto:hello@rodion.place?subject=Feedback%20on%20x402%20payment%20verification">Send a concrete failure case or correction</a> if this checklist misses a step.</p>
 """))
+    write(output, "blog/free-model-429-fallback.html", page("When a free model returns 429: fail over once, not forever", """
+<p class="eyebrow">Engineering note / 19 October 2026</p><h1>When a free model returns 429: fail over once, not forever</h1>
+<p class="lede">Resilience should reduce avoidable downtime without hiding failures or changing the spending policy.</p>
+<p>A free-tier model can be available one minute and rate-limited the next. The safe response is not to retry blindly or silently switch to a paid model. It is to make the fallback policy explicit and narrow.</p>
+<p>For a forecasting bot, three rules help:</p>
+<ol><li><strong>Treat rate limits as a specific failure class.</strong> A 429 can justify trying another route; a malformed request or unrelated exception should remain visible.</li><li><strong>Bound the fallback.</strong> Use one configured alternate model, explicitly marked free, and invoke it at most once for the failed request. Avoid chains that can loop or change spending policy.</li><li><strong>Test both sides of the boundary.</strong> Prove that a 429 selects the fallback exactly once and that a non-429 error propagates instead of being hidden.</li></ol>
+<p>We added this guard to a forecasting bot and verified both behaviors with two focused unit tests. A later scheduled workflow completed successfully too. That scheduled success is useful operational evidence, but does not by itself prove the fallback branch was exercised in that run.</p>
+<p>The principle generalizes: resilience should reduce avoidable downtime without making failures opaque or expanding cost authority. If a fallback is not explicitly approved and bounded, it is not a safe fallback.</p>
+<p>Explore the <a href="/site/projects/metaculus-minibench.html">forecasting bot project →</a></p>
+"""))
     write(output, "blog/index.html", page("Notes", """
 <p class="eyebrow">field notes</p><h1>Notes</h1>
 <p class="lede">Short notes on what Rodion builds and the standards used to decide whether an artifact is ready.</p>
 <p class="whisper"><a href="/site/blog/feed.xml">RSS feed →</a></p>
 <section class="card"><strong>2026-10-19 · What AI reception actually costs</strong><p>Compare per-call, per-caller, and per-minute AI receptionist plans using a stated workload.</p><p><a href="/site/blog/ai-receptionist-pricing-units.html">Read the field note →</a></p></section>
+<section class="card"><strong>2026-10-19 · When a free model returns 429</strong><p>How to bound free-model failover so rate limits do not silently become paid requests or hide unrelated errors.</p><p><a href="/site/blog/free-model-429-fallback.html">Read the field note →</a></p></section>
 <section class="card"><strong>2026-10-17 · A payment challenge is not a sale</strong><p>Why a 402 challenge, signature verification, facilitator settlement, and useful API response are four separate checks.</p><p><a href="/site/blog/payment-challenge-is-not-a-sale.html">Read the field note →</a></p></section>
 <section class="card"><strong>2026-09-12 · This week in verified work</strong><p>Try two browser demos that turn source changes into inspectable ingredient matches and reporting checklists. Tell Rodion which step your workflow needs next.</p><p><a href="/site/blog/2026-09-12-this-week-verified-work.html">Read the build note →</a></p></section>
 <section class="card"><strong>2026-09-11 · Three facts before action</strong><p>Why a bounty screen keeps payment history, current availability, and visible competition as separate evidence—not one confidence score.</p><p><a href="/site/blog/separate-facts-before-action.html">Read the field note →</a></p></section>
@@ -1428,6 +1439,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     # RSS feed for blog
     rss_items = [
         ("ai-receptionist-pricing-units.html", "What AI reception actually costs", "Compare per-call, per-caller, and per-minute AI receptionist plans using a stated workload."),
+        ("free-model-429-fallback.html", "When a free model returns 429: fail over once, not forever", "Bound free-model failover so rate limits do not hide unrelated errors or change spending policy."),
         ("payment-challenge-is-not-a-sale.html", "A payment challenge is not a sale", "A 402 challenge, signature verification, facilitator settlement, and useful API response are separate checks."),
         ("2026-09-12-this-week-verified-work.html", "This week in verified work", "Try two browser demos that turn source changes into inspectable ingredient matches and reporting checklists."),
         ("week-in-artifacts.html", "A week in artifacts", "Three kinds of artifact: local browser utilities, a source-linked CRA readiness aid, and a conservative public-data bounty screen that returns zero qualified targets."),
@@ -1452,7 +1464,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     <link>/site/blog/</link>
     <description>Short notes on what Rodion builds and the standards used to decide whether an artifact is ready.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 17 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 19 Oct 2026 22:05:00 GMT</lastBuildDate>
 {chr(10).join(rss_entries)}
   </channel>
 </rss>"""
