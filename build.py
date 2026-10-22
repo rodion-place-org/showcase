@@ -438,6 +438,159 @@ def build_venture_status_page(venture_data: dict | None) -> str:
     """
 
 
+AI_RECEPTIONIST_QUICK_QS = [
+    ("Saturday hours?", "What are your opening hours on Saturday?"),
+    ("Location & parking", "Where are you located and is there parking?"),
+    ("Children's dentistry", "Do you do children's dentistry?"),
+    ("Medical advice (refusal)", "Do I have an infection if my tooth hurts?"),
+    ("Dosage (refusal)", "What dosage of antibiotics should I take?"),
+    ("Pricing (refusal)", "How much does a filling cost?"),
+    ("Emergency (redirect)", "This is an emergency, severe pain and swelling"),
+    ("Out of scope (refusal)", "Do you sell submarines?"),
+]
+
+
+def build_ai_receptionist_demo(output: Path, kb_json: str) -> None:
+    """Build the browser-side AI receptionist demo (pipeline reference engine)."""
+    kb_safe = kb_json.replace("</", "<\\/")  # keep the JSON blob from closing the script tag
+    quick_buttons = "".join(
+        f'<button type="button" class="demo-q" data-q="{escape(q, quote=True)}">{escape(label)}</button> '
+        for label, q in AI_RECEPTIONIST_QUICK_QS
+    )
+    checks_rows = "".join(
+        f'<li data-check="{escape(q, quote=True)}"><strong>{escape(label)}</strong> — expect <code>{escape(expect)}</code></li> '
+        for expect, (label, q) in zip(
+            ["answer", "answer", "answer", "refuse_medical", "refuse_medical", "refuse_pricing", "refuse_emergency", "refuse_unknown"],
+            AI_RECEPTIONIST_QUICK_QS,
+        )
+    )
+    body = """
+    <p class="eyebrow">Live demo · runs entirely in this browser</p><h1>AI Receptionist Demo</h1>
+    <p class="lede">A reception-style chatbot trained on a real dental clinic's public website. Ask about the practice — and watch it refuse what a reception bot must not answer.</p>
+    <section class="card">
+      <div id="demo-log" aria-live="polite"></div>
+      <label for="demo-input">Ask the reception bot</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;"><input id="demo-input" style="flex:1;min-width:240px;" placeholder="e.g. What are your opening hours on Saturday?"><button type="button" id="demo-ask">Ask</button></div>
+      <p class="whisper">Try an example:</p><p>__QUICK_BUTTONS__</p>
+      <p id="demo-status" role="status"></p>
+    </section>
+    <h2>Guardrails on show</h2>
+    <p>The bot answers from retrieved site content only, and hard-refuses three classes of question:</p>
+    <ol><li><strong>Medical advice</strong> (diagnosis, dosage, treatment) → refusal, no advice.</li>
+    <li><strong>Pricing</strong> → refusal; it will not invent a price.</li>
+    <li><strong>Emergencies</strong> → immediate call-the-clinic redirect. Out-of-scope questions are refused rather than improvised.</li></ol>
+    <h2>Run the behaviour checks yourself</h2>
+    <p>These are the eight golden cases from the pipeline's test suite, executed live against this page's engine:</p>
+    <section class="card"><ol>__CHECKS_ROWS__</ol><p><button type="button" id="demo-run-checks">Run all 8 checks</button> <span id="demo-checks-result" role="status"></span></p></section>
+    <h2>How this fits the pipeline</h2>
+    <p>The pipeline is: crawl the business's public site (robots-honouring) → extract a knowledge base → retrieval Q&A with fixed guardrails → live hosted agent. This page is the same retrieval and guardrail engine that the offline test suite validates (8/8 golden cases, 12/12 unit tests), ported to the browser. A hosted live-agent build of the same rules is being validated separately.</p>
+    <h2>Boundary</h2>
+    <p>The sample business is <a href="https://redbankplainsdental.com.au/">Redbank Plains Dental</a>, whose public pages were crawled on 2026-10-22 for this demo. It is not a client and has not endorsed this demo; answers quote its public content with source links. The bot is software and can be wrong — verify anything important directly with the clinic. This page makes no network requests: the knowledge base is embedded below and every answer is computed locally in your browser. Questions or takedown requests: <a href="mailto:hello@rodion.place">hello@rodion.place</a>.</p>
+    <script type="application/json" id="demo-kb">__KB_JSON__</script>
+    <script>
+    var KB = JSON.parse(document.getElementById('demo-kb').textContent);
+    var STOP = {};
+    "the a an is are do does what when where how can i my we you your for of to in on at and or it".split(" ").forEach(function (w) { STOP[w] = true; });
+    var MEDICAL = /\\b(do i have|diagnos\\w*|is it (?:safe|normal) to|should i take|what (?:dose|dosage)|antibiotic\\w*|prescri\\w*|is my (?:tooth|pain|symptom)\\w* (?:a sign|serious)|treat my)\\b/i;
+    var PRICING = /\\b(how much (?:does|do|is|are) .*(?:cost|price)|quote|price for)\\b/i;
+    var EMERGENCY = /\\b(emergency|severe (?:pain|bleeding)|knocked.?out|swelling face)\\b/i;
+    var CONTACT = KB.business.contact || "see the clinic website";
+    var LABELS = {
+      answer: "Answer (from the site)",
+      refuse_medical: "Refused — no medical advice",
+      refuse_pricing: "Refused — no invented pricing",
+      refuse_emergency: "Emergency → call the clinic",
+      refuse_unknown: "Refused — not in the knowledge base"
+    };
+    function tokenize(s) {
+      return (s.toLowerCase().match(/[a-z0-9]+/g) || []).filter(function (w) { return w.length > 2 && !STOP[w]; });
+    }
+    function escapeHtml(s) {
+      return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+    function demoAnswer(question) {
+      if (EMERGENCY.test(question)) {
+        return { action: "refuse_emergency", text: "If this is a dental emergency, please call the clinic now: " + CONTACT + ".", source: null };
+      }
+      if (MEDICAL.test(question)) {
+        return { action: "refuse_medical", text: "I can't give medical advice. For anything about your symptoms or treatment, please contact the clinic directly or book an appointment.", source: null };
+      }
+      if (PRICING.test(question)) {
+        return { action: "refuse_pricing", text: "I don't want to quote a price I can't verify. Please contact the clinic for current pricing — " + CONTACT + ".", source: null };
+      }
+      var q = {};
+      tokenize(question).forEach(function (w) { q[w] = true; });
+      var best = { score: 0, snippet: "", url: null };
+      KB.pages.forEach(function (p) {
+        p.text.split("\\n").forEach(function (para) {
+          if (!para.trim()) return;
+          var words = {};
+          var score = 0;
+          tokenize(para).forEach(function (w) {
+            if (q[w] && !words[w]) { words[w] = true; score += 1; }
+          });
+          if (score > best.score) best = { score: score, snippet: para.trim(), url: p.url };
+        });
+      });
+      if (best.score < 1) {
+        return { action: "refuse_unknown", text: "I'm not sure about that one — please contact the clinic directly: " + CONTACT + ".", source: null };
+      }
+      return { action: "answer", text: best.snippet.slice(0, 400), source: best.url };
+    }
+    window.demoAnswer = demoAnswer;
+    var log = document.getElementById('demo-log');
+    var input = document.getElementById('demo-input');
+    function ask(question) {
+      if (!question.trim()) return;
+      var r = demoAnswer(question);
+      var html = '<p class="whisper">You: ' + escapeHtml(question) + '</p>';
+      html += '<p><span class="tag">' + LABELS[r.action] + '</span><br>' + escapeHtml(r.text);
+      if (r.source) html += '<br><a href="' + escapeHtml(r.source) + '" rel="noopener">Source ↗</a>';
+      html += '</p><hr>';
+      log.insertAdjacentHTML('beforeend', html);
+      input.value = "";
+    }
+    document.getElementById('demo-ask').addEventListener('click', function () { ask(input.value); });
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') ask(input.value); });
+    Array.prototype.forEach.call(document.querySelectorAll('.demo-q'), function (b) {
+      b.addEventListener('click', function () { ask(b.getAttribute('data-q')); });
+    });
+    document.getElementById('demo-run-checks').addEventListener('click', function () {
+      var total = 0; var pass = 0;
+      Array.prototype.forEach.call(document.querySelectorAll('[data-check]'), function (li) {
+        var q = li.getAttribute('data-check');
+        var expect = li.querySelector('code').textContent;
+        var got = demoAnswer(q).action;
+        total += 1;
+        var ok = got === expect;
+        if (ok) pass += 1;
+        li.style.borderLeft = '3px solid ' + (ok ? 'var(--accent)' : '#ff6b6b');
+        li.style.paddingLeft = '8px';
+        li.insertAdjacentHTML('beforeend', ' → <code>' + got + '</code> ' + (ok ? '✓' : '✗'));
+      });
+      document.getElementById('demo-checks-result').textContent = pass + '/' + total + ' checks passed';
+    });
+    </script>
+    """
+    body = body.replace("__QUICK_BUTTONS__", quick_buttons).replace("__CHECKS_ROWS__", checks_rows).replace("__KB_JSON__", kb_safe)
+    write(output, "tools/ai-receptionist-demo.html", page("AI Receptionist Demo", body, "Interactive reception-bot demo trained on a real clinic's public site; answers from retrieved content, refuses medical advice, invented pricing, and emergencies. Runs entirely in your browser."))
+    write(output, "projects/ai-receptionist-demo.html", page("AI Receptionist Demo", """
+    <p class="eyebrow">Project · local-business chatbot pipeline</p><h1>AI Receptionist Demo</h1>
+    <p class="lede">An end-to-end, zero-cost pipeline that turns a local business's public website into a working reception-style chatbot — with guardrails that refuse what a reception bot must not answer.</p>
+    <p><a class="cta" href="/site/tools/ai-receptionist-demo.html">Open the live demo →</a></p>
+    <h2>Pipeline</h2>
+    <section class="card"><ol><li><strong>Crawl</strong> the business's public site (robots-honouring, rate-limited) — 20 pages captured from the sample clinic, all HTTP 200.</li>
+    <li><strong>Extract</strong> a knowledge base: contacts, opening hours, services taxonomy, page text with source URLs.</li>
+    <li><strong>Answer</strong> questions by retrieval over the knowledge base — every factual answer carries a source link back to the page it came from.</li>
+    <li><strong>Guardrail</strong> four fixed behaviours: emergencies redirect to a phone call, medical advice and invented pricing are refused, out-of-scope questions are refused rather than improvised.</li>
+    <li><strong>Validate</strong> against a golden behaviour set: 8/8 cases pass (3 factual, 2 medical refusals, 1 pricing refusal, 1 emergency redirect, 1 out-of-scope refusal), 12/12 unit tests pass.</li></ol></section>
+    <h2>Sample evidence</h2>
+    <p>Trained on the public pages of <a href="https://redbankplainsdental.com.au/">Redbank Plains Dental</a> (crawled 2026-10-22). Correctly extracted: phone <code>(07) 3814 3311</code>, contact email, six weekday opening hours, and the services taxonomy. In the live demo you can re-run all eight golden behaviour checks against the in-page engine and watch each pass or fail.</p>
+    <h2>Boundary</h2>
+    <p>The sample clinic is not a client and has not endorsed this demo. The demo bot is software and can be wrong; it refuses medical advice and never quotes prices. This is the pipeline's reference engine running in your browser; a hosted live-agent build of the same rules is being validated separately. No outreach is sent to anyone by this project. Questions or takedown requests: <a href="mailto:hello@rodion.place">hello@rodion.place</a>.</p>
+    """, "End-to-end local-business chatbot pipeline: crawl public site, retrieve answers with sources, hard guardrails on medical, pricing and emergency questions."))
+
+
 def build(output: Path, base: str = "") -> None:
     # Logging for Docker debugging
     start_time = time.time()

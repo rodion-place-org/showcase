@@ -132,12 +132,37 @@
       "repo": "rodion-place-org/numerai-unstaked-track-record",
       "jurisdiction": "none-needed for free unstaked submissions; staking requires John's payment decision"
     }
+    {
+      "id": 8,
+      "name": "botpress-demo",
+      "track": "product-services",
+      "stage": "probe",
+      "owner": "builder",
+      "hypothesis": "Build and validate an end-to-end Botpress chatbot demo pipeline for a local business using Botpress free tier (100 conv/mo hard cap), including scraping, knowledge extraction, offline Q&A + guardrails, screen recording, and portfolio deployment. Validate free tier works live, guardrails hold, demo recordable, and portfolio deployable at $0.",
+      "metric_name": "pipeline_validated",
+      "metric_value": 0.0,
+      "iterations": 1,
+      "min_iterations": 4,
+      "min_days": 42,
+      "kill_allowed": false,
+      "last_iteration": {
+        "ts": 1792260000.0,
+        "changed": "initial setup complete: scraper.py validated on redbankplainsdental.com.au (20 pages), demo_qa.py validated 8/8 golden cases, unit tests 12/12 pass",
+        "result": "prototype ready for Botpress build step"
+      },
+      "review_in_days": 2.9,
+      "project_dir": "botpress-demo",
+      "repo": "rodion-place-org/botpress-demo",
+      "jurisdiction": "none-needed"
+    },
+
   ],
   "summary": {
-    "total_ventures": 5,
-    "active_ventures": 3,
-    "probes": 4,
+    "total_ventures": 6,
+    "active_ventures": 4,
+    "probes": 5,
     "tracks": {
+      "product-services": 1,
       "forecasting": 2,
       "markets": 1,
       "bounties": 1,
