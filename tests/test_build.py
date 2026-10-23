@@ -59,6 +59,17 @@ class BuildTests(unittest.TestCase):
             self.assertTrue(blog_index.is_file())
             self.assertIn("Evidence before confidence", blog_index.read_text(encoding="utf-8"))
             self.assertTrue(changelog.is_file())
+            receptionist_demo = output / "tools" / "ai-receptionist-demo.html"
+            receptionist_project = output / "projects" / "ai-receptionist-demo.html"
+            self.assertTrue(receptionist_demo.is_file())
+            self.assertTrue(receptionist_project.is_file())
+            demo_html = receptionist_demo.read_text(encoding="utf-8")
+            project_html = receptionist_project.read_text(encoding="utf-8")
+            self.assertIn("demo-run-checks", demo_html)
+            self.assertNotIn("__KB_JSON__", demo_html)
+            self.assertIn("8/8", project_html)
+            self.assertIn("not endorsed", project_html)
+            self.assertIn("ai-receptionist-demo.html", project_html)
             self.assertTrue(json_formatter.is_file())
             self.assertTrue(json_formatter_project.is_file())
             self.assertTrue(url_encoder.is_file())

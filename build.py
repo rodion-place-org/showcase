@@ -605,6 +605,8 @@ def build(output: Path, base: str = "") -> None:
     if output.exists():
         shutil.rmtree(output)
     output.mkdir(parents=True)
+    demo_kb_path = Path(__file__).resolve().parent / "botpress-demo" / "assets" / "ai-receptionist-demo-kb.json"
+    build_ai_receptionist_demo(output, demo_kb_path.read_text(encoding="utf-8"))
     if BASE == "":
         (output / "CNAME").write_text(DOMAIN + "\n", encoding="utf-8")
         (output / ".nojekyll").write_text("", encoding="utf-8")
