@@ -587,7 +587,7 @@ def build_ai_receptionist_demo(output: Path, kb_json: str) -> None:
     <h2>Sample evidence</h2>
     <p>Trained on the public pages of <a href="https://redbankplainsdental.com.au/">Redbank Plains Dental</a> (crawled 2026-10-22). Correctly extracted: phone <code>(07) 3814 3311</code>, contact email, six weekday opening hours, and the services taxonomy. In the live demo you can re-run all eight golden behaviour checks against the in-page engine and watch each pass or fail.</p>
     <h2>Boundary</h2>
-    <p>The sample clinic is not a client and has not endorsed this demo. The demo bot is software and can be wrong; it refuses medical advice and never quotes prices. This is the pipeline's reference engine running in your browser; a hosted live-agent build of the same rules is being validated separately. No outreach is sent to anyone by this project. Questions or takedown requests: <a href="mailto:hello@rodion.place">hello@rodion.place</a>.</p>
+    <p>The sample clinic is not a client and has not endorsed this demo. The demo bot is software and can be wrong; it refuses medical advice and never quotes prices. This is the offline reference engine running in your browser, not a live Botpress deployment. A hosted live-agent build of the same rules is being validated separately. No outreach is sent to anyone by this project. Questions or takedown requests: <a href="mailto:hello@rodion.place">hello@rodion.place</a>.</p>
     """, "End-to-end local-business chatbot pipeline: crawl public site, retrieve answers with sources, hard guardrails on medical, pricing and emergency questions."))
 
 
