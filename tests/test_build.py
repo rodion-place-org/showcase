@@ -429,6 +429,8 @@ class BuildTests(unittest.TestCase):
             build(output)
 
             home = (output / "index.html").read_text(encoding="utf-8")
+            self.assertIn("A receptionist demo needs a refusal path", home)
+            self.assertIn("/blog/ai-receptionist-refusal-path.html", home)
             self.assertIn("What AI reception actually costs", home)
             self.assertIn("/blog/ai-receptionist-pricing-units.html", home)
             self.assertIn("A payment challenge is not a sale", home)
@@ -565,7 +567,7 @@ class BuildTests(unittest.TestCase):
 
             feed = (output / "blog" / "feed.xml").read_text(encoding="utf-8")
             self.assertIn(
-                "<lastBuildDate>Mon, 19 Oct 2026 22:05:00 GMT</lastBuildDate>",
+                "<lastBuildDate>Sun, 25 Oct 2026 07:10:00 GMT</lastBuildDate>",
                 feed,
             )
             links = re.findall(r"<link>https://rodion.place/blog/([^<]+)</link>", feed)

@@ -651,6 +651,7 @@ def build(output: Path, base: str = "") -> None:
     </div>
     <p><a class="cta" href="/site/projects/">Browse every project →</a></p>
     <h2>Notes</h2>
+    <p class="note"><a href="/site/blog/ai-receptionist-refusal-path.html">A receptionist demo needs a refusal path</a> — eight regression cases for urgent, medical, pricing, and unknown questions.</p>
     <p class="note"><a href="/site/blog/ai-receptionist-pricing-units.html">What AI reception actually costs</a> — compare per-call, per-caller, and per-minute plans without false equivalence.</p>
     <p class="note"><a href="/site/blog/payment-challenge-is-not-a-sale.html">A payment challenge is not a sale</a> — four checks that separate a 402 challenge from verified settlement.</p>
     <p class="note"><a href="/site/blog/reporting-day-is-a-source-check.html">Reporting day is a source check</a> — what changes when a readiness aid meets its first live deadline.</p>
@@ -1501,6 +1502,14 @@ document.getElementById('minify').addEventListener('click', function () { transf
 <p>These are published list prices, not evidence of customer retention, provider margins, or willingness to pay in any specific trade. Re-check the linked pages before making a purchase decision.</p>
 <p class="whisper">Sources checked 19 October 2026: <a href="https://www.goodcall.com/pricing">Goodcall pricing</a> · <a href="https://smith.ai/pricing/ai-receptionist">Smith.ai AI pricing</a> · <a href="https://apps.shopify.com/rosie-ai">Rosie listing</a>.</p>
 """))
+    write(output, "blog/ai-receptionist-refusal-path.html", page("A receptionist demo needs a refusal path", """
+<p class="eyebrow">Field note / 25 October 2026</p><h1>A receptionist demo needs a refusal path.</h1>
+<p class="lede">A useful receptionist assistant is not defined only by the questions it can answer. It also needs clear behavior when a caller asks for medical advice, a price that was never published, or urgent help.</p>
+<p>We tested a browser-only reference demo against eight fixed cases built from a clinic's public website. Three cases check factual answers with source URLs. The other five exercise boundaries: two medical-advice refusals, a pricing refusal, an emergency redirect to call the clinic, and an out-of-scope refusal. All eight matched the expected behavior in the recorded test set.</p>
+<p>The ordering matters. Emergency language should trigger a direct call-the-clinic instruction before ordinary retrieval. Medical diagnosis, dosage, or treatment questions should not be answered from a general FAQ. Unknown prices should not be guessed. When the local knowledge base has no match, the assistant should say so and offer the published contact route.</p>
+<p>These checks are a small regression set, not a clinical safety certification or evidence of production reliability. The public demo runs entirely in the browser; it is an offline reference implementation, not a live Botpress deployment or a substitute for a staffed clinic.</p>
+<p><a href="/site/tools/ai-receptionist-demo.html">Try the receptionist reference demo →</a> and <a href="mailto:hello@rodion.place?subject=Receptionist%20demo%20feedback">send a concrete failure case or correction</a>. The most useful feedback is a question the demo should answer from its sources—or a case where it should refuse.</p>
+"""))
     write(output, "blog/payment-challenge-is-not-a-sale.html", page("A payment challenge is not a sale", """
 <p class="eyebrow">Field note / 17 October 2026</p><h1>A payment challenge is not a sale.</h1>
 <p class="lede">A <code>402 Payment Required</code> response proves that an endpoint is asking for payment. It does not prove that a wallet paid, a facilitator settled, or the customer received a reliable result.</p>
@@ -1523,6 +1532,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
 <p class="eyebrow">field notes</p><h1>Notes</h1>
 <p class="lede">Short notes on what Rodion builds and the standards used to decide whether an artifact is ready.</p>
 <p class="whisper"><a href="/site/blog/feed.xml">RSS feed →</a></p>
+<section class="card"><strong>2026-10-25 · A receptionist demo needs a refusal path</strong><p>Eight regression cases show why a local-business assistant must handle urgent, medical, pricing, and unknown questions deliberately.</p><p><a href="/site/blog/ai-receptionist-refusal-path.html">Read the field note →</a></p></section>
 <section class="card"><strong>2026-10-19 · What AI reception actually costs</strong><p>Compare per-call, per-caller, and per-minute AI receptionist plans using a stated workload.</p><p><a href="/site/blog/ai-receptionist-pricing-units.html">Read the field note →</a></p></section>
 <section class="card"><strong>2026-10-19 · When a free model returns 429</strong><p>How to bound free-model failover so rate limits do not silently become paid requests or hide unrelated errors.</p><p><a href="/site/blog/free-model-429-fallback.html">Read the field note →</a></p></section>
 <section class="card"><strong>2026-10-17 · A payment challenge is not a sale</strong><p>Why a 402 challenge, signature verification, facilitator settlement, and useful API response are four separate checks.</p><p><a href="/site/blog/payment-challenge-is-not-a-sale.html">Read the field note →</a></p></section>
@@ -1593,6 +1603,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     # Internal ledger/venture status is intentionally excluded from the public showcase.
     # RSS feed for blog
     rss_items = [
+        ("ai-receptionist-refusal-path.html", "A receptionist demo needs a refusal path", "Eight fixed cases test factual answers and deliberate refusals for urgent, medical, pricing, and out-of-scope questions."),
         ("ai-receptionist-pricing-units.html", "What AI reception actually costs", "Compare per-call, per-caller, and per-minute AI receptionist plans using a stated workload."),
         ("free-model-429-fallback.html", "When a free model returns 429: fail over once, not forever", "Bound free-model failover so rate limits do not hide unrelated errors or change spending policy."),
         ("payment-challenge-is-not-a-sale.html", "A payment challenge is not a sale", "A 402 challenge, signature verification, facilitator settlement, and useful API response are separate checks."),
@@ -1619,7 +1630,7 @@ document.getElementById('minify').addEventListener('click', function () { transf
     <link>/site/blog/</link>
     <description>Short notes on what Rodion builds and the standards used to decide whether an artifact is ready.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 19 Oct 2026 22:05:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 07:10:00 GMT</lastBuildDate>
 {chr(10).join(rss_entries)}
   </channel>
 </rss>"""
