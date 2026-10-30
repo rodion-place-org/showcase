@@ -110,6 +110,8 @@ class BuildTests(unittest.TestCase):
             self.assertIn("CRA SRP Readiness", index_text)
             self.assertIn("AI-built workflow/readiness aid", index_text)
             self.assertIn("Source re-checked 11 September 2026; corpus 2026-09-11.1", index_text)
+            self.assertIn('href="/projects/ai-receptionist-demo.html"', index_text)
+            self.assertIn('href="/tools/ai-receptionist-demo.html"', index_text)
             self.assertNotIn("scheduled live re-check", index_text)
             self.assertIn("Browse every project", index_text)
             for commodity_link in (
@@ -140,6 +142,8 @@ class BuildTests(unittest.TestCase):
             self.assertIn(".project-grid,.boundary", projects_index_text)
             self.assertIn('id="utilities"', projects_index_text)
             self.assertIn("Current project index", projects_index_text)
+            self.assertIn('href="/projects/ai-receptionist-demo.html"', projects_index_text)
+            self.assertIn('href="/tools/ai-receptionist-demo.html"', projects_index_text)
             self.assertIn("Start from your task", projects_index_text)
             self.assertIn("Prepare for a reporting clock", projects_index_text)
             self.assertIn("Screen an OSS bounty", projects_index_text)
