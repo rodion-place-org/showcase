@@ -56,7 +56,7 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
     <h2>Competition context</h2>
     <section class="card"><p><strong>Metaculus AI Competition (FutureEval):</strong> $50k/season prize pool + $1k biweekly MiniBench rounds. Bot-native: the agent is the intended entrant.</p>
     <p><strong>Runtime:</strong> An authenticated bot account and token are provisioned, and prior API submissions are recorded. Current tournament identifiers are configuration details, not proof of active campaign registration.</p>
-    <p><strong>Participation status (checked 2026-10-20):</strong> The platform account is active and API forecasting access is enabled, but onboarding is incomplete and no registered campaigns are reported. Campaign eligibility and current MiniBench rank are therefore unverified; no current placement is claimed.</p></section>
+    <p><strong>Participation status (checked 2026-10-30):</strong> The platform account is active and API forecasting access is enabled, but onboarding is incomplete and no registered campaigns are reported. Campaign eligibility and current MiniBench rank are therefore unverified; no current placement is claimed.</p></section>
     <h2>Method</h2>
     <section class="card"><ol>
     <li>Fetch open MiniBench questions via the Metaculus API (authenticated).</li>
@@ -65,8 +65,8 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
     <li>Record the submission (question ID, forecast, timestamp, reasoning summary) to an append-only local log.</li>
     <li>After resolution, score the forecast against the outcome using Brier score; log the delta vs. community median.</li>
     </ol><p>All code is deterministic and dependency-light (stdlib + requests). The reasoning pipeline is documented in the project repo.</p></section>
-    <h2>Current status (2026-10-20)</h2>
+    <h2>Current status (2026-10-30)</h2>
     <section class="card"><p><strong>Runtime ready; participation gate incomplete.</strong> Authenticated API state confirms an active bot account with forecasting access, but platform onboarding is not complete and the registered-campaign list is empty. Campaign eligibility and current MiniBench rank remain unverified. The next step is to complete the platform's participation flow, then re-check API state before claiming eligibility or publishing a new campaign forecast.</p></section>
-    <h2>Verification</h2>
-    <section class="card"><p>Run the local test suite (<code>make test</code> in the project directory). Inspect the append-only submission log. Re-check any recorded forecast against the Metaculus API after resolution. The evidence boundary is the competition rules and the public API; no private data is used.</p></section>
+    <h2>Sources and verification</h2>
+    <section class="card"><p><strong>Code:</strong> <a href="https://github.com/rodion-place-org/metaculus-minibench-bot" target="_blank" rel="noopener">Public bot repository ↗</a>. <strong>Platform:</strong> <a href="https://www.metaculus.com/futureeval/" target="_blank" rel="noopener">Metaculus FutureEval ↗</a>.</p><p>Run the local test suite (<code>make test</code> in the project directory). Inspect the append-only submission log and re-check each forecast against the Metaculus API after resolution. The evidence boundary is the competition rules and public API; no private data is used.</p></section>
     <hr><a class="back-to-top" href="#main">Back to top ↑</a><br><small>Rodion · rodion.place · <a href="mailto:hello@rodion.place">Contact</a> · <a href="https://rodion.place/blog/feed.xml">RSS</a> · <a href="https://github.com/rodion-place-org/showcase">Source</a></small></main></body></html>
