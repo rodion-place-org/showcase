@@ -58,6 +58,55 @@ button { background:var(--accent); color:#071018; border:0; border-radius:10px; 
     <section class="card"><p>Each appended row captures: UTC timestamp, venue (polymarket or kalshi), question ID, question text, forecast probability, market price at recording time, model label ("market-consensus-baseline-v1"), source URL, and version. The same market can appear multiple times at different offsets, creating a time series of consensus snapshots.</p></section>
     <h2>Evaluation</h2>
     <section class="card"><p>When a Polymarket market closes, the evaluator reads the resolved outcome (YES=1, NO=0) from the Gamma API, computes the Brier score for the recorded forecast <code>(forecast - outcome)^2</code>, the Brier score for the market price at recording time <code>(market_price - outcome)^2</code>, and their delta <code>brier_forecast - brier_market</code>. A negative delta means the recorded forecast was closer to the outcome than the market price at that moment; a positive delta means the market price was closer.</p></section>
+    <h2>Try the scoring calculation</h2>
+    <section class="card" aria-labelledby="brier-tool-title">
+      <h3 id="brier-tool-title">Brier comparison calculator</h3>
+      <p>Enter two probabilities and the resolved outcome. Probabilities use a 0–1 scale; a smaller Brier score is better.</p>
+      <div id="brier-calculator">
+        <p><label for="brier-forecast">Your forecast probability</label><br><input id="brier-forecast" type="number" min="0" max="1" step="0.01" value="0.8"></p>
+        <p><label for="brier-market">Market price at forecast time</label><br><input id="brier-market" type="number" min="0" max="1" step="0.01" value="0.6"></p>
+        <p><label for="brier-outcome">Resolved outcome</label><br><select id="brier-outcome"><option value="1">YES (1)</option><option value="0">NO (0)</option></select></p>
+      </div>
+      <p id="brier-result" role="status" aria-live="polite">Forecast Brier: 0.0400 · market Brier: 0.1600 · delta: -0.1200. The forecast is closer to the outcome.</p>
+      <p class="whisper">This calculator runs locally in your browser. Inputs are not sent or stored.</p>
+    </section>
+    <script>
+    (function () {
+      const root = document.getElementById('brier-calculator');
+      const forecast = document.getElementById('brier-forecast');
+      const market = document.getElementById('brier-market');
+      const outcome = document.getElementById('brier-outcome');
+      const result = document.getElementById('brier-result');
+      function updateScores() {
+        if (forecast.value === '' || market.value === '') {
+          result.textContent = 'Enter both probabilities between 0 and 1.';
+          return;
+        }
+        const f = Number(forecast.value);
+        const m = Number(market.value);
+        const o = Number(outcome.value);
+        if (!Number.isFinite(f) || !Number.isFinite(m) || f < 0 || f > 1 || m < 0 || m > 1) {
+          result.textContent = 'Enter both probabilities between 0 and 1.';
+          return;
+        }
+        const forecastBrier = (f - o) ** 2;
+        const marketBrier = (m - o) ** 2;
+        const delta = forecastBrier - marketBrier;
+        const comparison = delta < -1e-12
+          ? 'The forecast is closer to the outcome.'
+          : delta > 1e-12
+            ? 'The market price is closer to the outcome.'
+            : 'Both have the same Brier score.';
+        result.textContent = 'Forecast Brier: ' + forecastBrier.toFixed(4)
+          + ' · market Brier: ' + marketBrier.toFixed(4)
+          + ' · delta: ' + (delta >= 0 ? '+' : '') + delta.toFixed(4)
+          + '. ' + comparison;
+      }
+      root.addEventListener('input', updateScores);
+      root.addEventListener('change', updateScores);
+      updateScores();
+    }());
+    </script>
     <h2>Sources and verifiability</h2>
     <section class="card"><p><strong>Polymarket Gamma API:</strong> <a href="https://gamma-api.polymarket.com/markets?active=true&closed=false&limit=25">active markets endpoint</a> · <a href="https://gamma-api.polymarket.com/markets/{question_id}">individual market resolution</a></p>
     <p><strong>Kalshi public API:</strong> <a href="https://api.elections.kalshi.com/trade-api/v2/markets?limit=25&status=open">open markets endpoint</a></p>
