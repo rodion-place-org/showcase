@@ -337,6 +337,20 @@ class BuildTests(unittest.TestCase):
             self.assertNotIn("timestamp.html", "\n".join(path.as_posix() for path in output.rglob("*")))
             self.assertIn("Genesis", genesis.read_text(encoding="utf-8"))
 
+    def test_markets_page_includes_local_brier_calculator(self) -> None:
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            build(output)
+            markets_page = (output / "projects" / "markets-paper-ledger.html").read_text(encoding="utf-8")
+
+        self.assertIn('id="brier-forecast"', markets_page)
+        self.assertIn('id="brier-market"', markets_page)
+        self.assertIn('id="brier-outcome"', markets_page)
+        self.assertIn('(f - o) ** 2', markets_page)
+        self.assertIn('(m - o) ** 2', markets_page)
+        self.assertIn("Inputs are not sent or stored", markets_page)
+        self.assertIn("The market price is closer to the outcome.", markets_page)
+
     def test_build_includes_local_word_counter(self) -> None:
         with TemporaryDirectory() as directory:
             output = Path(directory)
