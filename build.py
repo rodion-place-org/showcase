@@ -1039,6 +1039,20 @@ def build(output: Path, base: str = "") -> None:
     """, "A transparent paper ledger for timestamping public-market consensus forecasts and scoring them against resolved outcomes using Brier scores."))
     numerai_venture = find_venture_for_project(venture_data, "numerai-unstaked-track-record")
 
+    write(output, "forecasts/index.html", page("Forecast Track Record", """
+    <p class="eyebrow">Forecasting · public measurement</p><h1>A forecast should leave a score.</h1>
+    <p class="lede">A dated, inspectable record of model forecasts measured against the market price available when each forecast was made.</p>
+    <section class="card"><p><strong>Current resolved cohort:</strong> 83 eligible non-baseline model forecasts, against a 350-observation evidence threshold.</p><p><strong>Mean Brier delta vs time-matched market:</strong> +0.024913. Delta is model Brier minus market Brier; positive means the model scored worse than the market benchmark.</p><p><strong>Conclusion:</strong> No forecasting edge has been demonstrated. This sample is below the stated threshold and the observed mean delta favours the market.</p></section>
+    <h2>What is counted</h2>
+    <section class="card"><p>The resolved cohort includes independently varied, non-baseline model forecasts with resolved outcomes and a market price recorded at forecast time. Each forecast is compared with that time-matched market price using the Brier score:</p><p><code>Brier = (probability − outcome)²</code></p><p><code>delta = model Brier − market Brier</code></p><p>A negative delta favours the model; a positive delta favours the market. Lower Brier scores are better.</p></section>
+    <h2>What is excluded</h2>
+    <section class="card"><ul><li>Market-copy baseline forecasts are excluded from model performance metrics.</li><li>Unclassified legacy rows are excluded until their provenance and cohort eligibility can be established.</li><li>Unscored LLM-v2 forecasts are shown separately and are not counted as resolved evidence.</li></ul><p><strong>Unscored LLM-v2 records:</strong> 7 currently recorded. These are pending outcomes and do not increase the resolved sample size.</p></section>
+    <h2>Method and limitations</h2>
+    <section class="card"><p>Forecast probabilities are timestamped before resolution. The benchmark is the market price captured at that same timestamp, not a later closing price. Resolved outcomes are scored after the event. The cohort is restricted to eligible, non-baseline model forecasts so that copied market prices and records with uncertain provenance cannot inflate the result.</p><p>This is a paper measurement record only. It does not place trades, hold positions, or establish revenue. The current sample is too small to support an edge claim; the 350 resolved-observation threshold is a minimum evidence gate, not a guarantee of statistical significance or future performance.</p></section>
+    <h2>Sources and further reading</h2>
+    <section class="card"><p><a href="https://gamma-api.polymarket.com/markets?active=true&amp;closed=false&amp;limit=25">Polymarket public market data ↗</a></p><p><a href="https://api.elections.kalshi.com/trade-api/v2/markets?limit=25&amp;status=open">Kalshi public market data ↗</a></p><p><a href="/projects/markets-paper-ledger.html">Read how the paper ledger records and scores forecasts →</a></p></section>
+    """, "A transparent public record of model forecasts scored against time-matched market prices. The current resolved sample has not demonstrated an edge."))
+
     write(output, "projects/numerai-unstaked-track-record.html", page("Numerai Unstaked Track Record", f"""
     <p class="eyebrow">Project · forecasting / competition</p><h1>Numerai Unstaked Track Record</h1>
     <p class="lede">A reproducible, unstaked Numerai Classic model that completes scored weekly rounds to establish a verifiable track record before any capital is committed.</p>

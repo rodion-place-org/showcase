@@ -58,6 +58,10 @@ make test
 
 `/tools/bounty-eligibility-checker.html` applies three conservative screen gates locally: at least five completed public awards in the prior 90 days, independently confirmed open work, and no more than three visible comments. A passing result only cues a source re-check; it does not establish payment, availability, authority to act, or create a marketplace account. No network requests or telemetry are included.
 
+## Forecast Track Record
+
+`/forecasts/` publishes the current eligible resolved non-baseline forecast cohort, its time-matched market Brier comparison, methodology, and evidence limitations. Unscored LLM-v2 forecasts are listed separately; market-copy baselines and unclassified legacy rows are excluded from model metrics. The page makes no claim of a demonstrated edge or revenue.
+
 ## Unix Time Converter
 
 `/tools/unix-time-converter.html` converts Unix timestamps and human-readable dates locally in the browser.

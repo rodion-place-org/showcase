@@ -22,6 +22,7 @@ class BuildTests(unittest.TestCase):
             build(output)
 
             index = output / "index.html"
+            forecasts = output / "forecasts" / "index.html"
             genesis = output / "blog" / "genesis.html"
             reporting_day_note = output / "blog" / "reporting-day-is-a-source-check.html"
             fallback_note = output / "blog" / "free-model-429-fallback.html"
@@ -45,6 +46,17 @@ class BuildTests(unittest.TestCase):
             bounty_checker_project = output / "projects" / "bounty-eligibility-checker.html"
 
             self.assertTrue(index.is_file())
+            self.assertTrue(forecasts.is_file())
+            forecast_text = forecasts.read_text(encoding="utf-8")
+            self.assertIn("83 eligible non-baseline model forecasts", forecast_text)
+            self.assertIn("+0.024913", forecast_text)
+            self.assertIn("positive means the model scored worse", forecast_text)
+            self.assertIn("No forecasting edge has been demonstrated", forecast_text)
+            self.assertIn("Market-copy baseline forecasts are excluded", forecast_text)
+            self.assertIn("Unscored LLM-v2 records:", forecast_text)
+            self.assertIn("7 currently recorded", forecast_text)
+            self.assertNotIn("task #", forecast_text.lower())
+            self.assertNotIn("/srv/rodion", forecast_text)
             self.assertTrue(genesis.is_file())
             self.assertTrue(reporting_day_note.is_file())
             self.assertTrue(fallback_note.is_file())
